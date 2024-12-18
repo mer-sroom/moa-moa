@@ -1,33 +1,44 @@
-name: Synchronize to forked repo
+name: Synchronize and Deploy to Vercel
 
 on:
+  pull_request: # Pull Request 이벤트 감지
+    branches:
+      - main
   push:
     branches:
       - main
 
 jobs:
-  sync:
-    name: Sync forked repo
+  sync-and-deploy:
+    name: Sync forked repo and Deploy Preview
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main
+      - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.AUTO_ACTIONS }}
           fetch-depth: 0
-          ref: main
 
-      - name: Add remote-url
-        run: |
-          git remote add forked-repo https://jun1378527:${{ secrets.AUTO_ACTIONS }}@github.com/jun1378527/moa-moa.git
-          git config user.name "jun1378527"
-          git config user.email "${{ secrets.EMAIL }}"
+      - name: Install Vercel CLI
+        run: npm install -g vercel
 
-      - name: Push changes to forked-repo
-        run: |
-          git push -f forked-repo main
+      - name: Pull Vercel environment variables
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Clean up
+      - name: Build Project
+        run: vercel build
+
+      - name: Deploy to Vercel
+        id: deploy
+        run: echo "preview-url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_ENV
+
+      - name: Comment Vercel Preview URL on PR
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git remote remove forked-repo
+          PREVIEW_URL=${{ env.preview-url }}
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d "{\"body\":\"🚀 Vercel Preview URL: ${PREVIEW_URL}\"}" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments
