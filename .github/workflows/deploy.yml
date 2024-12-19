@@ -29,11 +29,12 @@ jobs:
       - name: Deploy to Vercel
         id: deploy
         run: |
-          PREVIEW_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} | tail -n 1 | tr -d '\r')
+          PREVIEW_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} | grep -Eo 'https://[^ ]+')
           echo "preview-url=$PREVIEW_URL" >> $GITHUB_ENV
 
-      - name: Verify PREVIEW_URL
-        run: echo "Preview URL: ${{ env.preview-url }}"
+      - name: Debug Preview URL
+        run: |
+          echo "Preview URL from environment: ${{ env.preview-url }}"
 
       - name: Comment Vercel Preview URL on PR
         if: ${{ github.event_name == 'pull_request' }}
