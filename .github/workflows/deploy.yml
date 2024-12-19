@@ -1,7 +1,7 @@
 name: Synchronize and Deploy to Vercel
 
 on:
-  pull_request: # Pull Request 이벤트 감지
+  pull_request:
     branches:
       - main
   push:
@@ -26,12 +26,14 @@ jobs:
       - name: Pull Vercel environment variables
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Build Project
-        run: vercel build
-
       - name: Deploy to Vercel
         id: deploy
-        run: echo "preview-url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_ENV
+        run: |
+          PREVIEW_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} | tail -n 1)
+          echo "preview-url=$PREVIEW_URL" >> $GITHUB_ENV
+
+      - name: Verify PREVIEW_URL
+        run: echo "Preview URL: ${{ env.preview-url }}"
 
       - name: Comment Vercel Preview URL on PR
         if: github.event_name == 'pull_request'
@@ -39,6 +41,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           PREVIEW_URL=${{ env.preview-url }}
-          curl -X POST -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \ 
+          echo "Posting URL: $PREVIEW_URL"
+          curl -X POST -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
             -d "{\"body\":\"🚀 Vercel Preview URL: ${PREVIEW_URL}\"}" \
             https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments
