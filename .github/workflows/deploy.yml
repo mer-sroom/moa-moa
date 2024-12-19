@@ -1,13 +1,3 @@
-name: Synchronize and Deploy to Vercel
-
-on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
-
 jobs:
   sync-and-deploy:
     name: Sync forked repo and Deploy Preview
@@ -23,8 +13,11 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: Pull Vercel environment variables
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: vercel build
 
       - name: Deploy to Vercel
         id: deploy
@@ -32,9 +25,8 @@ jobs:
           PREVIEW_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} | grep -Eo 'https://[^ ]+')
           echo "preview-url=$PREVIEW_URL" >> $GITHUB_ENV
 
-      - name: Debug Preview URL
-        run: |
-          echo "Preview URL from environment: ${{ env.preview-url }}"
+      - name: Verify PREVIEW_URL
+        run: echo "Preview URL: ${{ env.preview-url }}"
 
       - name: Comment Vercel Preview URL on PR
         if: ${{ github.event_name == 'pull_request' }}
