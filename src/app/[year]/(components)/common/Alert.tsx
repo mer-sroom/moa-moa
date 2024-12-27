@@ -1,26 +1,14 @@
 "use client";
-// 나중에 Alert 라이브러리 쓸건지 말건지 정해야할듯
-
-/**
- * Alert 컴포넌트에 사용할 props 정의
- */
+// 추후에 알러트랑 모달 어떻게 디자인하고, (라이브러리 사용여부 등) 결정해야할 듯요요
 export interface AlertProps {
-  /**
-   * Alert에 표시될 메시지(문자열 또는 ReactNode 가능)
-   */
   message: string | React.ReactNode;
-  /**
-   * Alert의 유형('success', 'info', 'warning', 'error' 등)
-   */
   type?: "success" | "info" | "warning" | "error";
-  /**
-   * Alert를 표시할지 여부 (true면 표시, false면 숨김)
-   */
   isOpen?: boolean;
-  /**
-   * Alert 닫기 버튼 클릭 시 호출될 함수
-   */
   onClose?: () => void;
+
+  // [추가] 스타일 덮어쓰기 위한 props
+  alertStyle?: React.CSSProperties;
+  overlayStyle?: React.CSSProperties;
 }
 
 export default function Alert({
@@ -28,12 +16,28 @@ export default function Alert({
   type = "info",
   isOpen = true,
   onClose,
+  alertStyle: customAlertStyle,
+  overlayStyle: customOverlayStyle,
 }: AlertProps) {
-  // isOpen이 false이면 Alert 표시 안 함
   if (!isOpen) return null;
 
-  // Alert 유형에 따른 간단한 배경색 설정
-  const alertStyle = {
+  // 오버레이(배경) 기본 스타일
+  const overlayStyle: React.CSSProperties = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    zIndex: 9998,
+  };
+
+  // Alert 창(팝업) 기본 스타일
+  const baseAlertStyle: React.CSSProperties = {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     backgroundColor:
       type === "success"
         ? "lightgreen"
@@ -43,22 +47,30 @@ export default function Alert({
         ? "pink"
         : "lightblue",
     border: "1px solid gray",
-    padding: "8px",
-    margin: "8px 0",
-    position: "relative" as const,
+    padding: "16px",
+    borderRadius: "8px",
+    zIndex: 9999,
+    width: "300px",
+    textAlign: "center",
   };
 
   return (
-    <div style={alertStyle}>
-      <div>{message}</div>
-      {onClose && (
-        <button
-          style={{ position: "absolute", top: "4px", right: "4px" }}
-          onClick={onClose}
-        >
-          Close
-        </button>
-      )}
-    </div>
+    <>
+      {/* 오버레이 */}
+      <div
+        style={{ ...overlayStyle, ...customOverlayStyle }}
+        onClick={onClose}
+      />
+
+      {/* Alert 팝업 */}
+      <div style={{ ...baseAlertStyle, ...customAlertStyle }}>
+        <div style={{ marginBottom: "8px" }}>{message}</div>
+        {onClose && (
+          <button onClick={onClose} style={{ cursor: "pointer" }}>
+            닫기
+          </button>
+        )}
+      </div>
+    </>
   );
 }
