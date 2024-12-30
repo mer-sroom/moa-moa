@@ -14,6 +14,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^6.1.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -23,6 +24,7 @@
     "@types/react": "19.0.1",
     "eslint": "^9.16.0",
     "eslint-config-next": "^15.1.1",
+    "prisma": "^6.1.0",
     "typescript": "5.7.2"
   }
 }
