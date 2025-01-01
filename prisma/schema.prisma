@@ -6,15 +6,145 @@
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL") 
+  url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
+// (추가) User Role을 관리하기 위한 enum
+enum UserRole {
+  USER
+  SUPER_ADMIN
+}
+
+// 1. User (소셜 로그인 전용)
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String
+  id             Int        @id @default(autoincrement())
+  email          String     @unique // 소셜에서 받아온 이메일 (수정 불가)
+  provider       String     // 예: "google", "kakao", "naver"
+  providerId     String     // 소셜 프로바이더에서 받은 고유 ID
+  nickname       String     // 사용자가 수정 가능
+  profileImage   String?    // 프로필 이미지 (URL 등으로 저장)
+
+  // (추가) role 필드로 사용자 권한을 구분: 기본값은 USER
+  role           UserRole   @default(USER)
+
+  // 1:N 관계: 사용자가 소유한 MoaBox들
+  moaBoxes       MoaBox[]
+  // M:N(실제로는 중간테이블) 관계: 그룹 모아 참여
+  participants   MoaBoxParticipant[]
+  // 알림
+  notifications  Notification[]
+
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  // 소셜 계정 중복 가입을 방지하기 위해 @@unique([provider, providerId]) 활성화
+  @@unique([provider, providerId])
+}
+
+// 2. Friendship (친구 관계)
+model Friendship {
+  id         Int    @id @default(autoincrement())
+  userA      User   @relation(fields: [userAId], references: [id])
+  userAId    Int
+  userB      User   @relation(fields: [userBId], references: [id])
+  userBId    Int
+
+  status     String @default("ACCEPTED")
+  // 예: "PENDING", "ACCEPTED", "BLOCKED" 등
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+
+  // userAId와 userBId 조합의 중복 방지
+  @@unique([userAId, userBId])
+}
+
+// 3. MoaBox (모아 박스)
+// 개인 모아 / 그룹 모아 공통
+model MoaBox {
+  id                Int      @id @default(autoincrement())
+  // 박스를 만든 소유자
+  owner             User     @relation(fields: [ownerId], references: [id])
+  ownerId           Int
+
+  title             String?
+  isGroup           Boolean  @default(false)   // 그룹 모아 여부
+  dueDate           DateTime?                 // D-Day (만기 시점)
+  isPublic          Boolean  @default(true)    // 공개 여부
+  allowAnonymous    Boolean  @default(true)    // 익명 편지 허용 (개인 모아만)
+  shareLink         String                    // 공유 링크(URL)
+  letterCountPublic Boolean  @default(false)   // 편지 개수 공개
+
+  // 1:N 관계: 이 모아 박스에 달린 편지들
+  letters           Letter[]
+  // 그룹 모아 참여자
+  participants      MoaBoxParticipant[]
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @default(now())
+}
+
+// 4. MoaBoxParticipant (그룹 모아 참가자)
+// 그룹 모아에 초대받은 사용자 정보
+model MoaBoxParticipant {
+  id        Int    @id @default(autoincrement())
+
+  user      User   @relation(fields: [userId], references: [id])
+  userId    Int
+  moaBox    MoaBox @relation(fields: [moaBoxId], references: [id])
+  moaBoxId  Int
+
+  // 모두가 오너 권한을 가지는 경우, 기본값을 OWNER
+  role      String @default("OWNER")
+
+  // "INVITED" → 알림 확인 후 "ACCEPTED" / "REJECTED"
+  status    String @default("INVITED")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  // 중복 참여 방지
+  @@unique([userId, moaBoxId])
+}
+
+// 5. Letter (편지)
+model Letter {
+  id         Int      @id @default(autoincrement())
+
+  // 어떤 MoaBox(개인/그룹)에 달린 편지인지
+  moaBox     MoaBox   @relation(fields: [moaBoxId], references: [id])
+  moaBoxId   Int
+
+  // 작성자가 로그인 유저라면 연결, 익명이면 null
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+  authorName String?  // 익명 편지 시 닉네임
+
+  title      String?
+  content    String
+  theme      String?
+  isOpened   Boolean  @default(false)
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+}
+
+// 6. Notification (알림)
+model Notification {
+  id       Int      @id @default(autoincrement())
+  user     User     @relation(fields: [userId], references: [id])
+  userId   Int
+
+  // 알림 종류 예: "WELCOME", "LETTER_RECEIVED", "INVITE_GROUP_MOA", "FRIEND_REQUEST"
+  type     String
+  message  String?
+  payload  Json?
+  read     Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
