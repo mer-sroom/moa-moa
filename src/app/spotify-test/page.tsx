@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 
 interface TrackItem {
   id: string;
@@ -94,14 +95,15 @@ export default function SpotifyTestPage() {
           return (
             <li key={track.id} style={{ marginBottom: 10 }}>
               {coverUrl && (
-                <img
+                <Image
                   src={coverUrl}
                   alt={track.name}
+                  width={50}
+                  height={50}
                   style={{
-                    width: 50,
-                    height: 50,
                     objectFit: "cover",
                     marginRight: 10,
+                    borderRadius: 4,
                   }}
                 />
               )}

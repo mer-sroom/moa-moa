@@ -92,11 +92,15 @@ export async function GET(req: Request) {
         images: album.images,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[ERROR] /api/spotify/tracks GET:", error);
-    return NextResponse.json(
-      { error: error.message || "Failed to fetch track" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    } else {
+      return NextResponse.json(
+        { error: "Unknown error occurred" },
+        { status: 500 }
+      );
+    }
   }
 }

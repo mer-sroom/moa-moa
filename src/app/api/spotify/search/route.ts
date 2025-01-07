@@ -97,12 +97,16 @@ export async function GET(req: Request) {
     console.log("[DEBUG] search results:", JSON.stringify(tracks, null, 2));
 
     return NextResponse.json(tracks);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[ERROR] /api/spotify/search GET:", error);
-    return NextResponse.json(
-      { error: error.message || "Failed to search tracks" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    } else {
+      return NextResponse.json(
+        { error: "Unknown error occurred" },
+        { status: 500 }
+      );
+    }
   }
 }
 
