@@ -11,7 +11,6 @@ const spotifyApi = new SpotifyWebApi({
 
 /**
  * 토큰 만료 시각 (ms 단위)
- * 처음엔 null → 아직 토큰 발급 안 된 상태
  */
 let tokenExpiresAt: number | null = null;
 
@@ -32,14 +31,14 @@ async function getSpotifyToken() {
     // 현재 시각 + expiresIn(초) → 만료 시각 계산
     // 여유있게 1분 정도 빼서 안전마진 확보
     tokenExpiresAt = Date.now() + expiresInSec * 1000 - 60_000;
-    console.log("[DEBUG] New token set:", accessToken.slice(0, 10) + "..."); // 일부만 표시
+    console.log("[DEBUG] New token set:", accessToken.slice(0, 10) + "...");
     console.log("[DEBUG] Token expires at:", new Date(tokenExpiresAt));
   } catch (error) {
     console.error(
       "[ERROR] Failed to get Spotify Token via clientCredentialsGrant:",
       error
     );
-    throw error; // 라우트에서 잡거나, 상위에서 다시 핸들링
+    throw error;
   }
 }
 
@@ -57,41 +56,63 @@ async function ensureAccessToken() {
 }
 
 /**
- * GET /api/spotify/tracks?id=...
- * 클라이언트 크리덴셜(앱 자격 증명) 방식으로 토큰을 받아
- * Spotify API에서 track 정보를 가져온다.
+ * GET /api/spotify/search?q=...
+ * Spotify 검색 API를 호출하여 트랙 검색 결과를 반환
  */
 export async function GET(req: Request) {
   try {
-    console.log("[DEBUG] GET /api/spotify/tracks called");
+    console.log("[DEBUG] GET /api/spotify/search called");
     const { searchParams } = new URL(req.url);
-    const trackId = searchParams.get("id");
-    if (!trackId) {
-      return NextResponse.json({ error: "Missing track ID" }, { status: 400 });
+    const query = searchParams.get("q");
+    if (!query) {
+      return NextResponse.json(
+        { error: "Missing search query" },
+        { status: 400 }
+      );
     }
 
-    // 1) 토큰이 필요한 경우 발급 혹은 재발급
+    // 토큰 발급 또는 재발급
     await ensureAccessToken();
 
-    // 2) Spotify API로 트랙 정보 가져오기
-    const data = await spotifyApi.getTrack(trackId, { market: "SE" });
-
-    // 3) 디버깅용 콘솔 - 트랙 데이터를 JSON 문자열로 직렬화하여 출력
-    console.log("[DEBUG] track data:", JSON.stringify(data.body, null, 2));
-
-    // 4) preview_url, name, artists 등만 추려서 응답
-    const { preview_url, name, artists } = data.body;
-
-    return NextResponse.json({
-      previewUrl: preview_url,
-      trackName: name,
-      artists: artists?.map(a => a.name),
+    // Spotify 검색 API 호출
+    const data = await spotifyApi.searchTracks(query, {
+      limit: 10,
+      market: "SE",
     });
-  } catch (error) {
-    console.error("[ERROR] /api/spotify/tracks GET:", error);
+
+    // 검색 결과 가공
+    const tracks: TrackItem[] =
+      data.body.tracks?.items.map(track => ({
+        id: track.id,
+        name: track.name,
+        artists: track.artists.map(artist => ({ name: artist.name })),
+        previewUrl: track.preview_url,
+        externalUrl: track.external_urls.spotify,
+        album: {
+          images: track.album.images,
+        },
+      })) || [];
+
+    // 디버깅용 콘솔
+    console.log("[DEBUG] search results:", JSON.stringify(tracks, null, 2));
+
+    return NextResponse.json(tracks);
+  } catch (error: any) {
+    console.error("[ERROR] /api/spotify/search GET:", error);
     return NextResponse.json(
-      { error: "Failed to fetch track" },
+      { error: error.message || "Failed to search tracks" },
       { status: 500 }
     );
   }
+}
+
+interface TrackItem {
+  id: string;
+  name: string;
+  artists: { name: string }[];
+  previewUrl: string | null;
+  externalUrl: string;
+  album: {
+    images: { url: string; width: number; height: number }[];
+  };
 }
