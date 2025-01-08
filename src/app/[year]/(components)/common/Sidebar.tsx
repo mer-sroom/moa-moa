@@ -22,13 +22,16 @@ const SidebarItem: SidebarItem[] = [
 export default function Sidebar(
   { userName, width }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [sidebarTransform, setsidebarTransform] = useState("translateX(270px)");
 
   const SidebarOpen = () => {
     setIsOpen(true);
+    setsidebarTransform("translateX(0)");
   };
 
   const SidebarClose = () => {
-    setIsOpen(false);
+    setIsOpen(false)
+    setsidebarTransform("translateX(270px)")
   };
 
   const SidebarStyle: CSSProperties = {
@@ -42,6 +45,7 @@ export default function Sidebar(
     width: "270px",
     height: "100%",
     transition: "0.5s ease",
+    transform: sidebarTransform,
   };
 
   const CloseButton: CSSProperties = {
@@ -65,11 +69,7 @@ export default function Sidebar(
         ●●●
       </div>
       <div style={isOpen ? SidebarBackground : {}}></div>
-      <div style={{
-        ...SidebarStyle,
-        ...isOpen ?
-          { transform: "translateX(0)" } : { transform: "translateX(270px)" }
-      }}>
+      <div style={{ ...SidebarStyle }}>
         <ul key={userName}>
           <h2 style={CloseButton} onClick={SidebarClose}>
             X
