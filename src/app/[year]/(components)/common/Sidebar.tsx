@@ -20,7 +20,7 @@ const SidebarItem: SidebarItem[] = [
 ];
 
 export default function Sidebar(
-  { userName, width }: SidebarProps) {
+  { userName }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [sidebarTransform, setsidebarTransform] = useState("translateX(270px)");
 
