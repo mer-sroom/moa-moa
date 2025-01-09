@@ -1,30 +1,22 @@
 import NextAuth from "next-auth";
 import KakaoProvider from "next-auth/providers/kakao";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "@/lib/prisma";
 
-const handler = NextAuth({
+const authOptions /* : any */ = {
+  adapter: PrismaAdapter(prisma),
   providers: [
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID || "",
       clientSecret: "",
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/auth/login",
-    error: "/auth/login",
+    signIn: "/auth/login", // 커스텀 로그인 페이지
+    error: "/auth/error", // 에러 페이지
   },
-  callbacks: {
-    async jwt({ token, account }) {
-      if (account) {
-        token.accessToken = account.access_token;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      session.accessToken = token.accessToken;
-      return session;
-    },
-  },
-});
+};
 
+const handler = NextAuth(authOptions as any);
+// App Router → export GET, POST
 export { handler as GET, handler as POST };

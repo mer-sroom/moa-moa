@@ -24,12 +24,12 @@ model User {
   id           Int     @id @default(autoincrement())
   // 소셜에서 받아온 이메일 (수정 불가)
   email        String? @unique
-  
-  // 예: "google", "kakao", "naver" 
-  // (NextAuth의 Account 모델로 관리하므로, 이 필드는 제거)
-  // provider     String
-  // 소셜 프로바이더에서 받은 고유 ID 
-  // providerId   String
+
+  // NextAuth에서 user.name을 넘길 수 있으므로 추가
+  name         String?
+
+  // (추가) emailVerified 필드를 추가하여 NextAuth의 email 인증 로직을 지원
+  emailVerified DateTime?
 
   // 사용자가 수정 가능
   nickname     String
@@ -100,8 +100,8 @@ model MoaBox {
   title             String?
   isGroup           Boolean   @default(false) // 그룹 모아 여부
   dueDate           DateTime? // D-Day (만기 시점)
-  isPublic          Boolean   @default(true) // 공개 여부
-  allowAnonymous    Boolean   @default(true) // 익명 편지 허용 (개인 모아만)
+  isPublic          Boolean   @default(true)  // 공개 여부
+  allowAnonymous    Boolean   @default(true)  // 익명 편지 허용 (개인 모아만)
   shareLink         String    // 공유 링크(URL)
   letterCountPublic Boolean   @default(false) // 편지 개수 공개
 
