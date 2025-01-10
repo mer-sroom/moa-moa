@@ -9,14 +9,15 @@ export const authOptions: NextAuthOptions = {
   providers: [
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID!,
-      clientSecret: process.env.KAKAO_CLIENT_SECRET!, // 카카오 시크릿 키 입력
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
     }),
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
-      // 필요 시 scope 추가
-      // authorization: "https://accounts.spotify.com/authorize?scope=user-read-email+user-read-private",
+      authorization:
+        "https://accounts.spotify.com/authorize?scope=user-read-email,user-read-private",
     }),
+
     // 다른 Provider 추가 가능
   ],
   callbacks: {

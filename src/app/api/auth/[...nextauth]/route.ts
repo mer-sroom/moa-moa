@@ -22,8 +22,6 @@ const authOptions /* : any */ = {
         user.nickname = user.name || "Guest";
       }
 
-      // 필요하다면, user.email = profile?.kakao_account?.email 등도 보정
-
       return true; // 로그인을 계속 진행
     },
   },

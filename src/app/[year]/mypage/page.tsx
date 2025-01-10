@@ -1,51 +1,60 @@
 "use client";
 
-import { useSession, signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function MyPage() {
   const { data: session, status } = useSession();
-  const router = useRouter();
-  const [isSpotifyConnected, setIsSpotifyConnected] = useState(false);
+  const [spotifyConnected, setSpotifyConnected] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // (1) 세션 로딩 중 표시
-  if (status === "loading") {
+  useEffect(() => {
+    async function checkSpotify() {
+      if (session?.user?.id) {
+        try {
+          const res = await fetch(
+            `/api/check-spotify?userId=${session.user.id}`
+          );
+          const data = await res.json();
+          setSpotifyConnected(data.connected);
+        } catch (error) {
+          console.error("Error checking Spotify connection:", error);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+      }
+    }
+
+    checkSpotify();
+  }, [session]);
+
+  const handleConnectSpotify = () => {
+    // Spotify OAuth 로그인 프로세스 시작
+    signIn("spotify", { callbackUrl: "/2025/mypage" });
+  };
+
+  const handleLogout = () => {
+    // 로그아웃 후, 로그인 페이지로 리다이렉트
+    signOut({ callbackUrl: "/auth/login" });
+  };
+
+  if (status === "loading" || loading) {
     return <p>로딩 중...</p>;
   }
 
-  // (2) 로그인 안 된 경우
-  if (!session) {
-    return <p>로그인 필요</p>;
-  }
-
-  // (3) DB에서 "provider=spotify" 레코드가 있는지 확인
-  // -> 실제로는 API fetch or SWR 등을 사용
-  //    아래는 예시로 간단히 fetch (클라이언트 component)
-  useEffect(() => {
-    async function checkSpotify() {
-      const res = await fetch("/api/check-spotify");
-      const data = await res.json();
-      setIsSpotifyConnected(data.connected); // { connected: true/false }
-    }
-    checkSpotify();
-  }, []);
-
-  // 스포티파이 연결 버튼
-  const connectSpotify = () => {
-    signIn("spotify", { callbackUrl: "/[year]/mypage" });
-  };
-
   return (
-    <div>
+    <div style={{ padding: 20 }}>
       <h1>마이페이지</h1>
-      <p>카카오 로그인 상태: {session.user?.name || session.user?.nickname}</p>
-
-      {isSpotifyConnected ? (
-        <p>스포티파이 연결됨</p>
-      ) : (
-        <button onClick={connectSpotify}>스포티파이 계정 연결하기</button>
+      <p>
+        스포티파이 연결 상태: {spotifyConnected ? "연결됨" : "연결되지 않음"}
+      </p>
+      {!spotifyConnected && (
+        <button onClick={handleConnectSpotify}>스포티파이 연결하기</button>
       )}
+      {spotifyConnected && <button onClick={handleLogout}>로그아웃</button>}
+      {/* 추가적인 마이페이지 내용 */}
     </div>
   );
 }
