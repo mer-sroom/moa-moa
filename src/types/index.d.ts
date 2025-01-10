@@ -6,6 +6,9 @@ declare module "next-auth" {
       email: string;
     };
   }
+  interface Window {
+    Kakao: any; // Kakao 객체의 타입을 정의
+  }
 }
 
 declare module "*.css";

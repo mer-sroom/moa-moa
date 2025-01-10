@@ -1,0 +1,29 @@
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.kakaoButton {
+  padding: 10px 20px;
+  background-color: #fee500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #000;
+}
+
+.kakaoButton:hover {
+  background-color: #ffd700;
+}
