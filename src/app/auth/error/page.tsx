@@ -1,12 +1,13 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 
-export default function ErrorPage() {
-  const router = useRouter();
-  const { error } = router.query;
+function ErrorContent() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
 
   let errorMessage = "알 수 없는 오류가 발생했습니다.";
   let showLinkButton = false;
@@ -31,5 +32,13 @@ export default function ErrorPage() {
       )}
       <Link href="/auth/login">로그인 페이지로 돌아가기</Link>
     </div>
+  );
+}
+
+export default function ErrorPage() {
+  return (
+    <Suspense fallback={<p>로딩 중...</p>}>
+      <ErrorContent />
+    </Suspense>
   );
 }

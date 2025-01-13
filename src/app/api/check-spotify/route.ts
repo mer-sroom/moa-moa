@@ -12,7 +12,7 @@ export async function GET(request: Request) {
   try {
     const accounts = await prisma.account.findMany({
       where: {
-        userId: parseInt(userId, 10),
+        userId: userId, // string으로 전달
         provider: "spotify",
       },
     });

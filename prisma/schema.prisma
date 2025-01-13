@@ -21,7 +21,7 @@ enum UserRole {
 
 // 1. User (소셜 로그인 전용)
 model User {
-  id           Int     @id @default(autoincrement())
+  id           String   @id @default(uuid())
   // 소셜에서 받아온 이메일 (수정 불가)
   email        String? @unique
 
@@ -73,11 +73,11 @@ model Friendship {
 
   // userA
   userA   User @relation(name: "UserAFriendships", fields: [userAId], references: [id])
-  userAId Int
+  userAId String
 
   // userB
   userB   User @relation(name: "UserBFriendships", fields: [userBId], references: [id])
-  userBId Int
+  userBId String
 
   status String @default("ACCEPTED")
   // 예: "PENDING", "ACCEPTED", "BLOCKED" 등
@@ -95,7 +95,7 @@ model MoaBox {
   id      Int  @id @default(autoincrement())
   // 박스를 만든 소유자
   owner   User @relation(fields: [ownerId], references: [id])
-  ownerId Int
+  ownerId String
 
   title             String?
   isGroup           Boolean   @default(false) // 그룹 모아 여부
@@ -120,7 +120,7 @@ model MoaBoxParticipant {
   id Int @id @default(autoincrement())
 
   user     User   @relation(fields: [userId], references: [id])
-  userId   Int
+  userId   String
   moaBox   MoaBox @relation(fields: [moaBoxId], references: [id])
   moaBoxId Int
 
@@ -147,7 +147,7 @@ model Letter {
 
   // 작성자가 로그인 유저라면 연결, 익명이면 null
   author     User?   @relation(name: "UserLetters", fields: [authorId], references: [id])
-  authorId   Int?
+  authorId   String?
   authorName String? // 익명 편지 시 닉네임
 
   title    String?
@@ -163,7 +163,7 @@ model Letter {
 model Notification {
   id     Int  @id @default(autoincrement())
   user   User @relation(fields: [userId], references: [id])
-  userId Int
+  userId String
 
   // 알림 종류 예: "WELCOME", "LETTER_RECEIVED", "INVITE_GROUP_MOA", "FRIEND_REQUEST"
   type    String
@@ -181,20 +181,20 @@ model Notification {
 
 // Account: 각 소셜(Provider)별 계정 정보 저장
 model Account {
-  id                 Int      @id @default(autoincrement())
-  userId             Int
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
+  id                        Int      @id @default(autoincrement())
+  userId                    String
+  type                      String
+  provider                  String
+  providerAccountId         String
+  refresh_token             String?  @db.Text
+  access_token              String?  @db.Text
+  expires_at                Int?
+  token_type                String?
+  scope                     String?
+  id_token                  String?
+  session_state             String?
   refresh_token_expires_in  Int?
-  
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
@@ -204,7 +204,7 @@ model Account {
 model Session {
   id           Int      @id @default(autoincrement())
   sessionToken String   @unique
-  userId       Int
+  userId       String
   expires      DateTime
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
