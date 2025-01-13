@@ -1,36 +1,31 @@
-import { OAuthConfig, OAuthUserConfig } from "next-auth/providers";
+import { DefaultSession } from "next-auth";
+import { JWT } from "@auth/core/jwt";
 
-declare module "next-auth" {
+declare module "next-auth/index" {
   interface Session {
     user: {
-      id: string;
-      name: string;
-      email: string;
-    };
+      id: string; // Prisma User 모델에 맞게 string으로 설정
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      role: "USER" | "SUPER_ADMIN"; // 추가한 role 속성
+    } & DefaultSession["user"];
+  }
+  np;
+  interface User {
+    id: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    nickname?: string; // nickname 속성 추가
+    role: "USER" | "SUPER_ADMIN"; // 추가한 role 속성
   }
 }
 
-declare module "next-auth/providers/kakao" {
-  export interface KakaoProfile {
-    id: number;
-    connected_at: string;
-    properties?: {
-      nickname?: string;
-      profile_image?: string;
-      thumbnail_image?: string;
-    };
-    kakao_account?: {
-      profile_needs_agreement?: boolean;
-      profile?: {
-        nickname?: string;
-        thumbnail_image_url?: string;
-        profile_image_url?: string;
-      };
-      email?: string;
-    };
+declare module "@auth/core/jwt" {
+  interface JWT {
+    identifier: string;
+    name: string;
+    role: "USER" | "SUPER_ADMIN";
   }
-
-  export default function KakaoProvider<P extends KakaoProfile>(
-    options: OAuthUserConfig<P>
-  ): OAuthConfig<P>;
 }

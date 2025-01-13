@@ -2,7 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@/types/*": ["src/types/*"],
+      "@/components/*": ["src/components/*"],
+      "@/styles/*": ["src/styles/*"],
+      "@/lib/*": ["src/lib/*"]
     },
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -17,13 +21,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": ".", // 프로젝트 루트를 기준으로 설정
-    "paths": {
-      "@/types/*": ["src/types/*"], // 사용자 정의 타입 경로
-      "@/components/*": ["src/components/*"], // 컴포넌트 경로
-      "@/styles/*": ["src/styles/*"], // 스타일 경로
-      "@/lib/*": ["src/lib/*"] // Prisma 클라이언트 경로 추가
-    },
+    "types": ["next-auth"],
     "plugins": [
       {
         "name": "next"
