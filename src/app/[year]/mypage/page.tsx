@@ -12,13 +12,17 @@ export default function MyPage() {
     async function checkSpotify() {
       if (session?.user?.id) {
         try {
-          const res = await fetch(
-            `/api/check-spotify?userId=${session.user.id}`
-          );
+          const res = await fetch(`/api/check-spotify`);
           const data = await res.json();
-          setSpotifyConnected(data.connected);
+          if (typeof data.connected === "boolean") {
+            setSpotifyConnected(data.connected);
+          } else {
+            console.error("Unexpected response format:", data);
+            setSpotifyConnected(false);
+          }
         } catch (error) {
           console.error("Error checking Spotify connection:", error);
+          setSpotifyConnected(false);
         } finally {
           setLoading(false);
         }

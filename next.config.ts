@@ -3,6 +3,9 @@ import path from "path";
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
+  images: {
+    domains: ["i.scdn.co"],
+  },
   reactStrictMode: true,
   swcMinify: true,
   webpack: (config, context) => {

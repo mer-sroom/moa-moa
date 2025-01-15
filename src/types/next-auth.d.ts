@@ -1,5 +1,5 @@
-import { DefaultSession } from "next-auth";
-import { JWT } from "@auth/core/jwt";
+import { DefaultSession } from "next-auth/index";
+import { JWT as NextAuthJWT } from "next-auth/jwt";
 
 declare module "next-auth/index" {
   interface Session {
@@ -11,7 +11,7 @@ declare module "next-auth/index" {
       role: "USER" | "SUPER_ADMIN"; // 추가한 role 속성
     } & DefaultSession["user"];
   }
-  np;
+
   interface User {
     id: string;
     name?: string | null;
@@ -22,10 +22,10 @@ declare module "next-auth/index" {
   }
 }
 
-declare module "@auth/core/jwt" {
-  interface JWT {
-    identifier: string;
-    name: string;
+declare module "next-auth/jwt" {
+  interface JWT extends NextAuthJWT {
+    id: string;
+    accessToken?: string;
     role: "USER" | "SUPER_ADMIN";
   }
 }

@@ -2,6 +2,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import KakaoProvider from "next-auth/providers/kakao";
 import SpotifyProvider from "next-auth/providers/spotify";
+import NextAuth from "next-auth/index";
 import { NextAuthOptions } from "next-auth/index";
 
 export const authOptions: NextAuthOptions = {
@@ -25,15 +26,18 @@ export const authOptions: NextAuthOptions = {
       }
       return true;
     },
-    async session({ session, user }) {
-      if (session.user) {
-        session.user.id = user.id; // TypeScript가 'id'를 인식
+    async session({ session, token }) {
+      // 'user' 대신 'token' 사용
+      if (session.user && token) {
+        session.user.id = token.id;
+        session.user.role = token.role;
       }
       return session;
     },
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
+        token.role = user.role; // role 추가
       }
       if (account) {
         token.accessToken = account.access_token;
@@ -66,5 +70,11 @@ export const authOptions: NextAuthOptions = {
     signIn: "/auth/login",
     error: "/auth/error",
   },
+  secret: process.env.NEXTAUTH_SECRET, // secret 추가
+  session: {
+    strategy: "jwt", // JWT 전략 사용
+  },
   debug: true, // 개발 중에만 활성화
 };
+
+export default NextAuth(authOptions);
