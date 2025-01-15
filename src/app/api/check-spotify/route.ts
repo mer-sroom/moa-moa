@@ -1,30 +1,32 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import { getServerSession } from "next-auth/next";
+import authOptions from "../auth/authoptions"; // 상대 경로 수정
+import prisma from "@/lib/prisma"; // 절대 경로 사용
+import { Session } from "next-auth"; // Session 타입 임포트
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const userId = searchParams.get("userId");
+  // Session 타입 단언
+  const session = (await getServerSession(authOptions)) as Session | null;
 
-  if (!userId) {
-    return NextResponse.json({ error: "Missing userId" }, { status: 400 });
+  console.log("check-spotify session:", session);
+
+  if (!session || !session.user) {
+    return NextResponse.json({ connected: false }, { status: 401 });
   }
 
-  try {
-    const accounts = await prisma.account.findMany({
-      where: {
-        userId: userId, // string으로 전달
-        provider: "spotify",
-      },
-    });
+  // 사용자의 Spotify 계정 정보 가져오기
+  const account = await prisma.account.findFirst({
+    where: {
+      userId: session.user.id,
+      provider: "spotify",
+    },
+  });
 
-    const connected = accounts.length > 0;
+  console.log("check-spotify account:", account);
 
-    return NextResponse.json({ connected });
-  } catch (error) {
-    console.error("Error checking Spotify connection:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+  if (account && account.access_token) {
+    return NextResponse.json({ connected: true });
   }
+
+  return NextResponse.json({ connected: false });
 }
