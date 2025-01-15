@@ -17,14 +17,19 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@prisma/client": "^6.1.0",
+    "library-name": "^1.1.0",
     "next": "^15.1.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "spotify-web-api-node": "^5.0.2"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-mobile-picker": "^1.0.1",
+    "spotify-web-api-node": "^5.0.2",
+    "styled-components": "^6.1.14",
+    "webpack": "^5.97.1"
   },
   "devDependencies": {
     "@types/node": "22.10.2",
-    "@types/react": "19.0.1",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
     "eslint": "^9.16.0",
     "eslint-config-next": "^15.1.1",
     "prisma": "^6.1.0",
