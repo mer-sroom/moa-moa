@@ -1,25 +1,25 @@
 .sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
-    background-color: black;
-    color: white;
-    height: 100%;
-    transition: 0.5s ease;
-  }
-  
-  .pointer {
-    cursor: pointer;
-  }
-  
-  .background {
-    background-color: rgba(126, 126, 126, 0.7);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-  }
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background-color: black;
+  color: white;
+  height: 100%;
+  transition: 0.5s ease;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.background {
+  background-color: rgba(126, 126, 126, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
