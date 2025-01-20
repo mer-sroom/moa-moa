@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
 import styles from "@/styles/Sidebar.module.css";
 
 export interface SidebarProps {
   userName: string;
-  width: "mobile" | "web" | string;
+  loginInfo: string;
+  isOpen: boolean;
 }
 
 export interface SidebarItem {
@@ -19,47 +19,29 @@ const SidebarItem: SidebarItem[] = [
   { label: "마이페이지", href: "/mypage", icon: "" },
 ];
 
-export default function Sidebar(
-  { userName, width }: SidebarProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const thisWidth = width === "mobile" ? "270px" :
-    width === "web" ? "380px" :
-      "700px";
-
-  const SidebarOpen = () => {
-    setIsOpen(true);
-  };
-  const SidebarClose = () => {
-    setIsOpen(false)
-  };
-
+export default function Sidebar({ userName, loginInfo, isOpen }: SidebarProps) {
+  /*나중에 로그인 정보 받아오는 용도*/
+  const isLoggedIn = true;
   return (
     <>
-      <div
-        onClick={SidebarOpen} className={styles.pointer}>
-        ●●●
-      </div>
-      <div className={isOpen ? styles.background : ""}></div>
-      <div
-        style={{
-          width: `${thisWidth}`,
-          transform: `${isOpen ? "translateX(0)" : `translateX(${thisWidth})`}`
-        }}
-        className={`${styles.sidebar}`}>
-        <ul key={userName}>
-          <h2 className={styles.pointer} onClick={SidebarClose}>
-            X
-          </h2>
-          <h2>{userName}</h2>
-          {SidebarItem.map((item) => (
-            <li key={item.label}>
-              <a href={item.href} style={{ color: "white" }}>{item.label}</a>
-            </li>
-          ))}
-        </ul>
+      <div className={`${styles.overlay} ${isOpen ? styles.open : ""}`} />
+      <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+        <div className={styles.sidebar_conent}>
+          <ul key={userName}>
+            <h2>{userName}</h2>
+            <p>{loginInfo}</p>
+            {SidebarItem.map(item => (
+              <li key={item.label}>
+                <a href={item.href} style={{ color: "white" }}>
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
-  )
+  );
 }
 
 // 사용 예제

@@ -16,8 +16,9 @@
   transform: rotate(0deg);
   transition: 0.5s ease-in-out;
   cursor: pointer;
+  z-index: 5;
 }
-
+/*사이드 바 기본 스타일*/
 #hamburger_icon span {
   display: block;
   position: absolute;
@@ -43,7 +44,7 @@
 #hamburger_icon span:nth-child(4) {
   top: 16px;
 }
-
+/*사이드 바 열릴 때 애니메이션*/
 #hamburger_icon.open span:nth-child(1),
 #hamburger_icon.open span:nth-child(4) {
   top: 16px;
@@ -52,9 +53,13 @@
 }
 
 #hamburger_icon.open span:nth-child(2) {
+  background: white;
   transform: rotate(45deg);
+  height: 3.5px;
 }
 
 #hamburger_icon.open span:nth-child(3) {
   transform: rotate(-45deg);
+  background: white;
+  height: 3.5px;
 }

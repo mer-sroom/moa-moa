@@ -1,25 +1,39 @@
-.sidebar {
-  position: fixed;
+/*뒤에 오버레이*/
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
   z-index: 2;
+  max-width: 600px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+  visibility: hidden;
+}
+
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/*사이드 바*/
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
   background-color: black;
   color: white;
   height: 100%;
   transition: 0.5s ease;
+  width: 0%;
+  opacity: 0;
 }
 
-.pointer {
-  cursor: pointer;
-}
-
-.background {
-  background-color: rgba(126, 126, 126, 0.7);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
+.sidebar.open {
+  right: 0;
+  width: 50%;
+  opacity: 1;
 }

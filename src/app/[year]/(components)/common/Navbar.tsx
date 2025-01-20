@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Sidebar from "./Sidebar";
 import Image from "next/image";
 import logo from "../../../../../public/nav_logo.svg";
 import notifiIcon from "../../../../../public/nav_notification_icon.svg";
@@ -28,6 +29,11 @@ export default function Navbar() {
             <span></span>
           </div>
         </div>
+        <Sidebar
+          userName="TestUser"
+          loginInfo="카카오 로그인"
+          isOpen={isOpen}
+        />
       </div>
     </>
   );
