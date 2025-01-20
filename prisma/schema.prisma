@@ -21,12 +21,20 @@ enum UserRole {
 
 // 1. User (소셜 로그인 전용)
 model User {
-  id           Int     @id @default(autoincrement())
-  email        String  @unique // 소셜에서 받아온 이메일 (수정 불가)
-  provider     String // 예: "google", "kakao", "naver"
-  providerId   String // 소셜 프로바이더에서 받은 고유 ID
-  nickname     String // 사용자가 수정 가능
-  profileImage String? // 프로필 이미지 (URL 등으로 저장)
+  id           String   @id @default(uuid())
+  // 소셜에서 받아온 이메일 (수정 불가)
+  email        String? @unique
+
+  // NextAuth에서 user.name을 넘길 수 있으므로 추가
+  name         String?
+
+  // (추가) emailVerified 필드를 추가하여 NextAuth의 email 인증 로직을 지원
+  emailVerified DateTime?
+
+  // 사용자가 수정 가능
+  nickname     String
+  // 프로필 이미지 (URL 등으로 저장)
+  profileImage String?
 
   // (추가) role 필드로 사용자 권한을 구분: 기본값은 USER
   role UserRole @default(USER)
@@ -52,7 +60,11 @@ model User {
   updatedAt DateTime @default(now())
 
   // 소셜 계정 중복 가입을 방지하기 위해 @@unique([provider, providerId]) 활성화
-  @@unique([provider, providerId])
+  // (NextAuth의 Account 테이블에서 관리하므로 제거)
+  
+  // --- NextAuth 추가: User와의 관계 ---
+  accounts  Account[]
+  sessions  Session[]
 }
 
 // 2. Friendship (친구 관계)
@@ -61,11 +73,11 @@ model Friendship {
 
   // userA
   userA   User @relation(name: "UserAFriendships", fields: [userAId], references: [id])
-  userAId Int
+  userAId String
 
   // userB
   userB   User @relation(name: "UserBFriendships", fields: [userBId], references: [id])
-  userBId Int
+  userBId String
 
   status String @default("ACCEPTED")
   // 예: "PENDING", "ACCEPTED", "BLOCKED" 등
@@ -83,14 +95,14 @@ model MoaBox {
   id      Int  @id @default(autoincrement())
   // 박스를 만든 소유자
   owner   User @relation(fields: [ownerId], references: [id])
-  ownerId Int
+  ownerId String
 
   title             String?
   isGroup           Boolean   @default(false) // 그룹 모아 여부
   dueDate           DateTime? // D-Day (만기 시점)
-  isPublic          Boolean   @default(true) // 공개 여부
-  allowAnonymous    Boolean   @default(true) // 익명 편지 허용 (개인 모아만)
-  shareLink         String // 공유 링크(URL)
+  isPublic          Boolean   @default(true)  // 공개 여부
+  allowAnonymous    Boolean   @default(true)  // 익명 편지 허용 (개인 모아만)
+  shareLink         String    // 공유 링크(URL)
   letterCountPublic Boolean   @default(false) // 편지 개수 공개
 
   // 1:N 관계: 이 모아 박스에 달린 편지들
@@ -108,7 +120,7 @@ model MoaBoxParticipant {
   id Int @id @default(autoincrement())
 
   user     User   @relation(fields: [userId], references: [id])
-  userId   Int
+  userId   String
   moaBox   MoaBox @relation(fields: [moaBoxId], references: [id])
   moaBoxId Int
 
@@ -135,7 +147,7 @@ model Letter {
 
   // 작성자가 로그인 유저라면 연결, 익명이면 null
   author     User?   @relation(name: "UserLetters", fields: [authorId], references: [id])
-  authorId   Int?
+  authorId   String?
   authorName String? // 익명 편지 시 닉네임
 
   title    String?
@@ -151,7 +163,7 @@ model Letter {
 model Notification {
   id     Int  @id @default(autoincrement())
   user   User @relation(fields: [userId], references: [id])
-  userId Int
+  userId String
 
   // 알림 종류 예: "WELCOME", "LETTER_RECEIVED", "INVITE_GROUP_MOA", "FRIEND_REQUEST"
   type    String
@@ -161,4 +173,51 @@ model Notification {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+}
+
+// ---------------------------
+// (추가) NextAuth 표준 모델
+// ---------------------------
+
+// Account: 각 소셜(Provider)별 계정 정보 저장
+model Account {
+  id                        Int      @id @default(autoincrement())
+  userId                    String
+  type                      String
+  provider                  String
+  providerAccountId         String
+  refresh_token             String?  @db.Text
+  access_token              String?  @db.Text
+  expires_at                Int?
+  token_type                String?
+  scope                     String?
+  id_token                  String?
+  session_state             String?
+  refresh_token_expires_in  Int?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+// Session: (DB 기반 세션 사용 시) 세션 정보 저장
+model Session {
+  id           Int      @id @default(autoincrement())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// VerificationToken: (이메일 인증 등) 토큰 보관
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+
+  @@id([identifier, token])
 }
