@@ -1,6 +1,7 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image"; // next/image 임포트
 import styles from "../../../styles/login.module.css";
 
 export default function LoginPage() {
@@ -23,15 +24,22 @@ export default function LoginPage() {
         {/* 헤더 */}
         <header className={styles.header}>
           <div className={styles.logo}>
-            <img
+            <Image
               src="/assets/icons/login-logo.svg"
               alt="MOAMOA Logo"
-              width="194.73"
-              height="164.33"
+              width={195}
+              height={164}
+              style={{ width: "194.73px", height: "164.33px" }}
+              priority
             />
           </div>
           <div className={styles.moaTitle}>
-            <img src="/assets/icons/Moa-moa.svg" alt="moa moa" width="253" />
+            <Image
+              src="/assets/icons/Moa-moa.svg"
+              alt="moa moa"
+              width={253}
+              height={35}
+            />
           </div>
         </header>
 
@@ -41,24 +49,37 @@ export default function LoginPage() {
             className={`${styles.loginButton} ${styles.google}`}
             onClick={handleGoogleLogin}
           >
-            <img src="/assets/icons/google.svg" alt="Google Logo" />
+            <Image
+              src="/assets/icons/google.svg"
+              alt="Google Logo"
+              width={24}
+              height={24}
+            />
             <span>구글 연동 로그인</span>
           </button>
+
           <button
             className={`${styles.loginButton} ${styles.kakao}`}
             onClick={handleKakaoLogin}
           >
-            <img src="/assets/icons/kakao.svg" alt="Kakao Logo" />
+            <Image
+              src="/assets/icons/kakao.svg"
+              alt="Kakao Logo"
+              width={24}
+              height={24}
+            />
             <span>카카오 연동 로그인</span>
           </button>
+
           <button
             className={`${styles.loginButton} ${styles.naver}`}
             onClick={handleNaverLogin}
           >
-            <img
+            <Image
               src="/assets/icons/naver.svg"
               alt="Naver Logo"
-              className="Naver"
+              width={20}
+              height={24}
             />
             <span>네이버 연동 로그인</span>
           </button>
@@ -67,14 +88,15 @@ export default function LoginPage() {
 
       {/* 푸터 (한 줄 표시) */}
       <footer className={styles.footer}>
-        <img
+        {/* 푸터 로고: 30 x 30 */}
+        <Image
           src="/assets/icons/cat.svg"
           alt="푸터 로고"
-          width="30"
-          height="30"
+          width={30}
+          height={30}
         />
         <p>moa moa</p>
-        <p>Copyright 2025, mer'made, all rights reserved.</p>
+        <p>Copyright 2025, mer&apos;made, all rights reserved.</p>
       </footer>
     </div>
   );
