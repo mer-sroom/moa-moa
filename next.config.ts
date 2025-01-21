@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
     domains: ["i.scdn.co"],
   },
   reactStrictMode: true,
-  swcMinify: true,
   webpack: (config, context) => {
     if (context?.isServer) {
       // 서버 빌드 시 msw/browser 무시
