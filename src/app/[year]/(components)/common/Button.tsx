@@ -7,6 +7,7 @@ export interface ButtonProps {
   className?: string;
   size?: "small" | "medium" | "long" | "circle";
   color?: "black" | "red";
+  onClick?: () => void; // toast alert 의 onCLick 속성 추가
 }
 
 //간단하게만 적었습니당
@@ -22,24 +23,24 @@ export const buttonSize = {
   long: css`
     width: 200px;
     height: 30px;
-`,
+  `,
 };
 
 export const buttonColor = {
   black: css`
-  background-color: black;
-  color: white;
-      &:hover {
-      background-color:rgb(150, 149, 149);
+    background-color: black;
+    color: white;
+    &:hover {
+      background-color: rgb(150, 149, 149);
     }
-`,
+  `,
   red: css`
-  background-color: red;
-  color:black;
-      &:hover {
-      background-color:rgb(255, 123, 123);
+    background-color: red;
+    color: black;
+    &:hover {
+      background-color: rgb(255, 123, 123);
     }
-`,
+  `,
 };
 
 const ButtonStyle = styled.button<ButtonProps>`
@@ -47,7 +48,7 @@ const ButtonStyle = styled.button<ButtonProps>`
   cursor: pointer;
   white-space: nowrap;
   border: none;
-  margin:10px;
+  margin: 10px;
   overflow: hidden;
 
   ${(props) => buttonSize[props.size]};
@@ -59,15 +60,19 @@ export default function Button({
   size,
   color,
   className,
+  onClick,
 }: ButtonProps) {
-
   return (
-    <ButtonStyle className={className} size={size} color={color}>
+    <ButtonStyle
+      className={className}
+      size={size}
+      color={color}
+      onClick={onClick}
+    >
       {label}
     </ButtonStyle>
-  )
+  );
 }
-
 
 // 사용 예제
 // <Button label="테스트" size="small" color="black"></Button>
