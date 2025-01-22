@@ -8,36 +8,35 @@ import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_let
 import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
 import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
 import styles from "../../../../styles/sidebar.module.css";
-
-export interface SidebarProps {
-  isLoggedIn: boolean;
-  userName: string;
-  loginInfo: string;
-  isOpen: boolean;
-}
-
-export interface SidebarItem {
-  id: string;
-  label: string;
-  href: string;
-  icon: string;
-}
-
-const sidebarItems: SidebarItem[] = [
-  { id: "1", label: "마이페이지", href: "/season", icon: my_page },
-  { id: "2", label: "모아 선택 화면", href: "/2025", icon: select_moa },
-  { id: "3", label: "지난모아 보관함", href: "/saved-moa", icon: saved_moa },
-  {
-    id: "4",
-    label: "내가 작성한 편지",
-    href: "/sent-letters",
-    icon: sent_letter,
-  },
-  { id: "5", label: "친구 목록", href: "/", icon: friend_list },
-];
+import { SidebarProps, SidebarItem } from "@/types/sideBar";
 
 export default function Sidebar(props: SidebarProps) {
   const { isLoggedIn, userName, loginInfo, isOpen } = props;
+  const sidebarItems: SidebarItem[] = [
+    { id: "1", label: "마이페이지", href: "/2025/mypage", icon: my_page },
+    {
+      id: "2",
+      label: "모아 선택 화면",
+      href: "/2025/moa/select-moa",
+      icon: select_moa,
+    },
+    {
+      id: "3",
+      label: "지난모아 보관함",
+      //[id]값을 받아와야 해서 일단 컴포넌트 안으로, userName은 임시값입니다다
+      href: `/2025/saved-moa/${userName}`,
+      icon: saved_moa,
+    },
+    {
+      id: "4",
+      label: "내가 작성한 편지",
+      href: "/2025/sent-letter",
+      icon: sent_letter,
+    },
+    //친구 리스트 임시시
+    { id: "5", label: "친구 목록", href: "/", icon: friend_list },
+  ];
+
   return (
     <>
       {/* 사이드 바가 열릴 때 overlay,sidebar, content 각자 다른 animation을 갖고 있어서 각 isOpen을 받아오고 있습니다 */}

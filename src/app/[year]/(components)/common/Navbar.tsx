@@ -53,6 +53,7 @@ export default function Navbar() {
           userName="TestUser"
           loginInfo="카카오 로그인"
           isOpen={isOpen}
+          setIsOpen={setIsOpen}
         />
       </div>
     </>
