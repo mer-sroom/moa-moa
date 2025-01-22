@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 20px 30px;
+  padding: 20px 5%;
   background-color: aquamarine;
 }
 
@@ -9,16 +9,20 @@
   display: flex;
   gap: 20px;
 }
+/*알림 버튼*/
+.notification_icon {
+  cursor: pointer;
+}
 
+/*햄버거 버튼*/
 #hamburger_icon {
-  width: 30px;
-  /* position: relative; */
+  width: 28px;
   transform: rotate(0deg);
   transition: 0.5s ease-in-out;
   cursor: pointer;
   z-index: 5; /*사이드 바가 열려도 버튼에 접근할 수 있게*/
 }
-/*사이드 바 기본 스타일*/
+
 #hamburger_icon span {
   display: block;
   position: absolute;
@@ -44,7 +48,7 @@
 #hamburger_icon span:nth-child(4) {
   top: 16px;
 }
-/*사이드 바 열릴 때 애니메이션*/
+/*햄버거 버튼 눌렀을 때 애니메이션*/
 #hamburger_icon.open span:nth-child(1),
 #hamburger_icon.open span:nth-child(4) {
   top: 16px;

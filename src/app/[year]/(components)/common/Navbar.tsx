@@ -1,23 +1,42 @@
 "use client";
 import { useState } from "react";
-import Sidebar from "./Sidebar";
 import Image from "next/image";
-import logo from "../../../../../public/nav_logo.svg";
-import notifiIcon from "../../../../../public/nav_notification_icon.svg";
+import Link from "next/link";
+import Sidebar from "./Sidebar";
+import logo from "../../../../../public/assets/icons/nav_sidebar/nav_logo.svg";
+import notifiIcon from "../../../../../public/assets/icons/nav_sidebar/nav_notification_icon.svg";
 import styles from "../../../../styles/navbar.module.css";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const isLoggedIn = true; //나중에 로그인 정보 받아오는 용도도
   return (
     <>
       <div className={styles.navbar}>
-        <Image src={logo} alt={"logo"}></Image>
+        <Link href={"/"}>
+          <Image src={logo} alt={"logo"} />
+        </Link>
         <div className={styles.btn_wrapper}>
-          <Image
-            src={notifiIcon}
-            alt={"notification_icon"}
-            className={styles.notification_icon}
-          ></Image>
+          {isLoggedIn ? (
+            <Link href={"/notification"}>
+              <Image
+                src={notifiIcon}
+                alt={"notification_icon"}
+                className={styles.notification_icon}
+              />
+            </Link>
+          ) : (
+            <div
+              onClick={() => alert("로그인 후 사용 가능합니다?")}
+              className={styles.notification_icon}
+            >
+              <Image
+                src={notifiIcon}
+                alt={"notification_icon"}
+                className={styles.notification_icon}
+              />
+            </div>
+          )}
           <div
             id={styles.hamburger_icon}
             className={isOpen ? styles.open : ""}
@@ -30,6 +49,7 @@ export default function Navbar() {
           </div>
         </div>
         <Sidebar
+          isLoggedIn={isLoggedIn}
           userName="TestUser"
           loginInfo="카카오 로그인"
           isOpen={isOpen}

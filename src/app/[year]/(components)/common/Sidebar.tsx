@@ -1,29 +1,46 @@
 "use client";
-import styles from "@/styles/Sidebar.module.css";
+import Link from "next/link";
+import Image from "next/image";
+import my_page from "../../../../../public/assets/icons/nav_sidebar/mypage_icon.svg";
+import select_moa from "../../../../../public/assets/icons/nav_sidebar/moa_select_icon.svg";
+import saved_moa from "../../../../../public/assets/icons/nav_sidebar/saved_moa_icon.svg";
+import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_letter_icon.svg";
+import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
+import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
+import styles from "../../../../styles/sidebar.module.css";
 
 export interface SidebarProps {
+  isLoggedIn: boolean;
   userName: string;
   loginInfo: string;
   isOpen: boolean;
 }
 
 export interface SidebarItem {
+  id: string;
   label: string;
   href: string;
-  icon?: string;
+  icon: string;
 }
 
-const SidebarItem: SidebarItem[] = [
-  { label: "Season", href: "/season", icon: "" },
-  { label: "2025", href: "/2025", icon: "" },
-  { label: "마이페이지", href: "/mypage", icon: "" },
+const sidebarItems: SidebarItem[] = [
+  { id: "1", label: "마이페이지", href: "/season", icon: my_page },
+  { id: "2", label: "모아 선택 화면", href: "/2025", icon: select_moa },
+  { id: "3", label: "지난모아 보관함", href: "/saved-moa", icon: saved_moa },
+  {
+    id: "4",
+    label: "내가 작성한 편지",
+    href: "/sent-letters",
+    icon: sent_letter,
+  },
+  { id: "5", label: "친구 목록", href: "/", icon: friend_list },
 ];
 
-export default function Sidebar({ userName, loginInfo, isOpen }: SidebarProps) {
-  /*나중에 로그인 정보 받아오는 용도*/
-  const isLoggedIn = true;
+export default function Sidebar(props: SidebarProps) {
+  const { isLoggedIn, userName, loginInfo, isOpen } = props;
   return (
     <>
+      {/* 사이드 바가 열릴 때 overlay,sidebar, content 각자 다른 animation을 갖고 있어서 각 isOpen을 받아오고 있습니다 */}
       <div className={`${styles.overlay} ${isOpen ? styles.open : ""}`} />
       <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
         <div
@@ -31,17 +48,44 @@ export default function Sidebar({ userName, loginInfo, isOpen }: SidebarProps) {
             isOpen ? styles.open : styles.closing
           }`}
         >
-          <ul key={userName}>
-            <h2>{userName}</h2>
-            <p>{loginInfo}</p>
-            {SidebarItem.map(item => (
-              <li key={item.label}>
-                <a href={item.href} style={{ color: "white" }}>
-                  {item.label}
-                </a>
-              </li>
-            ))}
+          <ul key="sidebar-list">
+            <div className={styles.user_info}>
+              {isLoggedIn && (
+                <>
+                  <div className={styles.user_name}>
+                    <span>{userName}</span>
+                    <span>님</span>
+                  </div>
+                  <p className={styles.user_login_info}>{loginInfo}</p>
+                </>
+              )}
+            </div>
+
+            <div className={styles.sidebar_items_wrapper}>
+              {sidebarItems.map(item => (
+                <li key={item.id} className={styles.sidebar_item}>
+                  <Image
+                    src={item.icon}
+                    alt={item.label}
+                    width={28}
+                    height={22}
+                  />
+                  <Link href={item.href} className={styles.sidebar_item}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </div>
           </ul>
+          <div className={styles.sidebar_footer}>
+            <Image
+              src={copyright_img}
+              alt="copy_right"
+              width={24}
+              height={20}
+            />
+            <p>© 2025.mer'made. All rights reserved</p>
+          </div>
         </div>
       </div>
     </>
