@@ -26,7 +26,11 @@ export default function Sidebar({ userName, loginInfo, isOpen }: SidebarProps) {
     <>
       <div className={`${styles.overlay} ${isOpen ? styles.open : ""}`} />
       <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
-        <div className={styles.sidebar_conent}>
+        <div
+          className={`${styles.sidebar_content} ${
+            isOpen ? styles.open : styles.closing
+          }`}
+        >
           <ul key={userName}>
             <h2>{userName}</h2>
             <p>{loginInfo}</p>

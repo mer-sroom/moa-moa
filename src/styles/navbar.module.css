@@ -9,14 +9,14 @@
   display: flex;
   gap: 20px;
 }
+
 #hamburger_icon {
   width: 30px;
-  /* height: auto; */
-  position: relative;
+  /* position: relative; */
   transform: rotate(0deg);
   transition: 0.5s ease-in-out;
   cursor: pointer;
-  z-index: 5;
+  z-index: 5; /*사이드 바가 열려도 버튼에 접근할 수 있게*/
 }
 /*사이드 바 기본 스타일*/
 #hamburger_icon span {
