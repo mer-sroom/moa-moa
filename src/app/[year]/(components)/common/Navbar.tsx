@@ -14,15 +14,23 @@ export default function Navbar() {
     <>
       <div className={styles.navbar}>
         <Link href={"/"}>
-          <Image src={logo} alt={"logo"} />
+          <Image
+            src={logo}
+            alt={"logo"}
+            className={styles.logo_icon}
+            width={54}
+            height={20}
+          />
         </Link>
         <div className={styles.btn_wrapper}>
           {isLoggedIn ? (
-            <Link href={"/notification"}>
+            <Link href={"/2025/notification"}>
               <Image
                 src={notifiIcon}
                 alt={"notification_icon"}
                 className={styles.notification_icon}
+                width={18}
+                height={20}
               />
             </Link>
           ) : (
@@ -34,6 +42,8 @@ export default function Navbar() {
                 src={notifiIcon}
                 alt={"notification_icon"}
                 className={styles.notification_icon}
+                width={18}
+                height={20}
               />
             </div>
           )}

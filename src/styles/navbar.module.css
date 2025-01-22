@@ -2,7 +2,17 @@
   display: flex;
   justify-content: space-between;
   padding: 20px 5%;
-  background-color: aquamarine;
+  background-color: transparent;
+  align-items: center;
+  /* box-shadow: 0 0 10px var(--color-gray-300); */
+}
+
+/*메인 로고고*/
+.logo_icon {
+  transition: 0.3s ease;
+}
+.logo_icon:hover {
+  transform: scale(1.08);
 }
 
 .btn_wrapper {
@@ -12,8 +22,25 @@
 /*알림 버튼*/
 .notification_icon {
   cursor: pointer;
+  transition: 0.2s ease;
+}
+.notification_icon:hover {
+  animation: alarmRotate 0.5s ease-in-out;
 }
 
+@keyframes alarmRotate {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  45% {
+    transform: rotate(18deg);
+  }
+
+  75% {
+    transform: rotate(-10deg);
+  }
+}
 /*햄버거 버튼*/
 #hamburger_icon {
   width: 28px;

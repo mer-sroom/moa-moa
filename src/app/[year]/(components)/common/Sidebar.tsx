@@ -8,10 +8,10 @@ import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_let
 import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
 import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
 import styles from "../../../../styles/sidebar.module.css";
-import { SidebarProps, SidebarItem } from "@/types/sideBar";
+import type { SidebarProps, SidebarItem } from "@/types/sideBar";
 
 export default function Sidebar(props: SidebarProps) {
-  const { isLoggedIn, userName, loginInfo, isOpen } = props;
+  const { isLoggedIn, userName, loginInfo, isOpen, setIsOpen } = props;
   const sidebarItems: SidebarItem[] = [
     { id: "1", label: "마이페이지", href: "/2025/mypage", icon: my_page },
     {
@@ -40,8 +40,14 @@ export default function Sidebar(props: SidebarProps) {
   return (
     <>
       {/* 사이드 바가 열릴 때 overlay,sidebar, content 각자 다른 animation을 갖고 있어서 각 isOpen을 받아오고 있습니다 */}
-      <div className={`${styles.overlay} ${isOpen ? styles.open : ""}`} />
-      <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+      <div
+        className={`${styles.overlay} ${isOpen ? styles.open : ""}`}
+        onClick={() => setIsOpen(false)}
+      />
+      <div
+        id="sidebar"
+        className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}
+      >
         <div
           className={`${styles.sidebar_content} ${
             isOpen ? styles.open : styles.closing
@@ -69,7 +75,11 @@ export default function Sidebar(props: SidebarProps) {
                     width={28}
                     height={22}
                   />
-                  <Link href={item.href} className={styles.sidebar_item}>
+                  <Link
+                    href={item.href}
+                    className={styles.sidebar_item}
+                    onClick={() => setIsOpen(false)}
+                  >
                     {item.label}
                   </Link>
                 </li>
@@ -83,7 +93,7 @@ export default function Sidebar(props: SidebarProps) {
               width={24}
               height={20}
             />
-            <p>© 2025.mer'made. All rights reserved</p>
+            <p>© 2025.mer&apos;made. All rights reserved</p>
           </div>
         </div>
       </div>
