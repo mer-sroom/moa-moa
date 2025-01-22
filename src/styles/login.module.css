@@ -1,29 +1,110 @@
+/* 전체 컨테이너 (440×956 고정) */
 .container {
-  text-align: center;
-  margin-top: 50px;
+  width: 440px;
+  height: 956px;
+  margin: 0 auto;
+  background-color: #fff;
+
+  display: flex;
+  flex-direction: column;
 }
 
-.title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+/* 헤더와 바디를 묶는 래퍼 */
+.headerBodyWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 가로 중앙 정렬 */
 }
 
-.description {
-  font-size: 1.2rem;
+/* 헤더 */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px; /* 헤더 위쪽 여백 */
+  margin-bottom: 79px; /* 헤더 아래쪽 여백 */
+}
+
+/* 헤더 로고 */
+.logo img {
+  display: block;
   margin-bottom: 20px;
 }
 
-.kakaoButton {
-  padding: 10px 20px;
-  background-color: #fee500;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  color: #000;
+/* 헤더 타이틀 이미지 */
+.moaTitle img {
+  display: block;
 }
 
-.kakaoButton:hover {
-  background-color: #ffd700;
+/* 바디(로그인 버튼) */
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px; /* 버튼 사이 간격 */
+}
+
+/* 공통 버튼 스타일 */
+.loginButton {
+  width: 313px;
+  height: 60px;
+
+  /* 아이콘을 절대 배치하기 위해 relative 사용 */
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  /* 텍스트를 가운데 오도록 */
+  justify-content: center;
+  padding-left: 1em;
+  background-color: #000;
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 버튼 호버 효과 */
+.loginButton:hover {
+  background-color: #333;
+}
+
+/* 각각의 소셜 버튼 색상(현재 동일) */
+.google,
+.kakao,
+.naver {
+  background-color: #1b1b1b;
+}
+
+/* 버튼 내부 아이콘 -> 왼쪽 정렬 */
+.loginButton img {
+  /* absolute로 배치하여 흐름에서 제거 */
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 푸터 (한 줄) */
+.footer {
+  margin-top: auto;
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: #aaa;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.footer img {
+  display: block;
 }
