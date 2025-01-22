@@ -75,13 +75,26 @@ export default function Sidebar(props: SidebarProps) {
                     width={28}
                     height={22}
                   />
-                  <Link
-                    href={item.href}
-                    className={styles.sidebar_item}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
+                  {isLoggedIn ? (
+                    <Link
+                      href={item.href}
+                      className={styles.sidebar_item}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href="#"
+                      className={styles.sidebar_item}
+                      onClick={e => {
+                        e.preventDefault();
+                        alert("로그인 후 이용 가능합니다");
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </div>
