@@ -1,65 +1,117 @@
 "use client";
-import { useState } from "react";
-import styles from "@/styles/Sidebar.module.css";
+import Link from "next/link";
+import Image from "next/image";
+import my_page from "../../../../../public/assets/icons/nav_sidebar/mypage_icon.svg";
+import select_moa from "../../../../../public/assets/icons/nav_sidebar/moa_select_icon.svg";
+import saved_moa from "../../../../../public/assets/icons/nav_sidebar/saved_moa_icon.svg";
+import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_letter_icon.svg";
+import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
+import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
+import styles from "../../../../styles/Sidebar.module.css";
+import type { SidebarProps, SidebarItem } from "@/types/sideBar";
 
-export interface SidebarProps {
-  userName: string;
-  width: "mobile" | "web" | string;
-}
-
-export interface SidebarItem {
-  label: string;
-  href: string;
-  icon?: string;
-}
-
-const SidebarItem: SidebarItem[] = [
-  { label: "Season", href: "/season", icon: "" },
-  { label: "2025", href: "/2025", icon: "" },
-  { label: "마이페이지", href: "/mypage", icon: "" },
-];
-
-export default function Sidebar(
-  { userName, width }: SidebarProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const thisWidth = width === "mobile" ? "270px" :
-    width === "web" ? "380px" :
-      "700px";
-
-  const SidebarOpen = () => {
-    setIsOpen(true);
-  };
-  const SidebarClose = () => {
-    setIsOpen(false)
-  };
+export default function Sidebar(props: SidebarProps) {
+  const { isLoggedIn, userName, loginInfo, isOpen, setIsOpen } = props;
+  const sidebarItems: SidebarItem[] = [
+    { id: "1", label: "마이페이지", href: "/2025/mypage", icon: my_page },
+    {
+      id: "2",
+      label: "모아 선택 화면",
+      href: "/2025/moa/select-moa",
+      icon: select_moa,
+    },
+    {
+      id: "3",
+      label: "지난모아 보관함",
+      //[id]값을 받아와야 해서 일단 컴포넌트 안으로, userName은 임시값입니다다
+      href: `/2025/saved-moa/${userName}`,
+      icon: saved_moa,
+    },
+    {
+      id: "4",
+      label: "내가 작성한 편지",
+      href: "/2025/sent-letter",
+      icon: sent_letter,
+    },
+    //친구 리스트 임시시
+    { id: "5", label: "친구 목록", href: "/", icon: friend_list },
+  ];
 
   return (
     <>
+      {/* 사이드 바가 열릴 때 overlay,sidebar, content 각자 다른 animation을 갖고 있어서 각 isOpen을 받아오고 있습니다 */}
       <div
-        onClick={SidebarOpen} className={styles.pointer}>
-        ●●●
-      </div>
-      <div className={isOpen ? styles.background : ""}></div>
+        className={`${styles.overlay} ${isOpen ? styles.open : ""}`}
+        onClick={() => setIsOpen(false)}
+      />
       <div
-        style={{
-          width: `${thisWidth}`,
-          transform: `${isOpen ? "translateX(0)" : `translateX(${thisWidth})`}`
-        }}
-        className={`${styles.sidebar}`}>
-        <ul key={userName}>
-          <h2 className={styles.pointer} onClick={SidebarClose}>
-            X
-          </h2>
-          <h2>{userName}</h2>
-          {SidebarItem.map((item) => (
-            <li key={item.label}>
-              <a href={item.href} style={{ color: "white" }}>{item.label}</a>
-            </li>
-          ))}
-        </ul>
+        id="sidebar"
+        className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}
+      >
+        <div
+          className={`${styles.sidebar_content} ${
+            isOpen ? styles.open : styles.closing
+          }`}
+        >
+          <ul key="sidebar-list">
+            <div className={styles.user_info}>
+              {isLoggedIn && (
+                <>
+                  <div className={styles.user_name}>
+                    <span>{userName}</span>
+                    <span>님</span>
+                  </div>
+                  <p className={styles.user_login_info}>{loginInfo}</p>
+                </>
+              )}
+            </div>
+
+            <div className={styles.sidebar_items_wrapper}>
+              {sidebarItems.map(item => (
+                <li key={item.id} className={styles.sidebar_item}>
+                  <Image
+                    src={item.icon}
+                    alt={item.label}
+                    width={28}
+                    height={22}
+                  />
+                  {isLoggedIn ? (
+                    <Link
+                      href={item.href}
+                      className={styles.sidebar_item}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href="#"
+                      className={styles.sidebar_item}
+                      onClick={e => {
+                        e.preventDefault();
+                        alert("로그인 후 이용 가능합니다");
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </div>
+          </ul>
+          <div className={styles.sidebar_footer}>
+            <Image
+              src={copyright_img}
+              alt="copy_right"
+              width={24}
+              height={20}
+            />
+            <p>© 2025.mer&apos;made. All rights reserved</p>
+          </div>
+        </div>
       </div>
     </>
-  )
+  );
 }
 
 // 사용 예제
