@@ -7,7 +7,7 @@ import saved_moa from "../../../../../public/assets/icons/nav_sidebar/saved_moa_
 import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_letter_icon.svg";
 import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
 import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
-import styles from "../../../../styles/sidebar.module.css";
+import styles from "../../../../styles/Sidebar.module.css";
 import type { SidebarProps, SidebarItem } from "@/types/sideBar";
 
 export default function Sidebar(props: SidebarProps) {
