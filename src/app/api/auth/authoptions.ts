@@ -5,6 +5,44 @@ import SpotifyProvider from "next-auth/providers/spotify";
 import NextAuth from "next-auth/index";
 import { NextAuthOptions } from "next-auth/index";
 
+import GoogleProvider from "next-auth/providers/google";
+import type { OAuthConfig, OAuthUserConfig } from "next-auth/providers";
+
+interface NaverProfile {
+  response: {
+    id: string;
+    email?: string;
+    nickname?: string;
+    profile_image?: string;
+  };
+}
+
+function NaverProvider<P extends Record<string, any> = NaverProfile>(
+  options: OAuthUserConfig<P>
+): OAuthConfig<P> {
+  return {
+    id: "naver",
+    name: "Naver",
+    type: "oauth",
+    authorization:
+      "https://nid.naver.com/oauth2.0/authorize?response_type=code",
+    token: "https://nid.naver.com/oauth2.0/token",
+    userinfo: "https://openapi.naver.com/v1/nid/me",
+    profile(profile) {
+      return {
+        id: profile.response.id,
+        name: profile.response.nickname,
+        email: profile.response.email,
+        image: profile.response.profile_image, // 여기서는 그대로 'image'로 받음
+        role: "USER",
+      };
+    },
+    clientId: options.clientId,
+    clientSecret: options.clientSecret,
+  };
+}
+/* -------------------------------------------------------------- */
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -18,16 +56,35 @@ export const authOptions: NextAuthOptions = {
       authorization:
         "https://accounts.spotify.com/authorize?scope=user-read-email,user-read-private",
     }),
+
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+
+    NaverProvider({
+      clientId: process.env.NAVER_CLIENT_ID!,
+      clientSecret: process.env.NAVER_CLIENT_SECRET!,
+    }),
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
+      if ((user as any).image) {
+        (user as any).profileImage = (user as any).image;
+        delete (user as any).image;
+      }
+
+      if (!user.role) {
+        user.role = "USER";
+      }
+
       if (!user.nickname) {
         user.nickname = user.name || "Guest";
       }
+
       return true;
     },
     async session({ session, token }) {
-      // 'user' 대신 'token' 사용
       if (session.user && token) {
         session.user.id = token.id;
         session.user.role = token.role;
