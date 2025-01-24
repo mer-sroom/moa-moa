@@ -11,17 +11,19 @@ import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_l
 import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
 import styles from "../../../../styles/Sidebar.module.css";
 
-/** 사이드바가 열리고/닫히는 상태 제어만 props로 받음 */
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  isLoggedIn?: boolean;
+  userName?: string;
+  loginInfo?: string;
 }
 
 interface SidebarItem {
   id: string;
   label: string;
   href: string;
-  icon: any; // Image import type
+  icon: any;
 }
 
 export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
