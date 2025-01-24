@@ -1,4 +1,6 @@
 "use client";
+
+import { useSession, signIn } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import my_page from "../../../../../public/assets/icons/nav_sidebar/mypage_icon.svg";
@@ -8,10 +10,31 @@ import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_let
 import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
 import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
 import styles from "../../../../styles/Sidebar.module.css";
-import type { SidebarProps, SidebarItem } from "@/types/sideBar";
 
-export default function Sidebar(props: SidebarProps) {
-  const { isLoggedIn, userName, loginInfo, isOpen, setIsOpen } = props;
+/** 사이드바가 열리고/닫히는 상태 제어만 props로 받음 */
+interface SidebarProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
+
+interface SidebarItem {
+  id: string;
+  label: string;
+  href: string;
+  icon: any; // Image import type
+}
+
+export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
+  // 세션에서 사용자 정보를 가져옴
+  const { data: session } = useSession();
+
+  // 로그인 여부
+  const isLoggedIn = !!session?.user;
+  // 세션 정보에서 사용자 이름과 이메일(원하면 nickname, email 등)
+  const userName = session?.user?.name ?? "게스트";
+  const userEmail = session?.user?.email ?? "";
+
+  // 사이드바 메뉴들
   const sidebarItems: SidebarItem[] = [
     { id: "1", label: "마이페이지", href: "/2025/mypage", icon: my_page },
     {
@@ -44,6 +67,8 @@ export default function Sidebar(props: SidebarProps) {
         className={`${styles.overlay} ${isOpen ? styles.open : ""}`}
         onClick={() => setIsOpen(false)}
       />
+
+      {/* 사이드바 본체 */}
       <div
         id="sidebar"
         className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}
@@ -54,18 +79,23 @@ export default function Sidebar(props: SidebarProps) {
           }`}
         >
           <ul key="sidebar-list">
+            {/* 유저 정보 영역 */}
             <div className={styles.user_info}>
-              {isLoggedIn && (
+              {isLoggedIn ? (
                 <>
                   <div className={styles.user_name}>
                     <span>{userName}</span>
                     <span>님</span>
                   </div>
-                  <p className={styles.user_login_info}>{loginInfo}</p>
+                  <p className={styles.user_login_info}>{userEmail}</p>
                 </>
+              ) : (
+                // 로그인되지 않았다면 (세션이 없으면) 로그인 버튼 만들지 아니면 놔둘지 추후 정합시다다
+                <p>로그인 후 이용 가능합니다</p>
               )}
             </div>
 
+            {/* 사이드바 메뉴 목록 */}
             <div className={styles.sidebar_items_wrapper}>
               {sidebarItems.map(item => (
                 <li key={item.id} className={styles.sidebar_item}>
@@ -76,6 +106,7 @@ export default function Sidebar(props: SidebarProps) {
                     height={22}
                   />
                   {isLoggedIn ? (
+                    // 로그인 상태면 Link로 실제 이동 가능
                     <Link
                       href={item.href}
                       className={styles.sidebar_item}
@@ -84,12 +115,15 @@ export default function Sidebar(props: SidebarProps) {
                       {item.label}
                     </Link>
                   ) : (
+                    // 미로그인 상태면 클릭 막기 or 알림
                     <a
                       href="#"
                       className={styles.sidebar_item}
                       onClick={e => {
                         e.preventDefault();
-                        alert("로그인 후 이용 가능합니다");
+                        // 원하는 동작 (예: signIn 호출)
+                        signIn(undefined, { callbackUrl: "/auth/login" });
+                        setIsOpen(false);
                       }}
                     >
                       {item.label}
@@ -99,6 +133,8 @@ export default function Sidebar(props: SidebarProps) {
               ))}
             </div>
           </ul>
+
+          {/* 사이드바 하단 푸터 */}
           <div className={styles.sidebar_footer}>
             <Image
               src={copyright_img}
@@ -115,4 +151,4 @@ export default function Sidebar(props: SidebarProps) {
 }
 
 // 사용 예제
-// <Sidebar userName="테스트유저" width="mobile"></Sidebar>
+// <Sidebar isOpen={true} setIsOpen={() => {}} />
