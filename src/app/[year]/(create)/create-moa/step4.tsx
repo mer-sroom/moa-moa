@@ -2,22 +2,22 @@
 
 import { useState } from "react";
 import Calendar from "../(components)/Calendar";
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 export default function CreateMoaStep4() {
   const today = dayjs(new Date()).format("YYYY-MM-DD");
-  const [startDay, setStartDay] = useState<string>();
+  const [startDay, setStartDay] = useState<string>(today);
   const [endDay, setEndDay] = useState<string>(today);
   const year = new Date().getFullYear();
   const month = new Date().getMonth() + 1;
   const date = new Date().getDate();
-  
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e.currentTarget.group.value)
+    console.log(e.currentTarget.moa_name.value)
     console.log(e.currentTarget.start_day.value)
     console.log(e.currentTarget.end_day.value)
-    console.log(e.currentTarget.moa_name.value)
+    console.log(e.currentTarget.group.value)
   };
 
   const onStartDayHandler = (data: string) => {
@@ -42,12 +42,12 @@ export default function CreateMoaStep4() {
           <label htmlFor="d_day">디데이 설정</label>
           <div id="d_day">
             <div id="start">
-              <input type="text" id="start_day" value={startDay} hidden readOnly/>
-              <Calendar onDateChange={onStartDayHandler}></Calendar>
+              <input type="text" id="start_day" value={startDay} hidden readOnly />
+              <Calendar labelName="시작 날짜" onDateChange={onStartDayHandler}></Calendar>
             </div>
             <div id="end">
               <input type="text" id="end_day" value={endDay} hidden readOnly />
-              <Calendar onDateChange={onEndDayHandler}></Calendar>
+              <Calendar labelName="마감 날짜" onDateChange={onEndDayHandler}></Calendar>
             </div>
           </div>
           <label htmlFor="group">모아 그룹설정</label>
@@ -56,9 +56,9 @@ export default function CreateMoaStep4() {
         </form>
       </div>
 
-      {/* <input type="date" id="start" placeholder={`${today}`}
-        onFocus={(e) => { }} style={{margin:"100px"}} /> */}
- 
+      <input type="date" id="start" placeholder={`${today}`}
+        onFocus={(e) => { }} style={{ margin: "100px" }} />
+
     </>
   )
 }

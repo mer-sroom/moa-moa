@@ -7,9 +7,10 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 interface DatePickerProps {
   onDateChange: (date: string) => void;
+  labelName: string;
 }
 
-export default function Calendar({ onDateChange }: DatePickerProps) {
+export default function Calendar({ onDateChange, labelName }: DatePickerProps) {
   const [value, setValue] = useState<Dayjs | null>(dayjs(new Date()));
   const nextYear = dayjs().add(1, "year");
 
@@ -23,12 +24,11 @@ export default function Calendar({ onDateChange }: DatePickerProps) {
       <DemoContainer components={['DatePicker',]}>
         <DemoItem>
           <DatePicker
-            defaultValue={dayjs(new Date())}
             format="YYYY-MM-DD"
-            value={value}
-            onChange={(value) => { setValue(value); onDateHandler(value); }}
+            onChange={(e) => { setValue(value); onDateHandler(value); }}
             maxDate={nextYear}
             minDate={dayjs('1980-01-01')}
+            label={labelName}
           />
         </DemoItem>
       </DemoContainer>
