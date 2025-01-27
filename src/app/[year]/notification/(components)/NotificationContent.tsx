@@ -62,10 +62,10 @@ export default function NotificationContent() {
                   {/* 수락/거절 버튼 */}
                   <div className={styles.btn_wrapper}>
                     <button className={styles.accept_btn}>
-                      <img src={accept_btn.src} alt="accept" />
+                      <Image src={accept_btn} alt="accept" />
                     </button>
                     <button className={styles.reject_btn}>
-                      <img src={reject_btn.src} alt="reject" />
+                      <Image src={reject_btn} alt="reject" />
                     </button>
                   </div>
                 </div>

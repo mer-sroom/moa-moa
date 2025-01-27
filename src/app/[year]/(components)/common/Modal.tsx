@@ -76,8 +76,8 @@ export default function Modal({
             <button className={styles.action_btn}>선택 완료</button>
           </div>
         ) : (
-          <img
-            src={x_btn.src}
+          <Image
+            src={x_btn}
             alt="close"
             onClick={onClose}
             className={styles.X_btn}
