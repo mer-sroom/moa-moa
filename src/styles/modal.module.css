@@ -1,0 +1,31 @@
+.X_btn {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 26px;
+  right: 28px;
+  cursor: pointer;
+}
+
+.action_btn_wrapper {
+  position: absolute;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* margin-top: 32px; */
+  bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.action_btn {
+  padding: 14px 32px;
+  border-radius: 4px;
+  color: var(--color-gray-300);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.modal_title {
+  margin: 0 0 0 0;
+}

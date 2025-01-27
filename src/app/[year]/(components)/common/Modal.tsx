@@ -1,35 +1,25 @@
 "use client";
-
 import type { CSSProperties, ReactNode } from "react";
+import Image from "next/image";
+import x_btn from "../../../../../public/assets/icons/modal_X_btn.svg";
+import styles from "../../../../styles/modal.module.css";
 
-/**
- * Modal 컴포넌트에 사용할 props 정의
- */
+// Modal 컴포넌트에 사용할 props 정의
 export interface ModalProps {
-  /**
-   * Modal에 표시될 내용(문자열 또는 ReactNode 가능)
-   */
+  //Modal에 표시될 내용(문자열 또는 ReactNode 가능)
   content: string | ReactNode;
-  /**
-   * Modal이 열려 있는지 여부
-   */
+  // Modal이 열려 있는지 여부
   isOpen: boolean;
-  /**
-   * Modal의 제목 (선택사항)
-   */
+  //Modal의 제목 (선택사항)
   title?: string;
-  /**
-   * Modal을 닫을 때 호출되는 함수
-   */
+  // Modal을 닫을 때 호출되는 함수
   onClose: () => void;
-  /**
-   * 모달 컨테이너(내부)의 스타일
-   */
+  // 모달 컨테이너(내부)의 스타일
   modalStyle?: CSSProperties;
-  /**
-   * 모달 뒷배경(오버레이)의 스타일
-   */
+  //모달 뒷배경(오버레이)의 스타일
   overlayStyle?: CSSProperties;
+  //모달 타입1,2 체크용. false(기본값): X버튼, true: 닫기/선택하기 버튼
+  showActionButtons: boolean;
 }
 
 export default function Modal({
@@ -39,31 +29,34 @@ export default function Modal({
   onClose,
   modalStyle: customModalStyle,
   overlayStyle: customOverlayStyle,
+  showActionButtons,
 }: ModalProps) {
   // isOpen이 false이면 Modal 표시 안 함
   if (!isOpen) return null;
-
   // 기본 모달 스타일
   const defaultModalStyle: CSSProperties = {
-    position: "fixed",
+    position: "absolute",
     top: "50%",
     left: "50%",
+    width: "360px",
+    maxHeight: "60%",
     transform: "translate(-50%, -50%)",
     backgroundColor: "#fff",
-    border: "1px solid #ccc",
-    padding: "16px",
+    borderRadius: "28px",
+    padding: "24px 30px",
     zIndex: 9999,
+    boxShadow: "0px 1px 3px 0px rgba(0, 0, 0, 0.3)",
   };
-
   // 오버레이(배경) 스타일
   const defaultOverlayStyle: CSSProperties = {
-    position: "fixed",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    position: "absolute",
     top: 0,
-    left: 0,
+    right: 0,
+    zIndex: 2,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-    zIndex: 9998,
+    transition: "opacity 0.5s ease, visibility 0s 0.5s",
   };
 
   return (
@@ -72,11 +65,26 @@ export default function Modal({
       <div
         style={{ ...defaultOverlayStyle, ...customOverlayStyle }}
         onClick={onClose}
+        aria-hidden="true"
       />
       <div style={{ ...defaultModalStyle, ...customModalStyle }}>
-        {title && <h2>{title}</h2>}
+        {showActionButtons ? (
+          <div className={styles.action_btn_wrapper}>
+            <button onClick={onClose} className={styles.action_btn}>
+              닫기
+            </button>
+            <button className={styles.action_btn}>선택 완료</button>
+          </div>
+        ) : (
+          <Image
+            src={x_btn}
+            alt="close"
+            onClick={onClose}
+            className={styles.X_btn}
+          />
+        )}
+        {title && <h3 className={styles.modal_title}>{title}</h3>}
         <div>{content}</div>
-        <button onClick={onClose}>Close Modal</button>
       </div>
     </>
   );
