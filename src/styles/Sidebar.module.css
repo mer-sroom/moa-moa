@@ -27,7 +27,7 @@
   background-color: var(--color-black);
   color: white;
   height: 100%;
-  transition: width 0.5s ease, opacity 0.5s ease;
+  transition: width 0.4s ease, opacity 0.5s ease;
   width: 0;
   opacity: 0;
   padding: 0 32px;
@@ -38,13 +38,42 @@
   opacity: 1;
 }
 
+/*사이드 바 로그인 안했을 때*/
+.login_wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-decoration: none;
+  padding: 4px 0 10px 0;
+}
+
+.login_wrapper h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: var(--color-gray-300);
+  transition: 0.3s ease;
+}
+
+.login_text {
+  margin: 0 0 6px 0;
+  text-decoration: none;
+  font-size: 14px;
+  color: var(--color-gray-800);
+  font-weight: bold;
+}
+
+.login_wrapper h3:hover {
+  transform: scale(1.02);
+}
+
 /*사이드 바 내용물*/
 .sidebar_content {
   padding-top: 40px;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 4s ease, opacity 5s ease;
+  transition: max-height 4s ease, opacity 4s ease;
 }
 
 .sidebar_content.open {
@@ -95,7 +124,7 @@
   padding-bottom: 26px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
   cursor: pointer;
 }
 
@@ -109,11 +138,6 @@
   font-weight: bold;
 }
 
-.sidebar_item img {
-  transition: 0.3s ease;
-}
-
-.sidebar_item img:hover,
 .sidebar_item a:hover {
   transform: scale(1.05);
 }
@@ -123,7 +147,13 @@
   position: absolute;
   bottom: 0;
   padding-bottom: 8px;
+  display: none;
 }
+
+.sidebar_footer.open {
+  display: block;
+}
+
 .sidebar_footer p {
   font-size: 10px;
   color: var(--color-gray-900);

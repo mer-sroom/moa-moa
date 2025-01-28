@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface SidebarProps {
   isLoggedIn: boolean;
   userName: string;
@@ -10,5 +12,5 @@ export interface SidebarItem {
   id: string;
   label: string;
   href: string;
-  icon: string;
+  icon: StaticImageData | string;
 }

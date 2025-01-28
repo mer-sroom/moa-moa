@@ -9,22 +9,9 @@ import saved_moa from "../../../../../public/assets/icons/nav_sidebar/saved_moa_
 import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_letter_icon.svg";
 import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
 import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
+import login_btn from "../../../../../public/assets/icons/sidebar_login_btn.svg";
 import styles from "../../../../styles/Sidebar.module.css";
-
-interface SidebarProps {
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-  isLoggedIn?: boolean;
-  userName?: string;
-  loginInfo?: string;
-}
-
-interface SidebarItem {
-  id: string;
-  label: string;
-  href: string;
-  icon: any;
-}
+import type { SidebarProps, SidebarItem } from "@/types/sideBar";
 
 export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   // 세션에서 사용자 정보를 가져옴
@@ -93,7 +80,14 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 </>
               ) : (
                 // 로그인되지 않았다면 (세션이 없으면) 로그인 버튼 만들지 아니면 놔둘지 추후 정합시다다
-                <p>로그인 후 이용 가능합니다</p>
+
+                <>
+                  <Link href="/auth/login" className={styles.login_wrapper}>
+                    <Image src={login_btn} alt="login_btn" />
+                    <h3 className={styles.login_text}>로그인하기</h3>
+                  </Link>
+                  <p className={styles.login_text}>로그인 후 이용 가능합니다</p>
+                </>
               )}
             </div>
 
@@ -101,12 +95,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
             <div className={styles.sidebar_items_wrapper}>
               {sidebarItems.map(item => (
                 <li key={item.id} className={styles.sidebar_item}>
-                  <Image
-                    src={item.icon}
-                    alt={item.label}
-                    width={28}
-                    height={22}
-                  />
+                  <Image src={item.icon} alt={item.label} width={24} />
                   {isLoggedIn ? (
                     // 로그인 상태면 Link로 실제 이동 가능
                     <Link
@@ -137,13 +126,10 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
           </ul>
 
           {/* 사이드바 하단 푸터 */}
-          <div className={styles.sidebar_footer}>
-            <Image
-              src={copyright_img}
-              alt="copy_right"
-              width={24}
-              height={20}
-            />
+          <div
+            className={`${styles.sidebar_footer} ${isOpen ? styles.open : ""}`}
+          >
+            <Image src={copyright_img} alt="copy_right" width={24} />
             <p>© 2025.mer&apos;made. All rights reserved</p>
           </div>
         </div>

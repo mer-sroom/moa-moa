@@ -35,7 +35,7 @@ const moaNotifications = mockNotifications.filter(
 export default function NotificationContent() {
   return (
     <>
-      <div style={{ marginTop: "32px" }}>
+      <div className={styles.content_wrapper}>
         {/* 내 소식 알림함  */}
         <section className={styles.my_notifications_section}>
           <p className={styles.notifications_category}>내 소식</p>
