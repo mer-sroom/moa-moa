@@ -4,6 +4,13 @@ import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// 👉 사용예제
+// <ToastButton></ToastButton>
+// <Toast label="Info Toast" type="info" message="🍞 This is an info toast!" />
+// <Toast label="Success Toast" type="success" message="✨ Operation successful!" />
+// <Toast label="Error Toast" type="error" message="❌ Something went wrong!" />
+// <Toast label="Default Toast" type="default" message="🦄 This is Default Toast!" />
+
 // 토스트 버튼 타입 정의
 type ToastButtonProps = {
   label?: string;
@@ -55,10 +62,3 @@ const ToastButton = ({
 };
 
 export default ToastButton;
-
-// 사용예제
-// <ToastButton></ToastButton>
-// <Toast label="Info Toast" type="info" message="🍞 This is an info toast!" />
-// <Toast label="Success Toast" type="success" message="✨ Operation successful!" />
-// <Toast label="Error Toast" type="error" message="❌ Something went wrong!" />
-// <Toast label="Default Toast" type="default" message="🦄 This is Default Toast!" />
