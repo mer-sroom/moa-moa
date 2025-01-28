@@ -9,22 +9,9 @@ import saved_moa from "../../../../../public/assets/icons/nav_sidebar/saved_moa_
 import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_letter_icon.svg";
 import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
 import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
+import login_btn from "../../../../../public/assets/icons/sidebar_login_btn.svg";
 import styles from "../../../../styles/Sidebar.module.css";
-
-interface SidebarProps {
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-  isLoggedIn?: boolean;
-  userName?: string;
-  loginInfo?: string;
-}
-
-interface SidebarItem {
-  id: string;
-  label: string;
-  href: string;
-  icon: any;
-}
+import type { SidebarProps, SidebarItem } from "@/types/sideBar";
 
 export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   // 세션에서 사용자 정보를 가져옴
@@ -93,7 +80,14 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 </>
               ) : (
                 // 로그인되지 않았다면 (세션이 없으면) 로그인 버튼 만들지 아니면 놔둘지 추후 정합시다다
-                <p>로그인 후 이용 가능합니다</p>
+
+                <>
+                  <Link href="/auth/login" className={styles.login_wrapper}>
+                    <Image src={login_btn} alt="login_btn" />
+                    <h3 className={styles.login_text}>로그인하기</h3>
+                  </Link>
+                  <p className={styles.login_text}>로그인 후 이용 가능합니다</p>
+                </>
               )}
             </div>
 
