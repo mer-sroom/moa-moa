@@ -101,12 +101,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
             <div className={styles.sidebar_items_wrapper}>
               {sidebarItems.map(item => (
                 <li key={item.id} className={styles.sidebar_item}>
-                  <Image
-                    src={item.icon}
-                    alt={item.label}
-                    width={28}
-                    height={22}
-                  />
+                  <Image src={item.icon} alt={item.label} width={24} />
                   {isLoggedIn ? (
                     // 로그인 상태면 Link로 실제 이동 가능
                     <Link
@@ -137,13 +132,10 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
           </ul>
 
           {/* 사이드바 하단 푸터 */}
-          <div className={styles.sidebar_footer}>
-            <Image
-              src={copyright_img}
-              alt="copy_right"
-              width={24}
-              height={20}
-            />
+          <div
+            className={`${styles.sidebar_footer} ${isOpen ? styles.open : ""}`}
+          >
+            <Image src={copyright_img} alt="copy_right" width={24} />
             <p>© 2025.mer&apos;made. All rights reserved</p>
           </div>
         </div>
