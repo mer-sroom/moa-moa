@@ -2,11 +2,8 @@ import { mockMoaBoxes } from "../mockData";
 import SelectCarousel from "../(components)/SelectCarousel";
 import { notFound } from "next/navigation";
 
-export default async function FriendSelectMoaPage({
-  params,
-}: {
-  params: { friendId: string };
-}) {
+//async 제거 -> Next에서는 params가 동기적으로 전달됨
+export default function FriendSelectMoaPage({ params }) {
   //친구 id를 params로 받아와서 사용(필터할 때 필요)
   const { friendId } = params;
 
