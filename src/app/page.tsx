@@ -62,6 +62,14 @@ export default function HomePage() {
             /2025/moa/friendmoa/[friendId] (예: 123)
           </Link>
         </li>
+        <li>
+          <Link href="/2025/moa/select-moa">
+            /2025/moa/select-moa(모아 선택 화면)
+          </Link>
+        </li>
+        <li>
+          <Link href="/2025/moa/mymoa">/2025/moa/mymoa(내 모아)</Link>
+        </li>
       </ul>
     </main>
   );
