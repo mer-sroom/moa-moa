@@ -39,6 +39,32 @@ export const mockMoaBoxes: MoaBox[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
+  {
+    id: 4,
+    ownerId: "user456",
+    title: "테슷트",
+    isGroup: false,
+    dueDate: null,
+    isPublic: false,
+    allowAnonymous: false,
+    shareLink: "",
+    letterCountPublic: false,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: 5,
+    ownerId: "user999",
+    title: "테슷트",
+    isGroup: false,
+    dueDate: null,
+    isPublic: false,
+    allowAnonymous: false,
+    shareLink: "",
+    letterCountPublic: false,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 export interface MoaBox {

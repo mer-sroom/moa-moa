@@ -12,7 +12,7 @@ export default function Layout({ children }) {
       </div>
 
       <p style={{ margin: "8px 0" }}>
-        새로운 모아 박스를 만들거나 진행 중인 기념일을 모아 볼 수 있어요
+        현재 진행 중인 기념일을 모아서 볼 수 있어요
       </p>
       {children}
     </div>
