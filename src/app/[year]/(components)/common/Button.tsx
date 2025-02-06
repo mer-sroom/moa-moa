@@ -17,11 +17,18 @@ export const buttonSize = {
     height: 30px;
   `,
   medium: css`
-    width: 100px;
-    height: 30px;
+    max-width: 316px;
+    width: 100%;
+    height: 63px;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 60px;
+    transition: 0.2s ease;
   `,
   long: css`
-    width: 200px;
+    max-width: 200px;
+    width: 100%;
     height: 30px;
   `,
 };
@@ -51,8 +58,8 @@ const ButtonStyle = styled.button<ButtonProps>`
   margin: 10px;
   overflow: hidden;
 
-  ${(props) => buttonSize[props.size]};
-  ${(props) => buttonColor[props.color]};
+  ${props => buttonSize[props.size]};
+  ${props => buttonColor[props.color]};
 `;
 
 export default function Button({
