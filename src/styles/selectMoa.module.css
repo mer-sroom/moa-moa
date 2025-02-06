@@ -1,0 +1,100 @@
+/*select-moa/layout.tsx css*/
+.layoutContainer {
+  padding: 48px 40px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.description {
+  margin: 8px 0;
+}
+
+/*SelectCarousel.tsx 컴포넌트 css*/
+.carouselContainer {
+  padding-top: 56px; /*캐러셀 위쪽 여백백*/
+}
+
+.card {
+  box-shadow: 0px 4.4px 4.4px 0px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 280 / 410;
+  border-radius: 20px;
+  padding: 20px;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+/*create-moa 이동 카드*/
+.addCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+/*moaBox가 담긴 카드*/
+.moaCard {
+  background-color: var(--color-gray-200);
+}
+/*선택 됐을 때*/
+.selected {
+  background-color: var(--color-gray-400);
+}
+
+/*삭제 버튼*/
+.deleteBtnContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+.deleteBtnContainer img {
+  transition: 0.2s ease;
+}
+.deleteBtnContainer img:hover {
+  /* transform: scale(1.1); */
+  animation: deleteBtnRotate 0.5s ease-in-out;
+}
+/*삭제 버튼 애니메이션*/
+@keyframes deleteBtnRotate {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  45% {
+    transform: rotate(18deg);
+  }
+
+  75% {
+    transform: rotate(-10deg);
+  }
+}
+
+/*모아 박스 컨테이너*/
+.moaBoxContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*선택하기 버튼 컨테이너너*/
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 86px;
+}

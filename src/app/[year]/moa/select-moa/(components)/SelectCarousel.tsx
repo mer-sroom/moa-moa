@@ -1,95 +1,121 @@
 "use client";
 
-import { SelectCarouselProps } from "../mockData";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import add_btn from "../../../../../../public/assets/icons/select_moa_add_btn.svg";
-import Button from "@/app/[year]/(components)/common/Button";
-
+//Swiper 라이브러리 import
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
-
-// Import Swiper styles
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/scrollbar";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState, useRef, useEffect } from "react";
+import addBtn from "../../../../../../public/assets/icons/select_moa_add_btn.svg";
+import deleteBtn from "../../../../../../public/assets/icons/trash_can_icon.svg";
+import Button from "@/app/[year]/(components)/common/Button";
+import styles from "../../../../../styles/selectMoa.module.css";
+import { SelectCarouselProps } from "../mockData"; //목업 데이터
 
 export default function SelectCarousel({
   friendId,
   moaBoxes,
 }: SelectCarouselProps) {
-  const router = useRouter(); // Next.js 라우터 훅을 사용해 페이지 이동 처리
+  const router = useRouter();
+  const [nowSelected, setNowSelected] = useState<number | null>(null);
+  const containerRef = useRef(null); // 컨테이너를 참조하기 위한 ref
+
+  // 선택된 moaBox 페이지로 이동 함수
+  const handleRoute = () => {
+    if (nowSelected != null && friendId) {
+      router.push(`/2025/moa/friendmoa/${nowSelected}`);
+    } else if (nowSelected != null && !friendId) {
+      router.push(`/2025/moa/mymoa/${nowSelected}`);
+    }
+  };
+
+  //특정 moaBox 삭제하는 함수(id : moaBox id)
+  const handleMoaBoxDelete = (id: number) => {
+    console.log(id);
+  };
+
+  // 클릭 이벤트 리스너 추가 (컴포넌트 외부 클릭 시 선택 해제)
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (!containerRef.current.contains(event.target)) {
+        setNowSelected(null);
+      }
+    };
+
+    // 이벤트 리스너 등록
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // 언마운트될 때 이벤트 리스너 제거
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <>
-      <div style={{ paddingTop: "56px" }}>
+    <div ref={containerRef}>
+      <div className={styles.carouselContainer}>
         <Swiper
           spaceBetween={28} // 슬라이드 간 간격
           slidesPerView="auto" // 자동으로 슬라이드 너비 조정
           centeredSlides={true} // 슬라이드 중앙 정렬
           pagination={{
-            clickable: true, // 페이지네이션 클릭 가능
+            clickable: true,
           }}
           style={{ width: "100%", padding: "10px 0" }}
-          modules={[Pagination]} // 페이지네이션 모듈 사용
+          modules={[Pagination]}
         >
-          {/* create-moa 이동 카드 (친구 select-moa에서 표시되지 않음) */}
+          {/* create-moa 이동 카드 (친구 select-moa에선선 표시되지 않음) */}
           {!friendId && (
             <SwiperSlide
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "white",
-                width: "320px",
-                height: "450px",
-                marginRight: "10px",
-                borderRadius: "20px",
-                cursor: "pointer", // 클릭 가능한 스타일 적용
-                boxShadow: "0px 4.4px 4.4px 0px rgba(0, 0, 0, 0.25)", // 그림자 효과
-              }}
+              className={`${styles.card} ${styles.addCard}`}
               onClick={() => router.push("/2025/create-moa")} // 클릭 시 create-moa 페이지로 이동
             >
-              <Image src={add_btn} alt="select_moa_add_btn" />
+              <Image src={addBtn} alt="Add new MOA" />
             </SwiperSlide>
           )}
 
-          {/* moaBoxes 리스트를 슬라이드로 렌더링 */}
+          {/* moaBoxes 리스트 슬라이드로 렌더링 */}
           {moaBoxes.map(moaBox => (
             <SwiperSlide
-              key={moaBox.id} // 각 슬라이드의 고유 키
-              onClick={() => router.push(`/2025/moa/friendmoa/${moaBox.id}`)} // 클릭 시 해당 moaBox 페이지로 이동
-              style={{
-                backgroundColor: "var(--color-gray-200)", // 배경색
-                width: "320px", // 슬라이드 너비
-                height: "450px", // 슬라이드 높이
-                borderRadius: "20px", // 모서리 둥글게
-                boxShadow: "0px 4.4px 4.4px 0px rgba(0, 0, 0, 0.25)", // 그림자 효과
-                cursor: "pointer", // 클릭 가능한 스타일 적용
+              key={moaBox.id}
+              onClick={() => {
+                setNowSelected(moaBox.id);
               }}
+              className={`${styles.card} ${styles.moaCard} ${
+                nowSelected === moaBox.id ? styles.selected : ""
+              }`}
             >
+              {/* 삭제 버튼 */}
+              {!friendId && (
+                <div className={styles.deleteBtnContainer}>
+                  <Image
+                    src={deleteBtn}
+                    onClick={() => handleMoaBoxDelete(moaBox.id)}
+                    alt="select_moa_delete_btn"
+                  />
+                </div>
+              )}
               {/* 임시 데이터 표시: 나중에 모아박스 이미지로 교체 예정 */}
-              {moaBox.ownerId}
-              <br />
-              {moaBox.id}
+              <div className={styles.moaBoxContainer}>
+                {moaBox.ownerId}
+                <br />
+                {moaBox.id}
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      {/* "선택하기" 버튼 감싸는 div */}
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          paddingTop: "86px", // 버튼 위쪽 여백
-        }}
-      >
-        <Button label={"선택하기"} size={"medium"} color={"black"} />{" "}
-        {/* 버튼 컴포넌트 */}
+      {/* 버튼 컴포넌트 컨테이너 */}
+      <div className={styles.buttonContainer}>
+        <Button
+          label={"선택하기"}
+          size={"medium"}
+          color={"black"}
+          onClick={handleRoute}
+        />
       </div>
-    </>
+    </div>
   );
 }
