@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 5%;
+  background-color: transparent;
+  align-items: center;
+}
+
+/* 로고 */
+.logo_icon {
+  transition: 0.3s ease;
+}
+.logo_icon:hover {
+  transform: scale(1.08);
+}
+
+/* 버튼 래퍼 */
+.btn_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 공통 버튼 스타일 */
+.menuBtn {
+  display: inline-block;
+  text-decoration: none; /* Link 밑줄 제거 */
+  background-color: #fff; /* 기본: 흰 배경 */
+  color: #000; /* 기본: 검정 텍스트 */
+  padding: 8px 16px;
+  border-radius: 18px;
+  transition: 0.3s ease;
+  font-weight: 500; /* 가독성 위해 약간 두께 */
+}
+
+.menuBtn:hover {
+  background-color: #000; /* 호버 시 검정 배경 */
+  color: #fff; /* 호버 시 흰 글씨 */
+  transform: scale(1.05); /* 조금 확대 */
+}
