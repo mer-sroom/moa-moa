@@ -1,3 +1,5 @@
+import { MoaBox } from "@/types/select-moa";
+
 //목업 데이터 (moaBox 테이블)
 export const mockMoaBoxes: MoaBox[] = [
   {
@@ -66,22 +68,3 @@ export const mockMoaBoxes: MoaBox[] = [
     updatedAt: new Date(),
   },
 ];
-
-export interface MoaBox {
-  id: number;
-  ownerId: string;
-  title: string;
-  isGroup: boolean;
-  dueDate: Date | null;
-  isPublic: boolean;
-  allowAnonymous: boolean;
-  shareLink: string | null;
-  letterCountPublic: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface SelectCarouselProps {
-  friendId?: string;
-  moaBoxes: MoaBox[];
-}

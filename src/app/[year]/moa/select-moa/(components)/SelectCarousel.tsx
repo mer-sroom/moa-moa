@@ -11,7 +11,7 @@ import addBtn from "../../../../../../public/assets/icons/select_moa_add_btn.svg
 import deleteBtn from "../../../../../../public/assets/icons/trash_can_icon.svg";
 import Button from "@/app/[year]/(components)/common/Button";
 import styles from "../../../../../styles/selectMoa.module.css";
-import { SelectCarouselProps } from "../mockData"; //목업 데이터
+import { SelectCarouselProps } from "@/types/select-moa"; //props 타입
 
 export default function SelectCarousel({
   friendId,
@@ -71,7 +71,9 @@ export default function SelectCarousel({
               className={`${styles.card} ${styles.addCard}`}
               onClick={() => router.push("/2025/create-moa")} // 클릭 시 create-moa 페이지로 이동
             >
-              <Image src={addBtn} alt="Add new MOA" />
+              <div className={styles.addBtnConatiner}>
+                <Image src={addBtn} alt="Add new MOA" />
+              </div>
             </SwiperSlide>
           )}
 

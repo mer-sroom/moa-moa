@@ -1,8 +1,7 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth/next";
 import SelectCarousel from "./(components)/SelectCarousel";
-//모아 박스 목업 데이터
-import { mockMoaBoxes } from "./mockData";
+import { mockMoaBoxes } from "./mockData"; //모아 박스 목업 데이터
 
 // 현재 유저 (실제 프로젝트에서는 세션 기반으로 가져올 것)
 const nowUserMock = { id: "user999", name: "멈머" };
