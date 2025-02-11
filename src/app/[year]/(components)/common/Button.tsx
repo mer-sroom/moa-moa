@@ -52,7 +52,7 @@ export const buttonColor = {
   padding-top :4.5px;
   border: none;
   border-radius: 10px;
-      &:hover {
+      &:active {
       background-color:rgb(150, 149, 149);
    }
 `,
@@ -63,7 +63,7 @@ export const buttonColor = {
   padding-top :4.5px;
   border: 1px solid rgb(222, 222, 222);
   border-radius: 10px;
-      &:hover {
+      &:active {
       background-color:rgb(189, 189, 189);
     }
 `,
