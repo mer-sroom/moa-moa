@@ -1,9 +1,11 @@
 "use client";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { ReactNode } from "react";
 
 export interface ButtonProps {
-  label?: string;
+  label?: String;
+  icon?: ReactNode; //Image 태그로 받기 위해
   className?: string;
   size?: "small" | "medium" | "long" | "circle" | "modalBtn";
   color?: "black" | "white" | "red" | "blocked" | "none";
@@ -94,6 +96,7 @@ const ButtonStyle = styled.button<ButtonProps>`
 
 export default function Button({
   label,
+  icon,
   size,
   color,
   className,
@@ -106,7 +109,10 @@ export default function Button({
       color={color}
       onClick={onClick}
     >
-      {label}
+      <div style={{ justifyContent: "center", display: "flex", gap: "12px" }}>
+        {label}
+        {icon}
+      </div>
     </ButtonStyle>
   );
 }

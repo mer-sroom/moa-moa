@@ -4,6 +4,7 @@
   padding: 20px 5%;
   background-color: transparent;
   align-items: center;
+  z-index: 9;
   /* box-shadow: 0 0 10px var(--color-gray-300); */
 }
 
