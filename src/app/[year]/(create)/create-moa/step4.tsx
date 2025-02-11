@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Calendar from "../(components)/Calendar";
 import dayjs from 'dayjs';
+import Button from "../../(components)/common/Button";
+import { FaCheck } from "react-icons/fa";
 
 export default function CreateMoaStep4() {
   const today = dayjs(new Date()).format("YYYY-MM-DD");
@@ -32,6 +34,12 @@ export default function CreateMoaStep4() {
     console.log(data)
   };
 
+
+  const [isOpen, setIsOpen] = useState(false);
+  const groupHandler = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <h1>나의 모아 설정하기</h1>
@@ -50,8 +58,12 @@ export default function CreateMoaStep4() {
               <Calendar labelName="마감 날짜" onDateChange={onEndDayHandler}></Calendar>
             </div>
           </div>
-          <label htmlFor="group">모아 그룹설정</label>
-          <input type="text" id="group" />
+
+          <label htmlFor="group">모아 그룹설정
+            <input type="hidden" id="group" value={`${isOpen}`} />
+            <Button label={isOpen ? <FaCheck color="white"/> : <FaCheck color="rgb(222, 222, 222)"/>} size="checkbox" color={isOpen ? "checkboxTrue" : "checkboxFalse"} onClick={groupHandler}></Button>
+          </label>
+
           <button type="submit">제출</button>
         </form>
       </div>
