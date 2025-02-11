@@ -5,8 +5,6 @@ import {
   mockLetters,
   mockBackgroundDesigns,
   mockMailBoxDesigns,
-  mockLetterIconDesigns,
-  mockLetterPaperDesigns,
 } from "./mockdata";
 import MailBox from "../../(components)/MailBox";
 import { Suspense } from "react";
