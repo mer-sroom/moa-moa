@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import LetterItem from "./LetterItem";
-import { Letter } from "../mymoa/[id]/mockdata";
+import { Letter } from "../mockData";
 import mockMailBox from "../../../../../public/assets/mailbox1.svg";
 import styles from "../../../../styles/mymoa.module.css";
 import { useState } from "react";
@@ -34,9 +34,10 @@ export default function MailBox({
             position: "relative",
             width: "420px",
             height: "490px",
-            backgroundColor: "red",
-            backgroundImage: `url(${mockMailBox})`,
-            backgroundSize: "cover",
+            // backgroundColor: "rgb(0,0,330,0.15)",
+            backgroundImage: `url(${designURL})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
           }}
         >
           {/* 그리드 영역 */}
@@ -46,7 +47,8 @@ export default function MailBox({
               position: "absolute",
               top: "90px",
               left: "90px",
-              backgroundColor: "skyblue",
+              padding: "10px",
+              backgroundColor: "rgb(255,255,255,0.7)",
               width: "240px",
               height: "280px",
             }}
@@ -63,6 +65,7 @@ export default function MailBox({
             >
               {firstRow.map(letter => (
                 <LetterItem
+                  isOpened={letter.isOpened}
                   key={letter.id}
                   id={letter.id}
                   name={letter.authorName}

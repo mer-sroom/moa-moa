@@ -102,7 +102,9 @@ export default function SelectCarousel({
               <div className={styles.moaBoxContainer}>
                 {moaBox.ownerId}
                 <br />
-                {moaBox.id}
+                moaBox Id:{moaBox.id}
+                <br />
+                title: {moaBox.title}
               </div>
             </SwiperSlide>
           ))}

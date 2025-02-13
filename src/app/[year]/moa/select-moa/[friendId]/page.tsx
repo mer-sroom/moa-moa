@@ -1,4 +1,4 @@
-import { mockMoaBoxes } from "../mockData"; //목업 데이터터
+import { mockMoaBoxes } from "../../mockData"; //목업 데이터터
 import SelectCarousel from "../(components)/SelectCarousel";
 import { notFound } from "next/navigation";
 
