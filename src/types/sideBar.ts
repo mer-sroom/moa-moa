@@ -5,7 +5,7 @@ export interface SidebarProps {
   userName: string;
   loginInfo: string;
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  // setIsOpen: (isOpen: boolean) => void;
 }
 
 export interface SidebarItem {

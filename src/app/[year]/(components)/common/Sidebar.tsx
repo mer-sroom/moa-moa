@@ -13,7 +13,7 @@ import login_btn from "../../../../../public/assets/icons/sidebar_login_btn.svg"
 import styles from "../../../../styles/Sidebar.module.css";
 import type { SidebarProps, SidebarItem } from "@/types/sideBar";
 
-export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
+export default function Sidebar({ isOpen }: SidebarProps) {
   // 세션에서 사용자 정보를 가져옴
   const { data: session } = useSession();
 
@@ -54,7 +54,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       {/* 사이드 바가 열릴 때 overlay,sidebar, content 각자 다른 animation을 갖고 있어서 각 isOpen을 받아오고 있습니다 */}
       <div
         className={`${styles.overlay} ${isOpen ? styles.open : ""}`}
-        onClick={() => setIsOpen(false)}
+        // onClick={() => setIsOpen(false)}
       />
 
       {/* 사이드바 본체 */}
@@ -101,7 +101,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                     <Link
                       href={item.href}
                       className={styles.sidebar_item}
-                      onClick={() => setIsOpen(false)}
+                      // onClick={() => setIsOpen(false)}
                     >
                       {item.label}
                     </Link>
@@ -114,7 +114,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                         e.preventDefault();
                         // 원하는 동작 (예: signIn 호출)
                         signIn(undefined, { callbackUrl: "/auth/login" });
-                        setIsOpen(false);
+                        // setIsOpen(false);
                       }}
                     >
                       {item.label}

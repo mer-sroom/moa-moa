@@ -65,10 +65,10 @@ export default function MailBox({
             >
               {firstRow.map(letter => (
                 <LetterItem
-                  isOpened={letter.isOpened}
                   key={letter.id}
                   id={letter.id}
                   name={letter.authorName}
+                  isOpened={letter.isOpened}
                   paperDesignId={letter.letterPaperDesignId}
                   iconDesignId={letter.letterIconDesignId}
                 />
@@ -90,6 +90,7 @@ export default function MailBox({
                 <LetterItem
                   key={letter.id}
                   id={letter.id}
+                  isOpened={letter.isOpened}
                   name={letter.authorName}
                   paperDesignId={letter.letterPaperDesignId}
                   iconDesignId={letter.letterIconDesignId}

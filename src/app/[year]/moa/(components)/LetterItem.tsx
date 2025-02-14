@@ -25,15 +25,15 @@ export default function LetterItem({
   //편지 오픈 핸들러
   const handleOpenLetter = id => {
     console.log(id);
+    console.log(isOpened);
   };
-  console.log(isOpened);
 
   return (
     <div
-      style={isOpened ? { opacity: "30%" } : {}}
+      style={isOpened ? { opacity: "50%" } : {}}
       onClick={() => {
         handleOpenLetter(id);
-        isOpened = true;
+        // letter.isOpened true로 PATCH 요청 로직(route.ts에 작성하기)
       }}
     >
       {/* 편지 아이콘 */}
