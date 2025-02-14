@@ -4,6 +4,9 @@
   padding: 20px 5%;
   background-color: transparent;
   align-items: center;
+  position: absolute;
+  /* max-width: 530px; */
+  width: 90%;
   /* box-shadow: 0 0 10px var(--color-gray-300); */
 }
 
@@ -47,6 +50,8 @@
   transform: rotate(0deg);
   transition: 0.5s ease-in-out;
   cursor: pointer;
+  border: none;
+  background-color: transparent;
   z-index: 5; /*사이드 바가 열려도 버튼에 접근할 수 있게*/
 }
 

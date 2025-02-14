@@ -1,8 +1,10 @@
 "use client";
 
-import { useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import { useNavigationContext } from "@/contexts/NavigationContext";
 import Link from "next/link";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
+//아이콘------------------------------------------------------------------------------
 import my_page from "../../../../../public/assets/icons/nav_sidebar/mypage_icon.svg";
 import select_moa from "../../../../../public/assets/icons/nav_sidebar/moa_select_icon.svg";
 import saved_moa from "../../../../../public/assets/icons/nav_sidebar/saved_moa_icon.svg";
@@ -10,18 +12,21 @@ import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_let
 import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
 import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
 import login_btn from "../../../../../public/assets/icons/sidebar_login_btn.svg";
+//css------------------------------------------------------------------------------
 import styles from "../../../../styles/Sidebar.module.css";
-import type { SidebarProps, SidebarItem } from "@/types/sideBar";
 
-export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
-  // 세션에서 사용자 정보를 가져옴
-  const { data: session } = useSession();
+//SideBar 메뉴 인터페이스
+export interface SidebarItem {
+  id: string;
+  label: string;
+  href: string;
+  icon: StaticImageData | string;
+}
 
-  // 로그인 여부
-  const isLoggedIn = !!session?.user;
-  // 세션 정보에서 사용자 이름과 이메일(원하면 nickname, email 등)
-  const userName = session?.user?.name ?? "게스트";
-  const userEmail = session?.user?.email ?? "";
+export default function Sidebar() {
+  //전역에서 불러오기
+  const { isOpen, setIsOpen, userName, isLoggedIn, userEmail } =
+    useNavigationContext();
 
   // 사이드바 메뉴들
   const sidebarItems: SidebarItem[] = [
@@ -45,7 +50,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       href: "/2025/sent-letter",
       icon: sent_letter,
     },
-    //친구 리스트 임시시
+    //친구 리스트 임시
     { id: "5", label: "친구 목록", href: "/", icon: friend_list },
   ];
 
@@ -79,8 +84,6 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                   <p className={styles.user_login_info}>{userEmail}</p>
                 </>
               ) : (
-                // 로그인되지 않았다면 (세션이 없으면) 로그인 버튼 만들지 아니면 놔둘지 추후 정합시다다
-
                 <>
                   <Link href="/auth/login" className={styles.login_wrapper}>
                     <Image src={login_btn} alt="login_btn" />

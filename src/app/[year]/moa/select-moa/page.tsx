@@ -21,9 +21,7 @@ export default async function SelectMoaPage() {
   return (
     <>
       <div>
-        <div>
-          <SelectCarousel moaBoxes={userMoaBoxes} />
-        </div>
+        <SelectCarousel moaBoxes={userMoaBoxes} />
       </div>
     </>
   );

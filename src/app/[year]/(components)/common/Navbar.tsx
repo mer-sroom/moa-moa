@@ -1,18 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useNavigationContext } from "@/contexts/NavigationContext";
 import Image from "next/image";
 import Link from "next/link";
-import Sidebar from "./Sidebar";
 import logo from "../../../../../public/assets/icons/nav_sidebar/nav_logo.svg";
 import notifiIcon from "../../../../../public/assets/icons/nav_sidebar/nav_notification_icon.svg";
 import styles from "../../../../styles/navbar.module.css";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const isLoggedIn = true; //나중에 로그인 정보 받아오는 용도도
+  const { isLoggedIn, isOpen, setIsOpen } = useNavigationContext();
   return (
     <>
-      <div className={styles.navbar}>
+      <nav className={styles.navbar}>
         <Link href={"/"}>
           <Image
             src={logo}
@@ -47,7 +45,7 @@ export default function Navbar() {
               />
             </div>
           )}
-          <div
+          <button
             id={styles.hamburger_icon}
             className={isOpen ? styles.open : ""}
             onClick={() => setIsOpen(!isOpen)}
@@ -56,16 +54,9 @@ export default function Navbar() {
             <span></span>
             <span></span>
             <span></span>
-          </div>
+          </button>
         </div>
-        <Sidebar
-          isLoggedIn={isLoggedIn}
-          userName="TestUser"
-          loginInfo="카카오 로그인"
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-        />
-      </div>
+      </nav>
     </>
   );
 }
