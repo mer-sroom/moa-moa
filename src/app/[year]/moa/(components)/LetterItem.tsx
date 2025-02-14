@@ -1,5 +1,6 @@
 "use client";
 import { mockLetterPaperDesigns, mockLetterIconDesigns } from "../mockData";
+import styles from "@/styles/mymoa.module.css";
 
 export default function LetterItem({
   id,
@@ -30,7 +31,9 @@ export default function LetterItem({
 
   return (
     <div
-      style={isOpened ? { opacity: "50%" } : {}}
+      className={`${styles.letterItem} ${
+        isOpened ? styles.opened : styles.glowing
+      }`}
       onClick={() => {
         handleOpenLetter(id);
         // letter.isOpened true로 PATCH 요청 로직(route.ts에 작성하기)
@@ -38,33 +41,13 @@ export default function LetterItem({
     >
       {/* 편지 아이콘 */}
       <div
+        className={styles.icon}
         style={{
-          height: "52px",
-          width: "70px",
-          cursor: "pointer",
           backgroundImage: `url(${IconDesign.imageURL})`,
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          // backgroundColor: "wheat",
-          // boxShadow: "0px 2px 2px 2px rgba(0, 0, 0, 0.25)",
         }}
       ></div>
       {/* 편지 작성한 사람 */}
-      <p
-        style={{
-          margin: "0",
-          paddingTop: "4px",
-          fontSize: "10px",
-          textAlign: "center",
-          // boxShadow: "0px 2px 2px 2px rgba(0, 0, 0, 0.25)",
-          textShadow: "0px 10px 2px 2px rgba(0, 0, 0, 0.9)",
-          // mixBlendMode: "difference",
-          // color: "blue",
-        }}
-      >
-        {name}
-      </p>
+      <p className={styles.authorName}>{name}</p>
     </div>
   );
 }

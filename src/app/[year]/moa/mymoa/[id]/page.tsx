@@ -17,6 +17,7 @@ import MailBox from "../../(components)/MailBox";
 import Button from "@/app/[year]/(components)/common/Button";
 import downloadIcon from "../../../../../../public/assets/icons/download_icon.svg";
 import shareIcon from "../../../../../../public/assets/icons/share_icon.svg";
+import styles from "@/styles/mymoa.module.css";
 
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
@@ -50,48 +51,25 @@ export default async function MyMoaBoxPage({ params }) {
     <>
       {/* 마이 모아 전체 배경 img */}
       <div
+        className={styles.background}
         style={{
-          position: "absolute",
-          top: "0",
-          width: "100%",
           backgroundImage: `url(${backgroundDesign.imageURL})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          height: "100vh",
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
         }}
       >
-        {/* 모아 박스 타이틀 / 편지 수*/}
-        <section
-          style={{
-            marginTop: "90px",
-            maxWidth: "320px",
-            width: "100%",
-            textAlign: "center",
-          }}
-        >
-          <h2
-            style={{
-              marginTop: "0",
-              borderRadius: "50px",
-              background: " rgba(255, 255, 255, 0.52)",
-            }}
-          >
-            {moaBox.title}
-          </h2>
+        {/* 모아 박스 타이틀 */}
+        <section className={styles.headerSection}>
+          <h2 className={styles.title}>{moaBox.title}</h2>
           {/* 받은 편지 수 */}
           <div>
             {moaBox.letterCountPublic && (
-              <p style={{ margin: "0" }}>
+              <p className={styles.letterCount}>
                 moaBox Id : {id}, 받은 편지 수 : {letters.length}
               </p>
             )}
           </div>
         </section>
         {/* 모아 박스 컨테이너*/}
-        <section style={{ paddingTop: "40px" }}>
+        <section className={styles.mailBoxSection}>
           <Suspense fallback={"loading..."}>
             <MailBox
               moaBoxId={moaBoxId}
@@ -101,14 +79,7 @@ export default async function MyMoaBoxPage({ params }) {
           </Suspense>
         </section>
         {/* 버튼 컨테이너 */}
-        <section
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-            paddingTop: "68px",
-          }}
-        >
+        <section className={styles.buttonSection}>
           <Button
             icon={<Image src={downloadIcon} alt="share icon" />}
             size="circle"
