@@ -4,6 +4,11 @@ import React from "react";
 import paginationBtn from "@/components/../../public/assets/icons/pagination_btn.svg";
 import styles from "@/styles/pagination.module.css";
 
+// Pagination 사용 시 부모 컴포넌트에서 아래의 값들을 넘기면 됩니다다
+//   currentPage : 현재 페이지 설정
+//   totalPages : 총 페이지 수
+//   onPageChange : 버튼 눌렀을 때 실행할 함수
+
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
