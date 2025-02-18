@@ -1,0 +1,34 @@
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.paginationContainer button {
+  background-color: transparent;
+  border: none;
+  scale: 0.8;
+}
+
+.paginationContainer button:nth-child(1) {
+  transform: rotateY(180deg);
+}
+
+.dotsContainer {
+  display: flex;
+  max-width: 106px;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-gray-300);
+}
+
+.active {
+  background-color: var(--ui-accent);
+}

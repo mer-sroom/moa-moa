@@ -59,7 +59,7 @@ export default function Sidebar() {
       {/* 사이드 바가 열릴 때 overlay,sidebar, content 각자 다른 animation을 갖고 있어서 각 isOpen을 받아오고 있습니다 */}
       <div
         className={`${styles.overlay} ${isOpen ? styles.open : ""}`}
-        onClick={() => setIsOpen(false)}
+        // onClick={() => setIsOpen(false)}
       />
 
       {/* 사이드바 본체 */}
@@ -104,7 +104,7 @@ export default function Sidebar() {
                     <Link
                       href={item.href}
                       className={styles.sidebar_item}
-                      onClick={() => setIsOpen(false)}
+                      // onClick={() => setIsOpen(false)}
                     >
                       {item.label}
                     </Link>
@@ -117,7 +117,7 @@ export default function Sidebar() {
                         e.preventDefault();
                         // 원하는 동작 (예: signIn 호출)
                         signIn(undefined, { callbackUrl: "/auth/login" });
-                        setIsOpen(false);
+                        // setIsOpen(false);
                       }}
                     >
                       {item.label}
