@@ -1,0 +1,55 @@
+.explanationSection {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fafafa;
+  position: relative;
+}
+
+/* 탭 버튼 컨테이너 */
+.tabButtons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+/* 탭 버튼 활성/비활성 */
+.activeBtn {
+  background-color: #000;
+  color: #fff;
+  border-radius: 24px;
+  border: none;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+}
+.inactiveBtn {
+  background-color: #ddd;
+  color: #666;
+  border-radius: 24px;
+  border: none;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+}
+
+/* 하위 섹션 공통 레이아웃 */
+.subSection {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 하단 화살표 */
+.arrowDown {
+  margin-top: 2rem;
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+}

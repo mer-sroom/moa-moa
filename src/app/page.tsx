@@ -1,98 +1,48 @@
 "use client";
 
-import { useState } from "react";
-// import Navbar from "@/app/[year]/(components)/common/Navbar";
-import styles from "@/styles/LandingPage.module.css";
+import { useRef } from "react";
 import Navbar from "@/app/[year]/(components)/common/LandingNavbar";
-export default function LandingPage() {
-  // 'home' → 첫 섹션, 'explanation' → 두 번째 섹션
-  const [selectedSection, setSelectedSection] = useState<
-    "home" | "explanation"
-  >("home");
+import HomeSection from "@/app/(lending-sections)/HomeSection";
+import ExplanationSection from "@/app/(lending-sections)/ExplanationSection";
+import FinalSection from "@/app/(lending-sections)/FinalSection";
+import styles from "@/styles/LandingPage.module.css";
+
+/**
+ * 메인 랜딩 페이지 (루트)
+ *  - 1) HomeSection
+ *  - 2) ExplanationSection (내부 탭: Send / Get)
+ *  - 3) FinalSection
+ */
+export default function Page() {
+  // 파이널 섹션 DOM 참조
+  const finalRef = useRef<HTMLElement | null>(null);
+
+  // ExplanationSection("Get a letter" 하위 섹션)에서 화살표 클릭 시
+  // 파이널 섹션으로 스크롤하기 위한 콜백
+  const scrollToFinal = () => {
+    if (finalRef.current) {
+      finalRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className={styles.container}>
-      {/* 상단 고정 Navbar */}
+      {/* 상단 고정 네비바 */}
       <Navbar />
 
       <div className={styles.mainContent}>
-        {selectedSection === "home" && (
-          <HomeSection onClickNext={() => setSelectedSection("explanation")} />
-        )}
+        {/* 1) Home Section */}
+        <HomeSection
+        // 필요하다면, HomeSection 화살표 클릭 → scroll to ExplanationSection
+        // 구현도 가능. 예: onClickNext={scrollToExplanation}
+        />
 
-        {selectedSection === "explanation" && <ExplanationSection />}
+        {/* 2) Explanation Section (탭: Send / Get) */}
+        <ExplanationSection onScrollFinal={scrollToFinal} />
+
+        {/* 3) Final Section (마지막) */}
+        <FinalSection ref={finalRef} />
       </div>
     </div>
-  );
-}
-
-/** 1) 첫 번째 섹션 (HomeSection) */
-function HomeSection({ onClickNext }: { onClickNext: () => void }) {
-  return (
-    <section className={styles.homeSection}>
-      {/* 왼쪽 텍스트 영역 (픽셀 고정 배치) */}
-      <div className={styles.leftContent}>
-        <h1 className={styles.title}>MOA MOA!</h1>
-        <p className={styles.subtitle}>Connect, Customize, Collect!</p>
-        <p className={styles.description}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque vitae
-          quod natus quis quibusdam saepe veritatis quia at officiis, nisi modi
-          recusandae magnam obcaecati aliquam autem quidem repellat quae illo.
-        </p>
-        <button className={styles.createButton}>만들기</button>
-      </div>
-
-      {/* 오른쪽 (이미지 배치) */}
-      <div className={styles.rightContent}>
-        {/* 편지 (중앙) */}
-        <img
-          src="/assets/icons/lending/letter.svg"
-          alt="Letter"
-          className={styles.letterImage}
-        />
-        {/* 뮤직 (편지 뒤, 오른쪽 위) */}
-        <img
-          src="/assets/icons/lending/music.svg"
-          alt="Music"
-          className={styles.musicImage}
-        />
-        {/* 고양이 (편지 앞, 왼쪽 아래) */}
-        <img
-          src="/assets/icons/lending/Goyang.svg"
-          alt="Cat"
-          className={styles.catImage}
-        />
-        {/* 폭탄 (편지 왼편) */}
-        <img
-          src="/assets/icons/lending/bomb.svg"
-          alt="Bomb"
-          className={styles.bombImage}
-        />
-        {/* 돼지 (편지 왼쪽 위) */}
-        <img
-          src="/assets/icons/lending/pig.svg"
-          alt="Pig"
-          className={styles.pigImage}
-        />
-      </div>
-
-      {/* 하단 중앙 화살표 버튼 */}
-      <img
-        src="/assets/icons/lending/arrow-down.svg"
-        alt="Scroll Down"
-        className={styles.arrowDown}
-        onClick={onClickNext} // 클릭 시 다음 섹션으로
-      />
-    </section>
-  );
-}
-
-/** 2) 두 번째 섹션 (설명 섹션) */
-function ExplanationSection() {
-  return (
-    <section className={styles.explanationSection}>
-      <h2>설명 섹션</h2>
-      <p>섹션을 전환을 해버릴지지 말지,, ㅡ,ㅡ,ㅡ,ㅡ 아ㅏㅏㅏㅏㅏㅏㅏㅏㅏ</p>
-    </section>
   );
 }
