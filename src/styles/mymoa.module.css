@@ -48,10 +48,10 @@
 
 .mailBoxGrid {
   position: absolute;
-  top: 90px;
-  left: 90px;
+  top: 15%;
+  left: 20%;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.5); /*임시*/
   width: 240px;
   height: 280px;
 }
@@ -76,13 +76,12 @@
 .letterItem {
   cursor: pointer;
 }
-/*안 읽은 편지 효과과*/
-.letterItem.glowing {
+/*안 읽은 편지 효과 - 보류*/
+/* .letterItem.glowing {
   border-radius: 50%;
   background-color: transparent;
   animation: glowing 1s ease-in-out infinite alternate;
 }
-
 @keyframes glowing {
   from {
     box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px rgb(255, 237, 133);
@@ -90,7 +89,8 @@
   to {
     box-shadow: 0 0 20px #fff, 0 0 40px rgb(255, 237, 133);
   }
-}
+} */
+/*편지 읽었을 때*/
 .letterItem.opened {
   opacity: 50%;
   animation: none;

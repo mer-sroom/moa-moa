@@ -1,43 +1,25 @@
-"use client";
-import { mockLetterPaperDesigns, mockLetterIconDesigns } from "../mockData";
+import { mockLetterIconDesigns } from "../mockData"; //목업 데이터터
 import styles from "@/styles/mymoa.module.css";
 
-export default function LetterItem({
-  id,
-  name,
-  isOpened,
-  paperDesignId,
-  iconDesignId,
-}: {
+interface LetterItemProps {
   id: number;
   name: string;
   isOpened: boolean;
-  paperDesignId: number;
   iconDesignId: number;
-}) {
-  //편지 읽음
-  //디자인 정보 불러오기
-  const PaperDesign = mockLetterPaperDesigns.find(
-    design => design.id === paperDesignId
-  );
+}
+
+export default function LetterItem(props: LetterItemProps) {
+  const { name, isOpened, iconDesignId } = props;
+  //아이콘 정보 불러오기
   const IconDesign = mockLetterIconDesigns.find(
     design => design.id === iconDesignId
   );
-  //편지 오픈 핸들러
-  const handleOpenLetter = id => {
-    console.log(id);
-    console.log(isOpened);
-  };
 
   return (
     <div
       className={`${styles.letterItem} ${
         isOpened ? styles.opened : styles.glowing
       }`}
-      onClick={() => {
-        handleOpenLetter(id);
-        // letter.isOpened true로 PATCH 요청 로직(route.ts에 작성하기)
-      }}
     >
       {/* 편지 아이콘 */}
       <div

@@ -4,7 +4,7 @@ import {
   mockMoaBoxes, //모아 박스
   mockLetters, //편지
   mockBackgroundDesigns, //배경 디자인
-  mockMailBoxDesigns, //모아 박스 디자인인
+  mockMailBoxDesigns, //모아 박스 디자인
 } from "../../mockData";
 //----------------------------------------------------------------
 import Image from "next/image";
@@ -13,6 +13,7 @@ import { getServerSession } from "next-auth/next";
 import { Suspense } from "react";
 import NotFound from "@/app/[year]/(components)/not-found";
 //----------------------------------------------------------------
+import Title from "../../(components)/Title";
 import MailBox from "../../(components)/MailBox";
 import Button from "@/app/[year]/(components)/common/Button";
 import downloadIcon from "../../../../../../public/assets/icons/download_icon.svg";
@@ -57,27 +58,21 @@ export default async function MyMoaBoxPage({ params }) {
         }}
       >
         {/* 모아 박스 타이틀 */}
-        <section className={styles.headerSection}>
-          <h2 className={styles.title}>{moaBox.title}</h2>
-          {/* 받은 편지 수 */}
-          <div>
-            {moaBox.letterCountPublic && (
-              <p className={styles.letterCount}>
-                moaBox Id : {id}, 받은 편지 수 : {letters.length}
-              </p>
-            )}
-          </div>
-        </section>
+        <Title
+          title={moaBox.title}
+          letterCountPublic={moaBox.letterCountPublic}
+          lettersLength={letters.length}
+        />
+
         {/* 모아 박스 컨테이너*/}
-        <section className={styles.mailBoxSection}>
-          <Suspense fallback={"loading..."}>
-            <MailBox
-              moaBoxId={moaBoxId}
-              designURL={mailBoxDesign.imageURL}
-              letters={letters}
-            />
-          </Suspense>
-        </section>
+        <Suspense fallback={"loading..."}>
+          <MailBox
+            moaBoxId={moaBoxId}
+            designURL={mailBoxDesign.imageURL}
+            letters={letters}
+          />
+        </Suspense>
+
         {/* 버튼 컨테이너 */}
         <section className={styles.buttonSection}>
           <Button

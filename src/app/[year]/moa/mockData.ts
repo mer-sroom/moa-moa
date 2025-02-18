@@ -1,51 +1,11 @@
-import type { MoaBox } from "@/types/select-moa";
+import {
+  MoaBox,
+  BackgroundDesign,
+  MailBoxDesign,
+  LetterPaperDesign,
+  LetterIconDesign,
+} from "@/types/moabox"; //props 타입입
 
-export interface Letter {
-  id: number;
-  moaBoxId: number;
-  authorId: string;
-  authorName: string;
-  title: string;
-  content: string;
-  theme: string;
-  isOpened: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  letterIconDesignId: number;
-  letterPaperDesignId: number;
-}
-
-export interface BackgroundDesign {
-  id: number;
-  name: string;
-  imageURL: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface MailBoxDesign {
-  id: number;
-  name: string;
-  imageURL: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface LetterPaperDesign {
-  id: number;
-  name: string;
-  imageURL: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface LetterIconDesign {
-  id: number;
-  name: string;
-  imageURL: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
 //목업 유저
 export const mockUser = { id: "user999", name: "머메이드드" };
 
@@ -185,6 +145,34 @@ export const mockLetters = [
   },
   {
     id: 2,
+    moaBoxId: 1,
+    authorId: "author2",
+    authorName: "Author Two",
+    title: "Second Letter",
+    content: "This is the second letter.",
+    theme: "theme2",
+    isOpened: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    letterPaperDesignId: 2,
+    letterIconDesignId: 2,
+  },
+  {
+    id: 23,
+    moaBoxId: 1,
+    authorId: "author2",
+    authorName: "Author Two",
+    title: "Second Letter",
+    content: "This is the second letter.",
+    theme: "theme2",
+    isOpened: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    letterPaperDesignId: 2,
+    letterIconDesignId: 2,
+  },
+  {
+    id: 32,
     moaBoxId: 1,
     authorId: "author2",
     authorName: "Author Two",

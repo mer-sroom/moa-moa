@@ -11,7 +11,12 @@ import addBtn from "../../../../../../public/assets/icons/select_moa_add_btn.svg
 import deleteBtn from "../../../../../../public/assets/icons/trash_can_icon.svg";
 import Button from "@/app/[year]/(components)/common/Button";
 import styles from "../../../../../styles/selectMoa.module.css";
-import { SelectCarouselProps } from "@/types/select-moa"; //props 타입
+import { MoaBox } from "@/types/moabox"; //props 타입
+
+export interface SelectCarouselProps {
+  friendId?: string;
+  moaBoxes: MoaBox[];
+}
 
 export default function SelectCarousel({
   friendId,
