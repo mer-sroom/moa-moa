@@ -1,24 +1,29 @@
 "use client";
 
 import { useRef } from "react";
-import Navbar from "@/app/[year]/(components)/common/LandingNavbar";
+import LandingNavbar from "@/app/[year]/(components)/common/LandingNavbar";
 import HomeSection from "@/app/(lending-sections)/HomeSection";
 import ExplanationSection from "@/app/(lending-sections)/ExplanationSection";
 import FinalSection from "@/app/(lending-sections)/FinalSection";
+
 import styles from "@/styles/LandingPage.module.css";
 
 /**
- * 메인 랜딩 페이지 (루트)
- *  - 1) HomeSection
- *  - 2) ExplanationSection (내부 탭: Send / Get)
- *  - 3) FinalSection
+ * 루트 랜딩 페이지
  */
 export default function Page() {
-  // 파이널 섹션 DOM 참조
+  // 두 번째 섹션(ExplanationSection) / 세 번째 섹션(FinalSection) 참조
+  const explanationRef = useRef<HTMLElement | null>(null);
   const finalRef = useRef<HTMLElement | null>(null);
 
-  // ExplanationSection("Get a letter" 하위 섹션)에서 화살표 클릭 시
-  // 파이널 섹션으로 스크롤하기 위한 콜백
+  // HomeSection → ExplanationSection
+  const scrollToExplanation = () => {
+    if (explanationRef.current) {
+      explanationRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // ExplanationSection(“Get a letter”) → FinalSection
   const scrollToFinal = () => {
     if (finalRef.current) {
       finalRef.current.scrollIntoView({ behavior: "smooth" });
@@ -27,20 +32,20 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
-      {/* 상단 고정 네비바 */}
-      <Navbar />
+      {/* 스티키 Navbar */}
+      <LandingNavbar />
 
       <div className={styles.mainContent}>
         {/* 1) Home Section */}
-        <HomeSection
-        // 필요하다면, HomeSection 화살표 클릭 → scroll to ExplanationSection
-        // 구현도 가능. 예: onClickNext={scrollToExplanation}
+        <HomeSection onClickNext={scrollToExplanation} />
+
+        {/* 2) Explanation Section */}
+        <ExplanationSection
+          ref={explanationRef}
+          onScrollFinal={scrollToFinal}
         />
 
-        {/* 2) Explanation Section (탭: Send / Get) */}
-        <ExplanationSection onScrollFinal={scrollToFinal} />
-
-        {/* 3) Final Section (마지막) */}
+        {/* 3) Final Section */}
         <FinalSection ref={finalRef} />
       </div>
     </div>

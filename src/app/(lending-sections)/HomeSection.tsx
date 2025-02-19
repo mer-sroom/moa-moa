@@ -3,12 +3,6 @@
 import React from "react";
 import styles from "@/styles/HomeSection.module.css";
 
-/**
- * 첫 번째 섹션 (홈 섹션)
- *
- * @param onClickNext - 화살표 버튼 클릭 시 호출되는 콜백
- *                     (필요 없다면 사용 안 해도 됩니다.)
- */
 interface HomeSectionProps {
   onClickNext?: () => void;
 }

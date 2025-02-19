@@ -3,10 +3,6 @@
 import React, { useState, forwardRef } from "react";
 import styles from "@/styles/ExplanationSection.module.css";
 
-/**
- * SendLetterSection:
- *  - 하단 화살표 클릭 시 onClickNext → "Get a letter"로 전환
- */
 function SendLetterSection({ onClickNext }: { onClickNext: () => void }) {
   return (
     <div className={styles.subSection}>
@@ -23,10 +19,6 @@ function SendLetterSection({ onClickNext }: { onClickNext: () => void }) {
   );
 }
 
-/**
- * GetLetterSection:
- *  - 하단 화살표 클릭 시 onClickNext → 파이널 섹션으로 스크롤
- */
 function GetLetterSection({ onClickNext }: { onClickNext: () => void }) {
   return (
     <div className={styles.subSection}>
@@ -43,12 +35,6 @@ function GetLetterSection({ onClickNext }: { onClickNext: () => void }) {
   );
 }
 
-/**
- * ExplanationSection (두 번째 섹션)
- *  - 상단 탭 버튼: "Send a letter" / "Get a letter"
- *  - "Send" 섹션 하단 화살표 → "Get" 섹션 전환
- *  - "Get" 섹션 하단 화살표 → 파이널 섹션 scrollIntoView
- */
 interface ExplanationSectionProps {
   onScrollFinal: () => void;
 }

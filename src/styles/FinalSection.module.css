@@ -1,8 +1,6 @@
 .finalSection {
   width: 100%;
   min-height: calc(100vh - 60px);
-  /* 배경색 회색빛 (예시) */
-  background-color: #f3f2f7;
 
   display: flex;
   flex-direction: column;
