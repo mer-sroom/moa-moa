@@ -4,6 +4,9 @@
   padding: 20px 5%;
   background-color: transparent;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 /* 로고 */
