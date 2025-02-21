@@ -16,20 +16,37 @@ export async function getFriendship(userId: string) {
       },
     });
 
-    //상대방 ID만 추출
-    //내가 userA라면 userB를, 아니라면 userA id를 반환
+    // 상대방 ID만 추출
+    // 내가 userA라면 userB를, 아니라면 userA id를 반환
     const friends = myFriendships.map(friendship => {
-      const friend =
-        friendship.userAId === userId ? friendship.userB : friendship.userA;
+      return friendship.userAId === userId
+        ? friendship.userB
+        : friendship.userA;
+    });
+
+    // 친구들이 소유한 MoaBox 한번에 조회
+    const moaBoxes = await prisma.moaBox.findMany({
+      where: {
+        ownerId: { in: friends.map(friend => friend.id) }, // 친구들의 id로 MoaBox 조회
+        dueDate: { gte: new Date() }, //현재 날짜 기준 <=인인 moaBox만 조회
+      },
+    });
+
+    // 친구 정보와 MoaBox 유무 합치기
+    const result = friends.map(friend => {
+      //some으로 여부만 확인, boolean으로 저장
+      const moaBoxOngoing = moaBoxes.some(
+        moaBox => moaBox.ownerId === friend.id
+      );
       return {
         id: friend.id,
         nickname: friend.nickname,
         name: friend.name,
         profileImage: friend.profileImage,
+        moaBoxOngoing,
       };
     });
-
-    return friends;
+    return result;
   } catch (error) {
     console.error("친구 목록 불러오는 중 오류 발생:", error);
     throw error;

@@ -1,0 +1,76 @@
+.modalTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  filter: invert(100%);
+}
+
+.contentWrapper {
+  margin-top: 30px;
+}
+
+.friendList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  gap: 12px;
+}
+
+.noFriendsMessage {
+  text-align: center;
+  color: var(--color-gray-300);
+  padding: 20px 0;
+}
+.noFriendsMessage img {
+  opacity: 0.2;
+}
+
+/*FriendItem.tsx css*/
+.friendItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: 24px;
+  padding: 14px;
+  background-color: var(--color-gray-100);
+  text-decoration: none;
+  color: var(--color-black);
+}
+
+.infoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.nickname {
+  font-weight: bold;
+  margin: 0;
+}
+
+.moaBoxStatus {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-gray-400);
+  border-radius: 50%;
+}
+.moaBoxStatus.active {
+  background-color: var(--color-accent);
+}
+
+.moaBoxOngoing {
+  margin: 0;
+  font-size: 14px;
+}
