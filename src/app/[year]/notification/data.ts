@@ -1,30 +1,4 @@
-//목업 친구 관계
-export const mockFriendships = [
-  {
-    id: 1,
-    userAId: "user999",
-    userBId: "user123",
-    status: "ACCEPTED",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 2,
-    userAId: "user456",
-    userBId: "user999",
-    status: "ACCEPTED",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 3,
-    userAId: "user999",
-    userBId: "user112",
-    status: "ACCEPTED",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-];
+//추후 연결 예정정
 //목업 유저 목록
 export const mockUsers = [
   {

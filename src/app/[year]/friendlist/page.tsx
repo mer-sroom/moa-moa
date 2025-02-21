@@ -6,7 +6,7 @@ import NotFound from "../(components)/not-found";
 
 export default async function FriendListPage() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-  // 현재 요청의 헤더에서 호스트 정보와 쿠키 추출
+  // 현재 요청의 헤더에서 쿠키 추출
   const reqHeaders = await headers();
   const cookie = reqHeaders.get("cookie") ?? "";
 
