@@ -53,7 +53,7 @@ export default function Modal({
     position: "absolute",
     top: 0,
     right: 0,
-    zIndex: 2,
+    zIndex: 100,
     width: "100%",
     height: "100%",
     transition: "opacity 0.5s ease, visibility 0s 0.5s",

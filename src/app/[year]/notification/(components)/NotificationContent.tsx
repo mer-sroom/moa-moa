@@ -4,7 +4,7 @@ import moa_cat from "../../../../../public/assets/icons/notification/notificatio
 import accept_btn from "../../../../../public/assets/icons/notification/notification_yes_btn.svg";
 import reject_btn from "../../../../../public/assets/icons/notification/notification_no_btn.svg";
 import styles from "../../../../styles/notification.module.css";
-import { mockUsers, mockNotifications } from "./data";
+import { mockUsers, mockNotifications } from "../data";
 
 //미리 유저 정보 받아오기
 const userMap = new Map(mockUsers.map(user => [user.id, user]));

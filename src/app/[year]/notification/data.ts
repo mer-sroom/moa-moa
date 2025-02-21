@@ -1,26 +1,55 @@
-//user profileImage 목업용 이미지입니다! 나중에 삭제해주시면 됩니당
-import mock_profile_img from "../../../../../public/assets/icons/notification/mock_user_profile.jpg";
-
+//목업 친구 관계
+export const mockFriendships = [
+  {
+    id: 1,
+    userAId: "user999",
+    userBId: "user123",
+    status: "ACCEPTED",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: 2,
+    userAId: "user456",
+    userBId: "user999",
+    status: "ACCEPTED",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: 3,
+    userAId: "user999",
+    userBId: "user112",
+    status: "ACCEPTED",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];
+//목업 유저 목록
 export const mockUsers = [
   {
     id: "user123",
     nickname: "서머",
-    profileImage: mock_profile_img,
+    profileImage:
+      "https://i.pinimg.com/736x/10/72/7c/10727cc6fbcb8a5b733c329177b0b6e7.jpg",
   },
   {
     id: "user456",
     nickname: "현머",
-    profileImage: mock_profile_img,
+    profileImage:
+      "https://i.pinimg.com/736x/26/3c/62/263c62bb7d1d67d8695a40f7e0263b3f.jpg",
   },
   {
     id: "user112",
     nickname: "미머",
-    profileImage: mock_profile_img,
+    profileImage:
+      "https://i.pinimg.com/736x/8a/eb/31/8aeb31f033ba256a88ae23351efdce4d.jpg",
   },
   {
     id: "user223",
     nickname: "멈멈머머머머머머머",
-    profileImage: mock_profile_img,
+    profileImage:
+      "https://i.pinimg.com/736x/22/7d/8b/227d8bb55e508cfce61a8d389dfdeec1.jpg",
   },
 ];
 
