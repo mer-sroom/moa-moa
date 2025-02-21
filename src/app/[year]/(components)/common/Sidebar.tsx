@@ -50,8 +50,12 @@ export default function Sidebar() {
       href: "/2025/sent-letter",
       icon: sent_letter,
     },
-    //친구 리스트 임시
-    { id: "5", label: "친구 목록", href: "/", icon: friend_list },
+    {
+      id: "5",
+      label: "친구 목록",
+      href: "/2025/friendlist",
+      icon: friend_list,
+    },
   ];
 
   return (

@@ -11,7 +11,7 @@ export interface ModalProps {
   // Modal이 열려 있는지 여부
   isOpen: boolean;
   //Modal의 제목 (선택사항)
-  title?: string;
+  title?: string | ReactNode;
   // Modal을 닫을 때 호출되는 함수
   onClose: () => void;
   // 모달 컨테이너(내부)의 스타일
@@ -53,7 +53,7 @@ export default function Modal({
     position: "absolute",
     top: 0,
     right: 0,
-    zIndex: 2,
+    zIndex: 100,
     width: "100%",
     height: "100%",
     transition: "opacity 0.5s ease, visibility 0s 0.5s",
