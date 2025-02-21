@@ -28,7 +28,7 @@ export default function FriendInfo(props: FriendInfo) {
           </div>
           <div>
             <p className={styles.moaBoxOngoing}>
-              {moaBoxOngoing ? "현재 진행 중인 모아박스가 있어요!" : "-"}
+              {moaBoxOngoing ? "모아박스 진행 중!" : "-"}
             </p>
           </div>
         </div>

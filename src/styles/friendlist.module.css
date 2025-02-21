@@ -67,7 +67,7 @@
   border-radius: 50%;
 }
 .moaBoxStatus.active {
-  background-color: var(--color-accent);
+  background-color: var(--ui-accent);
 }
 
 .moaBoxOngoing {
