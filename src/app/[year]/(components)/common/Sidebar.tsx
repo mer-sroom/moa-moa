@@ -40,7 +40,7 @@ export default function Sidebar() {
     {
       id: "3",
       label: "지난모아 보관함",
-      //[id]값을 받아와야 해서 일단 컴포넌트 안으로, userName은 임시값입니다다
+      //[id]값을 받아와야 해서 일단 컴포넌트 안으로, userName은 임시값입니다
       href: `/2025/saved-moa/${userName}`,
       icon: saved_moa,
     },
@@ -63,7 +63,7 @@ export default function Sidebar() {
       {/* 사이드 바가 열릴 때 overlay,sidebar, content 각자 다른 animation을 갖고 있어서 각 isOpen을 받아오고 있습니다 */}
       <div
         className={`${styles.overlay} ${isOpen ? styles.open : ""}`}
-        // onClick={() => setIsOpen(false)}
+        onClick={() => setIsOpen(false)}
       />
 
       {/* 사이드바 본체 */}
@@ -108,7 +108,7 @@ export default function Sidebar() {
                     <Link
                       href={item.href}
                       className={styles.sidebar_item}
-                      // onClick={() => setIsOpen(false)}
+                      onClick={() => setIsOpen(false)}
                     >
                       {item.label}
                     </Link>
@@ -121,7 +121,7 @@ export default function Sidebar() {
                         e.preventDefault();
                         // 원하는 동작 (예: signIn 호출)
                         signIn(undefined, { callbackUrl: "/auth/login" });
-                        // setIsOpen(false);
+                        setIsOpen(false);
                       }}
                     >
                       {item.label}
