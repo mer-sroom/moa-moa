@@ -3,7 +3,7 @@ import Modal from "../(components)/common/Modal";
 import NotificationContent from "./(components)/NotificationContent";
 import { useRouter } from "next/navigation";
 
-export default function Page() {
+export default function NotificationPage() {
   const router = useRouter();
   const onClose = () => {
     router.back();
