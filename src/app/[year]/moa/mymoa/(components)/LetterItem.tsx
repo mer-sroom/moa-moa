@@ -1,4 +1,4 @@
-import { mockLetterIconDesigns } from "../mockData"; //목업 데이터터
+import { mockLetterIconDesigns } from "../../mockData"; //목업 데이터터
 import styles from "@/styles/mymoa.module.css";
 
 interface LetterItemProps {

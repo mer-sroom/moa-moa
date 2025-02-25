@@ -13,10 +13,10 @@ import { getServerSession } from "next-auth/next";
 import { Suspense } from "react";
 import NotFound from "@/app/[year]/(components)/not-found";
 //----------------------------------------------------------------
-import Title from "../../(components)/Title";
-import MailBox from "../../(components)/MailBox";
+import Title from "../(components)/Title";
+import MailBox from "../(components)/MailBox";
 import Button from "@/app/[year]/(components)/common/Button";
-import OpenShareLinkModal from "../../(components)/OpenShareLinkModal";
+import OpenShareLinkModal from "../(components)/OpenShareLinkModal";
 import downloadIcon from "../../../../../../public/assets/icons/download_icon.svg";
 import shareIcon from "../../../../../../public/assets/icons/share_icon.svg";
 import styles from "@/styles/mymoa.module.css";
