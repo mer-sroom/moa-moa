@@ -46,7 +46,7 @@ export default function CreateMoaStep4() {
       <div>
         <form onSubmit={submitHandler}>
           <label htmlFor="moa_name">모아 이름짓기</label>
-          <input type="text" id="moa_name" />
+          <input type="text" id="moa_name" placeholder="이름을 설정해 주세요" />
           <label htmlFor="d_day">디데이 설정</label>
           <div id="d_day">
             <div id="start">
@@ -61,16 +61,25 @@ export default function CreateMoaStep4() {
 
           <label htmlFor="group">모아 그룹설정
             <input type="hidden" id="group" value={`${isOpen}`} />
-            <Button label={isOpen ? <FaCheck color="white"/> : <FaCheck color="rgb(222, 222, 222)"/>} size="checkbox" color={isOpen ? "checkboxTrue" : "checkboxFalse"} onClick={groupHandler}></Button>
+            <Button
+              label={isOpen ?
+                <FaCheck color="white" /> :
+                <FaCheck color="rgb(222, 222, 222)" />}
+              size="checkbox"
+              color={isOpen ? "checkboxTrue" : "checkboxFalse"}
+              onClick={groupHandler}>
+            </Button>
           </label>
-
-          <button type="submit">제출</button>
+          <label htmlFor="group_member">
+            <input id="group_member"
+              disabled={!isOpen}
+              placeholder="함께 할 친구를 설정해 주세요"
+            />
+            <Button label="함께 할 친구를 설정해 주세요" size="medium" color="false"></Button>
+          </label>
+          <button type="submit" >다음으로</button>
         </form>
       </div>
-
-      <input type="date" id="start" placeholder={`${today}`}
-        onFocus={(e) => { }} style={{ margin: "100px" }} />
-
     </>
   )
 }

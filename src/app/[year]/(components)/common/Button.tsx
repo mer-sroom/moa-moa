@@ -1,29 +1,45 @@
 "use client";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { ReactNode } from "react";
+import "@/styles/globals.css"
 
 export interface ButtonProps {
   label?: string | React.ReactNode;
+  icon?: ReactNode; //Image 태그로 받기 위해
   className?: string;
-  size?: "small" | "medium" | "long" | "circle" | "checkbox";
-  color?: "black" | "red" | "checkboxTrue" | "checkboxFalse";
-  onClick?: ()=>void;
+  size?: "small" | "medium" | "long" | "circle" | "modalBtn" | "checkbox";
+  color?: "black" | "white" | "red" | "blocked" | "none" | "checkboxTrue" | "checkboxFalse" | "false";
+  onClick?: () => void; // toast alert 의 onCLick 속성 추가
 }
 
 //간단하게만 적었습니당
 export const buttonSize = {
   small: css`
-    width: 50px;
-    height: 30px;
+    max-width: 128px;
+    width: 100%;
+    height: 56px;
   `,
   medium: css`
-    width: 100px;
-    height: 30px;
+    max-width: 316px;
+    width: 100%;
+    height: 63px;
   `,
   long: css`
-    width: 200px;
-    height: 30px;
-`,
+    max-width: 370px;
+    width: 100%;
+    height: 63px;
+  `,
+  circle: css`
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+  `,
+  modalBtn: css`
+    max-width: 174px;
+    width: 100%;
+    height: 56px;
+  `,
   checkbox: css`
     width: 40px;
     height: 40px;
@@ -32,73 +48,111 @@ export const buttonSize = {
 
 export const buttonColor = {
   black: css`
-  background-color: black;
-  color: white;
-      &:hover {
-      background-color:rgb(150, 149, 149);
+    background-color: var(--color-black);
+    color: white;
+    &:hover {
+      background-color: var(--color-gray-800);
     }
-`,
+  `,
+  white: css`
+    background-color: white;
+    color: white;
+    &:hover {
+      transform: scale(1.03);
+    }
+  `,
   red: css`
-  background-color: red;
-  color:black;
-      &:hover {
-      background-color:rgb(255, 123, 123);
+    background-color: red;
+    color: black;
+    &:hover {
+      background-color: rgb(255, 123, 123);
     }
-`,
+  `,
+  //버튼 상호작용 x일 때
+  blocked: css`
+    background-color: var(--color-gray-300);
+    color: var(--color-gray-500);
+    font-weight: bold;
+    cursor: default;
+  `,
+  //배경 X, modal용
+  none: css`
+    background-color: transparent;
+    color: var(--color-gray-300);
+    font-weight: bold;
+    box-shadow: none;
+  `,
   checkboxTrue: css`
-  background-color: black;
+  background-color: #1B1B1B;
   color: white;
   font-size: 16px;
-  padding-top :4.5px;
+  padding-top :4px;
   border: none;
   border-radius: 10px;
-      &:active {
-      background-color:rgb(150, 149, 149);
-   }
+  box-shadow: none;
+
 `,
   checkboxFalse: css`
   background-color: white;
   color: white;
   font-size: 16px;
-  padding-top :4.5px;
-  border: 1px solid rgb(222, 222, 222);
+  padding-top :4px;
+  border: 1px solid #e0e0e0;
   border-radius: 10px;
+  box-shadow: none;
+
+`,
+  false: css`
+background-color: white;
+color: #9e9e9e;
+font-size: 16px;
+padding-top :4.5px;
+border: 1px solid #e0e0e0;
+border-radius: 10px;
       &:active {
-      background-color:rgb(189, 189, 189);
+      background-color: #9e9e9e;
+      border: 1px solid #9e9e9e;
     }
 `,
 };
 
 const ButtonStyle = styled.button<ButtonProps>`
+  border-radius: 5px;
   cursor: pointer;
   white-space: nowrap;
   border: none;
-  margin:10px;
+  margin: 10px;
   overflow: hidden;
+  border-radius: 60px;
+  font-size: 16px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
+  ${props => buttonSize[props.size]};
+  ${props => buttonColor[props.color]};
   text-align: center;
-
-  ${(props) => buttonSize[props.size]};
-  ${(props) => buttonColor[props.color]};
 `;
 
 export default function Button({
   label,
+  icon,
   size,
   color,
   className,
   onClick,
 }: ButtonProps) {
-
   return (
     <ButtonStyle
-      type="button"
       className={className}
       size={size}
       color={color}
-      onClick={onClick}>
-      {label}
+      onClick={onClick}
+    >
+      <div style={{ justifyContent: "center", display: "flex", gap: "12px" }}>
+        {label}
+        {icon}
+      </div>
     </ButtonStyle>
-  )
+  );
 }
 
 
