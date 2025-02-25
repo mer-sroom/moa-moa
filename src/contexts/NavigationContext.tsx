@@ -1,4 +1,4 @@
-// GlobalContext.tsx
+//네비게이션 바, 사이드 바 전용용
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
 import { useSession } from "next-auth/react";

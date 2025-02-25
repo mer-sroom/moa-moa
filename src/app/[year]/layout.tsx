@@ -1,10 +1,10 @@
-import { useSession } from "next-auth/react";
 import BackgroundLayout from "./(components)/common/BackgroundLayout";
 import "../../styles/globals.css";
 import Navbar from "./(components)/common/Navbar";
 import Sidebar from "./(components)/common/Sidebar";
 //전역 관리
 import { NavigationProvider } from "@/contexts/NavigationContext";
+import ModalProvider from "@/contexts/ModalContext";
 
 export default function YearSeasonLayout({
   children,
@@ -14,11 +14,14 @@ export default function YearSeasonLayout({
   return (
     <>
       <BackgroundLayout>
-        <NavigationProvider>
-          <Navbar />
-          <Sidebar />
-          {children}
-        </NavigationProvider>
+        {/* 앱웹뷰 범위 내에서 작동하도록 현재 위치에 modal provider배치 */}
+        <ModalProvider>
+          <NavigationProvider>
+            <Navbar />
+            <Sidebar />
+            {children}
+          </NavigationProvider>
+        </ModalProvider>
       </BackgroundLayout>
     </>
   );
