@@ -2,7 +2,7 @@
 "use client";
 import React, { ReactElement } from "react";
 import { useModalContext } from "@/contexts/ModalContext";
-import ShareLinkModal from "./ShareLinkContent";
+import ShareLinkContent from "./ShareLinkContent";
 
 interface OpenShareLinkModalProps {
   children: ReactElement;
@@ -17,7 +17,7 @@ export default function OpenShareLinkModal({
     e.stopPropagation(); //모달에 이벤트 버블 방지
     openModal({
       title: "공유하기",
-      content: <ShareLinkModal />, // 필요에 따라 동적으로 변경 가능
+      content: <ShareLinkContent />, // 필요에 따라 동적으로 변경 가능
       showActionButtons: false,
     });
   };
