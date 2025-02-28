@@ -8,6 +8,7 @@ import facebookIcon from "@/../../public/assets/icons/sharelink_modal/facebook.s
 import xIcon from "@/../../public/assets/icons/sharelink_modal/x_sns.svg";
 import Swal from "sweetalert2";
 import styles from "@/styles/modal.module.css";
+import NotFound from "@/app/[year]/(components)/not-found";
 
 interface SnsItem {
   id: string;
@@ -46,35 +47,23 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function ShareLinkModal() {
   const { id } = useParams();
+  if (!id) {
+    return NotFound();
+  }
   const currentUrl = `${baseUrl}/2025/moa/mymoa/${id}`;
 
-  // 클립보드 복사 함수 (비동기)
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(currentUrl).catch(e => {
-      console.error(e);
-      Swal.fire({
-        title: "Error",
-        text: "복사 중 문제가 생겼습니다",
-        icon: "error",
-        confirmButtonText: "확인",
-      });
-    });
-  };
-
-  // SNS 공유하기 & 클립보드 복사
+  // SNS 공유하기
   const handleShare = snsUrl => {
     const url = snsUrl + encodeURIComponent(currentUrl);
     window.open(url, "_blank");
-    // 혹시 몰라 클립보드 복사 실행
-    copyToClipboard();
   };
 
   // 링크 복사 버튼 이벤트
   const handleCopyLink = async () => {
     try {
       //HTTPS 경우
-      if (window.location.protocol === "https:") {
-        await copyToClipboard();
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(currentUrl);
       }
       //HTTP 경우
       else {
@@ -108,10 +97,43 @@ export default function ShareLinkModal() {
       });
     }
   };
+  //카카오톡 공유하기
+  const handleShareKakao = () => {
+    const { Kakao, location } = window;
+    Kakao.Share.sendDefault({
+      objectType: "feed",
+      content: {
+        title: "모아 모아! 마음을 전달해요😺✉️",
+        description: "직접 꾸민 편지와 노래를 담아 친구의 우편함에 넣어봐요📫",
+        //나중에는 스크린샷 뜬 거를 S3에서 가져오는게 나을지도?!
+        imageUrl:
+          "https://i.pinimg.com/736x/df/eb/c4/dfebc49b2f3db477bcdf06796c26a95d.jpg",
+        link: {
+          mobileWebUrl: location.href,
+          webUrl: location.href,
+        },
+      },
+      buttons: [
+        {
+          title: "친구한테 편지쓰기",
+          link: {
+            mobileWebUrl: currentUrl,
+            webUrl: currentUrl,
+          },
+        },
+      ],
+    });
+  };
+
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.linkCopyWrapper}>
-        <input value={currentUrl} readOnly className={styles.linkInput} />
+        <input
+          value={currentUrl}
+          readOnly
+          className={styles.linkInput}
+          aria-label="공유 링크"
+        />
         <button className={styles.linkCopyBtn}>
           <Image src={copyIcon} alt="link copy icon" onClick={handleCopyLink} />
         </button>
@@ -122,7 +144,11 @@ export default function ShareLinkModal() {
             <li key={item.id}>
               <button
                 type="button"
-                onClick={() => handleShare(item.shareHref)}
+                onClick={
+                  item.label === "카카오"
+                    ? handleShareKakao
+                    : () => handleShare(item.shareHref)
+                }
                 className={styles.snsItem}
               >
                 <Image src={item.icon} alt={item.label} />
