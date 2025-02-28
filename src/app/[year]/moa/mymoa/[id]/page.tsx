@@ -13,9 +13,10 @@ import { getServerSession } from "next-auth/next";
 import { Suspense } from "react";
 import NotFound from "@/app/[year]/(components)/not-found";
 //----------------------------------------------------------------
-import Title from "../../(components)/Title";
-import MailBox from "../../(components)/MailBox";
+import Title from "../(components)/Title";
+import MailBox from "../(components)/MailBox";
 import Button from "@/app/[year]/(components)/common/Button";
+import OpenShareLinkModal from "../(components)/OpenShareLinkModal";
 import downloadIcon from "../../../../../../public/assets/icons/download_icon.svg";
 import shareIcon from "../../../../../../public/assets/icons/share_icon.svg";
 import styles from "@/styles/mymoa.module.css";
@@ -79,12 +80,14 @@ export default async function MyMoaBoxPage({ params }) {
             icon={<Image src={downloadIcon} alt="share icon" />}
             size="circle"
           ></Button>
-          <Button
-            label="공유하기"
-            icon={<Image src={shareIcon} alt="share icon" />}
-            size="medium"
-            color="black"
-          ></Button>
+          <OpenShareLinkModal>
+            <Button
+              label="공유하기"
+              icon={<Image src={shareIcon} alt="share icon" />}
+              size="medium"
+              color="black"
+            />
+          </OpenShareLinkModal>
         </section>
       </div>
     </>

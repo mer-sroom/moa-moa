@@ -80,7 +80,6 @@ export const buttonColor = {
 };
 
 const ButtonStyle = styled.button<ButtonProps>`
-  border-radius: 5px;
   cursor: pointer;
   white-space: nowrap;
   border: none;
