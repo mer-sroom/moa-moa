@@ -9,6 +9,7 @@ import {
 //----------------------------------------------------------------
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { getServerSession } from "next-auth/next";
 import { Suspense } from "react";
 import NotFound from "@/app/[year]/(components)/not-found";
@@ -17,13 +18,17 @@ import Title from "../(components)/Title";
 import MailBox from "../(components)/MailBox";
 import Button from "@/app/[year]/(components)/common/Button";
 import OpenShareLinkModal from "../(components)/OpenShareLinkModal";
-import downloadIcon from "../../../../../../public/assets/icons/download_icon.svg";
-import shareIcon from "../../../../../../public/assets/icons/share_icon.svg";
+import HandleAddFriend from "../(components)/HandleAddFriend";
+import downloadIcon from "@/../../public/assets/icons/download_icon.svg";
+import shareIcon from "@/../../public/assets/icons/share_icon.svg";
+import addFriend from "@/../../public/assets/icons/add_friend.svg";
+import penIcon from "@/../../public/assets/icons/pen.svg";
 import styles from "@/styles/mymoa.module.css";
 
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
   const moaBoxId = parseInt(id, 10);
+  let isOwner = true;
 
   // 세션에서 사용자 정보를 가져옴
   const session = await getServerSession();
@@ -34,10 +39,13 @@ export default async function MyMoaBoxPage({ params }) {
 
   //모아박스 데이터 불러오기
   const moaBox = mockMoaBoxes.find(box => box.id === moaBoxId);
-  //존재하는 moaBox인지, 모아박스의 소유자가 현재 로그인 된 유저가 맞는지 확인
-  //(현재는 목업 유저의 아이디 값으로 비교 중입니다)
-  if (!moaBox || moaBox.ownerId !== mockUser.id) {
+  //존재하는 moaBox인지 확인
+  if (!moaBox) {
     return <NotFound />;
+  }
+  //모아 박스 소유주가 현재 로그인된 유저인지 확인
+  if (moaBox.ownerId == mockUser.id) {
+    isOwner = false;
   }
 
   //디자인 정보 불러오기
@@ -76,18 +84,52 @@ export default async function MyMoaBoxPage({ params }) {
 
         {/* 버튼 컨테이너 */}
         <section className={styles.buttonSection}>
-          <Button
-            icon={<Image src={downloadIcon} alt="share icon" />}
-            size="circle"
-          ></Button>
-          <OpenShareLinkModal>
-            <Button
-              label="공유하기"
-              icon={<Image src={shareIcon} alt="share icon" />}
-              size="medium"
-              color="black"
-            />
-          </OpenShareLinkModal>
+          {isOwner ? (
+            <>
+              <Button
+                icon={<Image src={downloadIcon} alt="share icon" />}
+                size="circle"
+              ></Button>
+              <OpenShareLinkModal>
+                <Button
+                  label="공유하기"
+                  icon={<Image src={shareIcon} alt="share icon" />}
+                  size="medium"
+                  color="black"
+                />
+              </OpenShareLinkModal>
+            </>
+          ) : (
+            <>
+              <HandleAddFriend ownerId={moaBox.ownerId}>
+                <Button
+                  icon={
+                    <Image
+                      src={addFriend}
+                      style={{
+                        width: "24px",
+                        height: "auto",
+                        marginLeft: "5px",
+                      }}
+                      alt="add friend icon"
+                    />
+                  }
+                  size="circle"
+                />
+              </HandleAddFriend>
+              <Link
+                href={"/2025/create-letter"}
+                style={{ display: "block", width: "316px" }}
+              >
+                <Button
+                  label="편지 작성하기"
+                  icon={<Image src={penIcon} alt="pen icon" />}
+                  size="medium"
+                  color="black"
+                />
+              </Link>
+            </>
+          )}
         </section>
       </div>
     </>

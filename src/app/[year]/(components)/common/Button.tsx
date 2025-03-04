@@ -20,7 +20,7 @@ export const buttonSize = {
     height: 56px;
   `,
   medium: css`
-    max-width: 316px;
+    max-width: 280px;
     width: 100%;
     height: 63px;
   `,

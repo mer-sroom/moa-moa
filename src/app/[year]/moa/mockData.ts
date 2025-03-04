@@ -269,7 +269,7 @@ export const mockMailBoxDesigns: MailBoxDesign[] = [
     id: 1,
     name: "House MailBox",
     imageURL:
-      "https://i.pinimg.com/originals/d0/2a/c5/d02ac5677cc7b056484ce9f622b0d72a.png",
+      "https://i.pinimg.com/736x/10/50/87/1050870d216b7965402c92f5302360f9.jpg",
     createdAt: new Date(),
     updatedAt: new Date(),
   },

@@ -33,9 +33,11 @@
 
 .buttonSection {
   display: flex;
+  position: absolute;
   justify-content: center;
   width: 100%;
-  padding-top: 68px;
+  /* padding-top: 68px; */
+  bottom: 96px;
 }
 
 /*모아 박스(MailBox.tsx)*/
@@ -49,10 +51,10 @@
 
 .mailBoxGrid {
   position: absolute;
-  top: 15%;
-  left: 20%;
+  top: 30%;
+  left: 19%;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.5); /*임시*/
+  /* background-color: rgba(255, 255, 255, 0.5); 임시 */
   width: 240px;
   height: 280px;
 }
@@ -61,7 +63,7 @@
   display: grid;
   grid-template-columns: repeat(2, 64px);
   gap: 4px;
-  grid-auto-rows: 80px;
+  grid-auto-rows: 100px;
   justify-content: center;
 }
 
@@ -70,7 +72,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4px;
-  grid-auto-rows: 80px;
+  grid-auto-rows: 100px;
 }
 
 /*편지(LetterItem.tsx)*/
