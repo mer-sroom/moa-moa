@@ -28,7 +28,7 @@ export const mockMoaBoxes: MoaBox[] = [
   },
   {
     id: 2,
-    ownerId: "user999",
+    ownerId: "user123",
     title: "생일 축하해줘",
     isGroup: false,
     dueDate: new Date(),

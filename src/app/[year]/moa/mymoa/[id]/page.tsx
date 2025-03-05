@@ -44,9 +44,10 @@ export default async function MyMoaBoxPage({ params }) {
     return <NotFound />;
   }
   //모아 박스 소유주가 현재 로그인된 유저인지 확인
-  if (moaBox.ownerId == mockUser.id) {
+  if (moaBox.ownerId !== mockUser.id) {
     isOwner = false;
   }
+  //모아 박스 소유주 닉네임 불러오기
 
   //디자인 정보 불러오기
   const backgroundDesign = mockBackgroundDesigns.find(
@@ -86,6 +87,7 @@ export default async function MyMoaBoxPage({ params }) {
         <section className={styles.buttonSection}>
           {isOwner ? (
             <>
+              {/* 모아박스 소유주가 본인일 때 */}
               <Button
                 icon={<Image src={downloadIcon} alt="share icon" />}
                 size="circle"
@@ -101,15 +103,20 @@ export default async function MyMoaBoxPage({ params }) {
             </>
           ) : (
             <>
-              <HandleAddFriend ownerId={moaBox.ownerId}>
+              {/* 모아박스 소유주가 아닐 때 */}
+              <HandleAddFriend
+                targetId={moaBox.ownerId}
+                currentUserId={mockUser.id}
+                moaBoxId={id}
+              >
                 <Button
                   icon={
                     <Image
                       src={addFriend}
                       style={{
-                        width: "24px",
+                        width: "28px",
                         height: "auto",
-                        marginLeft: "5px",
+                        marginLeft: "4px",
                       }}
                       alt="add friend icon"
                     />
