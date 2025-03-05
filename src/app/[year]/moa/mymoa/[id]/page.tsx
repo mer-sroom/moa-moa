@@ -27,27 +27,22 @@ import styles from "@/styles/mymoa.module.css";
 
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
-  const moaBoxId = parseInt(id, 10);
-  let isOwner = true;
+  const moaBoxId = Number(id);
 
-  // 세션에서 사용자 정보를 가져옴
+  // 세션에서 사용자 정보를 가져오고 로그인 여부 확인
   const session = await getServerSession();
-  // 로그인 여부 확인
   if (!session?.user) {
     redirect("/auth/login");
   }
+  const currentUser = session.user;
 
-  //모아박스 데이터 불러오기
-  const moaBox = mockMoaBoxes.find(box => box.id === moaBoxId);
   //존재하는 moaBox인지 확인
+  const moaBox = mockMoaBoxes.find(box => box.id === moaBoxId);
   if (!moaBox) {
     return <NotFound />;
   }
-  //모아 박스 소유주가 현재 로그인된 유저인지 확인
-  if (moaBox.ownerId !== mockUser.id) {
-    isOwner = false;
-  }
-  //모아 박스 소유주 닉네임 불러오기
+  // 현재 로그인한 사용자가 소유자인지 확인
+  const isOwner = moaBox.ownerId === currentUser.id;
 
   //디자인 정보 불러오기
   const backgroundDesign = mockBackgroundDesigns.find(
