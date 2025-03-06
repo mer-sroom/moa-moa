@@ -34,7 +34,10 @@ export default async function MyMoaBoxPage({ params }) {
   if (!session?.user) {
     redirect("/auth/login");
   }
+
   const currentUser = session.user;
+  //화면 테스트용
+  // const currentUser = mockUser;
 
   //존재하는 moaBox인지 확인
   const moaBox = mockMoaBoxes.find(box => box.id === moaBoxId);
@@ -99,11 +102,7 @@ export default async function MyMoaBoxPage({ params }) {
           ) : (
             <>
               {/* 모아박스 소유주가 아닐 때 */}
-              <HandleAddFriend
-                targetId={moaBox.ownerId}
-                currentUserId={mockUser.id}
-                moaBoxId={id}
-              >
+              <HandleAddFriend targetId={moaBox.ownerId} moaBoxId={id}>
                 <Button
                   icon={
                     <Image
@@ -119,17 +118,13 @@ export default async function MyMoaBoxPage({ params }) {
                   size="circle"
                 />
               </HandleAddFriend>
-              <Link
-                href={"/2025/create-letter"}
-                style={{ display: "block", width: "316px" }}
-              >
-                <Button
-                  label="편지 작성하기"
-                  icon={<Image src={penIcon} alt="pen icon" />}
-                  size="medium"
-                  color="black"
-                />
-              </Link>
+
+              <Button
+                label={<Link href={"/2025/create-letter"}>편지 작성하기</Link>}
+                icon={<Image src={penIcon} alt="pen icon" />}
+                size="medium"
+                color="black"
+              />
             </>
           )}
         </section>

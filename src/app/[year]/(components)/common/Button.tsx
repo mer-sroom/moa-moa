@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import { ReactNode } from "react";
 
 export interface ButtonProps {
-  label?: string;
+  label?: string | ReactNode;
   icon?: ReactNode; //Image 태그로 받기 위해
   className?: string;
   size?: "small" | "medium" | "long" | "circle" | "modalBtn";
