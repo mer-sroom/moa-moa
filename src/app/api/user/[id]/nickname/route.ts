@@ -15,7 +15,7 @@ export async function GET(
   }
 
   try {
-    const nickname = await getUserNickname(params.id);
+    const nickname = await getUserNickname(id);
     return NextResponse.json({ nickname });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 404 });

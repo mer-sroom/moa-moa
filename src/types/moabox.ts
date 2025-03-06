@@ -15,21 +15,26 @@ export type MoaBox = {
   mailBoxDesignId: number | null;
 };
 
-//편지 타입
-export interface Letter {
+// 공통 필드
+export interface LetterBase {
   id: number;
-  moaBoxId: number;
-  authorId: string;
   authorName: string;
+  isOpened: boolean;
+  letterIconDesign: {
+    imageURL: string;
+  };
+}
+
+// 상세보기에서 필요한 전체 데이터 타입
+export interface LetterDetail extends LetterBase {
+  letterPaperDesignId: number;
   title: string;
   content: string;
   theme: string;
-  isOpened: boolean;
   createdAt: Date;
   updatedAt: Date;
-  letterIconDesignId: number;
-  letterPaperDesignId: number;
 }
+
 //마이 모아 배경 디자인 타입
 export interface BackgroundDesign {
   id: number;

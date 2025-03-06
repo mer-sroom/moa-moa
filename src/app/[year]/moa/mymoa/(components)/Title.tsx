@@ -19,7 +19,7 @@ export default function Title({
         <div>
           {letterCountPublic && (
             <p className={styles.letterCount}>
-              ✉️ <strong>{lettersLength}</strong>개의 편지가 모였어요
+              🎉 <strong>{lettersLength}</strong>개의 편지가 모였어요!
             </p>
           )}
         </div>
