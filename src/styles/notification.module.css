@@ -19,6 +19,13 @@
   scrollbar-color: transparent transparent;
 }
 
+/*소심함 알림 없을 때*/
+.no_notifications {
+  padding: 20px 0;
+  text-align: center;
+  color: var(--color-gray-300);
+}
+
 /* 내 소식 알림함*/
 .my_notifications_section {
   margin-bottom: 20px;

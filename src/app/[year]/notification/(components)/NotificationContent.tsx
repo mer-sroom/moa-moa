@@ -32,54 +32,62 @@ export default function NotificationContent({
       <section className={styles.my_notifications_section}>
         <p className={styles.notifications_category}>내 소식</p>
         <div className={styles.notifications_wrapper}>
-          {myNotifications.map(notification => (
-            <div key={notification.id} className={styles.my_notification}>
-              {/* 유저 프로필 */}
-              <Link href={`/2025/moa/select-moa/${notification.sender.id}`}>
-                <div
-                  className={styles.user_profileImg}
-                  style={{
-                    backgroundImage: notification.sender.profileImage
-                      ? `url(${notification.sender.profileImage})`
-                      : `url(${defaultImg.src})`,
-                  }}
-                />
-              </Link>
-              {/* 유저 닉네임, 알림 메시지 */}
-              <p className={styles.message}>
-                <strong>{notification.sender.nickname}</strong>{" "}
-                {notification.message}
-              </p>
-              {/* 수락/거절 버튼 */}
-              <div className={styles.btn_wrapper}>
-                <button className={styles.accept_btn}>
-                  <Image src={accept_btn} alt="accept" />
-                </button>
-                <button className={styles.reject_btn}>
-                  <Image src={reject_btn} alt="reject" />
-                </button>
+          {myNotifications.length === 0 ? (
+            <p className={styles.no_notifications}>알림이 없습니다</p>
+          ) : (
+            myNotifications.map(notification => (
+              <div key={notification.id} className={styles.my_notification}>
+                {/* 유저 프로필 */}
+                <Link href={`/2025/moa/select-moa/${notification.sender.id}`}>
+                  <div
+                    className={styles.user_profileImg}
+                    style={{
+                      backgroundImage: notification.sender.profileImage
+                        ? `url(${notification.sender.profileImage})`
+                        : `url(${defaultImg.src})`,
+                    }}
+                  />
+                </Link>
+                {/* 유저 닉네임, 알림 메시지 */}
+                <p className={styles.message}>
+                  <strong>{notification.sender.nickname}</strong>{" "}
+                  {notification.message}
+                </p>
+                {/* 수락/거절 버튼 */}
+                <div className={styles.btn_wrapper}>
+                  <button className={styles.accept_btn}>
+                    <Image src={accept_btn} alt="accept" />
+                  </button>
+                  <button className={styles.reject_btn}>
+                    <Image src={reject_btn} alt="reject" />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </section>
       {/* 모아 소식 알림함 */}
       <section className={styles.moa_notifications_section}>
         <p className={styles.notifications_category}>모아 소식</p>
         <div className={styles.notifications_wrapper}>
-          {moaNotifications.map(notification => (
-            <div
-              key={notification.id}
-              className={`${styles.moa_notification} ${
-                notification.read ? styles.read : ""
-              }`}
-            >
-              {/* 모아 소식 알림 이미지 */}
-              <Image src={moa_cat} alt="moa-cat" />
-              {/* 알림 메시지 */}
-              <p className={styles.message}>{notification.message}</p>
-            </div>
-          ))}
+          {moaNotifications.length === 0 ? (
+            <p className={styles.no_notifications}>아직 조용하네요!</p>
+          ) : (
+            moaNotifications.map(notification => (
+              <div
+                key={notification.id}
+                className={`${styles.moa_notification} ${
+                  notification.read ? styles.read : ""
+                }`}
+              >
+                {/* 모아 소식 알림 이미지 */}
+                <Image src={moa_cat} alt="moa-cat" />
+                {/* 알림 메시지 */}
+                <p className={styles.message}>{notification.message}</p>
+              </div>
+            ))
+          )}
         </div>
       </section>
       {/* 모달 하단 그라데이션용 */}
