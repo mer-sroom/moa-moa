@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import authOptions from "../auth/authoptions"; // 상대 경로 수정
 import { Session } from "next-auth"; // Session 타입 임포트
-import { error } from "console";
 
 export async function GET(request: Request) {
   // Session 타입 단언

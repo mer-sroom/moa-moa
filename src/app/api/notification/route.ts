@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth/next";
-import authOptions from "../auth/authoptions"; // 상대 경로 수정
+import { authOptions } from "@/app/api/auth/authoptions";
 import { Session } from "next-auth"; // Session 타입 임포트
 import { NextResponse } from "next/server";
 
@@ -12,13 +12,13 @@ export async function GET(request: Request) {
       { status: 401 }
     );
   }
+  console.log("노티 콘솔 확인:", session);
   try {
     // 모든 알림 최근 순으로 조회
     const notifications = await prisma.notification.findMany({
       where: { userId: session.user.id },
       orderBy: { createdAt: "desc" },
     });
-
     //보낸 사람의 정보가 필요한 알림 타입
     const senderTypes = ["INVITE_GROUP_MOA", "FRIEND_REQUEST"];
     // 일반 알림 (모아 소식) 타입
