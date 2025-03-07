@@ -5,7 +5,7 @@
 
 /* 소식 카테고리 p태그 공통*/
 .notifications_category {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--color-gray-300);
   margin: 0;
   padding-bottom: 16px;
@@ -17,6 +17,13 @@
   max-height: 200px;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
+}
+
+/*소심함 알림 없을 때*/
+.no_notifications {
+  padding: 20px 0;
+  text-align: center;
+  color: var(--color-gray-300);
 }
 
 /* 내 소식 알림함*/
@@ -34,7 +41,7 @@
   width: 44px;
   height: 44px;
   border-radius: 60px;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   background-size: cover;
   cursor: pointer;
   background-position: center;
@@ -82,7 +89,7 @@
 .moa_notification {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
 }
 
 .moa_notification .message {

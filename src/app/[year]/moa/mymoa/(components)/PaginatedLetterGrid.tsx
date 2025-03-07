@@ -2,10 +2,10 @@
 import { useState, useMemo } from "react";
 import LetterGrid from "./LetterGrid";
 import Pagination from "@/app/[year]/(components)/common/Pagination";
-import { Letter } from "@/types/moabox";
+import { LetterBase } from "@/types/moabox";
 
 interface PaginatedLetterGridProps {
-  letters: Letter[];
+  letters: LetterBase[];
   itemsPerPage: number;
 }
 

@@ -1,5 +1,7 @@
 .paginationContainer {
   display: flex;
+  position: absolute;
+  bottom: -68px;
   justify-content: center;
   gap: 12px;
 }

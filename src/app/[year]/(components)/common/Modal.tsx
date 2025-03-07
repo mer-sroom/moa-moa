@@ -25,7 +25,7 @@ const defaultModalStyle: CSSProperties = {
   top: "50%",
   left: "50%",
   width: "90%",
-  maxWidth: "340px",
+  maxWidth: "350px",
   maxHeight: "60%",
   transform: "translate(-50%, -50%)",
   backgroundColor: "#fff",

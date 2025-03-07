@@ -1,4 +1,5 @@
 /* 마이 모아 페이지 (page.tsx)*/
+
 .background {
   width: 100%;
   background-repeat: no-repeat;
@@ -17,7 +18,7 @@
 }
 
 .title {
-  margin-top: 0;
+  margin: 0 0 12px 0;
   border-radius: 50px;
   padding: 2px 0;
   background: rgba(255, 255, 255, 0.52);
@@ -35,7 +36,12 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  padding-top: 68px;
+  padding-top: 40px;
+}
+
+.buttonSection a {
+  text-decoration: none;
+  color: white;
 }
 
 /*모아 박스(MailBox.tsx)*/
@@ -49,10 +55,10 @@
 
 .mailBoxGrid {
   position: absolute;
-  top: 15%;
-  left: 20%;
+  top: 30%;
+  left: 19%;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.5); /*임시*/
+  /* background-color: rgba(255, 255, 255, 0.5); 임시 */
   width: 240px;
   height: 280px;
 }
@@ -61,7 +67,7 @@
   display: grid;
   grid-template-columns: repeat(2, 64px);
   gap: 4px;
-  grid-auto-rows: 80px;
+  grid-auto-rows: 100px;
   justify-content: center;
 }
 
@@ -70,7 +76,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4px;
-  grid-auto-rows: 80px;
+  grid-auto-rows: 100px;
 }
 
 /*편지(LetterItem.tsx)*/

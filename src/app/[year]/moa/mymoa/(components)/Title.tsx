@@ -18,7 +18,9 @@ export default function Title({
         {/* 받은 편지 수 */}
         <div>
           {letterCountPublic && (
-            <p className={styles.letterCount}>받은 편지 수 : {lettersLength}</p>
+            <p className={styles.letterCount}>
+              🎉 <strong>{lettersLength}</strong>개의 편지가 모였어요!
+            </p>
           )}
         </div>
       </section>

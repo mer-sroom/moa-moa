@@ -1,10 +1,10 @@
 import OpenLetter from "./OpenLetter";
 import LetterItem from "./LetterItem";
-import { Letter } from "@/types/moabox";
+import { LetterBase } from "@/types/moabox";
 import styles from "@/styles/mymoa.module.css";
 
 interface LetterGridProps {
-  letters: Letter[];
+  letters: LetterBase[];
 }
 
 export default function LetterGrid({ letters }: LetterGridProps) {
@@ -25,7 +25,7 @@ export default function LetterGrid({ letters }: LetterGridProps) {
                 id={letter.id}
                 name={letter.authorName}
                 isOpened={letter.isOpened}
-                iconDesignId={letter.letterIconDesignId}
+                iconDesignURL={letter.letterIconDesign.imageURL}
               />
             </OpenLetter>
           ))}
@@ -42,7 +42,7 @@ export default function LetterGrid({ letters }: LetterGridProps) {
                 id={letter.id}
                 name={letter.authorName}
                 isOpened={letter.isOpened}
-                iconDesignId={letter.letterIconDesignId}
+                iconDesignURL={letter.letterIconDesign.imageURL}
               />
             </OpenLetter>
           ))}
