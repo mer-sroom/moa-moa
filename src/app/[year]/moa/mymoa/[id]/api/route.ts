@@ -88,7 +88,7 @@ export async function POST(request: Request) {
           user: { connect: { id: targetUserId } },
           type: "FRIEND_REQUEST",
           message: `님이 친구 요청을 보냈습니다.`,
-          payload: { friendshipId: friendship.id, from: currentUserId },
+          payload: { friendshipId: friendship.id, senderId: currentUserId },
         },
       });
 
