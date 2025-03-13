@@ -163,6 +163,8 @@ model Letter {
   content  String
   theme    String?
   isOpened Boolean @default(false)
+  //--- (추가) 첨부된 노래 Id --- 
+  trackId  String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())

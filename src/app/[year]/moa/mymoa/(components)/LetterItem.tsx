@@ -19,7 +19,7 @@ export default function LetterItem({ letter }: LetterItemProps) {
       <div
         className={styles.icon}
         style={{
-          backgroundImage: `url(${letterIconDesign})`,
+          backgroundImage: `url(${letterIconDesign.imageURL})`,
         }}
       ></div>
       {/* 편지 작성한 사람 */}
