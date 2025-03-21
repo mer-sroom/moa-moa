@@ -1,3 +1,90 @@
-export default function LetterModal() {
-  return <></>;
+"use client";
+import type { Letter } from "@/types/moabox";
+import { defaultOverlayStyle } from "@/app/[year]/(components)/common/Modal";
+import Skeleton from "@/app/[year]/(components)/common/Skeleton";
+import { Suspense } from "react";
+import deleteBtn from "@/../../public/assets/icons/trash_can_icon.svg";
+import downloadBtn from "@/../../public/assets/icons/download_icon.svg";
+import Image from "next/image";
+import Link from "next/link";
+import Button from "@/app/[year]/(components)/common/Button";
+import styles from "@/styles/LetterModal.module.css"; // CSS 모듈 불러오기
+
+interface LetterModalProps {
+  isOpen: boolean;
+  letter: Letter;
+  onClose: () => void;
+}
+
+export default function LetterModal(props: LetterModalProps) {
+  const { isOpen, letter, onClose } = props;
+  if (!isOpen) {
+    return null;
+  }
+  return (
+    <>
+      <div style={defaultOverlayStyle} onClick={onClose}></div>
+      <section className={styles.modalContainer}>
+        <div>
+          {/* 편지 아이콘 */}
+          <div
+            className={styles.letterIcon}
+            style={{
+              backgroundImage: `url(${letter.letterIconDesign.imageURL})`,
+            }}
+          ></div>
+          <div
+            className={styles.letterPaper}
+            style={{
+              backgroundImage: `url(${letter.letterPaperDesign.imageURL})`,
+            }}
+          >
+            <div>
+              <h4 className={styles.letterTitle}>{letter.title}</h4>
+              <p className={styles.letterContent}>{letter.content}</p>
+              <p>from. {letter.authorName}</p>
+            </div>
+            <button className={styles.deleteButton} onClick={onClose}>
+              <Image
+                src={deleteBtn}
+                alt="delete letter button"
+                width={24}
+                height={24}
+              />
+            </button>
+          </div>
+        </div>
+        <div className={styles.spotifyContainer}>
+          <Suspense fallback={<Skeleton width="100%" height="80px" />}>
+            {letter.trackId && (
+              <iframe
+                src={`https://open.spotify.com/embed/track/${letter.trackId}`}
+                width="100%"
+                height="80"
+                frameBorder="0"
+                allow="encrypted-media"
+                className={styles.spotifyIframe}
+              ></iframe>
+            )}
+          </Suspense>
+        </div>
+        <Button
+          label={
+            <Link href={"/2025/create-letter"} className={styles.linkStyle}>
+              저장하기
+            </Link>
+          }
+          icon={
+            <Image
+              src={downloadBtn}
+              alt="pen icon"
+              className={styles.downloadIcon}
+            />
+          }
+          size="long"
+          color="black"
+        />
+      </section>
+    </>
+  );
 }

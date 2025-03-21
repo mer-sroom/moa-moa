@@ -33,6 +33,7 @@ export async function GET(
       select: {
         title: true,
         content: true,
+        trackId: true,
         // 편지가 속한 MoaBox의 ownerId 확인
         moaBox: {
           select: {

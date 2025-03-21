@@ -20,7 +20,7 @@ export interface ModalProps {
   onClose?: () => void; // Modal을 닫을 때 호출되는 함수
 }
 // 기본 모달 스타일
-const defaultModalStyle: CSSProperties = {
+export const defaultModalStyle: CSSProperties = {
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -35,7 +35,7 @@ const defaultModalStyle: CSSProperties = {
   boxShadow: "0px 1px 3px 0px rgba(0, 0, 0, 0.3)",
 };
 // 오버레이(배경) 스타일
-const defaultOverlayStyle: CSSProperties = {
+export const defaultOverlayStyle: CSSProperties = {
   backgroundColor: "rgba(0, 0, 0, 0.7)",
   position: "absolute",
   top: 0,

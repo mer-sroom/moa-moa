@@ -23,13 +23,6 @@ export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
   const moaBoxId = Number(id);
 
-  // 세션에서 사용자 정보를 가져오고 로그인 여부 확인
-  const session = await getServerSession(authOptions);
-  if (!session?.user) {
-    redirect("/auth/login");
-  }
-  const currentUser = session.user;
-
   //moaBox정보 받아오기(디자인, 편지지)
   const moaBox = await prisma.moaBox.findUnique({
     where: { id: moaBoxId },
@@ -52,8 +45,15 @@ export default async function MyMoaBoxPage({ params }) {
     //모아박스가 존재하지 않을 때
     return <NotFound />;
   }
-  // 현재 로그인한 사용자가 소유자인지 확인
-  const isOwner = moaBox.ownerId === currentUser.id;
+
+  // 세션에서 사용자 정보를 가져오고 로그인 여부 확인
+  const session = await getServerSession(authOptions);
+  let isOwner = false;
+  if (session?.user) {
+    const currentUser = session?.user;
+    // 현재 로그인한 사용자가 소유자인지 확인
+    isOwner = moaBox.ownerId === currentUser.id;
+  }
 
   //디자인 정보 불러오기
   const backgroundDesign = moaBox.backgroundDesign?.imageURL;
