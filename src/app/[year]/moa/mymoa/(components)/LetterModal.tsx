@@ -1,14 +1,17 @@
 "use client";
+import { Suspense } from "react";
+import Image from "next/image";
+import Link from "next/link";
+// 타입, 부속 컴포넌트
 import type { Letter } from "@/types/moabox";
 import { defaultOverlayStyle } from "@/app/[year]/(components)/common/Modal";
 import Skeleton from "@/app/[year]/(components)/common/Skeleton";
-import { Suspense } from "react";
+import SpotifyWithDelay from "./SpotifyWithDelay";
+import Button from "@/app/[year]/(components)/common/Button";
+//이미지, css
 import deleteBtn from "@/../../public/assets/icons/trash_can_icon.svg";
 import downloadBtn from "@/../../public/assets/icons/download_icon.svg";
-import Image from "next/image";
-import Link from "next/link";
-import Button from "@/app/[year]/(components)/common/Button";
-import styles from "@/styles/LetterModal.module.css"; // CSS 모듈 불러오기
+import styles from "@/styles/LetterModal.module.css";
 
 interface LetterModalProps {
   isOpen: boolean;
@@ -24,7 +27,7 @@ export default function LetterModal(props: LetterModalProps) {
   return (
     <>
       <div style={defaultOverlayStyle} onClick={onClose}></div>
-      <section className={styles.modalContainer}>
+      <section aria-modal="true" className={styles.modalContainer}>
         <div>
           {/* 편지 아이콘 */}
           <div
@@ -32,42 +35,44 @@ export default function LetterModal(props: LetterModalProps) {
             style={{
               backgroundImage: `url(${letter.letterIconDesign.imageURL})`,
             }}
-          ></div>
+          />
+          {/* 편지 본문 */}
           <div
             className={styles.letterPaper}
             style={{
               backgroundImage: `url(${letter.letterPaperDesign.imageURL})`,
             }}
           >
-            <div>
-              <h4 className={styles.letterTitle}>{letter.title}</h4>
+            <div className={styles.letterContentContainer}>
+              <h4 id="modalTitle" className={styles.letterTitle}>
+                {letter.title}
+              </h4>
               <p className={styles.letterContent}>{letter.content}</p>
-              <p>from. {letter.authorName}</p>
+              <p className={styles.letterSender}>from. {letter.authorName}</p>
             </div>
-            <button className={styles.deleteButton} onClick={onClose}>
-              <Image
-                src={deleteBtn}
-                alt="delete letter button"
-                width={24}
-                height={24}
-              />
-            </button>
+            {/* 편지 삭제 버튼 */}
+            <div className={styles.deleteButtonContainer}>
+              {/* 편지 삭제 비즈니스 로직 추가 예정 */}
+              <button className={styles.deleteButton} onClick={onClose}>
+                <Image
+                  src={deleteBtn}
+                  alt="delete letter button"
+                  width={24}
+                  height={24}
+                />
+              </button>
+            </div>
           </div>
         </div>
-        <div className={styles.spotifyContainer}>
-          <Suspense fallback={<Skeleton width="100%" height="80px" />}>
-            {letter.trackId && (
-              <iframe
-                src={`https://open.spotify.com/embed/track/${letter.trackId}`}
-                width="100%"
-                height="80"
-                frameBorder="0"
-                allow="encrypted-media"
-                className={styles.spotifyIframe}
-              ></iframe>
-            )}
-          </Suspense>
-        </div>
+        {/* 스포티파이 */}
+        {letter.trackId && (
+          <div className={styles.spotifyContainer}>
+            <Suspense fallback={<Skeleton width="100%" height="80px" />}>
+              <SpotifyWithDelay trackId={letter.trackId} delay={800} />
+            </Suspense>
+          </div>
+        )}
+        {/* 저장하기 버튼 */}
         <Button
           label={
             <Link href={"/2025/create-letter"} className={styles.linkStyle}>

@@ -87,6 +87,7 @@ const ButtonStyle = styled.button<ButtonProps>`
   overflow: hidden;
   border-radius: 60px;
   font-size: 16px;
+  margin: 10px 0;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
   transition: 0.3s ease;
   ${props => buttonSize[props.size]};

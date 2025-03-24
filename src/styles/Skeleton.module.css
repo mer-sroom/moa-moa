@@ -1,8 +1,8 @@
 .skeleton {
-  background: linear-gradient(90deg, #eee, #f5f5f5, #eee);
+  background: linear-gradient(120deg, #ffffff, var(--color-gray-300), #ffffff);
   background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 4px;
+  animation: shimmer 1.8s infinite ease-in-out;
+  border-radius: 24px;
 }
 
 @keyframes shimmer {
