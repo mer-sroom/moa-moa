@@ -96,7 +96,7 @@ export default function HandleAddFriend(props: Props) {
         setLoading(false);
       }
     }
-  }, [nickname, moaBoxId, targetId, loading]);
+  }, [nickname, moaBoxId, targetId, loading, isAuthenticated, router]);
 
   return <div onClick={clickHandler}>{children}</div>;
 }

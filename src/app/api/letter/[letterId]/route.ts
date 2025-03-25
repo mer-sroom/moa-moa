@@ -7,8 +7,9 @@ import { Session } from "next-auth"; // Session 타입 임포트
 //편지 정보 받아오는용
 export async function GET(
   request: Request,
-  { params }: { params: { letterId: number } }
+  { params }: { params: Promise<{ letterId: string }> }
 ) {
+  const { letterId } = await params;
   // Session 타입 단언
   const session = (await getServerSession(authOptions)) as Session | null;
 
@@ -19,8 +20,8 @@ export async function GET(
     );
   }
   //편지 아이디
-  const letterId = Number(params.letterId);
-  if (!letterId) {
+  const letterIdNumber = Number(letterId);
+  if (!letterIdNumber) {
     return NextResponse.json(
       { error: "편지 아이디를 찾을 수 없습니다." },
       { status: 400 }
@@ -29,7 +30,7 @@ export async function GET(
 
   try {
     const letter = await prisma.letter.findUnique({
-      where: { id: letterId },
+      where: { id: letterIdNumber },
       select: {
         title: true,
         content: true,
@@ -75,8 +76,9 @@ export async function GET(
 //편지 isOpend 상태 업데이트용
 export async function PATCH(
   request: Request,
-  { params }: { params: { letterId: number } }
+  { params }: { params: Promise<{ letterId: string }> }
 ) {
+  const letterId = await params;
   // Session 타입 단언
   const session = (await getServerSession(authOptions)) as Session | null;
 
@@ -87,8 +89,8 @@ export async function PATCH(
     );
   }
   // 편지 아이디 확인
-  const letterId = Number(params.letterId);
-  if (!letterId) {
+  const letterIdNumber = Number(letterId);
+  if (!letterIdNumber) {
     return NextResponse.json(
       { error: "편지 아이디를 찾을 수 없습니다." },
       { status: 400 }
@@ -98,7 +100,7 @@ export async function PATCH(
   try {
     //편지의 소유주가 맞는지 확인
     const existingLetter = await prisma.letter.findUnique({
-      where: { id: letterId },
+      where: { id: letterIdNumber },
       select: {
         isOpened: true,
         moaBox: {
@@ -126,7 +128,7 @@ export async function PATCH(
 
     // isOpened 상태를 true로 업데이트
     const updatedLetter = await prisma.letter.update({
-      where: { id: letterId },
+      where: { id: letterIdNumber },
       data: { isOpened: true },
     });
 

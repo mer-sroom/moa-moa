@@ -27,7 +27,7 @@ export default function LetterModal(props: LetterModalProps) {
   return (
     <>
       <div style={defaultOverlayStyle} onClick={onClose}></div>
-      <section aria-modal="true" className={styles.modalContainer}>
+      <section className={styles.modalContainer}>
         <div>
           {/* 편지 아이콘 */}
           <div
