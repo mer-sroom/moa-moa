@@ -1,7 +1,5 @@
-"use client";
 import { Suspense } from "react";
 import Image from "next/image";
-import Link from "next/link";
 // 타입, 부속 컴포넌트 --------------------------------------------------------
 import type { Letter } from "@/types/moabox";
 import { defaultOverlayStyle } from "@/app/[year]/(components)/common/Modal";
