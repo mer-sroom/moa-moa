@@ -1,4 +1,4 @@
-import OpenLetter from "./OpenLetter";
+import OpenLetter from "../(features)/OpenLetter";
 import LetterItem from "./LetterItem";
 import { LetterBase } from "@/types/moabox";
 import styles from "@/styles/mymoa.module.css";

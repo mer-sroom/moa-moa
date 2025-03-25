@@ -2,13 +2,13 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-// 타입, 부속 컴포넌트
+// 타입, 부속 컴포넌트 --------------------------------------------------------
 import type { Letter } from "@/types/moabox";
 import { defaultOverlayStyle } from "@/app/[year]/(components)/common/Modal";
 import Skeleton from "@/app/[year]/(components)/common/Skeleton";
-import SpotifyWithDelay from "./SpotifyWithDelay";
+import SpotifyWithDelay from "../(ui)/SpotifyWithDelay";
 import Button from "@/app/[year]/(components)/common/Button";
-//이미지, css
+//이미지, css ----------------------------------------------------------------
 import deleteBtn from "@/../../public/assets/icons/trash_can_icon.svg";
 import downloadBtn from "@/../../public/assets/icons/download_icon.svg";
 import styles from "@/styles/LetterModal.module.css";

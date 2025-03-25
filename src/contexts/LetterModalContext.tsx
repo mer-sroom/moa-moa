@@ -7,7 +7,7 @@ import {
   useCallback,
 } from "react";
 import type { Letter } from "@/types/moabox";
-import LetterModal from "@/app/[year]/moa/mymoa/(components)/LetterModal";
+import LetterModal from "@/app/[year]/moa/mymoa/(components)/(ui)/LetterModal";
 
 interface LetterModalContextType {
   //자식에게 제공할 값

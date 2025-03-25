@@ -1,23 +1,24 @@
 import prisma from "@/lib/prisma";
 //----------------------------------------------------------------
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getServerSession } from "next-auth/next";
 import { Suspense } from "react";
 import NotFound from "@/app/[year]/(components)/not-found";
 //----------------------------------------------------------------
-import Title from "../(components)/Title";
-import MailBox from "../(components)/MailBox";
+import Title from "../(components)/(ui)/Title";
+import MailBox from "../(components)/(ui)/MailBox";
 import Button from "@/app/[year]/(components)/common/Button";
-import OpenShareLinkModal from "../(components)/OpenShareLinkModal";
-import HandleAddFriend from "../(components)/HandleAddFriend";
+import OpenShareLinkModal from "../(components)/(features)/OpenShareLinkModal";
+import HandleAddFriend from "../(components)/(features)/HandleAddFriend";
+// import Handle
 import downloadIcon from "@/../../public/assets/icons/download_icon.svg";
 import shareIcon from "@/../../public/assets/icons/share_icon.svg";
 import addFriend from "@/../../public/assets/icons/add_friend.svg";
 import penIcon from "@/../../public/assets/icons/pen.svg";
 import styles from "@/styles/mymoa.module.css";
 import { authOptions } from "@/app/api/auth/authoptions";
+import HandleWriteLetter from "../(components)/(features)/HandleWriteLetter";
 
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
@@ -54,7 +55,7 @@ export default async function MyMoaBoxPage({ params }) {
     // 현재 로그인한 사용자가 소유자인지 확인
     isOwner = moaBox.ownerId === currentUser.id;
   }
-
+  console.log(session);
   //디자인 정보 불러오기
   const backgroundDesign = moaBox.backgroundDesign?.imageURL;
   const mailBoxDesign = moaBox.mailBoxDesign?.imageURL;
@@ -107,7 +108,11 @@ export default async function MyMoaBoxPage({ params }) {
           ) : (
             <>
               {/* 모아박스 소유주가 아닐 때 */}
-              <HandleAddFriend targetId={moaBox.ownerId} moaBoxId={moaBoxId}>
+              <HandleAddFriend
+                targetId={moaBox.ownerId}
+                moaBoxId={moaBoxId}
+                isAuthenticated={!!session}
+              >
                 <Button
                   icon={
                     <Image
@@ -123,13 +128,17 @@ export default async function MyMoaBoxPage({ params }) {
                   size="circle"
                 />
               </HandleAddFriend>
-
-              <Button
-                label={<Link href={"/2025/create-letter"}>편지 작성하기</Link>}
-                icon={<Image src={penIcon} alt="pen icon" />}
-                size="medium"
-                color="black"
-              />
+              <HandleWriteLetter
+                allowAnonymous={moaBox.allowAnonymous}
+                isAuthenticated={!!session}
+              >
+                <Button
+                  label={"편지 작성하기"}
+                  icon={<Image src={penIcon} alt="pen icon" />}
+                  size="medium"
+                  color="black"
+                />
+              </HandleWriteLetter>
             </>
           )}
         </section>

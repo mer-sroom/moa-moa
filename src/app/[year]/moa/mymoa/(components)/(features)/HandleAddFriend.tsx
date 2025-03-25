@@ -1,11 +1,13 @@
 //친구 추가 로직용 컴포넌트입니다
 "use client";
 import { PropsWithChildren, useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
 interface Props extends PropsWithChildren {
   targetId: string;
   moaBoxId: number;
+  isAuthenticated: boolean;
 }
 //친구 요청 에러 메세지
 const errorMessages = {
@@ -15,9 +17,11 @@ const errorMessages = {
 };
 
 export default function HandleAddFriend(props: Props) {
-  const { children, targetId, moaBoxId } = props;
+  const { children, targetId, moaBoxId, isAuthenticated } = props;
   const [nickname, setNickname] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
   //닉네임불러오기
   useEffect(() => {
     const fetchNickname = async () => {
@@ -36,8 +40,17 @@ export default function HandleAddFriend(props: Props) {
   }, [targetId]);
 
   const clickHandler = useCallback(async () => {
+    // 친구 요청한 사람이 로그인 되어있지 않다면
+    if (!isAuthenticated) {
+      await Swal.fire({
+        icon: "warning",
+        text: "로그인이 필요합니다. 로그인 페이지로 이동합니다.",
+      });
+      router.push("/auth/login");
+      return;
+    }
     if (loading) return; // 중복 요청 방지
-    if (!nickname) return;
+    if (!nickname) return; //닉네임이 없다면
     const result = await Swal.fire({
       text: `${nickname}님께 친구 요청을 보내시겠습니까?`,
       icon: "question",

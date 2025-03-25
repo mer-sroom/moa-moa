@@ -1,6 +1,6 @@
 "use client";
 import { useState, useMemo } from "react";
-import LetterGrid from "./LetterGrid";
+import LetterGrid from "../(ui)/LetterGrid";
 import Pagination from "@/app/[year]/(components)/common/Pagination";
 import { LetterBase } from "@/types/moabox";
 
