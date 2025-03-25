@@ -78,7 +78,7 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ letterId: string }> }
 ) {
-  const letterId = await params;
+  const { letterId } = await params;
   // Session 타입 단언
   const session = (await getServerSession(authOptions)) as Session | null;
 
