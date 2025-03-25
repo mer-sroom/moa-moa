@@ -35,7 +35,7 @@ const defaultModalStyle: CSSProperties = {
   boxShadow: "0px 1px 3px 0px rgba(0, 0, 0, 0.3)",
 };
 // 오버레이(배경) 스타일
-const defaultOverlayStyle: CSSProperties = {
+export const defaultOverlayStyle: CSSProperties = {
   backgroundColor: "rgba(0, 0, 0, 0.7)",
   position: "absolute",
   top: 0,

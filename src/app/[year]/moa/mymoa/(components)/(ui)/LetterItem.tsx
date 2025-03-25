@@ -1,14 +1,12 @@
 import styles from "@/styles/mymoa.module.css";
+import { LetterBase } from "@/types/moabox";
 
 interface LetterItemProps {
-  id: number;
-  name: string;
-  isOpened: boolean;
-  iconDesignURL: string;
+  letter: LetterBase;
 }
 
-export default function LetterItem(props: LetterItemProps) {
-  const { name, isOpened, iconDesignURL } = props;
+export default function LetterItem({ letter }: LetterItemProps) {
+  const { authorName, isOpened, letterIconDesign } = letter;
   //아이콘 정보 불러오기
 
   return (
@@ -21,11 +19,11 @@ export default function LetterItem(props: LetterItemProps) {
       <div
         className={styles.icon}
         style={{
-          backgroundImage: `url(${iconDesignURL})`,
+          backgroundImage: `url(${letterIconDesign.imageURL})`,
         }}
       ></div>
       {/* 편지 작성한 사람 */}
-      <p className={styles.authorName}>{name}</p>
+      <p className={styles.authorName}>{authorName}</p>
     </div>
   );
 }
