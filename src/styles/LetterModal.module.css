@@ -41,6 +41,8 @@
   line-height: 1.8;
   height: 200px;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
 }
 .letterSender {
   text-align: right;

@@ -9,7 +9,7 @@ interface Props extends PropsWithChildren {
   isAuthenticated: boolean;
 }
 
-export default function HandleWriteLetter(props: Props) {
+export default function HandleCreateLetter(props: Props) {
   const { children, allowAnonymous, isAuthenticated } = props;
   const router = useRouter();
   const clickHandler = async (e: React.MouseEvent) => {

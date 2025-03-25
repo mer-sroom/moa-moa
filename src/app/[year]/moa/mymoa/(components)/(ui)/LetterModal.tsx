@@ -74,11 +74,7 @@ export default function LetterModal(props: LetterModalProps) {
         )}
         {/* 저장하기 버튼 */}
         <Button
-          label={
-            <Link href={"/2025/create-letter"} className={styles.linkStyle}>
-              저장하기
-            </Link>
-          }
+          label="저장하기"
           icon={
             <Image
               src={downloadBtn}

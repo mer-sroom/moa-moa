@@ -20,7 +20,7 @@ export interface ModalProps {
   onClose?: () => void; // Modal을 닫을 때 호출되는 함수
 }
 // 기본 모달 스타일
-export const defaultModalStyle: CSSProperties = {
+const defaultModalStyle: CSSProperties = {
   position: "absolute",
   top: "50%",
   left: "50%",

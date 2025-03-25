@@ -1,24 +1,22 @@
 import prisma from "@/lib/prisma";
+import { authOptions } from "@/app/api/auth/authoptions";
 //----------------------------------------------------------------
 import Image from "next/image";
-import Link from "next/link";
 import { getServerSession } from "next-auth/next";
 import { Suspense } from "react";
-import NotFound from "@/app/[year]/(components)/not-found";
 //----------------------------------------------------------------
+import NotFound from "@/app/[year]/(components)/not-found";
 import Title from "../(components)/(ui)/Title";
 import MailBox from "../(components)/(ui)/MailBox";
 import Button from "@/app/[year]/(components)/common/Button";
 import OpenShareLinkModal from "../(components)/(features)/OpenShareLinkModal";
 import HandleAddFriend from "../(components)/(features)/HandleAddFriend";
-// import Handle
+import HandleCreateLetter from "../(components)/(features)/HandleWriteLetter";
 import downloadIcon from "@/../../public/assets/icons/download_icon.svg";
 import shareIcon from "@/../../public/assets/icons/share_icon.svg";
 import addFriend from "@/../../public/assets/icons/add_friend.svg";
 import penIcon from "@/../../public/assets/icons/pen.svg";
 import styles from "@/styles/mymoa.module.css";
-import { authOptions } from "@/app/api/auth/authoptions";
-import HandleWriteLetter from "../(components)/(features)/HandleWriteLetter";
 
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
@@ -128,7 +126,7 @@ export default async function MyMoaBoxPage({ params }) {
                   size="circle"
                 />
               </HandleAddFriend>
-              <HandleWriteLetter
+              <HandleCreateLetter
                 allowAnonymous={moaBox.allowAnonymous}
                 isAuthenticated={!!session}
               >
@@ -138,7 +136,7 @@ export default async function MyMoaBoxPage({ params }) {
                   size="medium"
                   color="black"
                 />
-              </HandleWriteLetter>
+              </HandleCreateLetter>
             </>
           )}
         </section>
