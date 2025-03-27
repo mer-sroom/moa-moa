@@ -12,6 +12,7 @@ import deleteBtn from "../../../../../../public/assets/icons/trash_can_icon.svg"
 import Button from "@/app/[year]/(components)/common/Button";
 import styles from "../../../../../styles/selectMoa.module.css";
 import { MoaBox } from "@/types/moabox"; //props 타입
+import Swal from "sweetalert2";
 
 export interface SelectCarouselProps {
   friendId?: string;
@@ -25,7 +26,6 @@ export default function SelectCarousel({
   const router = useRouter();
   const [nowSelected, setNowSelected] = useState<number | null>(null);
   const containerRef = useRef(null); // 컨테이너를 참조하기 위한 ref
-
   // 선택된 moaBox 페이지로 이동 함수
   const handleRoute = () => {
     if (nowSelected != null && friendId) {
@@ -34,10 +34,36 @@ export default function SelectCarousel({
       router.push(`/2025/moa/mymoa/${nowSelected}`);
     }
   };
+  //선택한 moaBox 삭제하는 함수
+  const handleMoaBoxDelete = async (moaBoxId: number) => {
+    const result = await Swal.fire({
+      icon: "question",
+      text: "삭제하시겠습니까? 삭제한 항목은 복구할 수 없습니다.",
+      showCancelButton: true,
+      confirmButtonColor: "#ff8473",
+      cancelButtonColor: "#aeaeae",
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    });
+    if (!result.isConfirmed) return;
 
-  //특정 moaBox 삭제하는 함수(id : moaBox id)
-  const handleMoaBoxDelete = (id: number) => {
-    console.log(id);
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`/api/moa/${moaBoxId}`, {
+          method: "DELETE",
+        });
+        const data = await response.json();
+        if (data.success) {
+          Swal.fire({ icon: "success", text: "성공적으로 삭제되었습니다!" });
+          router.refresh();
+        } else {
+          Swal.fire({ icon: "error", text: data.error });
+        }
+      } catch (error) {
+        console.error("모아 박스 삭제 중 문제 발생!", error);
+        Swal.fire({ icon: "error", text: "삭제 중 오류가 발생했습니다." });
+      }
+    }
   };
 
   // 클릭 이벤트 리스너 추가 (컴포넌트 외부 클릭 시 선택 해제)
@@ -89,7 +115,10 @@ export default function SelectCarousel({
               onClick={() => {
                 setNowSelected(moaBox.id);
               }}
-              className={`${styles.card} ${styles.moaCard} ${
+              style={{
+                backgroundImage: `url(${moaBox.backgroundDesign.imageURL})`,
+              }}
+              className={`${styles.card} ${
                 nowSelected === moaBox.id ? styles.selected : ""
               }`}
             >
@@ -105,11 +134,13 @@ export default function SelectCarousel({
               )}
               {/* 임시 데이터 표시: 나중에 모아박스 이미지로 교체 예정 */}
               <div className={styles.moaBoxContainer}>
-                {moaBox.ownerId}
-                <br />
-                moaBox Id:{moaBox.id}
-                <br />
-                title: {moaBox.title}
+                <div
+                  className={styles.moaBoxImage}
+                  style={{
+                    backgroundImage: `url(${moaBox.mailBoxDesign.imageURL})`,
+                  }}
+                />
+                <h4 className={styles.moaBoxName}>{moaBox.title}</h4>
               </div>
             </SwiperSlide>
           ))}

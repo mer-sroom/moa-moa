@@ -11,8 +11,14 @@ export type MoaBox = {
   letterCountPublic: boolean;
   createdAt: Date;
   updatedAt: Date;
-  backgroundDesignId: number | null;
-  mailBoxDesignId: number | null;
+  backgroundDesignId: number;
+  mailBoxDesignId: number;
+  backgroundDesign: {
+    imageURL: string;
+  };
+  mailBoxDesign: {
+    imageURL: string;
+  };
 };
 
 // 편지 미리보기(아이콘 형태일 때)
