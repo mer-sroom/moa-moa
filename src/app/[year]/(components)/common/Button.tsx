@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import { ReactNode } from "react";
 
 export interface ButtonProps {
-  label?: string;
+  label?: string | ReactNode;
   icon?: ReactNode; //Image 태그로 받기 위해
   className?: string;
   size?: "small" | "medium" | "long" | "circle" | "modalBtn";
@@ -20,7 +20,7 @@ export const buttonSize = {
     height: 56px;
   `,
   medium: css`
-    max-width: 316px;
+    max-width: 280px;
     width: 100%;
     height: 63px;
   `,
@@ -87,6 +87,7 @@ const ButtonStyle = styled.button<ButtonProps>`
   overflow: hidden;
   border-radius: 60px;
   font-size: 16px;
+  margin: 10px 0;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
   transition: 0.3s ease;
   ${props => buttonSize[props.size]};

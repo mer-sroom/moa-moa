@@ -15,21 +15,32 @@ export type MoaBox = {
   mailBoxDesignId: number | null;
 };
 
-//편지 타입
-export interface Letter {
+// 편지 미리보기(아이콘 형태일 때)
+export interface LetterBase {
   id: number;
-  moaBoxId: number;
-  authorId: string;
   authorName: string;
+  isOpened: boolean;
+  letterIconDesign: {
+    imageURL: string; // 편지 아이콘 이미지 URL
+  };
+}
+
+// 편지 상세보기(모달 형태일때 추가적으로 요청되는 데이터)
+export interface LetterDetail {
   title: string;
   content: string;
-  theme: string;
-  isOpened: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  letterIconDesignId: number;
-  letterPaperDesignId: number;
+  letterPaperDesign: {
+    imageURL: string; // 편지지 이미지 URL
+  };
+  moaBox: {
+    ownerId: string; // 나중에 검증을 위한 ownerId
+  };
+  trackId?: string | null; // spotify track ID
 }
+
+//편지 정보를 모두 합친 타입
+export type Letter = LetterBase & LetterDetail;
+
 //마이 모아 배경 디자인 타입
 export interface BackgroundDesign {
   id: number;

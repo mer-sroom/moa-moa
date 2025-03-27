@@ -1,12 +1,12 @@
 // MailBox.tsx
-import { Letter } from "@/types/moabox";
-import PaginatedLetterGrid from "../(components)/PaginatedLetterGrid";
+import { LetterBase } from "@/types/moabox";
+import PaginatedLetterGrid from "../(features)/PaginatedLetterGrid";
 import styles from "@/styles/mymoa.module.css";
 
 interface MailBoxProps {
   moaBoxId: number;
   designURL: string;
-  letters: Letter[];
+  letters: LetterBase[];
 }
 
 export default function MailBox({
