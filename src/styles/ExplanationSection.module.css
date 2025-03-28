@@ -9,14 +9,11 @@
   position: relative;
 }
 
-/* 탭 버튼 컨테이너 */
 .tabButtons {
   display: flex;
   gap: 8px;
   margin-bottom: 2rem;
 }
-
-/* 탭 버튼 활성/비활성 */
 .activeBtn {
   background-color: #000;
   color: #fff;
@@ -34,7 +31,7 @@
   cursor: pointer;
 }
 
-/* 하위 섹션 공통 레이아웃 */
+/* 섹션 공통 레이아웃 */
 .subSection {
   width: 100%;
   flex: 1;
@@ -45,77 +42,126 @@
   position: relative;
 }
 
-/* 하단 화살표 */
+/* 아래 화살표 */
 .arrowDown {
-  margin-top: 2rem;
+  position: relative; /* 혹은 absolute */
+  z-index: 99; /* 카드, 봉투보다 높은 값 */
+  margin-top: 15rem;
   width: 40px;
   height: auto;
   cursor: pointer;
 }
 
-/* 카드(박스) & 이미지들을 감싸는 래퍼 */
 .cardsWrapper {
-  position: relative; /* 뒤에 편지봉투를 깔기 위해 사용 */
-  display: flex; /* 가로로 나열 */
-  flex-wrap: wrap; /* 화면이 작을 때 카드가 자동으로 줄바꿈 */
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  gap: 2rem; /* 카드 간격 */
-  margin-top: 2rem; /* 필요 시 여백 조정 */
+  gap: 2rem;
+  margin-top: 2rem;
+  z-index: 2;
 }
 
-/* 개별 카드 (왼쪽, 오른쪽) */
-.card,
-.cardCenter {
-  position: relative;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  width: 260px; /* 카드 너비 */
-  min-height: 200px;
-  padding: 1.5rem;
-  text-align: left; /* 카드 내용 정렬 방식 */
-  z-index: 2; /* 편지봉투보다 위에 오도록 */
-}
-
-/* 중앙 카드만 별도로 스타일링이 필요하면 */
-.cardCenter {
-  /* 추가 스타일 가능. 예: 강조, 배경색, etc. */
-}
-
-/* 카드 안의 이미지 */
-.cardImage {
-  display: block;
-  margin: 0 auto 1rem; /* 가운데 정렬 예시 */
-  max-width: 100%;
-  height: auto;
-}
-
-/* 편지봉투(letter4) 이미지 래퍼 - 뒤로 깔기 */
 .envelopeWrapper {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 500px; /* 원하는 크기로 조정 */
-  height: 500px; /* fill 사용 시 width/height 필요 */
+  width: 500px;
+  height: 500px;
   transform: translate(-50%, 30px);
-  z-index: 1; /* 카드보다 뒤여야 하므로 1 또는 0 */
+  z-index: 1;
 }
-
-/* 편지봉투 이미지 자체 */
 .envelopeImage {
-  object-fit: contain; /* fill 사용하는 경우 */
+  object-fit: contain;
 }
 
-/* (선택) 반응형에서 좀 더 유연하게 */
+.card {
+  position: relative;
+  background-color: #fff;
+  color: #000;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  width: 260px;
+  min-height: 200px;
+  padding: 4rem 1.5rem 1.5rem;
+  text-align: left;
+  z-index: 2;
+  overflow: visible;
+}
+
+/* 중앙 카드 - 검정색 */
+.cardCenter {
+  position: relative;
+  background-color: #000;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  width: 260px;
+  min-height: 200px;
+  padding: 4rem 1.5rem 1.5rem;
+  text-align: left;
+  z-index: 2;
+  overflow: visible;
+}
+
+/* 카드 이미지들 */
+.cardImage {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: auto;
+  object-fit: contain;
+  z-index: 3;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* 왼쪽 카드 이미지 (고양이) */
+.leftcardImage {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: auto;
+  object-fit: contain;
+  z-index: 3;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* 오른쪽 카드 이미지 (CD) */
+.rightcardImage {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: auto;
+  object-fit: contain;
+  z-index: 3;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
 @media (max-width: 768px) {
   .cardsWrapper {
-    gap: 1rem; /* 작은 화면에서 간격 조절 */
+    gap: 1rem;
     margin-top: 1rem;
   }
   .card,
   .cardCenter {
-    width: 200px; /* 작은 화면에서 카드 너비 축소 */
+    width: 200px;
+  }
+  .cardImage {
+    top: -30px;
+    width: 100px;
   }
   .envelopeWrapper {
     width: 300px;
