@@ -28,9 +28,7 @@ export default function SelectCarousel({
   const containerRef = useRef(null); // 컨테이너를 참조하기 위한 ref
   // 선택된 moaBox 페이지로 이동 함수
   const handleRoute = () => {
-    if (nowSelected != null && friendId) {
-      router.push(`/2025/moa/friendmoa/${nowSelected}`);
-    } else if (nowSelected != null && !friendId) {
+    if (nowSelected != null && nowSelected !== undefined) {
       router.push(`/2025/moa/mymoa/${nowSelected}`);
     }
   };

@@ -4,7 +4,7 @@ import styles from "@/styles/friendlist.module.css";
 interface FriendInfo {
   id: string;
   nickname: string;
-  profileImage: string;
+  profileImage?: string;
   moaBoxOngoing: boolean;
 }
 
@@ -15,7 +15,9 @@ export default function FriendInfo(props: FriendInfo) {
       <Link href={`/2025/moa/select-moa/${id}`} className={styles.friendItem}>
         <div
           className={styles.profileImage}
-          style={{ backgroundImage: `url(${profileImage})` }}
+          style={
+            profileImage ? { backgroundImage: `url(${profileImage})` } : {}
+          }
         />
         <div>
           <div className={styles.infoWrapper}>

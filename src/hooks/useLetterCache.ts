@@ -14,7 +14,10 @@ export default function useLetterCache() {
     //캐싱된 적 없다면(처음 요청이라면)
     const response = await fetch(`/api/letter/${letterId}`);
     if (!response.ok) {
-      throw new Error("편지 데이터 가져오는 중 오류 발생");
+      throw {
+        message: "편지 데이터 가져오는 중 오류 발생",
+        status: response.status,
+      };
     }
     const data = await response.json();
     //캐싱하기

@@ -11,7 +11,7 @@ interface Friend {
   id: string;
   name: string;
   nickname: string;
-  profileImage: string;
+  profileImage?: string;
   moaBoxOngoing: boolean;
 }
 
