@@ -55,7 +55,7 @@ export default function SelectCarousel({
           Swal.fire({ icon: "success", text: "성공적으로 삭제되었습니다!" });
           router.refresh();
         } else {
-          Swal.fire({ icon: "error", text: data.error });
+          Swal.fire({ icon: "error", text: "삭제 중 오류가 발생했습니다." });
         }
       } catch (error) {
         console.error("모아 박스 삭제 중 문제 발생!", error);

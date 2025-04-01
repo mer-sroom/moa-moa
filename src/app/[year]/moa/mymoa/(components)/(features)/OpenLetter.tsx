@@ -36,7 +36,7 @@ export default function OpenLetter({ children, letter }: Props) {
       const combinedLetter: Letter = { ...letter, ...letterDetail };
       openLetterModal(combinedLetter);
     } catch (error) {
-      if (error.status === 401) {
+      if (error.status === 403 || error.status === 401) {
         Swal.fire({
           toast: true,
           text: "🧸 이 편지는 주인만 볼 수 있어요!",

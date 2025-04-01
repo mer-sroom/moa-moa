@@ -13,7 +13,6 @@ export default function NotificationPage() {
     moaNotifications: [],
   });
   const [loading, setLoading] = useState(true);
-  console.log(session);
   useEffect(() => {
     async function fetchNotifications() {
       if (session?.user?.id) {
