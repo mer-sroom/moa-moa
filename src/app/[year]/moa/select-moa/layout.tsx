@@ -8,7 +8,7 @@ export default function Layout({ children }) {
       <div className={styles.layoutContainer}>
         <div className={styles.header}>
           <Image src={icon} alt="select_moa_icon" />
-          <h3 className={styles.title}>모아 선택 화면</h3>
+          <h3 className={styles.title}>모아 박스 선택 화면</h3>
         </div>
 
         <p className={styles.description}>

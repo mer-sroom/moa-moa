@@ -17,6 +17,10 @@ export default async function FriendSelectMoaPage({ params }) {
     where: {
       ownerId: friendId,
     },
+    include: {
+      backgroundDesign: true,
+      mailBoxDesign: true,
+    },
   });
 
   if (friendMoaBoxes.length === 0) {
@@ -33,11 +37,18 @@ export default async function FriendSelectMoaPage({ params }) {
         }}
       >
         <Image src={NoMoaImage} alt="no moa" width={180} />
-        <p>진행 중인 모아가 없습니다 ...</p>
+        <p>진행 중인 모아 박스스가 없습니다 ...</p>
       </div>
     );
   }
-
+  <SelectCarousel
+    friendId={friendId}
+    moaBoxes={friendMoaBoxes.map(box => ({
+      ...box,
+      backgroundDesign: box.backgroundDesign || null,
+      mailBoxDesign: box.mailBoxDesign || null,
+    }))}
+  />;
   return (
     <>
       {/* 모아 박스 캐러셀 컴포넌트 */}

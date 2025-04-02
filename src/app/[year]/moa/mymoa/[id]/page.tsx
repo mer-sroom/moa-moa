@@ -53,7 +53,6 @@ export default async function MyMoaBoxPage({ params }) {
     // 현재 로그인한 사용자가 소유자인지 확인
     isOwner = moaBox.ownerId === currentUser.id;
   }
-  console.log(session);
   //디자인 정보 불러오기
   const backgroundDesign = moaBox.backgroundDesign?.imageURL;
   const mailBoxDesign = moaBox.mailBoxDesign?.imageURL;

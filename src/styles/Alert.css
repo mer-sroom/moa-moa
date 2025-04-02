@@ -1,0 +1,6 @@
+div:where(.swal2-container).swal2-top,
+div:where(.swal2-container).swal2-center,
+div:where(.swal2-container).swal2-bottom {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  z-index: 10000 !important;
+}

@@ -36,7 +36,7 @@ const defaultModalStyle: CSSProperties = {
 };
 // 오버레이(배경) 스타일
 export const defaultOverlayStyle: CSSProperties = {
-  backgroundColor: "rgba(0, 0, 0, 0.7)",
+  backgroundColor: "rgba(0, 0, 0, 0.8)",
   position: "absolute",
   top: 0,
   right: 0,

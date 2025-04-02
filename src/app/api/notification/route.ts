@@ -12,7 +12,7 @@ export async function GET(request: Request) {
       { status: 401 }
     );
   }
-  console.log("노티 콘솔 확인:", session);
+  // console.log("노티 콘솔 확인:", session);
   try {
     // 모든 알림 최근 순으로 조회
     const notifications = await prisma.notification.findMany({

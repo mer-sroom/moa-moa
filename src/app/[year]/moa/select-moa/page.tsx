@@ -16,6 +16,10 @@ export default async function SelectMoaPage() {
     where: {
       ownerId: session.user.id,
     },
+    include: {
+      backgroundDesign: { select: { imageURL: true } },
+      mailBoxDesign: { select: { imageURL: true } },
+    },
   });
 
   return (

@@ -30,13 +30,13 @@ export default function Sidebar() {
 
   // 사이드바 메뉴들
   const sidebarItems: SidebarItem[] = [
-    { id: "1", label: "마이페이지", href: "/2025/mypage", icon: my_page },
     {
-      id: "2",
+      id: "1",
       label: "모아 선택 화면",
       href: "/2025/moa/select-moa",
       icon: select_moa,
     },
+    { id: "2", label: "마이페이지", href: "/2025/mypage", icon: my_page },
     {
       id: "3",
       label: "지난모아 보관함",
