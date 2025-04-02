@@ -39,7 +39,7 @@ export async function PATCH(request: Request) {
   // payload값에서 friendshipId와 senderId 추출
   const { friendshipId, senderId } = notification.payload as {
     friendshipId: number;
-    senderId: number;
+    senderId: string;
   };
 
   // 두 값이 모두 존재하는지 확인
@@ -59,12 +59,18 @@ export async function PATCH(request: Request) {
     //notification에서 해당 알림 삭제
     await prisma.notification.delete({ where: { id: notificationId } });
 
-    //moaNotification으로 @@님과 친구가 되었습니다 read true상태로 추가하기
+    //moaNotification으로 -님과 친구가 되었습니다 read true상태로 추가
+    //친구 닉네임 조회
+    const friendUser = await prisma.user.findUnique({
+      where: { id: senderId },
+      select: { nickname: true },
+    });
+    const friendNickname = friendUser?.nickname || "알 수 없음";
     await prisma.notification.create({
       data: {
         userId: session.user.id,
         type: "FROM_MOA",
-        message: "님과 친구가 되었습니다.",
+        message: `${friendNickname}님과 친구가 되었습니다.`,
         read: true,
       },
     });

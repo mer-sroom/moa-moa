@@ -169,5 +169,5 @@ export async function DELETE(
     console.error("모아 박스 삭제 중 문제 발생");
     return NextResponse.json({ error: error }, { status: 400 });
   }
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true }, { status: 200 });
 }

@@ -6,21 +6,16 @@ import Image from "next/image";
 import moa_cat from "../../../../../public/assets/icons/notification/notification_moa_cat.svg";
 import accept_btn from "../../../../../public/assets/icons/notification/notification_yes_btn.svg";
 import reject_btn from "../../../../../public/assets/icons/notification/notification_no_btn.svg";
-import styles from "../../../../styles/notification.module.css";
+import styles from "@/styles/notification.module.css";
 import defaultImg from "@/../../public/assets/default_img.png";
-import { BaseNotification, MyNotification } from "@/types/notification";
+import {
+  BaseNotification,
+  MyNotification,
+  Notifications,
+} from "@/types/notification";
 import Swal from "sweetalert2"; //임시시
 
-interface NotificationContentProps {
-  notifications: {
-    myNotifications: MyNotification[];
-    moaNotifications: BaseNotification[];
-  };
-}
-
-export default function NotificationContent({
-  notifications,
-}: NotificationContentProps) {
+export default function NotificationContent({ notifications }: Notifications) {
   const router = useRouter();
   //알림 종류에 따라 분류
   //내 소식
@@ -121,6 +116,8 @@ export default function NotificationContent({
 
         if (data.success) {
           Swal.fire({ icon: "info", text: "친구 요청이 거절되었습니다" });
+          router.refresh();
+          return;
         } else {
           Swal.fire({
             icon: "warning",
@@ -201,7 +198,7 @@ export default function NotificationContent({
                 {/* 모아 소식 알림 이미지 */}
                 <Image src={moa_cat} alt="moa-cat" />
                 {/* 알림 메시지 */}
-                <p className={styles.message}>{notification.message}</p>
+                {<p className={styles.message}>{notification.message}</p>}
               </div>
             ))
           )}

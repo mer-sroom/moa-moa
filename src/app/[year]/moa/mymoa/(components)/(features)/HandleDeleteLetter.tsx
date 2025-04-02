@@ -1,5 +1,4 @@
 "use client";
-
 import React, { PropsWithChildren, ReactElement } from "react";
 import { AlertProvider } from "@/app/[year]/(components)/common/Alert";
 
@@ -22,15 +21,6 @@ export default function HandleDeleteLetter({ children, letterId }: Props) {
                 const res = await fetch(`/api/letter/${letterId}`, {
                   method: "DELETE",
                 });
-                // if (res.ok) {
-                //   showAlert("편지가 삭제되었습니다.", "성공");
-                //   location.reload();
-                // } else {
-                //   showAlert(
-                //     "편지 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.",
-                //     "오류"
-                //   );
-                // }
               } catch (error) {
                 console.error("편지 삭제 중 문제 발생", error);
                 showAlert("삭제 중 오류가 발생했습니다.", "오류");
