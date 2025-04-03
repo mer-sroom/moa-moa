@@ -1,6 +1,16 @@
+/* z-index값 */
 div:where(.swal2-container).swal2-top,
 div:where(.swal2-container).swal2-center,
 div:where(.swal2-container).swal2-bottom {
   grid-template-columns: auto minmax(0, 1fr) auto;
   z-index: 10000 !important;
+}
+
+/*title 폰트 사이즈*/
+div:where(.swal2-container) h2:where(.swal2-title) {
+  font-size: 1.2rem !important;
+}
+/* text 폰트 사이즈 */
+div:where(.swal2-container) div:where(.swal2-html-container) {
+  font-size: 1em !important;
 }
