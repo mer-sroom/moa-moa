@@ -10,7 +10,7 @@ import "@/styles/Alert.css";
 export interface AlertContextValue {
   showAlert: (
     message: string,
-    type?: "성공" | "정보" | "경고" | "오류"
+    type?: "성공" | "정보" | "경고" | "질문" | "오류"
   ) => void;
   showConfirmModal: (options: {
     message: string;
@@ -35,12 +35,13 @@ export const AlertProvider = ({
     성공: "success",
     정보: "info",
     경고: "warning",
+    질문: "question",
     오류: "error",
   } as const;
 
   const showAlert = (
     message: string,
-    type: "성공" | "정보" | "경고" | "오류" = "정보"
+    type: "성공" | "정보" | "경고" | "질문" | "오류" = "정보"
   ) => {
     Swal.fire({
       title: type,
@@ -70,9 +71,9 @@ export const AlertProvider = ({
     }).then(result => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: "완료되었습니다!",
-          text: options.message,
+          title: "성공적으로 완료되었습니다!",
           icon: typeToIconMap["성공"],
+          confirmButtonColor: "var(--color-black)",
         });
         if (options.onConfirm) options.onConfirm();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -80,6 +81,7 @@ export const AlertProvider = ({
           title: "취소",
           text: "요청하신 작업이 취소되었습니다.",
           icon: typeToIconMap["정보"],
+          confirmButtonColor: "var(--color-black)",
         });
         if (options.onCancel) options.onCancel();
       }

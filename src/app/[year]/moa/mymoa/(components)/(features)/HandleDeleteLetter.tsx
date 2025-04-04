@@ -1,6 +1,8 @@
 "use client";
 import React, { PropsWithChildren, ReactElement } from "react";
 import { useAlertContext } from "@/contexts/AlertContext";
+import { useRouter } from "next/navigation";
+import { useLetterModalContext } from "@/contexts/LetterModalContext";
 
 interface Props extends PropsWithChildren {
   children: ReactElement;
@@ -9,6 +11,8 @@ interface Props extends PropsWithChildren {
 
 export default function HandleDeleteLetter({ children, letterId }: Props) {
   const { showAlert, showConfirmModal } = useAlertContext();
+  const { closeLetterModal } = useLetterModalContext();
+  const router = useRouter();
 
   const clickHandler = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -21,6 +25,8 @@ export default function HandleDeleteLetter({ children, letterId }: Props) {
           const res = await fetch(`/api/letter/${letterId}`, {
             method: "DELETE",
           });
+          router.refresh();
+          closeLetterModal(); //편지 모달 닫기
         } catch (error) {
           console.error("편지 삭제 중 문제 발생", error);
           showAlert("삭제 중 오류가 발생했습니다.", "오류");
