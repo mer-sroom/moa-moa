@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useNavigationContext } from "@/contexts/NavigationContext";
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
+import { useAlertContext } from "@/contexts/AlertContext";
 //아이콘------------------------------------------------------------------------------
 import my_page from "../../../../../public/assets/icons/nav_sidebar/mypage_icon.svg";
 import select_moa from "../../../../../public/assets/icons/nav_sidebar/moa_select_icon.svg";
@@ -27,6 +28,7 @@ export default function Sidebar() {
   //전역에서 불러오기
   const { isOpen, setIsOpen, userName, isLoggedIn, userEmail } =
     useNavigationContext();
+  const { showConfirmModal, showAlert } = useAlertContext();
 
   // 사이드바 메뉴들
   const sidebarItems: SidebarItem[] = [
@@ -119,8 +121,15 @@ export default function Sidebar() {
                       className={styles.sidebar_item}
                       onClick={e => {
                         e.preventDefault();
-                        // 원하는 동작 (예: signIn 호출)
-                        signIn(undefined, { callbackUrl: "/auth/login" });
+                        showConfirmModal({
+                          icon: "정보",
+                          message: "로그인 페이지로 이동하시겠습니까?",
+                          confirmMessage: "로그인 후 이용 가능합니다",
+                          skipFollowUpAlert: true,
+                          onConfirm: () => {
+                            signIn(undefined, { callbackUrl: "/auth/login" });
+                          },
+                        });
                         setIsOpen(false);
                       }}
                     >

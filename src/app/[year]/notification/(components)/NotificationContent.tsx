@@ -55,7 +55,8 @@ export default function NotificationContent({ notifications }: Notifications) {
     e.preventDefault();
     showConfirmModal({
       message: "친구 요청을 수락하시겠습니까?",
-      icon: "질문", // 확인 모달에 사용할 icon (AlertContext에서 지정한 타입 중 하나)
+      icon: "질문",
+      skipFollowUpAlert: true,
       onConfirm: async () => {
         try {
           const res = await fetch("/api/notification/friend-request", {
@@ -86,6 +87,7 @@ export default function NotificationContent({ notifications }: Notifications) {
     showConfirmModal({
       message: "친구 요청을 거절하시겠습니까? 해당 작업은 되돌릴 수 없습니다.",
       icon: "경고",
+      skipFollowUpAlert: true,
       onConfirm: async () => {
         try {
           const res = await fetch("/api/notification/friend-request", {

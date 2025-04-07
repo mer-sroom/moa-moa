@@ -1,5 +1,7 @@
 "use client";
 import { useNavigationContext } from "@/contexts/NavigationContext";
+import { useAlertContext } from "@/contexts/AlertContext";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../../../public/assets/icons/nav_sidebar/nav_logo.svg";
@@ -8,6 +10,7 @@ import styles from "../../../../styles/navbar.module.css";
 
 export default function Navbar() {
   const { isLoggedIn, isOpen, setIsOpen } = useNavigationContext();
+  const { showConfirmModal } = useAlertContext();
   return (
     <>
       <nav className={styles.navbar}>
@@ -33,7 +36,17 @@ export default function Navbar() {
             </Link>
           ) : (
             <div
-              onClick={() => alert("로그인 후 사용 가능합니다?")}
+              onClick={() => {
+                showConfirmModal({
+                  icon: "정보",
+                  message: "로그인 페이지로 이동하시겠습니까?",
+                  confirmMessage: "로그인 후 이용 가능합니다",
+                  skipFollowUpAlert: true,
+                  onConfirm: () => {
+                    signIn(undefined, { callbackUrl: "/auth/login" });
+                  },
+                });
+              }}
               className={styles.notification_icon}
             >
               <Image

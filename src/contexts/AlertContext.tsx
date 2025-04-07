@@ -14,8 +14,9 @@ export interface AlertContextValue {
   ) => void;
   showConfirmModal: (options: {
     message: string;
-    icon: string;
+    icon: "성공" | "정보" | "경고" | "질문" | "오류";
     confirmMessage?: string;
+    skipFollowUpAlert?: boolean; //showConfirmModal 후속 알림 표시할 지
     onConfirm?: () => void;
     onCancel?: () => void;
   }) => void;
@@ -39,16 +40,30 @@ export const AlertProvider = ({
     오류: "error",
   } as const;
 
+  //후속 알림 모듈화
+  const showFollowUpAlert = (title: string, skip?: boolean, text?: string) => {
+    if (!skip) {
+      Swal.fire({
+        title: title,
+        text: text,
+        icon: title === "취소" ? typeToIconMap["정보"] : typeToIconMap["성공"],
+        confirmButtonColor: "var(--color-black)",
+      });
+    }
+  };
+
   const showAlert = (
     message: string,
     type: "성공" | "정보" | "경고" | "질문" | "오류" = "정보"
   ) => {
     Swal.fire({
       title: type,
-      html: message,
+      text: message,
       icon: typeToIconMap[type],
       backdrop: "rgba(0,0,0,0.3)",
       showConfirmButton: true,
+      confirmButtonColor: "var(--color-black)",
+      confirmButtonText: "확인",
     });
   };
 
@@ -58,6 +73,7 @@ export const AlertProvider = ({
     confirmMessage?: string;
     onConfirm?: () => void;
     onCancel?: () => void;
+    skipFollowUpAlert?: boolean; //showConfirmModal 후속 알림 표시할 지
   }) => {
     Swal.fire({
       title: options.confirmMessage || "진행하시겠습니까?",
@@ -70,19 +86,17 @@ export const AlertProvider = ({
       cancelButtonText: "취소",
     }).then(result => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "성공적으로 완료되었습니다!",
-          icon: typeToIconMap["성공"],
-          confirmButtonColor: "var(--color-black)",
-        });
+        showFollowUpAlert(
+          "성공적으로 완료되었습니다!",
+          options.skipFollowUpAlert
+        );
         if (options.onConfirm) options.onConfirm();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire({
-          title: "취소",
-          text: "요청하신 작업이 취소되었습니다.",
-          icon: typeToIconMap["정보"],
-          confirmButtonColor: "var(--color-black)",
-        });
+        showFollowUpAlert(
+          "취소",
+          options.skipFollowUpAlert,
+          "요청하신 작업이 취소되었습니다."
+        );
         if (options.onCancel) options.onCancel();
       }
     });

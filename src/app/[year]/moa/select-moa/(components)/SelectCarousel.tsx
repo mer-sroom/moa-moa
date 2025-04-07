@@ -41,7 +41,7 @@ export default function SelectCarousel({
       confirmMessage: "편지를 삭제하시겠습니까?",
       onConfirm: async () => {
         try {
-          const res = await fetch(`/api/moa/${moaBoxId}`, {
+          await fetch(`/api/moa/${moaBoxId}`, {
             method: "DELETE",
           });
           router.refresh();
