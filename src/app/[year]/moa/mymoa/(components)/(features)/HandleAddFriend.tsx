@@ -58,7 +58,7 @@ export default function HandleAddFriend(props: Props) {
     if (!nickname) return; //닉네임이 없다면
     showConfirmModal({
       icon: "질문",
-      message: `${nickname}님께 친구 요청을 보내시겠습니까?`,
+      confirmMessage: `${nickname}님께 친구 요청을 보내시겠습니까?`,
       skipFollowUpAlert: true,
       onConfirm: async () => {
         setLoading(true);

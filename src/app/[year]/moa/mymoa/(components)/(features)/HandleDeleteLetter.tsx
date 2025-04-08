@@ -22,7 +22,7 @@ export default function HandleDeleteLetter({ children, letterId }: Props) {
       confirmMessage: "편지를 삭제하시겠습니까?",
       onConfirm: async () => {
         try {
-          const res = await fetch(`/api/letter/${letterId}`, {
+          await fetch(`/api/letter/${letterId}`, {
             method: "DELETE",
           });
           router.refresh();

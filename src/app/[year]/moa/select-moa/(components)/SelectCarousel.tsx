@@ -1,5 +1,4 @@
 "use client";
-
 //Swiper 라이브러리 import
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";

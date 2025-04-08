@@ -13,7 +13,7 @@ export interface AlertContextValue {
     type?: "성공" | "정보" | "경고" | "질문" | "오류"
   ) => void;
   showConfirmModal: (options: {
-    message: string;
+    message?: string;
     icon: "성공" | "정보" | "경고" | "질문" | "오류";
     confirmMessage?: string;
     skipFollowUpAlert?: boolean; //showConfirmModal 후속 알림 표시할 지
@@ -47,7 +47,17 @@ export const AlertProvider = ({
         title: title,
         text: text,
         icon: title === "취소" ? typeToIconMap["정보"] : typeToIconMap["성공"],
-        confirmButtonColor: "var(--color-black)",
+        confirmButtonText: "확인",
+        backdrop: "rgba(0,0,0,0.3)",
+        buttonsStyling: false, //버튼 기본 스타일 제거
+        customClass: {
+          popup: "swal-popup",
+          icon: "swal-icon",
+          title: "swal-title",
+          htmlContainer: "swal-text",
+          confirmButton: "custom-button confirm",
+          actions: "swal-actions-one",
+        },
       });
     }
   };
@@ -62,28 +72,47 @@ export const AlertProvider = ({
       icon: typeToIconMap[type],
       backdrop: "rgba(0,0,0,0.3)",
       showConfirmButton: true,
-      confirmButtonColor: "var(--color-black)",
       confirmButtonText: "확인",
+      buttonsStyling: false, // 기본 스타일 제거
+      customClass: {
+        popup: "swal-popup",
+        icon: "swal-icon",
+        title: "swal-title",
+        htmlContainer: "swal-text",
+        confirmButton: "custom-button confirm",
+        actions: "swal-actions-one",
+      },
     });
   };
 
   const showConfirmModal = (options: {
-    message: string;
+    message?: string;
     icon: string;
     confirmMessage?: string;
     onConfirm?: () => void;
     onCancel?: () => void;
-    skipFollowUpAlert?: boolean; //showConfirmModal 후속 알림 표시할 지
+    skipFollowUpAlert?: boolean;
   }) => {
     Swal.fire({
-      title: options.confirmMessage || "진행하시겠습니까?",
+      title: options.confirmMessage,
       text: options.message,
       icon: typeToIconMap[options.icon],
       showCancelButton: true,
-      confirmButtonColor: "var(--color-black)",
-      cancelButtonColor: "#aeaeae",
+      // confirmButtonColor: "var(--color-gray-500)",
+      cancelButtonColor: "transparent",
+      backdrop: "rgba(0,0,0,0.3)",
       confirmButtonText: "확인",
       cancelButtonText: "취소",
+      reverseButtons: true,
+      customClass: {
+        popup: "swal-popup",
+        icon: "swal-icon",
+        title: "swal-title",
+        htmlContainer: "swal-text",
+        actions: "swal-actions",
+        confirmButton: "custom-button confirm",
+        cancelButton: "custom-button cancel",
+      },
     }).then(result => {
       if (result.isConfirmed) {
         showFollowUpAlert(
@@ -101,6 +130,7 @@ export const AlertProvider = ({
       }
     });
   };
+
   const value: AlertContextValue = { showAlert, showConfirmModal };
   return (
     <AlertContext.Provider value={value}>{children}</AlertContext.Provider>

@@ -54,7 +54,7 @@ export default function NotificationContent({ notifications }: Notifications) {
   const handleAccept = async (e: React.MouseEvent, notificationId: number) => {
     e.preventDefault();
     showConfirmModal({
-      message: "친구 요청을 수락하시겠습니까?",
+      confirmMessage: "친구 요청을 수락하시겠습니까?",
       icon: "질문",
       skipFollowUpAlert: true,
       onConfirm: async () => {
@@ -85,7 +85,8 @@ export default function NotificationContent({ notifications }: Notifications) {
   const handleReject = async (e: React.MouseEvent, notificationId: number) => {
     e.preventDefault();
     showConfirmModal({
-      message: "친구 요청을 거절하시겠습니까? 해당 작업은 되돌릴 수 없습니다.",
+      confirmMessage: "친구 요청을 거절하시겠습니까?",
+      message: "삭제된 요청은 복구할 수 없습니다.",
       icon: "경고",
       skipFollowUpAlert: true,
       onConfirm: async () => {
