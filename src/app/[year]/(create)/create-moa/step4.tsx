@@ -5,6 +5,8 @@ import Calendar from "../(components)/Calendar";
 import dayjs from 'dayjs';
 import Button from "../../(components)/common/Button";
 import { FaCheck } from "react-icons/fa";
+import styles from "@/styles/createMoa.module.css";
+
 
 export default function CreateMoaStep4() {
   const today = dayjs(new Date()).format("YYYY-MM-DD");
@@ -45,39 +47,50 @@ export default function CreateMoaStep4() {
       <h1>나의 모아 설정하기</h1>
       <div>
         <form onSubmit={submitHandler}>
-          <label htmlFor="moa_name">모아 이름짓기</label>
-          <input type="text" id="moa_name" placeholder="이름을 설정해 주세요" />
-          <label htmlFor="d_day">디데이 설정</label>
-          <div id="d_day">
-            <div id="start">
+          <label htmlFor="moa_name"
+            className={styles.line_sort_block}>모아 이름짓기</label>
+          <input type="text"
+            id="moa_name"
+            placeholder="이름을 설정해 주세요"
+            className={styles.group_member_input} />
+
+          <div className={styles.line_sort_block}>
+            <label htmlFor="d_day" >디데이 설정</label>
+            <p className={styles.line_sort_inline}>(마감 시간은 00:00 으로 자동 조정돼요)</p>
+          </div>
+          <div id="d_day" className={styles.d_day_group}>
+
+            <div id="start" className={styles.d_day_start}>
               <input type="text" id="start_day" value={startDay} hidden readOnly />
               <Calendar labelName="시작 날짜" onDateChange={onStartDayHandler}></Calendar>
             </div>
-            <div id="end">
+
+            <div id="end" className={styles.d_day_end}>
               <input type="text" id="end_day" value={endDay} hidden readOnly />
               <Calendar labelName="마감 날짜" onDateChange={onEndDayHandler}></Calendar>
             </div>
           </div>
 
-          <label htmlFor="group">모아 그룹설정
-            <input type="hidden" id="group" value={`${isOpen}`} />
-            <Button
-              label={isOpen ?
-                <FaCheck color="white" /> :
-                <FaCheck color="rgb(222, 222, 222)" />}
-              size="checkbox"
-              color={isOpen ? "checkboxTrue" : "checkboxFalse"}
-              onClick={groupHandler}>
-            </Button>
-          </label>
+          <label htmlFor="group" className={styles.line_sort_block}>모아 그룹설정</label>
+          <input type="hidden" id="group" value={`${isOpen}`} />
+          <Button
+            label={isOpen ?
+              <FaCheck color="white" /> :
+              <FaCheck color="rgb(222, 222, 222)" />}
+            size="checkbox"
+            color={isOpen ? "checkboxTrue" : "checkboxFalse"}
+            onClick={groupHandler}>
+          </Button>
+
           <label htmlFor="group_member">
             <input id="group_member"
               disabled={!isOpen}
               placeholder="함께 할 친구를 설정해 주세요"
+              className={styles.group_member_input}
             />
-            <Button label="함께 할 친구를 설정해 주세요" size="medium" color="false"></Button>
           </label>
-          <button type="submit" >다음으로</button>
+          <button type="submit" className={styles.next_button}
+          >다음으로</button>
         </form>
       </div>
     </>

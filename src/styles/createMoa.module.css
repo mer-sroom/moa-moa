@@ -1,0 +1,32 @@
+.group_member_input {
+    width: 55%;
+    padding: 10px;
+    border: 1px solid var(--color-gray-300);
+    border-radius: 10px;
+    font-size: 16px;
+  }
+
+  .d_day_group{
+    display: inline-block;
+  }
+
+  .d_day_start{
+    display: inline-block;
+  }
+
+  .d_day_end{
+    display: inline-block;
+  }
+
+  .line_sort_block{
+    display: block;
+  }
+
+  .line_sort_inline{
+    display: inline;
+  }
+
+  .next_button{
+    position: fixed;
+     bottom: 50px;
+  }

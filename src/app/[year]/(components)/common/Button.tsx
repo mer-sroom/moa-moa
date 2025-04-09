@@ -97,21 +97,21 @@ export const buttonColor = {
   color: white;
   font-size: 16px;
   padding-top :4px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-gray-300);
   border-radius: 10px;
   box-shadow: none;
 
 `,
   false: css`
 background-color: white;
-color: #9e9e9e;
+color: var(--color-gray-500);
 font-size: 16px;
 padding-top :4.5px;
-border: 1px solid #e0e0e0;
+border: 1px solid var(--color-gray-300);
 border-radius: 10px;
       &:active {
-      background-color: #9e9e9e;
-      border: 1px solid #9e9e9e;
+      background-color: var(--color-gray-500);
+      border: 1px solid var(--color-gray-500);
     }
 `,
 };
