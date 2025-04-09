@@ -13,10 +13,11 @@ import {
   MyNotification,
   Notifications,
 } from "@/types/notification";
-import Swal from "sweetalert2"; //임시시
+import { useAlertContext } from "@/contexts/AlertContext";
 
 export default function NotificationContent({ notifications }: Notifications) {
   const router = useRouter();
+  const { showAlert, showConfirmModal } = useAlertContext();
   //알림 종류에 따라 분류
   //내 소식
   const myNotifications: MyNotification[] = notifications.myNotifications;
@@ -52,86 +53,65 @@ export default function NotificationContent({ notifications }: Notifications) {
   // 내 소식: 친구 요청 수락
   const handleAccept = async (e: React.MouseEvent, notificationId: number) => {
     e.preventDefault();
-    const result = await Swal.fire({
-      icon: "question",
-      text: "친구 요청을 수락하시겠습니까?",
-      showCancelButton: true,
-      confirmButtonColor: "#ff8473",
-      cancelButtonColor: "#aeaeae",
-      confirmButtonText: "확인",
-      cancelButtonText: "취소",
-    });
-
-    if (!result.isConfirmed) return;
-    if (result.isConfirmed) {
-      try {
-        const res = await fetch("/api/notification/friend-request", {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ notificationId }),
-        });
-        const data = await res.json();
-        if (data.success) {
-          await Swal.fire({
-            icon: "success",
-            text: "친구 요청이 수락되었습니다",
+    showConfirmModal({
+      confirmMessage: "친구 요청을 수락하시겠습니까?",
+      icon: "질문",
+      skipFollowUpAlert: true,
+      onConfirm: async () => {
+        try {
+          const res = await fetch("/api/notification/friend-request", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ notificationId }),
           });
-        } else {
-          Swal.fire({
-            icon: "error",
-            text: "수락 중 문제가 발생했습니다",
-          });
+          const data = await res.json();
+          if (data.success) {
+            showAlert("친구 요청이 수락되었습니다", "성공");
+            router.refresh();
+          } else {
+            showAlert("수락 중 문제가 발생했습니다", "오류");
+          }
+        } catch (error) {
+          console.error("친구 요청 수락 중 문제 발생", error);
         }
-      } catch (error) {
-        console.error("친구 요청 수락 중 문제 발생", error);
-        Swal.fire({
-          icon: "error",
-          text: "수락 중 문제가 발생했습니다.",
-        });
-      }
-    }
+      },
+      onCancel: () => {
+        showAlert("수락이 취소되었습니다", "정보");
+      },
+    });
   };
 
   // 내 소식 : 친구 요청 거절
   const handleReject = async (e: React.MouseEvent, notificationId: number) => {
     e.preventDefault();
-    const result = await Swal.fire({
-      icon: "warning",
-      text: "친구 요청을 거절하시겠습니까? 해당 작업은 되돌릴 수 없습니다.",
-      showCancelButton: true,
-      confirmButtonColor: "#ff8473",
-      cancelButtonColor: "#aeaeae",
-      confirmButtonText: "확인",
-      cancelButtonText: "취소",
-    });
-    if (!result.isConfirmed) return;
-    if (result.isConfirmed) {
-      try {
-        const res = await fetch(`/api/notification/friend-request`, {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ notificationId }),
-        });
-        const data = await res.json();
-
-        if (data.success) {
-          Swal.fire({ icon: "info", text: "친구 요청이 거절되었습니다" });
-          router.refresh();
-          return;
-        } else {
-          Swal.fire({
-            icon: "warning",
-            text: "요청 거절 중 문제가 발생했습니다",
+    showConfirmModal({
+      confirmMessage: "친구 요청을 거절하시겠습니까?",
+      message: "삭제된 요청은 복구할 수 없습니다.",
+      icon: "경고",
+      skipFollowUpAlert: true,
+      onConfirm: async () => {
+        try {
+          const res = await fetch("/api/notification/friend-request", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ notificationId }),
           });
+          const data = await res.json();
+          if (data.success) {
+            showAlert("친구 요청이 거절되었습니다", "정보");
+            router.refresh();
+          } else {
+            showAlert("요청 거절 중 문제가 발생했습니다", "경고");
+          }
+        } catch (error) {
+          console.error("친구 요청 거절 중 문제 발생", error);
+          showAlert("요청 거절 중 문제가 발생했습니다", "경고");
         }
-      } catch (error) {
-        console.error("친구 요청 거절 중 문제 발생", error);
-        Swal.fire({
-          icon: "warning",
-          text: "요청 거절 중 문제가 발생했습니다",
-        });
-      }
-    }
+      },
+      onCancel: () => {
+        showAlert("요청이 취소되었습니다.", "정보");
+      },
+    });
   };
 
   return (

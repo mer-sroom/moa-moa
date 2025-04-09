@@ -1,6 +1,73 @@
-div:where(.swal2-container).swal2-top,
-div:where(.swal2-container).swal2-center,
-div:where(.swal2-container).swal2-bottom {
-  grid-template-columns: auto minmax(0, 1fr) auto;
+/* 컨테이너 레벨 z-index (선택사항) */
+.swal2-container {
   z-index: 10000 !important;
+}
+
+/* 모달창 스타일 */
+.swal-popup {
+  border-radius: 20px !important;
+  width: 29em !important;
+}
+
+/* 아이콘 */
+.swal-icon {
+  font-size: 15px !important;
+  margin: 2.5em auto 0.8em !important;
+}
+
+/* 타이틀 */
+.swal-title {
+  font-size: 1.1rem !important;
+  padding: 1.2em 0 0.2em !important;
+}
+
+/* 본문 텍스트 */
+.swal-text {
+  font-size: 14px !important;
+  padding: 0.5em 1.6em 0.3em !important;
+}
+
+/* 액션 버튼 wrapper */
+.swal-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 50% !important;
+  padding: 0 0 0.2em;
+  gap: 1rem;
+}
+
+/*액션 버튼이 1개일때*/
+.swal-actions-one {
+  display: flex;
+  width: 30% !important;
+  padding: 0 0 0.2em;
+}
+
+/* 버튼 공통 스타일 */
+.custom-button {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  border-radius: 24px;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+/* 버튼별 색상 */
+/*확인 버튼*/
+.custom-button.confirm {
+  background-color: var(--color-black);
+  color: white;
+}
+.custom-button.confirm:hover {
+  background-color: var(--color-gray-700) !important;
+}
+
+/*취소 버튼*/
+.custom-button.cancel {
+  color: #2d3748;
+}
+.custom-button.cancel:hover {
+  background-color: var(--color-gray-200) !important;
+  color: white;
 }

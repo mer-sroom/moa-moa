@@ -5,7 +5,7 @@ import Modal from "../../(components)/common/Modal";
 import FriendInfo from "./FriendInfo";
 import friendListIcon from "@/../public/assets/icons/nav_sidebar/friend_list_icon.svg";
 import NoFriendImg from "@/../public/assets/broke_cat.svg";
-import styles from "@/styles/notification.module.css";
+import styles from "@/styles/friendlist.module.css";
 
 interface Friend {
   id: string;

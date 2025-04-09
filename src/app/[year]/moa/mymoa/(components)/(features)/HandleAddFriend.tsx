@@ -2,7 +2,7 @@
 "use client";
 import { PropsWithChildren, useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import Swal from "sweetalert2";
+import { useAlertContext } from "@/contexts/AlertContext";
 
 interface Props extends PropsWithChildren {
   targetId: string;
@@ -21,6 +21,7 @@ export default function HandleAddFriend(props: Props) {
   const [nickname, setNickname] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { showConfirmModal, showAlert } = useAlertContext();
 
   //닉네임불러오기
   useEffect(() => {
@@ -39,63 +40,86 @@ export default function HandleAddFriend(props: Props) {
     fetchNickname();
   }, [targetId]);
 
-  const clickHandler = useCallback(async () => {
+  const clickHandler = useCallback(() => {
     // 친구 요청한 사람이 로그인 되어있지 않다면
     if (!isAuthenticated) {
-      await Swal.fire({
-        icon: "warning",
-        text: "로그인이 필요합니다. 로그인 페이지로 이동합니다.",
+      showConfirmModal({
+        icon: "정보",
+        confirmMessage: "로그인이 필요합니다",
+        message: "로그인 페이지로 이동하시겠습니까?",
+        skipFollowUpAlert: true,
+        onConfirm: () => {
+          router.push("/auth/login");
+        },
       });
-      router.push("/auth/login");
       return;
     }
     if (loading) return; // 중복 요청 방지
     if (!nickname) return; //닉네임이 없다면
-    const result = await Swal.fire({
-      text: `${nickname}님께 친구 요청을 보내시겠습니까?`,
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#ff8473",
-      cancelButtonColor: "#aeaeae",
-      confirmButtonText: "확인",
-      cancelButtonText: "취소",
+    showConfirmModal({
+      icon: "질문",
+      confirmMessage: `${nickname}님께 친구 요청을 보내시겠습니까?`,
+      skipFollowUpAlert: true,
+      onConfirm: async () => {
+        setLoading(true);
+        try {
+          //친구 요청 전송
+          const response = await fetch(`/2025/moa/mymoa/${moaBoxId}/api`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              targetUserId: targetId,
+            }),
+          });
+          const data = await response.json();
+          if (data.success) {
+            showAlert("친구 요청이 전송되었습니다!", "성공");
+            router.refresh(); //페이지 새로고침
+          } else {
+            console.log(data.code);
+            showAlert(
+              errorMessages[data.code] || errorMessages.DEFAULT,
+              "경고"
+            );
+          }
+        } catch (error) {
+          console.error("친구 요청 중 에러 발생!", error);
+        } finally {
+          setLoading(false);
+        }
+      },
     });
 
-    if (result.isConfirmed) {
-      setLoading(true);
-      try {
-        //친구 요청 전송
-        const response = await fetch(`/2025/moa/mymoa/${moaBoxId}/api`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            targetUserId: targetId,
-          }),
-        });
+    //   try {
+    //     //친구 요청 전송
+    //     const response = await fetch(`/2025/moa/mymoa/${moaBoxId}/api`, {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({
+    //         targetUserId: targetId,
+    //       }),
+    //     });
 
-        const data = await response.json();
-        if (data.success) {
-          Swal.fire({
-            icon: "success",
-            text: "친구 요청이 전송되었습니다!",
-          });
-        } else {
-          console.log(data.code);
-          Swal.fire({
-            icon: "warning",
-            text: errorMessages[data.code], //errir nessages에서 에러문구 출력
-          });
-        }
-      } catch (error) {
-        console.error("친구 요청 중 에러 발생!", error);
-        Swal.fire({
-          icon: "warning",
-          text: errorMessages.DEFAULT,
-        });
-      } finally {
-        setLoading(false);
-      }
-    }
+    //     const data = await response.json();
+    //     if (data.success) {
+    //       Swal.fire({
+    //         icon: "success",
+    //         text: "친구 요청이 전송되었습니다!",
+    //       });
+    //     } else {
+    //       console.log(data.code);
+    //       Swal.fire({
+    //         icon: "warning",
+    //         text: errorMessages[data.code], //errir nessages에서 에러문구 출력
+    //       });
+    //     }
+    //   } catch (error) {
+    //     console.error("친구 요청 중 에러 발생!", error);
+    //     Swal.fire({
+    //       icon: "warning",
+    //       text: errorMessages.DEFAULT,
+    //     });
+    //   }
   }, [nickname, moaBoxId, targetId, loading, isAuthenticated, router]);
 
   return <div onClick={clickHandler}>{children}</div>;

@@ -7,6 +7,7 @@ import lineIcon from "@/../../public/assets/icons/sharelink_modal/line.svg";
 import facebookIcon from "@/../../public/assets/icons/sharelink_modal/facebook.svg";
 import xIcon from "@/../../public/assets/icons/sharelink_modal/x_sns.svg";
 import Swal from "sweetalert2";
+import { useAlertContext } from "@/contexts/AlertContext";
 import styles from "@/styles/modal.module.css";
 import NotFound from "@/app/[year]/(components)/not-found";
 
@@ -47,6 +48,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function ShareLinkModal() {
   const { id } = useParams();
+  const { showAlert } = useAlertContext();
   if (!id) {
     return NotFound();
   }
@@ -89,12 +91,7 @@ export default function ShareLinkModal() {
       });
     } catch (e) {
       console.error(e);
-      Swal.fire({
-        title: "Error",
-        text: "복사 중 문제가 생겼습니다",
-        icon: "error",
-        confirmButtonText: "확인",
-      });
+      showAlert("복사 중 오류가 발생했습니다", "오류");
     }
   };
   //카카오톡 공유하기
