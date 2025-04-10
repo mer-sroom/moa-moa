@@ -52,6 +52,7 @@ export default function SpotifyWithDelay({
         allow="encrypted-media"
         onLoad={handleLoad}
         style={{
+          borderRadius: "16px",
           opacity: showEmbed ? 1 : 0,
           transition: "opacity 0.5s ease-in-out",
         }}
