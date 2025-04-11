@@ -13,7 +13,7 @@ export type MoaBox = {
   updatedAt: Date;
   backgroundDesignId: number;
   mailBoxDesignId: number;
-  backgroundDesign: {
+  backgroundDesign?: {
     imageURL: string;
   };
   mailBoxDesign: {

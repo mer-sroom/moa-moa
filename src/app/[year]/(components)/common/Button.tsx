@@ -65,8 +65,8 @@ export const buttonColor = {
   `,
   //버튼 상호작용 x일 때
   blocked: css`
-    background-color: var(--color-gray-300);
-    color: var(--color-gray-500);
+    background-color: var(--color-gray-400);
+    color: var(--color-gray-300);
     font-weight: bold;
     cursor: default;
   `,
