@@ -24,7 +24,7 @@ export default async function FriendSelectMoaPage({ params }) {
   });
 
   if (friendMoaBoxes.length === 0) {
-    //친구가 진행 중인 모아가 없을 때 화면(일단 notFound로 처리, 나중에 교체)
+    //친구가 진행 중인 모아가 없을 때 화면(나중에 교체 예정)
     return (
       <div
         style={{
@@ -37,7 +37,7 @@ export default async function FriendSelectMoaPage({ params }) {
         }}
       >
         <Image src={NoMoaImage} alt="no moa" width={180} />
-        <p>진행 중인 모아 박스스가 없습니다 ...</p>
+        <p>진행 중인 모아 박스가 없습니다 ...</p>
       </div>
     );
   }

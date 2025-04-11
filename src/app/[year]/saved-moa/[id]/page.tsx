@@ -25,10 +25,19 @@ export default async function SavedMoaPage() {
       mailBoxDesign: { select: { imageURL: true } },
     },
   });
-  //지난 모아박스가 없는 경우
+  //지난 모아박스가 없는 경우 폴백 화면(추후 수정 예정)
   if (!savedMoaBoxes.length) {
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          height: "60vh",
+          justifyContent: "center",
+          opacity: "0.5",
+        }}
+      >
         <Image
           src="/assets/broke_cat.svg"
           alt="no moa"

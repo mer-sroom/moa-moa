@@ -120,7 +120,16 @@ export default function HandleAddFriend(props: Props) {
     //       text: errorMessages.DEFAULT,
     //     });
     //   }
-  }, [nickname, moaBoxId, targetId, loading, isAuthenticated, router]);
+  }, [
+    nickname,
+    moaBoxId,
+    targetId,
+    loading,
+    isAuthenticated,
+    router,
+    showAlert,
+    showConfirmModal,
+  ]);
 
   return <div onClick={clickHandler}>{children}</div>;
 }

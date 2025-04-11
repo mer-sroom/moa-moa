@@ -6,11 +6,11 @@ import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
 import { useAlertContext } from "@/contexts/AlertContext";
 //아이콘------------------------------------------------------------------------------
-import my_page from "../../../../../public/assets/icons/nav_sidebar/mypage_icon.svg";
+import my_page from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
 import select_moa from "../../../../../public/assets/icons/nav_sidebar/moa_select_icon.svg";
 import saved_moa from "../../../../../public/assets/icons/nav_sidebar/saved_moa_icon.svg";
 import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_letter_icon.svg";
-import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
+import friend_list from "../../../../../public/assets/icons/nav_sidebar/mypage_icon.svg";
 import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
 import login_btn from "../../../../../public/assets/icons/sidebar_login_btn.svg";
 //css------------------------------------------------------------------------------
@@ -38,7 +38,12 @@ export default function Sidebar() {
       href: "/2025/moa/select-moa",
       icon: select_moa,
     },
-    { id: "2", label: "마이페이지", href: "/2025/mypage", icon: my_page },
+    {
+      id: "2",
+      label: "친구 목록",
+      href: "/2025/friendlist",
+      icon: friend_list,
+    },
     {
       id: "3",
       label: "지난모아 보관함",
@@ -52,12 +57,7 @@ export default function Sidebar() {
       href: "/2025/sent-letter",
       icon: sent_letter,
     },
-    {
-      id: "5",
-      label: "친구 목록",
-      href: "/2025/friendlist",
-      icon: friend_list,
-    },
+    { id: "5", label: "마이페이지", href: "/2025/mypage", icon: my_page },
   ];
 
   return (
