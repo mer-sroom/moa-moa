@@ -5,10 +5,9 @@ import type { Letter } from "@/types/moabox";
 import { defaultOverlayStyle } from "@/app/[year]/(components)/common/Modal";
 import Skeleton from "@/app/[year]/(components)/common/Skeleton";
 import SpotifyWithDelay from "../(ui)/SpotifyWithDelay";
-import Button from "@/app/[year]/(components)/common/Button";
+import LetterDownloadImageBtn from "../(features)/LetterDownloadImageBtn";
 //이미지, css ----------------------------------------------------------------
 import deleteBtn from "@/../../public/assets/icons/trash_can_icon.svg";
-import downloadBtn from "@/../../public/assets/icons/download_icon.svg";
 import styles from "@/styles/LetterModal.module.css";
 import HandleDeleteLetter from "../(features)/HandleDeleteLetter";
 
@@ -27,7 +26,7 @@ export default function LetterModal(props: LetterModalProps) {
     <>
       <div style={defaultOverlayStyle} onClick={onClose}></div>
       <section className={styles.modalContainer}>
-        <div>
+        <div id="captureLetterArea">
           {/* 편지 아이콘 */}
           <div
             className={styles.letterIcon}
@@ -73,18 +72,7 @@ export default function LetterModal(props: LetterModalProps) {
           </div>
         )}
         {/* 저장하기 버튼 */}
-        <Button
-          label="저장하기"
-          icon={
-            <Image
-              src={downloadBtn}
-              alt="pen icon"
-              className={styles.downloadIcon}
-            />
-          }
-          size="long"
-          color="black"
-        />
+        <LetterDownloadImageBtn />
       </section>
     </>
   );

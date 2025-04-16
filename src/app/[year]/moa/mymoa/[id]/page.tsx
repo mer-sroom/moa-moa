@@ -16,7 +16,7 @@ import shareIcon from "@/../../public/assets/icons/share_icon.svg";
 import addFriend from "@/../../public/assets/icons/add_friend.svg";
 import penIcon from "@/../../public/assets/icons/pen.svg";
 import styles from "@/styles/mymoa.module.css";
-import DownloadImageBtn from "../(components)/(features)/DownloadImageBtn";
+import DownloadImageBtn from "../(components)/(features)/MoaBoxDownloadImageBtn";
 
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
@@ -63,7 +63,7 @@ export default async function MyMoaBoxPage({ params }) {
   const isExpired = new Date(moaBox.dueDate).getTime() <= Date.now();
 
   return (
-    <div className={styles.captureArea} id="captureArea">
+    <div className={styles.captureArea} id="captureMoaBoxArea">
       {/* 마이 모아 전체 배경 img */}
       <div
         className={styles.background}
