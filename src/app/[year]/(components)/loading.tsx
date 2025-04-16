@@ -2,12 +2,18 @@
 import React from "react";
 import Image from "next/image";
 import moaCat from "@/../../public/assets/icons/cat.svg";
+import { defaultOverlayStyle } from "./common/Modal";
 
 const containerStyle: React.CSSProperties = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height: "100vh",
+  zIndex: 9999,
   //   backgroundColor: "var(--color-gray-500)", // 필요에 따라 배경색 조정
 };
 
@@ -19,15 +25,17 @@ const spinnerStyle: React.CSSProperties = {
 
 export default function Loading() {
   return (
-    <div style={containerStyle}>
-      <style>
-        {`
+    <div style={{ ...defaultOverlayStyle, zIndex: 9999 }}>
+      <div style={containerStyle}>
+        <style>
+          {`
           @keyframes spin {
             to { transform: rotate(360deg); }
           }
         `}
-      </style>
-      <Image src={moaCat} alt="moa cat image" style={spinnerStyle} />
+        </style>
+        <Image src={moaCat} alt="moa cat image" style={spinnerStyle} />
+      </div>
     </div>
   );
 }
