@@ -4,12 +4,13 @@ import { signIn } from "next-auth/react";
 import { useNavigationContext } from "@/contexts/NavigationContext";
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
+import { useAlertContext } from "@/contexts/AlertContext";
 //아이콘------------------------------------------------------------------------------
-import my_page from "../../../../../public/assets/icons/nav_sidebar/mypage_icon.svg";
+import my_page from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
 import select_moa from "../../../../../public/assets/icons/nav_sidebar/moa_select_icon.svg";
 import saved_moa from "../../../../../public/assets/icons/nav_sidebar/saved_moa_icon.svg";
 import sent_letter from "../../../../../public/assets/icons/nav_sidebar/sent_letter_icon.svg";
-import friend_list from "../../../../../public/assets/icons/nav_sidebar/friend_list_icon.svg";
+import friend_list from "../../../../../public/assets/icons/nav_sidebar/mypage_icon.svg";
 import copyright_img from "../../../../../public/assets/icons/nav_sidebar/sidebar_copyright.svg";
 import login_btn from "../../../../../public/assets/icons/sidebar_login_btn.svg";
 //css------------------------------------------------------------------------------
@@ -27,15 +28,21 @@ export default function Sidebar() {
   //전역에서 불러오기
   const { isOpen, setIsOpen, userName, isLoggedIn, userEmail } =
     useNavigationContext();
+  const { showConfirmModal, showAlert } = useAlertContext();
 
   // 사이드바 메뉴들
   const sidebarItems: SidebarItem[] = [
-    { id: "1", label: "마이페이지", href: "/2025/mypage", icon: my_page },
     {
-      id: "2",
+      id: "1",
       label: "모아 선택 화면",
       href: "/2025/moa/select-moa",
       icon: select_moa,
+    },
+    {
+      id: "2",
+      label: "친구 목록",
+      href: "/2025/friendlist",
+      icon: friend_list,
     },
     {
       id: "3",
@@ -50,12 +57,7 @@ export default function Sidebar() {
       href: "/2025/sent-letter",
       icon: sent_letter,
     },
-    {
-      id: "5",
-      label: "친구 목록",
-      href: "/2025/friendlist",
-      icon: friend_list,
-    },
+    { id: "5", label: "마이페이지", href: "/2025/mypage", icon: my_page },
   ];
 
   return (
@@ -119,8 +121,15 @@ export default function Sidebar() {
                       className={styles.sidebar_item}
                       onClick={e => {
                         e.preventDefault();
-                        // 원하는 동작 (예: signIn 호출)
-                        signIn(undefined, { callbackUrl: "/auth/login" });
+                        showConfirmModal({
+                          icon: "정보",
+                          message: "로그인 페이지로 이동하시겠습니까?",
+                          confirmMessage: "로그인 후 이용 가능합니다",
+                          skipFollowUpAlert: true,
+                          onConfirm: () => {
+                            signIn(undefined, { callbackUrl: "/auth/login" });
+                          },
+                        });
                         setIsOpen(false);
                       }}
                     >

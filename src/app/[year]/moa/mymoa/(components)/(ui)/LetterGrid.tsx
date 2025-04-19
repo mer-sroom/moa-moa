@@ -10,7 +10,6 @@ interface LetterGridProps {
 export default function LetterGrid({ letters }: LetterGridProps) {
   const firstRow = letters.slice(0, 2);
   const restRow = letters.slice(2);
-  console.log(letters);
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div className={styles.mailBoxGrid}>

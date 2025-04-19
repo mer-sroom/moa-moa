@@ -1,58 +1,31 @@
-"use client";
-import { Suspense, useEffect, useState } from "react";
-import Modal from "../(components)/common/Modal";
-import NotificationContent from "./(components)/NotificationContent";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import React from "react";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/authoptions";
+import { headers } from "next/headers";
+import NotFound from "../(components)/not-found";
+import NotificationPageClient from "./(components)/NotificationPageClient";
 
-export default function NotificationPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const [notifications, setNotifications] = useState({
-    myNotifications: [],
-    moaNotifications: [],
-  });
-  const [loading, setLoading] = useState(true);
-  console.log(session);
-  useEffect(() => {
-    async function fetchNotifications() {
-      if (session?.user?.id) {
-        try {
-          const res = await fetch("/api/notification");
-          const data = await res.json();
-          setNotifications(data);
-        } catch (error) {
-          console.error("알림함 불러오는 중 문제 발생", error);
-        } finally {
-          setLoading(false);
-        }
-      } else {
-        setLoading(false);
-      }
-    }
-    fetchNotifications();
-  }, [session]);
-
-  if (status === "loading" || loading) {
-    return <p>loading...</p>;
+export default async function NotificationPageServer() {
+  const baseURL = process.env.NEXT_PUBLIC_API_URL;
+  // 현재 요청의 헤더에서 쿠키 추출
+  const reqHeaders = await headers();
+  const cookie = reqHeaders.get("cookie") ?? "";
+  //세션 확인
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user) {
+    return redirect("/auth/login");
   }
+  const res = await fetch(`${baseURL}/api/notification`, {
+    cache: "no-store",
+    headers: { cookie },
+  });
+  //세션 없을 때
+  if (res.status === 401) return redirect("/auth/login");
+  //응답 값이 이상할 때
+  if (!res.ok) return NotFound();
 
-  //Modal에 넘기는 함수
-  const onClose = () => {
-    router.back();
-  };
+  const notifications = await res.json();
 
-  return (
-    <Modal
-      isOpen={true}
-      title="알림함"
-      onClose={onClose}
-      showActionButtons={false}
-      content={
-        <Suspense fallback="loading...">
-          <NotificationContent notifications={notifications} />
-        </Suspense>
-      }
-    />
-  );
+  return <NotificationPageClient notifications={notifications} />;
 }

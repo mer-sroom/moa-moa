@@ -53,12 +53,15 @@ export default async function MyMoaBoxPage({ params }) {
     // 현재 로그인한 사용자가 소유자인지 확인
     isOwner = moaBox.ownerId === currentUser.id;
   }
-  console.log(session);
   //디자인 정보 불러오기
   const backgroundDesign = moaBox.backgroundDesign?.imageURL;
   const mailBoxDesign = moaBox.mailBoxDesign?.imageURL;
   //모아 박스에 달린 모든 편지 불러오기
   const letters = moaBox.letters;
+
+  //모아박스 만료 여부 체크
+  const isExpired = new Date(moaBox.dueDate).getTime() <= Date.now();
+
   return (
     <>
       {/* 마이 모아 전체 배경 img */}
@@ -94,14 +97,19 @@ export default async function MyMoaBoxPage({ params }) {
                 icon={<Image src={downloadIcon} alt="share icon" />}
                 size="circle"
               ></Button>
-              <OpenShareLinkModal>
-                <Button
-                  label="공유하기"
-                  icon={<Image src={shareIcon} alt="share icon" />}
-                  size="medium"
-                  color="black"
-                />
-              </OpenShareLinkModal>
+              {isExpired ? ( //기념일 종료 됐을 시
+                <Button label="기념일 종료" size="medium" color="blocked" />
+              ) : (
+                //종료되지 않은 경우
+                <OpenShareLinkModal>
+                  <Button
+                    label="공유하기"
+                    icon={<Image src={shareIcon} alt="share icon" />}
+                    size="medium"
+                    color="black"
+                  />
+                </OpenShareLinkModal>
+              )}
             </>
           ) : (
             <>
@@ -126,17 +134,23 @@ export default async function MyMoaBoxPage({ params }) {
                   size="circle"
                 />
               </HandleAddFriend>
-              <HandleCreateLetter
-                allowAnonymous={moaBox.allowAnonymous}
-                isAuthenticated={!!session}
-              >
-                <Button
-                  label={"편지 작성하기"}
-                  icon={<Image src={penIcon} alt="pen icon" />}
-                  size="medium"
-                  color="black"
-                />
-              </HandleCreateLetter>
+              {isExpired ? (
+                //기념일 종료 시
+                <Button label="기념일 종료" size="medium" color="blocked" />
+              ) : (
+                //종료되지 않은 경우
+                <HandleCreateLetter
+                  allowAnonymous={moaBox.allowAnonymous}
+                  isAuthenticated={!!session}
+                >
+                  <Button
+                    label={"편지 작성하기"}
+                    icon={<Image src={penIcon} alt="pen icon" />}
+                    size="medium"
+                    color="black"
+                  />
+                </HandleCreateLetter>
+              )}
             </>
           )}
         </section>

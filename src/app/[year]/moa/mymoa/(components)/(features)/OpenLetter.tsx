@@ -4,6 +4,7 @@ import { LetterBase, Letter } from "@/types/moabox";
 import { PropsWithChildren, useCallback } from "react";
 import { useLetterModalContext } from "@/contexts/LetterModalContext";
 import useLetterCache from "@/hooks/useLetterCache";
+import Swal from "sweetalert2";
 
 interface Props extends PropsWithChildren {
   letter: LetterBase;
@@ -35,6 +36,16 @@ export default function OpenLetter({ children, letter }: Props) {
       const combinedLetter: Letter = { ...letter, ...letterDetail };
       openLetterModal(combinedLetter);
     } catch (error) {
+      if (error.status === 403 || error.status === 401) {
+        Swal.fire({
+          toast: true,
+          text: "🧸 이 편지는 주인만 볼 수 있어요!",
+          position: "bottom",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        return;
+      }
       console.error("편지 여는 중 문제 발생", error);
     }
   }, [letter, fetchLetterData, openLetterModal]);

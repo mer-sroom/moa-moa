@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/authoptions";
 import prisma from "@/lib/prisma";
 import { Session } from "next-auth"; // Session 타입 임포트
+import { deleteLetter } from "@/lib/deletion";
+import { error } from "console";
 
 //편지 정보 받아오는용
 export async function GET(
@@ -140,4 +142,32 @@ export async function PATCH(
       { status: 500 }
     );
   }
+}
+
+//편지 삭제 로직
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ letterId: string }> }
+) {
+  const session = (await getServerSession(authOptions)) as Session | null;
+
+  if (!session || !session.user) {
+    return NextResponse.json({ connected: false }, { status: 401 });
+  }
+
+  const { letterId } = await params;
+  const letterIdNumber = Number(letterId);
+  if (!letterIdNumber) {
+    return NextResponse.json(
+      { error: "편지 아이디를 찾을 수 없습니다." },
+      { status: 400 }
+    );
+  }
+  //편지 삭제 요청
+  const result = await deleteLetter(letterIdNumber, session);
+  if (!result) {
+    console.error("모아 박스 삭제 중 문제 발생");
+    return NextResponse.json({ error: error }, { status: 400 });
+  }
+  return NextResponse.json({ success: true }, { status: 200 });
 }

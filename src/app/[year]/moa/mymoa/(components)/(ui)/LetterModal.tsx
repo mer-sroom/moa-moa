@@ -10,6 +10,7 @@ import Button from "@/app/[year]/(components)/common/Button";
 import deleteBtn from "@/../../public/assets/icons/trash_can_icon.svg";
 import downloadBtn from "@/../../public/assets/icons/download_icon.svg";
 import styles from "@/styles/LetterModal.module.css";
+import HandleDeleteLetter from "../(features)/HandleDeleteLetter";
 
 interface LetterModalProps {
   isOpen: boolean;
@@ -50,15 +51,16 @@ export default function LetterModal(props: LetterModalProps) {
             </div>
             {/* 편지 삭제 버튼 */}
             <div className={styles.deleteButtonContainer}>
-              {/* 편지 삭제 비즈니스 로직 추가 예정 */}
-              <button className={styles.deleteButton} onClick={onClose}>
-                <Image
-                  src={deleteBtn}
-                  alt="delete letter button"
-                  width={24}
-                  height={24}
-                />
-              </button>
+              <HandleDeleteLetter letterId={letter.id}>
+                <button className={styles.deleteButton}>
+                  <Image
+                    src={deleteBtn}
+                    alt="delete letter button"
+                    width={24}
+                    height={24}
+                  />
+                </button>
+              </HandleDeleteLetter>
             </div>
           </div>
         </div>

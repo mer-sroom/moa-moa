@@ -17,3 +17,10 @@ export interface MyNotification extends BaseNotification {
     profileImage?: string;
   };
 }
+
+export interface Notifications {
+  notifications: {
+    myNotifications: MyNotification[];
+    moaNotifications: BaseNotification[];
+  };
+}

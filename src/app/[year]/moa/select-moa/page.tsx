@@ -11,10 +11,15 @@ export default async function SelectMoaPage() {
   if (!session?.user) {
     redirect("/auth/login");
   }
-  //userId === ownerId인 모든 moaBox 필터해오기
+  //userId === ownerId고 dueDate를 넘기지 않은 모든 moaBox 필터해오기
   const userMoaBoxes = await prisma.moaBox.findMany({
     where: {
       ownerId: session.user.id,
+      dueDate: { gte: new Date() },
+    },
+    include: {
+      backgroundDesign: { select: { imageURL: true } },
+      mailBoxDesign: { select: { imageURL: true } },
     },
   });
 

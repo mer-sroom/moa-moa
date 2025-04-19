@@ -2,6 +2,7 @@
 
 import React, { ReactNode } from "react";
 import Swal from "sweetalert2";
+import "@/styles/Alert.css";
 
 // 👉 사용예제
 // <AlertProvider> {({ showAlert, showConfirmModal }) => ( 이곳에 아래 버튼을 넣어주세요 )} </AlertProvider>
@@ -70,7 +71,7 @@ export const AlertProvider = ({ children }: AlertRenderProps): JSX.Element => {
       cancelButtonColor: "#1b1b1b",
       confirmButtonText: "예",
       cancelButtonText: "아니오",
-    }).then((result) => {
+    }).then(result => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "완료되었습니다!",

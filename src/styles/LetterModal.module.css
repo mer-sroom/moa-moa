@@ -58,6 +58,26 @@
   filter: contrast(20);
   cursor: pointer;
 }
+.deleteButton {
+  transition: 0.2s ease;
+}
+.deleteButton:hover {
+  animation: deleteBtnRotate 0.5s ease-in-out;
+}
+/*삭제 버튼 애니메이션*/
+@keyframes deleteBtnRotate {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  45% {
+    transform: rotate(18deg);
+  }
+
+  75% {
+    transform: rotate(-10deg);
+  }
+}
 
 .spotifyContainer {
   display: flex;
