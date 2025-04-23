@@ -25,7 +25,10 @@ const spinnerStyle: React.CSSProperties = {
 
 export default function Loading() {
   return (
-    <div style={{ ...defaultOverlayStyle, zIndex: 9999 }}>
+    <div
+      className="loadingOverlay"
+      style={{ ...defaultOverlayStyle, zIndex: 9999 }}
+    >
       <div style={containerStyle}>
         <style>
           {`

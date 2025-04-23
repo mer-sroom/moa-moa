@@ -16,7 +16,7 @@ import shareIcon from "@/../../public/assets/icons/share_icon.svg";
 import addFriend from "@/../../public/assets/icons/add_friend.svg";
 import penIcon from "@/../../public/assets/icons/pen.svg";
 import styles from "@/styles/mymoa.module.css";
-import DownloadImageBtn from "../(components)/(features)/MoaBoxDownloadImageBtn";
+import MoaBoxDownloadImageBtn from "../(components)/(features)/MoaBoxDownloadImageBtn";
 
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
@@ -91,8 +91,9 @@ export default async function MyMoaBoxPage({ params }) {
           {isOwner ? (
             <>
               {/* 모아박스 소유주가 본인일 때 */}
-              <DownloadImageBtn />
-              {isExpired ? ( //기념일 종료 됐을 시
+              {/* 이미지 다운로드 버튼 */}
+              <MoaBoxDownloadImageBtn moaBoxTitle={moaBox.title} />
+              {isExpired ? ( //소유주이지만, 종료된 모아박스일 때
                 <Button label="기념일 종료" size="medium" color="blocked" />
               ) : (
                 //종료되지 않은 경우
@@ -127,6 +128,7 @@ export default async function MyMoaBoxPage({ params }) {
                     />
                   }
                   size="circle"
+                  color="white"
                 />
               </HandleAddFriend>
               {isExpired ? (
