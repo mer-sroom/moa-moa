@@ -33,14 +33,8 @@ export default function MoaBoxDownloadImageBtn({
         fileName: `${moaBoxTitle}_캡쳐`,
         format: "png",
         //버튼 영역 캡쳐 대상에서 제외
-        excludeArea: `.${styles.buttonSection}`,
+        excludeSelector: `.${styles.buttonSection}`,
         //영역 크롭
-        clip: {
-          x: 0,
-          y: 0,
-          width: nodeArea.clientWidth,
-          height: nodeArea.clientHeight - 200,
-        },
       });
     } catch (error) {
       showAlert("캡쳐 중 문제가 발생했습니다", "오류");

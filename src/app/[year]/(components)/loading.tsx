@@ -27,7 +27,7 @@ export default function Loading() {
   return (
     <div
       className="loadingOverlay"
-      style={{ ...defaultOverlayStyle, zIndex: 9999 }}
+      style={{ ...defaultOverlayStyle, zIndex: 9999, borderRadius: 16 }}
     >
       <div style={containerStyle}>
         <style>
