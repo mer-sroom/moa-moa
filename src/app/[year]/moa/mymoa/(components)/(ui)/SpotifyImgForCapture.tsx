@@ -28,7 +28,7 @@ export default function SpotifyImgForCapture({ info, onReady }: Props) {
         </div>
       </div>
       <div className={styles.logoSection}>
-        <Image src={MoaLogo} alt="moa logo" width={32} height={32} />
+        <Image src={MoaLogo} alt="moa logo" width={32} />
       </div>
     </div>
   );
