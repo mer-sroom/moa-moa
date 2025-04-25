@@ -2,7 +2,6 @@ import Image from "next/image";
 import Button from "@/app/[year]/(components)/common/Button";
 import Loading from "@/app/[year]/(components)/loading";
 import downloadBtn from "@/../../public/assets/icons/download_icon.svg";
-import styles from "@/styles/LetterModal.module.css";
 
 interface Props {
   onClick: () => void; // 캡쳐 시작 시 호출되는 함수

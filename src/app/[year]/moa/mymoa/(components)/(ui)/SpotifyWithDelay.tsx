@@ -55,6 +55,7 @@ export default function SpotifyWithDelay({
           borderRadius: "16px",
           opacity: showEmbed ? 1 : 0,
           transition: "opacity 0.5s ease-in-out",
+          boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.2)",
         }}
       ></iframe>
     </div>
