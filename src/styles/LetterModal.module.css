@@ -1,3 +1,4 @@
+/*편지 모달 css*/
 .modalContainer {
   position: absolute;
   top: 50%;
@@ -79,6 +80,7 @@
   }
 }
 
+/*SpotifyWithDelay 전용*/
 .spotifyContainer {
   display: flex;
   justify-content: center;
@@ -98,8 +100,4 @@
 .linkStyle {
   color: white;
   text-decoration: none;
-}
-
-.downloadIcon {
-  filter: invert(1);
 }

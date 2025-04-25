@@ -86,3 +86,35 @@ export async function GET(request: Request) {
     );
   }
 }
+
+//모아 소식 읽음 처리 로직
+export async function PATCH(request: Request) {
+  const session = (await getServerSession(authOptions)) as Session | null;
+  if (!session || !session.user) {
+    return NextResponse.json(
+      { error: "인증되지 않은 사용자입니다." },
+      { status: 401 }
+    );
+  }
+
+  try {
+    //요청에서 읽지 않은 모아 소식 id값과 read값 받아오기
+    const { ids, read } = await request.json();
+
+    //검증
+
+    await prisma.notification.updateMany({
+      where: {
+        id: { in: ids },
+        userId: session.user.id,
+      },
+      data: { read },
+    });
+  } catch (error) {
+    console.error("모아 소식 읽음 처리 중 문제 발생:", error);
+    return NextResponse.json(
+      { error: "모아 소식 읽음 처리 중 문제 발생" },
+      { status: 500 }
+    );
+  }
+}

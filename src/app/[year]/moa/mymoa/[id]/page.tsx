@@ -12,11 +12,11 @@ import Button from "@/app/[year]/(components)/common/Button";
 import OpenShareLinkModal from "../(components)/(features)/OpenShareLinkModal";
 import HandleAddFriend from "../(components)/(features)/HandleAddFriend";
 import HandleCreateLetter from "../(components)/(features)/HandleWriteLetter";
-import downloadIcon from "@/../../public/assets/icons/download_icon.svg";
 import shareIcon from "@/../../public/assets/icons/share_icon.svg";
 import addFriend from "@/../../public/assets/icons/add_friend.svg";
 import penIcon from "@/../../public/assets/icons/pen.svg";
 import styles from "@/styles/mymoa.module.css";
+import MoaBoxDownloadImageBtn from "../(components)/(features)/MoaBoxDownloadImageBtn";
 
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
@@ -63,41 +63,37 @@ export default async function MyMoaBoxPage({ params }) {
   const isExpired = new Date(moaBox.dueDate).getTime() <= Date.now();
 
   return (
-    <>
+    <div className={styles.captureArea} id="captureMoaBoxArea">
       {/* 마이 모아 전체 배경 img */}
       <div
         className={styles.background}
-        style={{
-          backgroundImage: `url(${backgroundDesign})`,
-        }}
+        style={{ backgroundImage: `url(${backgroundDesign})` }}
       >
-        {/*
-        {/* 모아 박스 타이틀 */}
-        <Title
-          title={moaBox.title}
-          letterCountPublic={moaBox.letterCountPublic}
-          lettersLength={letters.length}
-        />
-
-        {/* 모아 박스 컨테이너*/}
-        <Suspense fallback={"loading..."}>
-          <MailBox
-            moaBoxId={moaBoxId}
-            designURL={mailBoxDesign}
-            letters={letters}
+        <>
+          {/* 모아 박스 타이틀 */}
+          <Title
+            title={moaBox.title}
+            letterCountPublic={moaBox.letterCountPublic}
+            lettersLength={letters.length}
           />
-        </Suspense>
 
+          {/* 모아 박스 컨테이너*/}
+          <Suspense fallback={"loading..."}>
+            <MailBox
+              moaBoxId={moaBoxId}
+              designURL={mailBoxDesign}
+              letters={letters}
+            />
+          </Suspense>
+        </>
         {/* 버튼 컨테이너 */}
         <section className={styles.buttonSection}>
           {isOwner ? (
             <>
               {/* 모아박스 소유주가 본인일 때 */}
-              <Button
-                icon={<Image src={downloadIcon} alt="share icon" />}
-                size="circle"
-              ></Button>
-              {isExpired ? ( //기념일 종료 됐을 시
+              {/* 이미지 다운로드 버튼 */}
+              <MoaBoxDownloadImageBtn moaBoxTitle={moaBox.title} />
+              {isExpired ? ( //소유주이지만, 종료된 모아박스일 때
                 <Button label="기념일 종료" size="medium" color="blocked" />
               ) : (
                 //종료되지 않은 경우
@@ -132,6 +128,7 @@ export default async function MyMoaBoxPage({ params }) {
                     />
                   }
                   size="circle"
+                  color="white"
                 />
               </HandleAddFriend>
               {isExpired ? (
@@ -155,6 +152,6 @@ export default async function MyMoaBoxPage({ params }) {
           )}
         </section>
       </div>
-    </>
+    </div>
   );
 }

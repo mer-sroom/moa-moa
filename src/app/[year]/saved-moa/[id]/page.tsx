@@ -70,6 +70,7 @@ export default async function SavedMoaPage() {
 
   return (
     <div className={styles.container}>
+      {/* 년도별 카테고리 */}
       {sortedYears.map(year => (
         <section key={year} className={styles.yearSection}>
           <div className={styles.yearHeader}>
@@ -77,6 +78,7 @@ export default async function SavedMoaPage() {
             {/* <hr className={styles.divideLine} /> */}
           </div>
           <div className={styles.moaBoxesWrapper}>
+            {/* 각각 모아박스 */}
             {groupedByYear[year].map(moaBox => (
               <Link
                 href={`/2025/moa/mymoa/${moaBox.id}`}
