@@ -15,6 +15,7 @@ export default function OpenLetter({ children, letter }: Props) {
   const fetchLetterData = useLetterCache(); //GET 요청 및 캐싱
 
   const clickHandler = useCallback(async () => {
+    // if (편지 소유주가 현재 session user가 아닐때){}
     try {
       let letterDetail;
       if (letter.isOpened) {
@@ -27,8 +28,29 @@ export default function OpenLetter({ children, letter }: Props) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ isOpened: true }),
         });
+
+        //인증, 권한 에러
+        if (patchResponse.status === 403 || patchResponse.status === 401) {
+          Swal.fire({
+            toast: true,
+            text: "🧸 이 편지는 주인만 볼 수 있어요!",
+            position: "bottom",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          return;
+        }
+        //수정 중 문제가 생겼을 때
         if (!patchResponse.ok) {
-          throw new Error("편지 읽음 여부 수정 실패");
+          console.error("편지 읽음 여부 수정 실패", patchResponse.status);
+          Swal.fire({
+            toast: true,
+            text: "편지를 여는 중 오류가 발생했습니다 😢",
+            position: "bottom",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          return;
         }
         letterDetail = await fetchLetterData(letter.id);
       }
@@ -36,16 +58,6 @@ export default function OpenLetter({ children, letter }: Props) {
       const combinedLetter: Letter = { ...letter, ...letterDetail };
       openLetterModal(combinedLetter);
     } catch (error) {
-      if (error.status === 403 || error.status === 401) {
-        Swal.fire({
-          toast: true,
-          text: "🧸 이 편지는 주인만 볼 수 있어요!",
-          position: "bottom",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        return;
-      }
       console.error("편지 여는 중 문제 발생", error);
     }
   }, [letter, fetchLetterData, openLetterModal]);

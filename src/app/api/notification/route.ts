@@ -110,6 +110,7 @@ export async function PATCH(request: Request) {
       },
       data: { read },
     });
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error("모아 소식 읽음 처리 중 문제 발생:", error);
     return NextResponse.json(
