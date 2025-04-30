@@ -20,10 +20,11 @@ export default function MyPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const isLoggedIn = !!session?.user;
-
-  // 닉네임 상태 관리
-  const [nickname, setNickname] = useState(session?.user?.name ?? "Guest");
   const [spotifyConnected, setSpotifyConnected] = useState(false);
+  const [nickname, setNickname] = useState(session?.user?.name ?? "Guest");
+  const [profileImage, setProfileImage] = useState(
+    session?.user?.image ?? moa_cat
+  );
 
   // 로그인하지 않은 경우 로그인 페이지로 리디렉션
   useEffect(() => {
@@ -31,6 +32,16 @@ export default function MyPage() {
       router.push("/auth/login");
     }
   }, [isLoggedIn, router]);
+
+  // 프로필 이미지 가져오기
+  useEffect(() => {
+    if (session?.user?.image) {
+      setProfileImage(session.user.image);
+      console.log(profileImage);
+    } else {
+      setProfileImage(moa_cat); // 기본 이미지
+    }
+  }, [session]);
 
   // Spotify 연결 여부 확인
   useEffect(() => {
@@ -64,6 +75,23 @@ export default function MyPage() {
     }
   };
 
+  // 회원탈퇴
+  const handleDeleteAccount = async () => {
+    try {
+      const res = await fetch(`/api/user/delete`, { method: "DELETE" });
+      const data = await res.json();
+
+      if (res.ok) {
+        await signOut({ callbackUrl: "/auth/login" });
+      } else {
+        toast.error(data.error || "회원탈퇴 실패");
+      }
+    } catch (error) {
+      console.error("회원탈퇴 실패:", error);
+      toast.error("회원탈퇴 실패");
+    }
+  };
+
   return (
     <AlertProvider>
       {({ showConfirmModal }) => (
@@ -73,17 +101,17 @@ export default function MyPage() {
             <div className={styles.profileSection}>
               <div className={styles.profileImage}>
                 <Image
-                  src={moa_cat}
-                  alt="User Profile"
+                  src={profileImage}
+                  alt="profile Image"
                   width={125}
                   height={125}
                 />
               </div>
               <div className={styles.userinfo}>
-                <div className={styles.userName}></div>
+                <div className={styles.userName}>{nickname}</div>
                 <div className={styles.loginWith}>
                   <Image
-                    src={kakao}
+                    src={naver}
                     alt="connect icon"
                     width={14}
                     height={14}
@@ -148,8 +176,7 @@ export default function MyPage() {
                   showConfirmModal({
                     message: "정말 회원탈퇴를 하시겠습니까?",
                     confirmMessage: "회원탈퇴 확인",
-                    onConfirm: () => console.log("회원탈퇴 진행"),
-                    onCancel: () => console.log("회원탈퇴 취소"),
+                    onConfirm: handleDeleteAccount,
                   })
                 }
               >
