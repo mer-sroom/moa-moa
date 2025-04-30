@@ -49,6 +49,12 @@ export const authOptions: NextAuthOptions = {
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID!,
       clientSecret: process.env.KAKAO_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          // scope 추가
+          scope: "account_email profile_nickname profile_image",
+        },
+      },
     }),
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID!,
@@ -71,7 +77,7 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account, profile }) {
       if ((user as any).image) {
         (user as any).profileImage = (user as any).image;
-        delete (user as any).image;
+        // delete (user as any).image; // session.user.image가 undefined?
       }
 
       if (!user.role) {
@@ -88,6 +94,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user && token) {
         session.user.id = token.id;
         session.user.role = token.role;
+        session.user.image = token.profileImage as string; // profileImage 추가
       }
       return session;
     },
@@ -95,6 +102,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.role = user.role; // role 추가
+        token.profileImage = (user as any).profileImage || (user as any).image;
       }
       if (account) {
         token.accessToken = account.access_token;
