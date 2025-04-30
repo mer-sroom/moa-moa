@@ -5,24 +5,35 @@ import Image from "next/image";
 import styles from "@/styles/ExplanationSection.module.css";
 
 interface ExplanationSectionProps {
-  onScrollFinal: () => void; // 파이널 섹션으로 넘어가는 콜백
+  onScrollFinal: () => void;
 }
 
 const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
   ({ onScrollFinal }, ref) => {
     const [tab, setTab] = useState<"SEND" | "GET">("SEND");
 
-    const handleClickSend = () => setTab("SEND");
-    const handleClickGet = () => setTab("GET");
+    /* ── ★ 카드별 업그레이드 이미지 경로 ── */
+    const upgraded = {
+      cat: "/assets/icons/lending/cat_upgrade.svg",
+      letter: "/assets/icons/lending/Letter_upgrade.svg",
+      cd: "/assets/icons/lending/Cd_upgrade.svg",
+    };
 
-    // "Send a letter" 섹션
+    /* ---------------- SEND 섹션 ---------------- */
     function SendLetterSection({ onClickNext }: { onClickNext: () => void }) {
       return (
         <div className={styles.subSection}>
-          {/* 카드들 */}
           <div className={styles.cardsWrapper}>
             {/* 왼쪽 카드 */}
-            <div className={styles.card}>
+            <div
+              className={`${styles.card} ${styles.cardCore}`}
+              /* ★ 업그레이드 이미지 경로를 CSS 변수로 전달 */
+              style={
+                {
+                  "--upgrade-img": `url(${upgraded.cat})`,
+                } as React.CSSProperties
+              }
+            >
               <Image
                 src="/assets/icons/lending/cat.svg"
                 alt="고양이"
@@ -31,14 +42,21 @@ const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
                 className={styles.leftcardImage}
               />
               <h3>귀여운 오므자를 장식해요!</h3>
-              <p>
+              <p className={styles.cardBody}>
                 오늘도 바쁘게만 살아가는 어른 여러분 귀여운 아이콘을 활용해 작은
                 행복을 찾아보세요!
               </p>
             </div>
 
-            {/* 중앙 카드 (검정) */}
-            <div className={styles.cardCenter}>
+            {/* 중앙 카드 */}
+            <div
+              className={`${styles.cardCenter} ${styles.cardCore}`}
+              style={
+                {
+                  "--upgrade-img": `url(${upgraded.letter})`,
+                } as React.CSSProperties
+              }
+            >
               <Image
                 src="/assets/icons/lending/letter3.svg"
                 alt="편지지"
@@ -47,14 +65,21 @@ const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
                 className={styles.cardImage}
               />
               <h3>편지지를 열어봐요!</h3>
-              <p>
+              <p className={styles.cardBody}>
                 둘이 주고 받는 추억을 아름답게 기록해보아요. 손 편지 한 장이 줄
                 수 있는 따뜻함을 최대한 담아내고 싶었어요.
               </p>
             </div>
 
             {/* 오른쪽 카드 */}
-            <div className={styles.card}>
+            <div
+              className={`${styles.card} ${styles.cardCore}`}
+              style={
+                {
+                  "--upgrade-img": `url(${upgraded.cd})`,
+                } as React.CSSProperties
+              }
+            >
               <Image
                 src="/assets/icons/lending/cd.svg"
                 alt="CD"
@@ -63,13 +88,13 @@ const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
                 className={styles.rightcardImage}
               />
               <h3>진진작한 음악을 들어요!</h3>
-              <p>
+              <p className={styles.cardBody}>
                 바쁜 시대를 살아가는 우리들에게 가볍게 즐길 수 있는 노래 추천과
                 함께 편지로 힐링하는 소중한 시간을 만들어 보세요.
               </p>
             </div>
 
-            {/* 뒤에 깔리는 편지봉투(letter4) */}
+            {/* 뒤 편지봉투 */}
             <div className={styles.envelopeWrapper}>
               <Image
                 src="/assets/icons/lending/letter4.svg"
@@ -80,7 +105,7 @@ const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
             </div>
           </div>
 
-          {/* 아래로 이동하는 화살표: 누르면 "Get a letter"로 전환 */}
+          {/* ↓ 버튼 */}
           <Image
             src="/assets/icons/lending/arrow-down.svg"
             alt="Next"
@@ -93,14 +118,13 @@ const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
       );
     }
 
-    // "Get a letter" 섹션
+    /* ---------------- GET 섹션 (변경 없음) ---------------- */
     function GetLetterSection({ onClickNext }: { onClickNext: () => void }) {
       return (
         <div className={styles.subSection}>
           <h2>Get a letter</h2>
-          <p>이곳은 &quot;Get a letter&quot; 섹션 내용입니다.</p>
+          <p>이곳은 "Get a letter" 섹션 내용입니다.</p>
 
-          {/* 아래로 이동하는 화살표: 누르면 파이널 섹션(혹은 다음 섹션)으로 이동 */}
           <Image
             src="/assets/icons/lending/arrow-down.svg"
             alt="Next"
@@ -115,23 +139,21 @@ const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
 
     return (
       <section ref={ref} className={styles.explanationSection}>
-        {/* 탭 버튼 */}
         <div className={styles.tabButtons}>
           <button
-            onClick={handleClickSend}
+            onClick={() => setTab("SEND")}
             className={tab === "SEND" ? styles.activeBtn : styles.inactiveBtn}
           >
             Send a letter
           </button>
           <button
-            onClick={handleClickGet}
+            onClick={() => setTab("GET")}
             className={tab === "GET" ? styles.activeBtn : styles.inactiveBtn}
           >
             Get a letter
           </button>
         </div>
 
-        {/* 탭 전환 */}
         {tab === "SEND" ? (
           <SendLetterSection onClickNext={() => setTab("GET")} />
         ) : (

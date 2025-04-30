@@ -90,6 +90,65 @@
   overflow: visible;
 }
 
+.cardCore::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--upgrade-img) center / contain no-repeat;
+  opacity: 0; /* 처음엔 안 보임 */
+  transition: opacity 0.25s ease; /* 짧은 페이드인/아웃 */
+  pointer-events: none; /* 클릭 방해 X */
+  z-index: 2; /* 카드 내부 텍스트 위로 올라옴 */
+}
+
+/* ------------------------------------------------------------------
+   ★ hover 시 변화
+------------------------------------------------------------------ */
+.cardCore:hover {
+  /* ① 배경·그림자·둥근 모서리 제거 → 직사각 자체가 안 보임 */
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+
+  /* ② 크기를 이미지만큼로 축소 – 패딩·고정폭 없애기  */
+  padding: 0;
+
+  /* ③ 레이아웃이 튀지 않도록 flex 컨테이너 안에서
+        ‘그 자리에 그대로’ 있게 하려면 display를 inline-flex로 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 업그레이드 이미지를 덮는 ::before 레이어도, 카드가 작아졌으니
+   100 % → 실제 이미지 크기만큼으로 맞춰 줍니다. */
+.cardCore:hover::before {
+  opacity: 1; /* (기존) 보이게 */
+  width: 220%;
+  height: 220%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-size: contain; /* 찌그러지지 않게 */
+}
+
+/* 기존 카드 내용(아이콘 + h3) 페이드아웃 ─ <p>는 남김 */
+.cardCore:hover img,
+.cardCore:hover h3 {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* ------------------------------------------------------------------
+   ★ <p> 문구를 카드 아래로 미끄러지도록
+------------------------------------------------------------------ */
+.cardBody {
+  transition: transform 0.35s ease;
+}
+.cardCore:hover .cardBody {
+  transform: translateY(calc(250% + 1.5rem)); /* 카드 높이만큼 내려가기 */
+}
+
 /* 중앙 카드 - 검정색 */
 .cardCenter {
   position: relative;
