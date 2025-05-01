@@ -33,7 +33,7 @@ function NaverProvider<P extends Record<string, any> = NaverProfile>(
         id: profile.response.id,
         name: profile.response.nickname,
         email: profile.response.email,
-        image: profile.response.profile_image, // 여기서는 그대로 'image'로 받음
+        image: profile.response.profile_image?.replace("http://", "https://"), // 수정함★
         role: "USER",
       };
     },
@@ -49,6 +49,25 @@ export const authOptions: NextAuthOptions = {
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID!,
       clientSecret: process.env.KAKAO_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          // scope 추가
+          scope: "account_email profile_nickname profile_image",
+        },
+      },
+      profile(profile) {
+        const img = profile.properties?.profile_image?.replace(
+          "http://",
+          "https://"
+        ); // 수정함★
+        return {
+          id: String(profile.id),
+          name: profile.properties?.nickname,
+          email: profile.kakao_account?.email,
+          image: img,
+          role: "USER",
+        };
+      },
     }),
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID!,
@@ -56,60 +75,64 @@ export const authOptions: NextAuthOptions = {
       authorization:
         "https://accounts.spotify.com/authorize?scope=user-read-email,user-read-private",
     }),
-
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-
     NaverProvider({
       clientId: process.env.NAVER_CLIENT_ID!,
       clientSecret: process.env.NAVER_CLIENT_SECRET!,
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
-      if ((user as any).image) {
-        (user as any).profileImage = (user as any).image;
-        delete (user as any).image;
+    async signIn({ user }) {
+      /* image 없으면 profileImage를 대체로 사용 */
+      if (!(user as any).image && (user as any).profileImage) {
+        (user as any).image = (user as any).profileImage; // 수정함★
       }
 
-      if (!user.role) {
-        user.role = "USER";
+      /* http → https 강제 */
+      if ((user as any).image?.startsWith("http://")) {
+        (user as any).image = (user as any).image.replace(
+          "http://",
+          "https://"
+        ); // 수정함★
       }
 
-      if (!user.nickname) {
-        user.nickname = user.name || "Guest";
-      }
+      delete (user as any).profileImage; // 유지
+
+      if (!user.role) user.role = "USER";
+      if (!(user as any).nickname)
+        (user as any).nickname = user.name || "Guest";
 
       return true;
     },
+
     async session({ session, token }) {
       if (session.user && token) {
         session.user.id = token.id;
         session.user.role = token.role;
+        session.user.image = token.image as string | null;
       }
       return session;
     },
+
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
-        token.role = user.role; // role 추가
+        token.role = user.role;
+        token.image = (user as any).image ?? null;
       }
-      if (account) {
-        token.accessToken = account.access_token;
-      }
+      if (account) token.accessToken = account.access_token;
       return token;
     },
   },
   events: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account }) {
       if (!user.email) return;
-
       const existingUser = await prisma.user.findUnique({
         where: { email: user.email },
       });
-
       if (existingUser && existingUser.id !== user.id) {
         await prisma.account.update({
           where: {

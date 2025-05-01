@@ -34,7 +34,7 @@ model User {
   // 사용자가 수정 가능
   nickname     String
   // 프로필 이미지 (URL 등으로 저장)
-  profileImage String?
+  image         String? @map("profileImage")
 
   // (추가) role 필드로 사용자 권한을 구분: 기본값은 USER
   role UserRole @default(USER)

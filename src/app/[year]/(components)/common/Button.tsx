@@ -10,6 +10,7 @@ export interface ButtonProps {
   size?: "small" | "medium" | "long" | "circle" | "modalBtn";
   color?: "black" | "white" | "red" | "blocked" | "none";
   onClick?: () => void; // toast alert 의 onCLick 속성 추가
+  loading?: boolean; //로딩이 필요한 작업일 때(ex. 이미지 다운로드)
 }
 
 //간단하게만 적었습니당

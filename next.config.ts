@@ -1,10 +1,15 @@
-import { NextConfig } from "next";
+import type { NextConfig } from "next";
 import path from "path";
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
   images: {
-    domains: ["i.scdn.co"],
+    domains: [
+      "i.scdn.co",
+      "lh3.googleusercontent.com",
+      "phinf.pstatic.net",
+      "img1.kakaocdn.net",
+    ], // 추가함*
   },
   reactStrictMode: true,
   webpack: (config, context) => {

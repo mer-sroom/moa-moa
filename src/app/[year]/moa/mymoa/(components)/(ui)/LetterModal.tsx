@@ -1,16 +1,12 @@
-import { Suspense } from "react";
 import Image from "next/image";
 // 타입, 부속 컴포넌트 --------------------------------------------------------
 import type { Letter } from "@/types/moabox";
 import { defaultOverlayStyle } from "@/app/[year]/(components)/common/Modal";
-import Skeleton from "@/app/[year]/(components)/common/Skeleton";
-import SpotifyWithDelay from "../(ui)/SpotifyWithDelay";
-import Button from "@/app/[year]/(components)/common/Button";
+import SpotifyAndDownloadBtn from "../(features)/(letter-features)/SpotifyAndDownloadBtn";
 //이미지, css ----------------------------------------------------------------
 import deleteBtn from "@/../../public/assets/icons/trash_can_icon.svg";
-import downloadBtn from "@/../../public/assets/icons/download_icon.svg";
 import styles from "@/styles/LetterModal.module.css";
-import HandleDeleteLetter from "../(features)/HandleDeleteLetter";
+import HandleDeleteLetter from "../(features)/(letter-features)/HandleDeleteLetter";
 
 interface LetterModalProps {
   isOpen: boolean;
@@ -20,13 +16,14 @@ interface LetterModalProps {
 
 export default function LetterModal(props: LetterModalProps) {
   const { isOpen, letter, onClose } = props;
+  // const spotifyData = letter.trackId? await fetchSpotifyData(letter.trackId) : null;
   if (!isOpen) {
     return null;
   }
   return (
     <>
       <div style={defaultOverlayStyle} onClick={onClose}></div>
-      <section className={styles.modalContainer}>
+      <section id="captureLetterArea" className={styles.modalContainer}>
         <div>
           {/* 편지 아이콘 */}
           <div
@@ -43,10 +40,13 @@ export default function LetterModal(props: LetterModalProps) {
             }}
           >
             <div className={styles.letterContentContainer}>
+              {/* 편지 타이틀 */}
               <h4 id="modalTitle" className={styles.letterTitle}>
                 {letter.title}
               </h4>
+              {/* 편지 내용 */}
               <p className={styles.letterContent}>{letter.content}</p>
+              {/* 편지 보낸 이 */}
               <p className={styles.letterSender}>from. {letter.authorName}</p>
             </div>
             {/* 편지 삭제 버튼 */}
@@ -64,26 +64,10 @@ export default function LetterModal(props: LetterModalProps) {
             </div>
           </div>
         </div>
-        {/* 스포티파이 */}
-        {letter.trackId && (
-          <div className={styles.spotifyContainer}>
-            <Suspense fallback={<Skeleton width="100%" height="80px" />}>
-              <SpotifyWithDelay trackId={letter.trackId} delay={800} />
-            </Suspense>
-          </div>
-        )}
-        {/* 저장하기 버튼 */}
-        <Button
-          label="저장하기"
-          icon={
-            <Image
-              src={downloadBtn}
-              alt="pen icon"
-              className={styles.downloadIcon}
-            />
-          }
-          size="long"
-          color="black"
+        {/* 스포티파이와 다운로드 버튼 영역 */}
+        <SpotifyAndDownloadBtn
+          trackId={letter.trackId}
+          authorName={letter.authorName}
         />
       </section>
     </>
