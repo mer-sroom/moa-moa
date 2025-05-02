@@ -42,7 +42,7 @@ export async function getFriendship(userId: string) {
         id: friend.id,
         nickname: friend.nickname,
         name: friend.name,
-        profileImage: friend.profileImage,
+        profileImage: friend.image,
         moaBoxOngoing,
       };
     });

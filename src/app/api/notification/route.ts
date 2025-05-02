@@ -52,7 +52,7 @@ export async function GET(request: Request) {
     // senderIds 유저의 id, nickname, profileImage 조회
     const senders = await prisma.user.findMany({
       where: { id: { in: Array.from(senderIds) } },
-      select: { id: true, nickname: true, profileImage: true },
+      select: { id: true, nickname: true, image: true },
     });
 
     const senderMap = {}; // 빈 객체 생성
