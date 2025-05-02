@@ -8,7 +8,7 @@ export interface ButtonProps {
   label?: string | React.ReactNode;
   icon?: ReactNode; //Image 태그로 받기 위해
   className?: string;
-  size?: "small" | "medium" | "long" | "circle" | "modalBtn" | "checkbox";
+  size?: "small" | "medium" | "long" | "circle" | "modalBtn" | "checkbox" | "next";
   color?: "black" | "white" | "red" | "blocked" | "none" | "checkboxTrue" | "checkboxFalse" | "false";
   onClick?: () => void; // toast alert 의 onCLick 속성 추가
 }
@@ -44,11 +44,16 @@ export const buttonSize = {
     width: 40px;
     height: 40px;
 `,
+  next: css`
+max-width: 370px;
+width: 300px;
+    height: 40px;
+`
 };
 
 export const buttonColor = {
   black: css`
-    background-color: var(--color-black);
+    background-color: var(--ui-primary);
     color: white;
     &:hover {
       background-color: var(--color-gray-800);
