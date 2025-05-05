@@ -3,7 +3,7 @@
 import { LetterBase, Letter } from "@/types/moabox";
 import { PropsWithChildren, useCallback } from "react";
 import { useLetterModalContext } from "@/contexts/LetterModalContext";
-import useLetterCache from "@/hooks/useLetterCache";
+import { useLetterCache } from "@/contexts/LetterCacheContext";
 import Swal from "sweetalert2";
 
 interface Props extends PropsWithChildren {
@@ -15,7 +15,7 @@ export default function OpenLetter({ children, letter }: Props) {
   const fetchLetterData = useLetterCache(); //GET 요청 및 캐싱
 
   const clickHandler = useCallback(async () => {
-    // if (편지 소유주가 현재 session user가 아닐때){}
+    // if (편지 소유주가 현재 session user가 아닐때)
     try {
       let letterDetail;
       if (letter.isOpened) {
@@ -56,6 +56,7 @@ export default function OpenLetter({ children, letter }: Props) {
       }
       //편지 기본 정보와 상세 정보를 합침 (편지 모달에 전달하기 위함)
       const combinedLetter: Letter = { ...letter, ...letterDetail };
+      console.log("편지 상세", combinedLetter);
       openLetterModal(combinedLetter);
     } catch (error) {
       console.error("편지 여는 중 문제 발생", error);

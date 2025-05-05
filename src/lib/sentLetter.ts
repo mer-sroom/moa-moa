@@ -10,6 +10,11 @@ export async function getSentLetters(userId: string) {
       title: true,
       content: true,
       createdAt: true,
+      letterIconDesign: {
+        select: {
+          imageURL: true,
+        },
+      },
       letterPaperDesign: {
         select: {
           imageURL: true,
