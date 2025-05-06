@@ -1,0 +1,148 @@
+/* 전체 감싸기 */
+.allContainer {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: #1b1b1b;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0;
+  padding-top: 63.5px;
+}
+
+/* 마이페이지 섹션 감싸기(저장버튼 제외) */
+.container {
+  width: 82%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding-top: 64px;
+  gap: 31px;
+}
+
+/* 프로필 섹션 전체 */
+.profileSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 프로필 사진 */
+.profileImage {
+  width: 125px;
+  height: 125px;
+  border-radius: 250px;
+  background-color: azure;
+  box-sizing: border-box;
+}
+
+/* 이름 / 닉네임 / 스포티파이 전체 */
+.userinfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 상단 닉네임 */
+.userName {
+  padding: 10px 0 5px 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* 연동 로그인 */
+.loginWith {
+  font-size: 14px;
+  font-weight: bold;
+  color: #8b8b8b;
+}
+
+.spotify {
+  display: flex;
+  font-size: 14px;
+  font-weight: bold;
+  color: #8b8b8b;
+  align-items: center;
+  flex-direction: row;
+}
+
+.spotify_signout {
+  cursor: pointer;
+}
+
+/* 하단 닉네임, 이메일 (전체) */
+.formSection {
+  width: 100%;
+  border-bottom: 1px solid #4a4a4a;
+  border-top: 1px solid #4a4a4a;
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 타이틀 라벨 */
+/* padding-bottom: 6px이 생각보다 좁아서 좀 넓혔어요 */
+.formSection label {
+  padding-bottom: 12px;
+  color: #fff;
+}
+
+/* 입력창 */
+.formSection input {
+  padding: 25px;
+  border-radius: 50px;
+  background-color: #e8e8e8;
+  font-size: 14px;
+  color: #8f8f8f;
+}
+
+/* 닉네임 */
+.formNickname {
+  padding-bottom: 17px;
+  padding-top: 7px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 이메일 */
+.formEmail {
+  padding-bottom: 17px;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+/* 로그아웃, 계정삭제 (전체) */
+.actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 102px;
+}
+
+/* 버튼 전체 스타일 */
+.actions button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* 로그아웃 버튼 */
+.actions .logout {
+  text-decoration: none;
+  color: #fff;
+  padding: 9px 0;
+}
+
+/* 계정 삭제 버튼 */
+.actions .delete {
+  text-decoration: none;
+  color: #a79c95;
+  padding: 9px 0;
+}

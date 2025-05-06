@@ -1,0 +1,120 @@
+/*전체*/
+.content_wrapper {
+  margin-top: 30px;
+}
+
+/* 소식 카테고리 p태그 공통*/
+.notifications_category {
+  font-size: 16px;
+  color: var(--color-gray-300);
+  margin: 0;
+  padding-bottom: 16px;
+}
+
+/* 소식함 공통 */
+.notifications_wrapper {
+  overflow-y: scroll;
+  max-height: 200px;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/*소심함 알림 없을 때*/
+.no_notifications {
+  padding: 20px 0;
+  text-align: center;
+  color: var(--color-gray-300);
+}
+
+/* 내 소식 알림함*/
+.my_notifications_section {
+  margin-bottom: 20px;
+}
+.my_notification {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  /* align-items: flex-start; */
+  align-items: center;
+}
+
+.my_notification .user_profileImg {
+  width: 44px;
+  height: 44px;
+  border-radius: 60px;
+  background-color: #ffffff;
+  background-size: cover;
+  cursor: pointer;
+  background-position: center;
+}
+
+.my_notification .message {
+  width: 220px;
+  margin: 0;
+}
+
+.my_notification .btn_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.my_notification .btn_wrapper button {
+  background-color: var(--color-gray-300);
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.my_notification .accept_btn {
+  padding: 6px 5px 3px 5px;
+}
+
+.my_notification .reject_btn {
+  padding: 7px 6px 3px 6px;
+}
+/*버튼 hover시*/
+.my_notification .accept_btn:hover {
+  background-color: var(--color-black);
+}
+.my_notification .reject_btn:hover {
+  background-color: var(--ui-accent);
+}
+
+/*모아 소식함*/
+.moa_notifications_section {
+  padding-bottom: 12px;
+}
+.moa_notification {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.moa_notification .message {
+  margin: 0 0 0 24px;
+  width: 90%;
+}
+
+/*모아 notification 읽었을 때*/
+.read {
+  opacity: 0.3;
+}
+
+/* 섹션 그라데이션용  */
+
+.gradation {
+  width: 85%;
+  height: 40px;
+  background: linear-gradient(
+    to top,
+    rgb(255, 255, 255) 25%,
+    rgba(255, 255, 255, 0.75) 70%,
+    rgba(255, 255, 255, 0)
+  );
+  position: fixed;
+  bottom: 24px;
+  /* left: 0; */
+}

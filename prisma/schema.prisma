@@ -34,7 +34,7 @@ model User {
   // 사용자가 수정 가능
   nickname     String
   // 프로필 이미지 (URL 등으로 저장)
-  profileImage String?
+  image         String? @map("profileImage")
 
   // (추가) role 필드로 사용자 권한을 구분: 기본값은 USER
   role UserRole @default(USER)
@@ -112,6 +112,15 @@ model MoaBox {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+
+  //--- (추가) 디자인 요소 컬럼  ---
+  // 배경 이미지
+  backgroundDesignId Int  
+  backgroundDesign   BackgroundDesign? @relation(fields: [backgroundDesignId], references: [id])
+
+  // 우편함 이미지
+  mailBoxDesignId    Int 
+  mailBoxDesign      MailBoxDesign? @relation(fields: [mailBoxDesignId], references: [id])
 }
 
 // 4. MoaBoxParticipant (그룹 모아 참가자)
@@ -154,9 +163,20 @@ model Letter {
   content  String
   theme    String?
   isOpened Boolean @default(false)
+  //--- (추가) 첨부된 노래 Id --- 
+  trackId  String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+
+  //--- (추가) 디자인 요소 컬럼  ---
+  //편지지 이미지
+  letterPaperDesignId   Int
+  letterPaperDesign     LetterPaperDesign? @relation(fields: [letterPaperDesignId], references: [id])
+
+  //편지 아이콘 이미지지
+  letterIconDesignId    Int
+  letterIconDesign      LetterIconDesign?  @relation(fields: [letterIconDesignId], references: [id])
 }
 
 // 6. Notification (알림)
@@ -175,6 +195,69 @@ model Notification {
   updatedAt DateTime @default(now())
 }
 
+// --- (추가) 모아박스 디자인 테이블 추가 ---
+// 7. BackgroundDesign (배경 이미지)
+model BackgroundDesign {
+  id              Int  @id @default(autoincrement()) 
+  name            String
+
+  //이미지 URL
+  imageURL        String
+
+ //moaBox와 1:N
+  moaBoxes        MoaBox[]
+
+  createdAt       DateTime @default(now())               
+  updatedAt       DateTime @default(now())                  
+}
+
+// 8. MailBoxDesign (우편함 이미지)
+model MailBoxDesign {
+  id              Int  @id @default(autoincrement()) 
+  name            String
+
+  // 이미지 URL
+  imageURL        String
+
+  //moaBox와 1:N
+  moaBoxes        MoaBox[]
+
+  createdAt       DateTime @default(now())               
+  updatedAt       DateTime @default(now())                    
+}
+
+// --- (추가) 편지 디자인 테이블 추가 ---
+// 9. LetterPaperDesign (편지지 이미지)
+model LetterPaperDesign {
+  id              Int  @id @default(autoincrement()) 
+  name            String
+
+  //이미지 URL
+  imageURL  String
+
+ //letter와 1:N
+  letters         Letter[]
+
+  createdAt       DateTime @default(now())              
+  updatedAt       DateTime @default(now())                   
+}
+
+// 10. LetterIconDesign (편지 아이콘 이미지)
+model LetterIconDesign {
+  id              Int  @id @default(autoincrement()) 
+  name            String
+  
+  // 이미지 URL
+  imageURL         String
+
+  //letter와 1:N
+  letters         Letter[]
+
+  createdAt       DateTime @default(now())              
+  updatedAt       DateTime @default(now())                   
+}
+
+
 // ---------------------------
 // (추가) NextAuth 표준 모델
 // ---------------------------
@@ -191,7 +274,7 @@ model Account {
   expires_at                Int?
   token_type                String?
   scope                     String?
-  id_token                  String?
+  id_token                  String?  @db.Text
   session_state             String?
   refresh_token_expires_in  Int?
 

@@ -5,5 +5,5 @@ export default function YearSeasonPage() {
     <>
       <h1>Year and Season Page</h1>
     </>
-  )
+  );
 }

@@ -1,0 +1,108 @@
+/*편지 모달 css*/
+.modalContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 350px;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 30px;
+}
+
+.letterIcon {
+  position: absolute;
+  top: -10px;
+  left: 40%;
+  height: 80px;
+  width: 80px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.letterPaper {
+  background-size: cover;
+  height: 380px;
+  border-radius: 28px;
+  padding: 24px 28px;
+}
+.letterContentContainer {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+.letterTitle {
+  margin: 24px 0 12px;
+}
+
+.letterContent {
+  font-size: 14px;
+  line-height: 1.8;
+  height: 200px;
+  /* overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent; */
+}
+.letterSender {
+  text-align: right;
+  font-size: 13px;
+}
+.deleteButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.deleteButton {
+  border: none;
+  background: none;
+  filter: contrast(20);
+  cursor: pointer;
+}
+.deleteButton {
+  transition: 0.2s ease;
+}
+.deleteButton:hover {
+  animation: deleteBtnRotate 0.5s ease-in-out;
+}
+/*삭제 버튼 애니메이션*/
+@keyframes deleteBtnRotate {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  45% {
+    transform: rotate(18deg);
+  }
+
+  75% {
+    transform: rotate(-10deg);
+  }
+}
+
+/*SpotifyWithDelay 전용*/
+.spotifyContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+}
+.spotifyIframeFallback {
+  width: 100%;
+  height: 80px;
+  border-radius: 28px;
+}
+
+.spotifyIframe {
+  border-radius: 8px;
+}
+
+.linkStyle {
+  color: white;
+  text-decoration: none;
+}

@@ -1,0 +1,44 @@
+.explanationSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 편지를 감싸는 컨테이너 */
+.letterContainer {
+  position: relative;
+  width: 400px; /* 원하는 크기로 조정 */
+  height: 400px; /* 편지가 들어갈 영역 */
+  overflow: visible;
+}
+
+/* 편지 이미지 기본 스타일 */
+.letterImage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px; /* 편지 크기 */
+  height: auto;
+  opacity: 0; /* 초기 투명도 0 (애니메이션 전) */
+}
+
+.slideDown {
+  animation: letterSlide 1.2s ease forwards; /* 1.2초 동안 실행, 끝나면 유지(forwards) */
+}
+
+@keyframes letterSlide {
+  0% {
+    transform: translate(-50%, -120%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+  }
+}

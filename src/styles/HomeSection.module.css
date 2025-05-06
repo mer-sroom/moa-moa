@@ -1,0 +1,120 @@
+.homeSection {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  position: relative;
+}
+
+/* 왼쪽 텍스트 영역 */
+.leftContent {
+  flex: 1;
+  max-width: 50%;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0;
+}
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+.description {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #444;
+  margin-bottom: 1rem;
+}
+.createButton {
+  background-color: #000;
+  color: #fff;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  min-width: 200px;
+}
+.createButton:hover {
+  background-color: #333;
+}
+
+/* 오른쪽 이미지 영역 */
+.rightContent {
+  position: relative;
+  width: 900px;
+  height: 600px;
+  overflow: hidden;
+}
+
+/* 이미지를 절대 배치 */
+.letterImage {
+  position: absolute;
+  width: 547.707px;
+  height: 361.758px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-4.789deg);
+  z-index: 1;
+}
+.musicImage {
+  position: absolute;
+  width: 333.402px;
+  height: 425.236px;
+  z-index: 0;
+  top: 5%;
+  right: 0;
+  transform: rotate(-28.536deg);
+}
+.catImage {
+  position: absolute;
+  width: 221.852px;
+  height: 175px;
+  z-index: 2;
+  top: 60%;
+  left: 10%;
+  transform: rotate(-7.916deg);
+}
+.bombImage {
+  position: absolute;
+  width: 85.243px;
+  height: 75.772px;
+  z-index: 2;
+  top: 40%;
+  left: 8%;
+  transform: rotate(61.898deg);
+}
+.pigImage {
+  position: absolute;
+  width: 100px;
+  height: auto;
+  z-index: 2;
+  top: 15%;
+  left: 15%;
+}
+
+/* 하단 화살표 */
+.arrowDown {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.arrowDown:hover {
+  transform: translateX(-50%) scale(1.1);
+}

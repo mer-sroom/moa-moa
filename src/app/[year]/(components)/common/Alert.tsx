@@ -1,76 +1,94 @@
 "use client";
-// 추후에 알러트랑 모달 어떻게 디자인하고, (라이브러리 사용여부 등) 결정해야할 듯요요
-export interface AlertProps {
-  message: string | React.ReactNode;
-  type?: "success" | "info" | "warning" | "error";
-  isOpen?: boolean;
-  onClose?: () => void;
 
-  // [추가] 스타일 덮어쓰기 위한 props
-  alertStyle?: React.CSSProperties;
-  overlayStyle?: React.CSSProperties;
+import React, { ReactNode } from "react";
+import Swal from "sweetalert2";
+import "@/styles/Alert.css";
+
+// 👉 사용예제
+// <AlertProvider> {({ showAlert, showConfirmModal }) => ( 이곳에 아래 버튼을 넣어주세요 )} </AlertProvider>
+// <button onClick={() => showAlert("메세지 입력", "아이콘 타입(ex.성공, 정보, 경고, 오류)")}> ✅ </button>
+// <button onClick={() => showConfirmModal({ message: "삭제", confirmMessage: "삭제 확인",})}> ❓ </button>
+
+export interface AlertRenderProps {
+  children: (props: {
+    showAlert: (
+      message: string,
+      type?: "성공" | "정보" | "경고" | "오류"
+    ) => void;
+    showConfirmModal: (options: {
+      message: string;
+      confirmMessage?: string;
+      onConfirm?: () => void;
+      onCancel?: () => void;
+    }) => void;
+  }) => ReactNode;
 }
 
-export default function Alert({
-  message,
-  type = "info",
-  isOpen = true,
-  onClose,
-  alertStyle: customAlertStyle,
-  overlayStyle: customOverlayStyle,
-}: AlertProps) {
-  if (!isOpen) return null;
-
-  // 오버레이(배경) 기본 스타일
-  const overlayStyle: React.CSSProperties = {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-    zIndex: 9998,
+export const AlertProvider = ({ children }: AlertRenderProps): JSX.Element => {
+  const typeToIconMap: {
+    [key in "성공" | "정보" | "경고" | "오류"]:
+      | "success"
+      | "info"
+      | "warning"
+      | "error";
+  } = {
+    성공: "success",
+    정보: "info",
+    경고: "warning",
+    오류: "error",
   };
 
-  // Alert 창(팝업) 기본 스타일
-  const baseAlertStyle: React.CSSProperties = {
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor:
-      type === "success"
-        ? "lightgreen"
-        : type === "warning"
-        ? "yellow"
-        : type === "error"
-        ? "pink"
-        : "lightblue",
-    border: "1px solid gray",
-    padding: "16px",
-    borderRadius: "8px",
-    zIndex: 9999,
-    width: "300px",
-    textAlign: "center",
+  const showAlert = (
+    message: string,
+    type: "성공" | "정보" | "경고" | "오류" = "정보"
+  ) => {
+    Swal.fire({
+      title: type,
+      html: message,
+      icon: typeToIconMap[type],
+      backdrop: "rgba(0,0,0,0.3)",
+      showConfirmButton: true,
+    });
   };
 
-  return (
-    <>
-      {/* 오버레이 */}
-      <div
-        style={{ ...overlayStyle, ...customOverlayStyle }}
-        onClick={onClose}
-      />
+  const showConfirmModal = ({
+    message,
+    confirmMessage = "진행하시겠습니까?",
+    onConfirm,
+    onCancel,
+  }: {
+    message: string;
+    confirmMessage?: string;
+    onConfirm?: () => void;
+    onCancel?: () => void;
+  }) => {
+    Swal.fire({
+      title: confirmMessage,
+      text: message,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "#1b1b1b",
+      confirmButtonText: "예",
+      cancelButtonText: "아니오",
+    }).then(result => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "완료되었습니다!",
+          text: message,
+          icon: typeToIconMap["성공"],
+        });
+        if (onConfirm) onConfirm();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: "취소",
+          text: "요청하신 작업이 취소되었습니다.",
+          icon: typeToIconMap["정보"],
+        });
+        if (onCancel) onCancel();
+      }
+    });
+  };
 
-      {/* Alert 팝업 */}
-      <div style={{ ...baseAlertStyle, ...customAlertStyle }}>
-        <div style={{ marginBottom: "8px" }}>{message}</div>
-        {onClose && (
-          <button onClick={onClose} style={{ cursor: "pointer" }}>
-            닫기
-          </button>
-        )}
-      </div>
-    </>
-  );
-}
+  return <>{children({ showAlert, showConfirmModal })}</>;
+};

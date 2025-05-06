@@ -2,15 +2,16 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { ReactNode } from "react";
-import "@/styles/globals.css"
 
 export interface ButtonProps {
-  label?: string | React.ReactNode;
+  label?: string | React.ReactNode | ReactNode;
   icon?: ReactNode; //Image 태그로 받기 위해
   className?: string;
   size?: "small" | "medium" | "long" | "circle" | "modalBtn" | "checkbox" | "next";
   color?: "black" | "white" | "red" | "blocked" | "none" | "checkboxTrue" | "checkboxFalse" | "false";
   onClick?: () => void; // toast alert 의 onCLick 속성 추가
+  loading?: boolean; //로딩이 필요한 작업일 때(ex. 이미지 다운로드)
+
 }
 
 //간단하게만 적었습니당
@@ -70,20 +71,6 @@ export const buttonColor = {
       background-color: rgb(255, 123, 123);
     }
   `,
-  //버튼 상호작용 x일 때
-  blocked: css`
-    background-color: var(--color-gray-300);
-    color: var(--color-gray-500);
-    font-weight: bold;
-    cursor: default;
-  `,
-  //배경 X, modal용
-  none: css`
-    background-color: transparent;
-    color: var(--color-gray-300);
-    font-weight: bold;
-    box-shadow: none;
-  `,
   checkboxTrue: css`
   background-color: #1B1B1B;
   color: white;
@@ -115,11 +102,24 @@ border-radius: 10px;
       background-color: var(--color-gray-500);
       border: 1px solid var(--color-gray-500);
     }
-`,
+  `,
+  //버튼 상호작용 x일 때
+  blocked: css`
+    background-color: var(--color-gray-400);
+    color: var(--color-gray-300);
+    font-weight: bold;
+    cursor: default;
+  `,
+  //배경 X, modal용
+  none: css`
+    background-color: transparent;
+    color: var(--color-gray-300);
+    font-weight: bold;
+    box-shadow: none;
+  `,
 };
 
 const ButtonStyle = styled.button<ButtonProps>`
-  border-radius: 5px;
   cursor: pointer;
   white-space: nowrap;
   border: none;
@@ -127,6 +127,7 @@ const ButtonStyle = styled.button<ButtonProps>`
   overflow: hidden;
   border-radius: 60px;
   font-size: 16px;
+  margin: 10px 0;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
   transition: 0.3s ease;
   ${props => buttonSize[props.size]};
@@ -156,7 +157,6 @@ export default function Button({
     </ButtonStyle>
   );
 }
-
 
 // 사용 예제
 // <Button label="테스트" size="small" color="black"></Button>

@@ -1,0 +1,74 @@
+
+-- AlterTable
+ALTER TABLE `letter` 
+  ADD COLUMN `letterIconDesignId` INTEGER NOT NULL, 
+  ADD COLUMN `letterPaperDesignId` INTEGER NOT NULL;
+
+-- AlterTable
+ALTER TABLE `moabox` 
+  ADD COLUMN `backgroundDesignId` INTEGER NOT NULL, 
+  ADD COLUMN `mailBoxDesignId` INTEGER NOT NULL;
+
+-- CreateTable
+CREATE TABLE `BackgroundDesign` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(191) NOT NULL,
+  `imageURL` VARCHAR(191) NOT NULL,
+  `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+  PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `MailBoxDesign` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(191) NOT NULL,
+  `imageURL` VARCHAR(191) NOT NULL,
+  `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+  PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `LetterPaperDesign` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(191) NOT NULL,
+  `imageURL` VARCHAR(191) NOT NULL,
+  `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+  PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `LetterIconDesign` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(191) NOT NULL,
+  `imageURL` VARCHAR(191) NOT NULL,
+  `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+  PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `MoaBox` 
+  ADD CONSTRAINT `MoaBox_backgroundDesignId_fkey` 
+  FOREIGN KEY (`backgroundDesignId`) REFERENCES `BackgroundDesign`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `MoaBox` 
+  ADD CONSTRAINT `MoaBox_mailBoxDesignId_fkey` 
+  FOREIGN KEY (`mailBoxDesignId`) REFERENCES `MailBoxDesign`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Letter` 
+  ADD CONSTRAINT `Letter_letterPaperDesignId_fkey` 
+  FOREIGN KEY (`letterPaperDesignId`) REFERENCES `LetterPaperDesign`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Letter` 
+  ADD CONSTRAINT `Letter_letterIconDesignId_fkey` 
+  FOREIGN KEY (`letterIconDesignId`) REFERENCES `LetterIconDesign`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
