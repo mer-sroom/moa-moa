@@ -56,7 +56,7 @@ export default function CreateMoaStep3() {
 
           <div className={styles.line_sort_block}>
             <label htmlFor="d_day" >디데이 설정</label>
-            <p className={styles.line_sort_inline}>(마감 시간은 00:00 으로 자동 조정돼요)</p>
+            <p className={styles.line_sort_small}>(마감 시간은 00:00 으로 자동 조정돼요)</p>
           </div>
           <div id="d_day" className={styles.d_day_group}>
 

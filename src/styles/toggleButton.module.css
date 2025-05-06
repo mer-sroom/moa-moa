@@ -1,0 +1,31 @@
+.toggleContainer {
+    width: 50px;
+    height: 26px;
+    background-color: var(--color-gray-300);
+    border-radius: 999px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+   
+  }
+  
+  .toggleContainer.on {
+    background-color:var(--ui-primary); 
+  }
+  
+  .circle {
+    width: 11px;
+    height: 11px;
+    background-color: var(--text-primary-reverse);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    transition: left 0.3s ease;
+  }
+  
+  .on .circle {
+    left: 33px;
+  }
+

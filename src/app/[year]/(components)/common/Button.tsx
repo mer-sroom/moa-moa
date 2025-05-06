@@ -54,10 +54,7 @@ width: 300px;
 export const buttonColor = {
   black: css`
     background-color: var(--ui-primary);
-    color: white;
-    &:hover {
-      background-color: var(--color-gray-800);
-    }
+    color: var(--text-primary-reverse);
   `,
   white: css`
     background-color: white;
