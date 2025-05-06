@@ -39,9 +39,9 @@ export default function CreateMoaStep() {
   const renderDot = () => {
     switch (step) {
       case 1: return null;
-      case 2: return <DotNav color1="black" color2="gray" color3="gray"></DotNav>
-      case 3: return <DotNav color1="gray" color2="black" color3="gray"></DotNav>
-      case 4: return <DotNav color1="gray" color2="gray" color3="black"></DotNav>
+      case 2: return <DotNav color1="black" color2="gray" color3="gray"></DotNav>;
+      case 3: return <DotNav color1="gray" color2="black" color3="gray"></DotNav>;
+      case 4: return <DotNav color1="gray" color2="gray" color3="black"></DotNav>;
       case 5: return null;
       default: return null;
     }
