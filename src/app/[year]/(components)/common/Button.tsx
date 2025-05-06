@@ -4,13 +4,14 @@ import { css } from "@emotion/react";
 import { ReactNode } from "react";
 
 export interface ButtonProps {
-  label?: string | ReactNode;
+  label?: string | React.ReactNode | ReactNode;
   icon?: ReactNode; //Image 태그로 받기 위해
   className?: string;
-  size?: "small" | "medium" | "long" | "circle" | "modalBtn";
-  color?: "black" | "white" | "red" | "blocked" | "none";
+  size?: "small" | "medium" | "long" | "circle" | "modalBtn" | "checkbox" | "next";
+  color?: "black" | "white" | "red" | "blocked" | "none" | "checkboxTrue" | "checkboxFalse" | "false";
   onClick?: () => void; // toast alert 의 onCLick 속성 추가
   loading?: boolean; //로딩이 필요한 작업일 때(ex. 이미지 다운로드)
+
 }
 
 //간단하게만 적었습니당
@@ -21,7 +22,7 @@ export const buttonSize = {
     height: 56px;
   `,
   medium: css`
-    max-width: 280px;
+    max-width: 316px;
     width: 100%;
     height: 63px;
   `,
@@ -40,15 +41,21 @@ export const buttonSize = {
     width: 100%;
     height: 56px;
   `,
+  checkbox: css`
+    width: 40px;
+    height: 40px;
+`,
+  next: css`
+max-width: 370px;
+width: 300px;
+    height: 40px;
+`
 };
 
 export const buttonColor = {
   black: css`
-    background-color: var(--color-black);
-    color: white;
-    &:hover {
-      background-color: var(--color-gray-800);
-    }
+    background-color: var(--ui-primary);
+    color: var(--text-primary-reverse);
   `,
   white: css`
     background-color: white;
@@ -62,6 +69,38 @@ export const buttonColor = {
     color: black;
     &:hover {
       background-color: rgb(255, 123, 123);
+    }
+  `,
+  checkboxTrue: css`
+  background-color: #1B1B1B;
+  color: white;
+  font-size: 16px;
+  padding-top :4px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: none;
+
+`,
+  checkboxFalse: css`
+  background-color: white;
+  color: white;
+  font-size: 16px;
+  padding-top :4px;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 10px;
+  box-shadow: none;
+
+`,
+  false: css`
+background-color: white;
+color: var(--color-gray-500);
+font-size: 16px;
+padding-top :4.5px;
+border: 1px solid var(--color-gray-300);
+border-radius: 10px;
+      &:active {
+      background-color: var(--color-gray-500);
+      border: 1px solid var(--color-gray-500);
     }
   `,
   //버튼 상호작용 x일 때
@@ -93,6 +132,7 @@ const ButtonStyle = styled.button<ButtonProps>`
   transition: 0.3s ease;
   ${props => buttonSize[props.size]};
   ${props => buttonColor[props.color]};
+  text-align: center;
 `;
 
 export default function Button({

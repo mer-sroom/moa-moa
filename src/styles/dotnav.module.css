@@ -1,0 +1,19 @@
+.container {
+    text-align: center;
+}
+
+.circle {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.black {
+    background-color: var(--ui-accent);
+}
+
+.gray {
+    background-color: var(--color-gray-500);
+}
