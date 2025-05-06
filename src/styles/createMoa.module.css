@@ -39,3 +39,34 @@
   float: right;
   margin-right: 20px;
 }
+
+.step4_Container {
+  max-width: 100vh;
+  max-height: 100vh;
+  position: relative;
+}
+
+.popup {
+  padding: 20px;
+  background-color: #212121a4;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  z-index: 1;
+}
+
+.popup_font p {
+  color: var(--text-primary-reverse);
+  margin: 0px;
+}
+
+
+.popup_closeButton {
+  position: absolute;
+  cursor: pointer;
+  background: none;
+  border: none;
+  top: 50px;
+  right: 40px;
+}
