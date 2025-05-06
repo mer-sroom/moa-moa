@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
-
 import styles from "@/styles/toggleButton.module.css";
+import type { ToggleLabelProps } from "@/types/createMoa.ts";
 
-// interface ToggleButtonProps {
-//   onLabel?: string;
-//   offLabel?: string;
-// }
-
-interface ToggleLabelProps {
-    label: string;
-}
 
 const ToggleButton: React.FC<ToggleLabelProps> = ({ label }) => {
     const [isOn, setIsOn] = useState(false);
     const toggle = () => setIsOn(!isOn);
 
-    console.log(label,isOn)
+    console.log(label, isOn)
     return (
         <div className={styles.right}>
             <span hidden>{label}</span>

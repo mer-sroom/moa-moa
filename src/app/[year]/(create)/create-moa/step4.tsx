@@ -1,8 +1,7 @@
 "use client";
 import styles from "@/styles/createMoa.module.css";
-import Button from "../../(components)/common/Button";
 import ToggleButton from "../(components)/ToggleButton";
-import { IoCloseOutline  } from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
 import { useState } from 'react';
 
 
@@ -19,7 +18,7 @@ export default function CreateMoaStep4() {
         <div className={styles.popup}>
           <button className={styles.popup_closeButton}
             onClick={handleClose}>
-            <IoCloseOutline  color="white" fontSize={"25px"}/>
+            <IoCloseOutline color="white" fontSize={"25px"} />
           </button>
           <div className={styles.popup_font}>
             <p>버튼을 검은색으로 만들어</p>
@@ -45,6 +44,5 @@ export default function CreateMoaStep4() {
         </div>
       </div>
     </div>
-    <Button label="생성하기" size="next" color="black"></Button>
   </div>
 }
