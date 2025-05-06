@@ -1,4 +1,4 @@
-import styles from "@/styles/SavedMoa.module.css";
+import styles from "@/styles/SentLetter.module.css";
 import Image from "next/image";
 import icon from "@/../public/assets/icons/sentLetterIcon.svg";
 export default function SentLetterLayout({ children }) {

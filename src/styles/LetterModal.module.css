@@ -25,13 +25,17 @@
 
 .letterPaper {
   background-size: cover;
-  height: 370px;
+  height: 380px;
   border-radius: 28px;
   padding: 24px 28px;
 }
 .letterContentContainer {
   display: flex;
   flex-direction: column;
+  height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
 }
 .letterTitle {
   margin: 24px 0 12px;
@@ -41,12 +45,13 @@
   font-size: 14px;
   line-height: 1.8;
   height: 200px;
-  overflow-y: auto;
+  /* overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
+  scrollbar-color: transparent transparent; */
 }
 .letterSender {
   text-align: right;
+  font-size: 13px;
 }
 .deleteButtonContainer {
   display: flex;
