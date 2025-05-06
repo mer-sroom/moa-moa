@@ -34,7 +34,8 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 24px;
-  align-items: flex-start;
+  /* align-items: flex-start; */
+  align-items: center;
 }
 
 .my_notification .user_profileImg {

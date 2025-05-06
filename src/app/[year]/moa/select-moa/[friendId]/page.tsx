@@ -16,6 +16,7 @@ export default async function FriendSelectMoaPage({ params }) {
   const friendMoaBoxes = await prisma.moaBox.findMany({
     where: {
       ownerId: friendId,
+      dueDate: { gte: new Date() },
     },
     include: {
       backgroundDesign: true,

@@ -37,6 +37,7 @@ export async function GET(
         title: true,
         content: true,
         trackId: true,
+        authorId: true,
         // 편지가 속한 MoaBox의 ownerId 확인
         moaBox: {
           select: {
@@ -50,7 +51,6 @@ export async function GET(
         },
       },
     });
-
     if (!letter) {
       return NextResponse.json(
         { error: "해당하는 편지를 찾을 수 없습니다." },
@@ -58,8 +58,11 @@ export async function GET(
       );
     }
 
-    // MoaBox의 소유주와 현재 로그인한 유저가 동일한지 검증
-    if (!letter.moaBox || letter.moaBox.ownerId !== session.user.id) {
+    // MoaBox의 소유주와 현재 로그인한 유저가 동일한지, 또는 작성자 본인인지 확인
+    const isOwner = letter.moaBox?.ownerId === session.user.id;
+    const isAuthor = letter.authorId === session.user.id;
+    //둘 다 아니면 403
+    if (!isOwner && !isAuthor) {
       return NextResponse.json(
         { error: "편지 소유주가 아닙니다." },
         { status: 403 }

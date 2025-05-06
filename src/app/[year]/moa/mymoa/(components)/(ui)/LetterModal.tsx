@@ -46,9 +46,9 @@ export default function LetterModal(props: LetterModalProps) {
               </h4>
               {/* 편지 내용 */}
               <p className={styles.letterContent}>{letter.content}</p>
-              {/* 편지 보낸 이 */}
-              <p className={styles.letterSender}>from. {letter.authorName}</p>
             </div>
+            {/* 편지 보낸 이 */}
+            <p className={styles.letterSender}>from. {letter.authorName}</p>
             {/* 편지 삭제 버튼 */}
             <div className={styles.deleteButtonContainer}>
               <HandleDeleteLetter letterId={letter.id}>

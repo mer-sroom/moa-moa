@@ -54,7 +54,7 @@ export default function Sidebar() {
     {
       id: "4",
       label: "내가 작성한 편지",
-      href: "/2025/sent-letter",
+      href: `/2025/sent-letter/${userName}`,
       icon: sent_letter,
     },
     { id: "5", label: "마이페이지", href: "/2025/mypage", icon: my_page },
