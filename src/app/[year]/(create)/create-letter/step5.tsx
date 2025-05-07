@@ -4,13 +4,13 @@ interface Props {
   nextStep: () => void;
 }
 
-export default function CreateLetterStep3(props: Props) {
+export default function CreateLetterStep5(props: Props) {
   const { nextStep } = props;
   return (
     <>
-      <h1>Create Letter - Step Page</h1>
+      <div>최종 편지지 확인하는 자리</div>{" "}
       <Button
-        label="작성 완료"
+        label="편지 보내기"
         size="medium"
         color="black"
         onClick={nextStep}
