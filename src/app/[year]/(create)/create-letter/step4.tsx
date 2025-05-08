@@ -8,7 +8,7 @@ export default function CreateLetterStep4(props: Props) {
   const { nextStep } = props;
   return (
     <>
-      <h1>Create Letter - Step Page</h1>
+      <h1>편지 노래 선택</h1>
       <div>
         <Button
           label="노래 선택하기"
