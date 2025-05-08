@@ -6,9 +6,10 @@ import dayjs from 'dayjs';
 import Button from "../../(components)/common/Button";
 import { FaCheck } from "react-icons/fa";
 import styles from "@/styles/createMoa.module.css";
+import type { NextStepProps } from "@/types/createMoa";
 
 
-export default function CreateMoaStep3() {
+export default function CreateMoaStep3<NextStepProps>({nextStep}) {
   const today = dayjs(new Date()).format("YYYY-MM-DD");
   const [startDay, setStartDay] = useState<string>(today);
   const [endDay, setEndDay] = useState<string>(today);
@@ -89,7 +90,7 @@ export default function CreateMoaStep3() {
               className={styles.group_member_input}
             />
           </label>
-          <Button label="다음으로" size="next" color="black"></Button>
+          <Button label="다음으로" size="medium" color="black" onClick={nextStep}></Button>
         </form>
       </div>
     </>

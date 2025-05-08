@@ -3,9 +3,11 @@ import styles from "@/styles/createMoa.module.css";
 import ToggleButton from "../(components)/ToggleButton";
 import { IoCloseOutline } from "react-icons/io5";
 import { useState } from 'react';
+import type { NextStepProps } from "@/types/createMoa";
+import Button from "../../(components)/common/Button";
 
 
-export default function CreateMoaStep4() {
+export default function CreateMoaStep4<NextStepProps>({nextStep}) {
   const [visible, setVisible] = useState(true);
 
   const handleClose = () => {
@@ -45,6 +47,8 @@ export default function CreateMoaStep4() {
           </div>
         </div>
       </div>
+      
     </div>
+    <Button label="생성하기" size="medium" color="black" onClick={nextStep}></Button>
   </div>
 }

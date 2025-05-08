@@ -13,15 +13,14 @@
   height: 100vh;
   position: absolute;
   align-content: center;
-  background-color: rgba(0, 128, 0, 0.144);
 }
 
 .button {
   display: flex;
   position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  bottom: 13%;
+  width: 100%;
+  justify-content: center;
+  bottom: 10%;
 }
 
 /* -------------------------- */

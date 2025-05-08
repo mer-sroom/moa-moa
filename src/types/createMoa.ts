@@ -11,4 +11,5 @@ export interface ToggleLabelProps {
 
 export interface NextStepProps {
     nextStep: () => void;
+    goSelectMoa?: () => void;
   }

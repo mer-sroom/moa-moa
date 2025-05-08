@@ -8,30 +8,22 @@ import CreateMoaStep4 from "./step4"
 import CreateMoaStep5 from "./step5"
 import Button from "../../(components)/common/Button";
 import DotNav from "../(components)/DotNav";
+import { useRouter } from 'next/navigation';
 
 
 export default function CreateMoaStep() {
+  const router = useRouter();
   const [step, setStep] = useState(1);
   const nextStep = () => setStep(prev => Math.min(prev + 1, 5));
-
-  const renderButton = () => {
-    switch (step) {
-      case 1: return <Button label="모아 생성하기" size="next" color="black" onClick={nextStep}></Button>;
-      case 2: return <Button label="다음으로" size="small" color="black" onClick={nextStep}></Button>;
-      case 3: return <Button label="다음으로" size="next" color="black" onClick={nextStep}></Button>;
-      case 4: return <Button label="생성하기" size="next" color="black" onClick={nextStep}></Button>;
-      case 5: return <Button label="메인으로" size="next" color="black" onClick={nextStep}></Button>;
-      default: return null;
-    }
-  };
+  const goSelectMoa = () => router.push('/2025/moa/select-moa');
 
   const renderStep = () => {
     switch (step) {
       case 1: return <CreateMoaStep1 nextStep={nextStep}></CreateMoaStep1>;
       case 2: return <CreateMoaStep2 nextStep={nextStep}></CreateMoaStep2>;
-      case 3: return <CreateMoaStep3></CreateMoaStep3>;
-      case 4: return <CreateMoaStep4></CreateMoaStep4>;
-      case 5: return <CreateMoaStep5></CreateMoaStep5>;
+      case 3: return <CreateMoaStep3 nextStep={nextStep}></CreateMoaStep3>;
+      case 4: return <CreateMoaStep4 nextStep={nextStep}></CreateMoaStep4>;
+      case 5: return <CreateMoaStep5 goSelectMoa={goSelectMoa}></CreateMoaStep5>;
       default: return null;
     }
   };
@@ -53,7 +45,6 @@ export default function CreateMoaStep() {
     <div>
       {renderDot()}
       {renderStep()}
-      {renderButton()}
     </div>
   )
 }
