@@ -31,13 +31,18 @@
   color: var(--color-gray-500);
 }
 
-.toggle_group {
-  align-items: center;
+.step4_setting_group {
+  margin-left: 45px;
+}
+
+.span_group {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 50px 0px 0px;
 }
 
 .toggle_right {
-  float: right;
-  margin-right: 20px;
+  display: flex;
 }
 
 .step4_Container {
@@ -68,5 +73,5 @@
   background: none;
   border: none;
   top: 50px;
-  right: 40px;
+  right: 90px;
 }
