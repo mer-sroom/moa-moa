@@ -1,6 +1,7 @@
 "use client";
 import DotNav from "../(components)/DotNav";
 import { useState } from "react";
+
 import CreateLetterStep1 from "./step1";
 import CreateLetterStep2 from "./step2";
 import CreateLetterStep3 from "./step3";
@@ -9,61 +10,22 @@ import CreateLetterStep5 from "./step5";
 import CreateLetterStep6 from "./step6";
 
 export default function CreateLetterStep() {
+  // 현재 단계 state
   const [step, setStep] = useState(1);
+  // 다음 단계로 이동 (최대 6단계까지 제한)
   const nextStep = () => setStep((prev) => Math.min(prev + 1, 6));
 
+  // 단계별 dot 색상 표시 및 클릭 시 해당 단계로 이동
   const renderDot = () => {
-    switch (step) {
-      case 1:
-        return (
-          <DotNav
-            color1="black"
-            color2="gray"
-            color3="gray"
-            color4="gray"
-          ></DotNav>
-        );
-      case 2:
-        return (
-          <DotNav
-            color1="black"
-            color2="gray"
-            color3="gray"
-            color4="gray"
-          ></DotNav>
-        );
-      case 3:
-        return (
-          <DotNav
-            color1="gray"
-            color2="black"
-            color3="gray"
-            color4="gray"
-          ></DotNav>
-        );
-      case 4:
-        return (
-          <DotNav
-            color1="gray"
-            color2="gray"
-            color3="black"
-            color4="gray"
-          ></DotNav>
-        );
-      case 5:
-        return (
-          <DotNav
-            color1="gray"
-            color2="gray"
-            color3="gray"
-            color4="black"
-          ></DotNav>
-        );
-      case 6:
-        return null;
-      default:
-        return null;
+    if (step >= 6) return null;
+
+    const colors = Array(5).fill("gray");
+    const activeIndex = step - 1;
+    if (activeIndex >= 0 && activeIndex < 5) {
+      colors[activeIndex] = "black"; // 현재 step을 검정으로 표시
     }
+
+    return <DotNav colors={colors} onClick={(i) => setStep(i + 1)} />;
   };
 
   const renderStep = () => {
@@ -85,17 +47,24 @@ export default function CreateLetterStep() {
     }
   };
 
+  function setCurrentStep(arg0: number): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
+    <>
       {renderDot()}
-      {renderStep()}
-    </div>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        {renderStep()}
+      </div>
+    </>
   );
 }
