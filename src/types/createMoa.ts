@@ -8,3 +8,7 @@ export interface DotNavProps {
 export interface ToggleLabelProps {
     label: string;
 }
+
+export interface NextStepProps {
+    nextStep: () => void;
+  }

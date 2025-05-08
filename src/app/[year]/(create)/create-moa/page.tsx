@@ -27,8 +27,8 @@ export default function CreateMoaStep() {
 
   const renderStep = () => {
     switch (step) {
-      case 1: return <CreateMoaStep1></CreateMoaStep1>;
-      case 2: return <CreateMoaStep2></CreateMoaStep2>;
+      case 1: return <CreateMoaStep1 nextStep={nextStep}></CreateMoaStep1>;
+      case 2: return <CreateMoaStep2 nextStep={nextStep}></CreateMoaStep2>;
       case 3: return <CreateMoaStep3></CreateMoaStep3>;
       case 4: return <CreateMoaStep4></CreateMoaStep4>;
       case 5: return <CreateMoaStep5></CreateMoaStep5>;
