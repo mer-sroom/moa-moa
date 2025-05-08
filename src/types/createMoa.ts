@@ -1,10 +1,8 @@
 export interface DotNavProps {
-    color1: string;
-    color2: string;
-    color3: string;
-    color4?: string;
+  colors: string[]; // 색 배열
+  onClick: (index: number) => void; // 클릭 이벤트
 }
 
 export interface ToggleLabelProps {
-    label: string;
+  label: string;
 }
