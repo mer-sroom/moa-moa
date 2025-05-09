@@ -1,4 +1,4 @@
-import Button from "../../(components)/common/Button";
+import Button from "../../../(components)/common/Button";
 import styles from "@/styles/createLetter.module.css";
 import Image from "next/image";
 import createLetter from "public/assets/icons/create_letter/create-letter.svg";
