@@ -6,7 +6,6 @@ import CreateMoaStep2 from "./step2"
 import CreateMoaStep3 from "./step3"
 import CreateMoaStep4 from "./step4"
 import CreateMoaStep5 from "./step5"
-import Button from "../../(components)/common/Button";
 import DotNav from "../(components)/DotNav";
 import { useRouter } from 'next/navigation';
 
