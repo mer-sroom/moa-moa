@@ -27,6 +27,9 @@ export default function CreateMoaStep4<NextStepProps>({ nextStep }) {
               <p>버튼을 검은색으로 만들어</p>
               <p>기능을 활성화 할 수 있어요</p>
             </div>
+            <div className={styles.popup_toggle}>
+            <div className={styles.popup_circle}/>
+            </div>
           </div>
         )}
         <div className={styles.step4_setting_group}>
