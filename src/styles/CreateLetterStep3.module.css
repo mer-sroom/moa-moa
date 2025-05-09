@@ -1,0 +1,179 @@
+/* 전체 컨테이너 */
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0 40px 0;
+}
+/* 편지지 */
+.letterPaper {
+  aspect-ratio: 350/428; /* 고정 비율 */
+
+  /*가로, 세로 뷰포트 모두 고려, 제일 작은 쪽을 기준으로로*/
+  width: min(
+    350px /*원본 사이즈이자 최대*/,
+    90vw /* 뷰포트 가로 90% */,
+    calc(40vh * (350 / 428)) /* 뷰포트 세로 × 고정 비율 */
+  );
+
+  height: auto; /*높이는 width 값에 따라 계산*/
+  display: flex;
+  justify-content: space-around;
+  padding: 16px 20px 10px 20px;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 1 auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  border-radius: 16px;
+  box-shadow: 0 4px 4px var(--color-gray-700);
+}
+/* 편지 상단 아이콘 */
+.letterIcon {
+  width: 72px;
+  height: 72px;
+  position: absolute;
+  top: -40px;
+  left: 40%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* 제목, 보낸 이 input 공통 */
+.inputField {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px dotted var(--color-gray-700);
+  padding-bottom: 2px;
+}
+
+/*편지 제목*/
+.letterTitle {
+  font-weight: bold;
+}
+/* 편지 내용 wrapper(제목,내용,수신자) */
+.letterContentWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+}
+.letterContentWrapper label {
+  font-size: 12px;
+  margin-bottom: 0.5rem;
+}
+/* 편지 본문 */
+.letterText {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  resize: none;
+  margin-bottom: 1rem;
+  line-height: 1.6em;
+}
+
+/* 편지 본문 스크롤바 설정 */
+/*스크롤 넓이 설정*/
+.letterText::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* 스크롤바 막대 설정*/
+.letterText::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.541);
+  border-radius: 10px;
+}
+
+/* 스크롤바 뒷 배경 설정*/
+.letterText::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.137);
+  border-radius: 10px;
+}
+
+/* 수신자 */
+.senderWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.senderLabel {
+  margin-right: 0.5rem;
+}
+/* 캐러셀 감싼 div */
+.carouselWrapper {
+  width: 100%;
+  /* flex: 0 1 auto; */
+}
+/* 버튼 wrapper */
+.buttonWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* 기본 placeholder, focus 설정 변경 */
+.letterText::placeholder,
+.inputField::placeholder,
+.letterTitle::placeholder {
+  color: var(--color-gray-700);
+  font-weight: normal;
+}
+.inputField:focus,
+.letterText:focus {
+  outline: none !important;
+}
+
+/*SelectCarousel.tsx 컴포넌트 css*/
+/* 컨테이너 */
+.carouselContainer {
+  padding: 0 8vw;
+}
+/*각 캐러셀 카드*/
+.card {
+  aspect-ratio: 128 / 72; /*비율 유지하며 카드 크기 조정*/
+  box-shadow: 0px 4.4px 4.4px 0px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  flex: 0 1 auto;
+  border-radius: 20px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+/*create-moa 이동 카드*/
+.addCard {
+  background-color: white;
+}
+
+.addBtnConatiner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addBtnConatiner img {
+  aspect-ratio: 1/1;
+  width: 40%;
+  height: auto;
+}
+
+/*선택 됐을 때*/
+.selected {
+  transform: scale(1.03);
+  box-shadow: 0 0 0 3px var(--color-black); /* 임시 색상*/
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}

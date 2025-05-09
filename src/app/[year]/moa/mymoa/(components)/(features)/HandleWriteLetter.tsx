@@ -5,12 +5,13 @@ import { useAlertContext } from "@/contexts/AlertContext";
 
 interface Props extends PropsWithChildren {
   children: ReactElement;
+  moaBoxId: number;
   allowAnonymous: boolean;
   isAuthenticated: boolean;
 }
 
 export default function HandleCreateLetter(props: Props) {
-  const { children, allowAnonymous, isAuthenticated } = props;
+  const { children, allowAnonymous, isAuthenticated, moaBoxId } = props;
   const router = useRouter();
   const { showConfirmModal } = useAlertContext();
 
@@ -29,7 +30,7 @@ export default function HandleCreateLetter(props: Props) {
       });
       return;
     }
-    router.push("/2025/create-letter");
+    router.push(`/2025/create-letter/${moaBoxId}`);
   };
 
   //자식 컴포넌트에 onClick 핸들러 부착
