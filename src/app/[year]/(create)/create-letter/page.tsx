@@ -8,12 +8,24 @@ import CreateLetterStep3 from "./step3";
 import CreateLetterStep4 from "./step4";
 import CreateLetterStep5 from "./step5";
 import CreateLetterStep6 from "./step6";
+import type { createdLetter } from "@/types/createLetter";
 
 export default function CreateLetterStep() {
   // 현재 단계 state
   const [step, setStep] = useState(1);
-  // 다음 단계로 이동 (최대 6단계까지 제한)
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, 6));
+  const nextStep = () => setStep(prev => Math.min(prev + 1, 6));
+  //편지 정보 담은 state
+  const [letterContent, setLetterContent] = useState({
+    moaBoxId: 0,
+    authorId: "", //session이 있다면 받아오기
+    authorName: "", //session이 있다면 기본 값으로 설ㅈ어
+    title: "",
+    content: "",
+    trackId: "",
+    letterIconDesign: 1,
+    letterPaperDesign: 1,
+    createdAt: new Date(),
+  } as createdLetter);
 
   // 단계별 dot 색상 표시 및 클릭 시 해당 단계로 이동
   const renderDot = () => {
@@ -25,7 +37,7 @@ export default function CreateLetterStep() {
       colors[activeIndex] = "black"; // 현재 step을 검정으로 표시
     }
 
-    return <DotNav colors={colors} onClick={(i) => setStep(i + 1)} />;
+    return <DotNav colors={colors} onClick={i => setStep(i + 1)} />;
   };
 
   const renderStep = () => {
@@ -35,7 +47,13 @@ export default function CreateLetterStep() {
       case 2:
         return <CreateLetterStep2 nextStep={nextStep} />;
       case 3:
-        return <CreateLetterStep3 nextStep={nextStep} />;
+        return (
+          <CreateLetterStep3
+            nextStep={nextStep}
+            letterContent={letterContent}
+            setLetterContent={setLetterContent}
+          />
+        );
       case 4:
         return <CreateLetterStep4 nextStep={nextStep} />;
       case 5:
