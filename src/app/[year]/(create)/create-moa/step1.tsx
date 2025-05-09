@@ -7,8 +7,8 @@ import type { NextStepProps } from "@/types/createMoa";
 
 export default function CreateMoaStep1<NextStepProps>({ nextStep }) {
   return (
-    <div className={styles.step1_container}>
-      <div className={styles.step1_main}>
+    <div>
+      <div className={styles.step1_container}>
         <Image src={step1} alt="step1" />
         <h1>마음을 모아봐요!</h1>
         <div className={styles.line_sort_gray}>
