@@ -26,8 +26,10 @@ const papers = [
   },
 ];
 
-export default function CreateLetterStep3(props: Props) {
-  const { nextStep, letterContentRef } = props;
+export default function CreateLetterStep3({
+  nextStep,
+  letterContentRef,
+}: Props) {
   const { showAlert } = useAlertContext();
   //현재 선택된 편지지 아이디(숫자)
   const [nowSelected, setNowSelected] = useState(1);

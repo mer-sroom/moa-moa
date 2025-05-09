@@ -1,7 +1,7 @@
 "use client";
-import DotNav from "../../(components)/DotNav";
 import { useState, useRef } from "react";
-
+import { useParams } from "next/navigation";
+import DotNav from "../../(components)/DotNav";
 import CreateLetterStep1 from "./step1";
 import CreateLetterStep2 from "./step2";
 import CreateLetterStep3 from "./step3";
@@ -14,9 +14,12 @@ export default function CreateLetterStep() {
   const [step, setStep] = useState(1); // 현재 단계 state
   const nextStep = () => setStep(prev => Math.min(prev + 1, 6)); // 다음 단계로 이동 (최대 6단계까지 제한)
 
+  //현재 모아박스 아이디 params로 받아오기
+  const { id } = useParams();
+  const moaBoxId = Number(id);
   //편지 정보 담은 ref(임시)
   const letterContentRef = useRef<createdLetter>({
-    moaBoxId: 0,
+    moaBoxId: moaBoxId,
     authorId: "", //세션이 있다면 현재 userId
     authorName: "", //세션이 있다면 현재 userNickname
     title: "",
