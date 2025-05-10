@@ -47,14 +47,15 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     <div>
       <div className={styles.step3_container}>
         <h1>나의 모아 설정하기</h1>
-        <div>
+        <div className={styles.width}>
           <form onSubmit={submitHandler}>
+
             <label htmlFor="moa_name"
               className={styles.line_sort_block}>모아 이름짓기</label>
             <input type="text"
               id="moa_name"
               placeholder="이름을 설정해 주세요"
-              className={styles.group_member_input} />
+              className={styles.moa_name_input} />
 
             <div className={styles.line_sort_block}>
               <label htmlFor="d_day" >디데이 설정</label>
@@ -74,23 +75,25 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
             </div>
 
             <label htmlFor="group" className={styles.line_sort_block}>모아 그룹설정</label>
+            <div className={styles.group_member_container}> 
             <input type="hidden" id="group" value={`${isOpen}`} />
             <Button
               label={isOpen ?
                 <FaCheck color="white" /> :
                 <FaCheck color="rgb(222, 222, 222)" />}
               size="checkbox"
-              color={isOpen ? "checkboxTrue" : "checkboxFalse"}
+              color={isOpen ? "checkboxTrue" : "checkboxFalse"} 
               onClick={groupHandler}>
             </Button>
 
-            <label htmlFor="group_member">
+            <label htmlFor="group_member"></label>
               <input id="group_member"
                 disabled={!isOpen}
                 placeholder="함께 할 친구를 설정해 주세요"
                 className={styles.group_member_input}
               />
-            </label>
+            
+            </div>
           </form>
         </div>
       </div>
