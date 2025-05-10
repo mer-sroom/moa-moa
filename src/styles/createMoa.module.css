@@ -56,9 +56,13 @@
   height: 20px;
 }
 
+.moa_name_input.color {
+  border: 1px solid var(--ui-neutral);
+}
+
 .group_member_input {
   display: flex;
-  width: 85.2%;
+  width: 85.5%;
   padding: 10px;
   border: 1px solid var(--color-gray-300);
   border-radius: 10px;
@@ -69,7 +73,6 @@
 .group_member_container {
   display: flex;
   gap: 3px;
-  align-content: center;
   width: 100%;
   align-items: center;
 }
@@ -80,7 +83,7 @@
 
 .line_sort_block {
   display: block;
-  margin: 28px 0px 0px 0px;
+  margin: 23px 0px 0px 0px;
   padding-bottom: 5px;
 }
 

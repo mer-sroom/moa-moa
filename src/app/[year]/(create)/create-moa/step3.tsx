@@ -16,6 +16,8 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   const year = new Date().getFullYear();
   const month = new Date().getMonth() + 1;
   const date = new Date().getDate();
+  const [isOpen, setIsOpen] = useState(false);
+  const [color, setColor] = useState(false);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,9 +40,13 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   };
 
 
-  const [isOpen, setIsOpen] = useState(false);
   const groupHandler = () => {
     setIsOpen(!isOpen);
+  };
+
+   const oninputColor = (e: React.FocusEvent<HTMLInputElement>) => {
+    console.log("입력완")
+    setColor(!!e.currentTarget.value)
   };
 
   return (
@@ -55,7 +61,9 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
             <input type="text"
               id="moa_name"
               placeholder="이름을 설정해 주세요"
-              className={styles.moa_name_input} />
+              className={`${styles.moa_name_input} ${color ? styles.color : ''}`}
+              onBlur={oninputColor}
+              />
 
             <div className={styles.line_sort_block}>
               <label htmlFor="d_day" >디데이 설정</label>
@@ -75,29 +83,26 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
             </div>
 
             <label htmlFor="group" className={styles.line_sort_block}>모아 그룹설정</label>
-            <div className={styles.group_member_container}> 
-            <input type="hidden" id="group" value={`${isOpen}`} />
-            <Button
-              label={isOpen ?
-                <FaCheck color="white" /> :
-                <FaCheck color="rgb(222, 222, 222)" />}
-              size="checkbox"
-              color={isOpen ? "checkboxTrue" : "checkboxFalse"} 
-              onClick={groupHandler}>
-            </Button>
-
-            <label htmlFor="group_member"></label>
+            <div className={styles.group_member_container}>
+              <input type="hidden" id="group" value={`${isOpen}`} />
+              <Button
+                label={isOpen ?
+                  <FaCheck color="white" /> :
+                  <FaCheck color="rgb(222, 222, 222)" />}
+                size="checkbox"
+                color={isOpen ? "checkboxTrue" : "checkboxFalse"}
+                onClick={groupHandler}>
+              </Button>
+              <label htmlFor="group_member"></label>
               <input id="group_member"
                 disabled={!isOpen}
                 placeholder="함께 할 친구를 설정해 주세요"
                 className={styles.group_member_input}
               />
-            
             </div>
           </form>
         </div>
       </div>
-      
       <div className={styles.button}>
         <Button label="다음으로" size="medium" color="black" onClick={nextStep}></Button>
       </div>

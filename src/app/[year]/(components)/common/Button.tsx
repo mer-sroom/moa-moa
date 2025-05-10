@@ -56,7 +56,7 @@ export const buttonSize = {
     height: 56px;
   `,
   checkbox: css`
-    width: 44px;
+    width: 42px;
     height: 40px;
   `,
   next: css`
