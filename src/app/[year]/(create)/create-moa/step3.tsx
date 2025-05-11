@@ -54,6 +54,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     <div>
       {openSelect && <SelectModal onClose={() => setOpenSelect(false)} />}
       <div className={styles.step3_container}>
+        
         <h1>나의 모아 설정하기</h1>
         <div className={styles.width}>
           <form onSubmit={submitHandler}>
