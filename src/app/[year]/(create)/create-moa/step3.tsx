@@ -7,6 +7,7 @@ import Button from "../../(components)/common/Button";
 import { FaCheck } from "react-icons/fa";
 import styles from "@/styles/createMoa.module.css";
 import type { NextStepProps } from "@/types/createMoa";
+import SelectModal from "../(components)/SelectModal";
 
 
 export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
@@ -18,6 +19,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   const date = new Date().getDate();
   const [isOpen, setIsOpen] = useState(false);
   const [color, setColor] = useState(false);
+  const [openSelect, setOpenSelect] = useState(false);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,6 +52,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
 
   return (
     <div>
+      {openSelect && <SelectModal onClose={() => setOpenSelect(false)} />}
       <div className={styles.step3_container}>
         <h1>나의 모아 설정하기</h1>
         <div className={styles.width}>
@@ -97,6 +100,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
                 disabled={!isOpen}
                 placeholder="함께 할 친구를 설정해 주세요"
                 className={styles.group_member_input}
+                onClick={() => setOpenSelect(true)}
               />
             </div>
           </form>
