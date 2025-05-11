@@ -39,7 +39,6 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     console.log(data)
   };
 
-
   const groupHandler = () => {
     setIsOpen(!isOpen);
   };

@@ -101,6 +101,8 @@
 
 .line_sort_small {
   display: inline;
+  padding-left: 8px;
+  font-size: small;
 }
 
 /* -------------------------- */
