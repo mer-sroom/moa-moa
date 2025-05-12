@@ -29,6 +29,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     console.log(e.currentTarget.group.value)
   };
 
+  // calendar.tsx 콜백 함수 : 초기 세팅 날짜를 현재 날짜로
   const onStartDayHandler = (data: string) => {
     console.log("상위 start Handler 확인")
     setStartDay(data)
@@ -45,16 +46,24 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     setIsOpen(!isOpen);
   };
 
-   const oninputColor = (e: React.FocusEvent<HTMLInputElement>) => {
+  //input에 데이터 입력이 되어있을때 innput border색 변경
+  const oninputColor = (e: React.FocusEvent<HTMLInputElement>) => {
     console.log("입력완")
     setColor(!!e.currentTarget.value)
   };
 
+  //select modal.tsx에서 받아온 이름 적용
+  const [member, setMember] = useState<string>('');
+  const onDateChange = (data: string) => {
+    setMember(data)
+    console.log("setMember 확인")
+  };
+
   return (
     <div>
-      {openSelect && <SelectModal onClose={() => setOpenSelect(false)} />}
+      {openSelect && <SelectModal onClose={() => setOpenSelect(false)} onMemberChange={onDateChange} />}
       <div className={styles.step3_container}>
-        
+
         <h1>나의 모아 설정하기</h1>
         <div className={styles.width}>
           <form onSubmit={submitHandler}>
@@ -66,7 +75,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
               placeholder="이름을 설정해 주세요"
               className={`${styles.moa_name_input} ${color ? styles.color : ''}`}
               onBlur={oninputColor}
-              />
+            />
 
             <div className={styles.line_sort_block}>
               <label htmlFor="d_day" >디데이 설정</label>
@@ -102,6 +111,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
                 placeholder="함께 할 친구를 설정해 주세요"
                 className={styles.group_member_input}
                 onClick={() => setOpenSelect(true)}
+                value={member}
               />
             </div>
           </form>

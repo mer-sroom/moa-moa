@@ -89,6 +89,8 @@
 
 .d_day_group {
   display: inline-block;
+  position: sticky;
+  z-index: 0;
 }
 
 .d_day_start {
