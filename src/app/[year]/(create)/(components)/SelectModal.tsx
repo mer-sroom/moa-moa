@@ -4,6 +4,7 @@ import { FiPlusCircle } from "react-icons/fi";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { useState } from "react";
 
+
 const List = ({ check, state }: { check: () => void, state: boolean }) => {
     return (
         <div>
@@ -11,7 +12,7 @@ const List = ({ check, state }: { check: () => void, state: boolean }) => {
                 <div className={styles.list_circle}>
                 </div>
                 <div className={`${styles.list_text_box} ${state ? styles.check : ''}`} >
-                    <p>머가문</p>
+                    <p className={styles.bold}>머가문</p>
                     <p>초대가능</p>
                 </div>
                 <div className={styles.list_icon} onClick={check}>
@@ -41,13 +42,13 @@ export default function SelectModal({ onClose }: { onClose: () => void }) {
                         <p className={styles.selectModal_close} onClick={onClose}>
                             닫기
                         </p>
-                        <p className={styles.selectModal_select}>
-                            선택 완료
-                        </p>
+                        {ischeck ? 
+                        <div className={styles.selectModal_select_button} onClick={onClose}>
+                            <Button label="선택완료" size="modalBtn" color="black"></Button>
+                        </div> : <p className={styles.selectModal_select}>선택 완료</p>}
+
                     </div>
-                    <div className={styles.selectModal_select_button}>
-                        <Button label="선택완료" size="modalBtn" color="black"></Button>
-                    </div>
+
                 </div>
             </div>
         </div>

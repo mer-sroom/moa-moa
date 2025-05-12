@@ -29,11 +29,11 @@
 }
 
 .bottom_tag {
+    width: 80%;
     position: absolute;
-    bottom: 20px;
+    bottom: 25px;
     display: flex;
-    gap: 180px;
-    margin-bottom: 10px;
+    justify-content: space-around;
 }
 
 .selectModal_close {
@@ -41,19 +41,20 @@
     color: var(--color-gray-300);
     font-weight: 600;
     z-index: 3;
+    flex-shrink: 0;
 }
 
 .selectModal_select {
-    cursor: pointer;
     color: var(--color-gray-300);
     font-weight: 600;
 }
 
 .selectModal_select_button {
+    font-weight: 600;
+    max-width: 174px;
     width: 100%;
-    position: absolute;
-    bottom: 20px;
     z-index: 2;
+    cursor: pointer;
 }
 
 .input {
@@ -102,20 +103,21 @@
 }
 
 .list_container.check {
-    background-color: black;
+    background-color: var(--ui-neutral);
 }
 
 .list_circle {
     width: 40px;
     height: 40px;
     margin-left: 5px;
-    background-color: white;
     border-radius: 50%;
     position: absolute;
     top: 50%;
     left: 10px;
     transform: translateY(-50%);
     transition: left 0.3s ease;
+    /* ---------- 프로필 이미지 영역 색칠 --------- */
+    background-color: white;
 }
 
 .list_icon {
@@ -141,4 +143,8 @@
 
 .list_text_box.check p {
     color: var(--text-primary-reverse);
+}
+
+.bold {
+    font-weight: 700;
 }
