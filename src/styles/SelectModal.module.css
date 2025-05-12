@@ -40,7 +40,7 @@
     cursor: pointer;
     color: var(--color-gray-300);
     font-weight: 600;
-    z-index: 2;
+    z-index: 3;
 }
 
 .selectModal_select {
@@ -96,10 +96,13 @@
     border-radius: 35px;
     font-size: 14px;
     height: 35px;
-    /* background-color: var(--color-primary); */
-    background-color: black;
+    background-color: var(--color-primary);
     position: absolute;
     text-align: center;
+}
+
+.list_container.check {
+    background-color: black;
 }
 
 .list_circle {
@@ -118,8 +121,9 @@
 .list_icon {
     display: inline-block;
     position: absolute;
- right: 8%;
-top: 25%;
+    right: 8%;
+    top: 25%;
+    cursor: pointer;
 }
 
 .list_text_box {
@@ -132,5 +136,9 @@ top: 25%;
 .list_text_box p {
     margin: 0px;
     margin-left: 60px;
+    color: var(--text-primary);
+}
+
+.list_text_box.check p {
     color: var(--text-primary-reverse);
 }
