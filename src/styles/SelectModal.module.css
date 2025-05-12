@@ -53,6 +53,7 @@
     width: 100%;
     position: absolute;
     bottom: 20px;
+    z-index: 2;
 }
 
 .input {
@@ -62,7 +63,7 @@
     border: 1px solid var(--color-gray-200);
     border-radius: 25px;
     font-size: 14px;
-    height: 20px;
+    height: 25px;
     background-color: var(--color-gray-200);
     margin: 30px;
     position: absolute;
@@ -72,11 +73,64 @@
     color: var(--color-gray-400);
 }
 
-.middle_p{
+.middle p {
     color: var(--color-gray-400);
-    position: absolute;
     display: flex;
     font-size: 13px;
+    margin-top: 25px;
+    margin-bottom: 17px;
+}
+
+.middle {
     left: 9%;
     top: 87px;
+    position: absolute;
+    width: 82%;
+}
+
+.list_container {
+    left: -3%;
+    width: 100%;
+    padding: 13px;
+    border: 1px solid none;
+    border-radius: 35px;
+    font-size: 14px;
+    height: 35px;
+    /* background-color: var(--color-primary); */
+    background-color: black;
+    position: absolute;
+    text-align: center;
+}
+
+.list_circle {
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    transition: left 0.3s ease;
+}
+
+.list_icon {
+    display: inline-block;
+    position: absolute;
+ right: 8%;
+top: 25%;
+}
+
+.list_text_box {
+    position: absolute;
+    display: block;
+    margin: 0px;
+    margin-top: -2px;
+}
+
+.list_text_box p {
+    margin: 0px;
+    margin-left: 60px;
+    color: var(--text-primary-reverse);
 }
