@@ -46,12 +46,20 @@
     padding-left: 40px;
 }
 
-.selectModal_select_button {
+.selectModal_select_button{
     font-weight: 600;
     max-width: 174px;
     width: 100%;
     z-index: 2;
-    cursor: pointer;
+}
+
+.notPointer {
+    max-width: 174px;
+    width: 100%;
+}
+
+.notPointer button {
+    cursor: default;
 }
 
 .input {

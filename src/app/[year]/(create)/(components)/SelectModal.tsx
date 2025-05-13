@@ -71,7 +71,9 @@ export default function SelectModal({
                                 onClick={() => { onClose(); onMemberChange(member); }}>
                                 <Button label="선택완료" size="modalBtn" color="black"></Button>
                             </div> :
+                            <div className={styles.notPointer}>
                             <Button label="선택완료" size="modalBtn" color="none"></Button>
+                            </div>
                         }
                     </div>
                 </div>
