@@ -42,11 +42,8 @@
     font-weight: 600;
     z-index: 3;
     flex-shrink: 0;
-}
-
-.selectModal_select {
-    color: var(--color-gray-300);
-    font-weight: 600;
+    align-self: center;
+    padding-left: 40px;
 }
 
 .selectModal_select_button {
