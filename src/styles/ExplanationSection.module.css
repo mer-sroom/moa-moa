@@ -209,6 +209,66 @@
   max-width: 100%;
 }
 
+/* 이미 있는 .subSection 규칙은 그대로 두고, GET 전용 확장 */
+.getSection {
+  /* 카드 섹션과 동일한 최소 높이/중앙정렬 유지 */
+}
+
+/* 줄 배치 틀 */
+.contentWrapper {
+  display: flex;
+  gap: 4rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* 왼쪽 글 영역 */
+.textWrapper {
+  flex: 0 0 40%; /* 40 % 너비(최대 480 px 정도) */
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  line-height: 1.4;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.highlight {
+  font-weight: 700;
+}
+
+/* 집 이미지 영역 */
+.imageWrapper {
+  flex: 1 1 auto; /* 남는 공간 꽉 채우기 */
+  display: flex;
+  justify-content: center;
+}
+
+.houseImage {
+  width: 100%;
+  height: auto; /* 반응형 */
+  max-width: 520px; /* 너무 커지지 않도록 */
+}
+
+/* 모바일 대비 – 768px 이하에서 세로 쌓기 */
+@media (max-width: 768px) {
+  .contentWrapper {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .textWrapper {
+    flex: none;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
 @media (max-width: 768px) {
   .cardsWrapper {
     gap: 1rem;

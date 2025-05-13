@@ -119,12 +119,44 @@ const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
     }
 
     /* ---------------- GET 섹션 (변경 없음) ---------------- */
+    /* ---------------- GET 섹션 ---------------- */
     function GetLetterSection({ onClickNext }: { onClickNext: () => void }) {
       return (
-        <div className={styles.subSection}>
-          <h2>Get a letter</h2>
-          <p>이곳은 "Get a letter" 섹션 내용입니다.</p>
+        <div className={`${styles.subSection} ${styles.getSection}`}>
+          {/* 본문 + 이미지 줄 배치 */}
+          <div className={styles.contentWrapper}>
+            {/* ───────── 왼쪽 글 ───────── */}
+            <div className={styles.textWrapper}>
+              <h2 className={styles.title}>Get a letter</h2>
 
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+                penatibus et magnis dis parturient montes, nascetur ridiculus
+                mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                quis, sem.
+              </p>
+
+              <p className={styles.highlight}>
+                Nulla consequat massa quis enim. Donec pede justo, fringilla
+                <br /> vel, aliquet nec, vulputate eget, arcu.
+              </p>
+            </div>
+
+            {/* ───────── 오른쪽 일러스트 ───────── */}
+            <div className={styles.imageWrapper}>
+              <Image
+                src="/assets/icons/lending/Get_a_letter_house.svg"
+                alt="받은 편지 보관함"
+                width={480}
+                height={480}
+                className={styles.houseImage}
+                priority
+              />
+            </div>
+          </div>
+
+          {/* ↓ 스크롤 버튼 */}
           <Image
             src="/assets/icons/lending/arrow-down.svg"
             alt="Next"
