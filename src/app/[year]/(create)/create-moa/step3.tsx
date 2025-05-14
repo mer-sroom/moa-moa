@@ -53,8 +53,8 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   };
 
   //select modal.tsx에서 받아온 이름 적용
-  const [member, setMember] = useState<string>('');
-  const onDateChange = (data: string) => {
+  const [member, setMember] = useState<string[]>([]);
+  const onDateChange = (data: string[]) => {
     setMember(data)
     console.log("setMember 확인")
   };

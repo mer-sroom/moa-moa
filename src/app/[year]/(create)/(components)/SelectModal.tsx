@@ -67,8 +67,7 @@ export default function SelectModal({
         const onDateChange = friend.filter((friend) => friend.selected)
             .map((friend) => friend.name);
         setMember(onDateChange);
-    }
-        , [friend]);
+    }, [friend]);
 
     // ["머가문", "멈가문", "현가문"] 의 boolean 값 상태체크
     const check = (name_: string) =>
