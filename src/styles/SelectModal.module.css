@@ -84,7 +84,7 @@
     display: flex;
     background-color: var(--ui-primary);
     color: var(--text-primary-reverse);
-    padding: 5px 10px 5px 5px;
+    padding: 5px 10px 5px 15px;
     border-radius: 25px;
 }
 
@@ -96,6 +96,7 @@
 .input .placeholder {
     color: var(--color-gray-400);
     background-color: var(--color-gray-200);
+    padding-left: 0px;
 }
 
 .middle p {
