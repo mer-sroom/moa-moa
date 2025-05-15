@@ -1,19 +1,20 @@
-'use client';
 
-import { useState } from 'react';
-import CreateMoaStep1 from "./step1"
-import CreateMoaStep2 from "./step2"
-import CreateMoaStep3 from "./step3"
-import CreateMoaStep4 from "./step4"
-import CreateMoaStep5 from "./step5"
+"use client";
+
+import { useState } from "react";
+import CreateMoaStep1 from "./step1";
+import CreateMoaStep2 from "./step2";
+import CreateMoaStep3 from "./step3";
+import CreateMoaStep4 from "./step4";
+import CreateMoaStep5 from "./step5";
+import Button from "../../(components)/common/Button";
 import DotNav from "../(components)/DotNav";
 import { useRouter } from 'next/navigation';
-
 
 export default function CreateMoaStep() {
   const router = useRouter();
   const [step, setStep] = useState(1);
-  const nextStep = () => setStep(prev => Math.min(prev + 1, 5));
+  const nextStep = () => setStep((prev) => Math.min(prev + 1, 5));
   const goSelectMoa = () => router.push('/2025/moa/select-moa');
 
   const renderStep = () => {
@@ -28,22 +29,22 @@ export default function CreateMoaStep() {
   };
 
   const renderDot = () => {
-    switch (step) {
-      case 1: return null;
-      case 2: return <DotNav color1="black" color2="gray" color3="gray"></DotNav>;
-      case 3: return <DotNav color1="gray" color2="black" color3="gray"></DotNav>;
-      case 4: return <DotNav color1="gray" color2="gray" color3="black"></DotNav>;
-      case 5: return null;
-      default: return null;
-    }
-  };
+    if (step >= 6) return null;
 
-  console.log(step)
+    const colors = Array(5).fill("gray");
+    const activeIndex = step - 1;
+    if (activeIndex >= 0 && activeIndex < 5) {
+      colors[activeIndex] = "black"; // 현재 step을 검정으로 표시
+    }
+
+    return <DotNav colors={colors} onClick={(i) => setStep(i + 1)} />;
+  };
+  console.log(step);
 
   return (
     <div>
       {renderDot()}
       {renderStep()}
     </div>
-  )
+  );
 }

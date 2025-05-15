@@ -139,6 +139,7 @@ export default async function MyMoaBoxPage({ params }) {
                 <HandleCreateLetter
                   allowAnonymous={moaBox.allowAnonymous}
                   isAuthenticated={!!session}
+                  moaBoxId={moaBoxId}
                 >
                   <Button
                     label={"편지 작성하기"}

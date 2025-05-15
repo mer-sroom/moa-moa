@@ -1,14 +1,16 @@
 .container {
-    text-align: center;
-    margin : 80px 0 36px 0;
+  text-align: center;
+  margin: 9vh 0 3vh 0;
+  display: flex;
+  justify-content: center;
+  gap: 3vw;
 }
 
 .circle {
-    display: inline-block;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    margin-right: 12px;
+  aspect-ratio: 1/1;
+  width: 1.5%;
+  height: auto;
+  border-radius: 50%;
 }
 
 .black {
@@ -16,5 +18,5 @@
 }
 
 .gray {
-    background-color: var(--color-gray-500);
+  background-color: var(--color-gray-500);
 }
