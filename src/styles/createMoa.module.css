@@ -8,6 +8,7 @@
   position: absolute;
   align-content: center;
   text-align: center;
+  top: 0px;
 }
 
 .step1_container h1 {
@@ -111,22 +112,14 @@
 /*     step 4 : 모아 설정      */
 /* -------------------------- */
 
-.step4_container {
-  top: -137px;
-  max-width: 100vw;
-  max-height: 100vh;
-  position: relative;
-}
-
 .step4_main {
-  padding-top: 137px;
   width: 100%;
-  height: 100%;
-  position: absolute;
+  display: contents;
 }
 
 .step4_setting_group {
   margin-left: 50px;
+  margin-top: 70px;
 }
 
 .step4_setting_group h1 {
@@ -137,6 +130,7 @@
   display: flex;
   justify-content: space-between;
   margin: 20px 60px 0px 0px;
+  width: 90%;
 }
 
 .toggle_right {
@@ -144,11 +138,11 @@
 }
 
 .popup {
-  top: 0px;
+  top: 0;
   background-color: #212121a4;
   position: absolute;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   text-align: center;
   z-index: 1;
 }
@@ -179,7 +173,7 @@
   border-radius: 999px;
   position: relative;
   float: right;
-  margin-right: 58px;
+  margin-right: 53px;
   margin-top: -7px;
   border: 2px solid var(--ui-secondary);
 }
@@ -217,7 +211,7 @@
 
 .step5_container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   align-content: center;
   text-align: center;
 }

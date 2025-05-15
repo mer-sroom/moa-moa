@@ -15,7 +15,7 @@ export default function CreateMoaStep4<NextStepProps>({ nextStep }) {
   };
 
   return (
-    <div className={styles.step4_container}>
+    <div>
       <div className={styles.step4_main}>
         {visible && (
           <div className={styles.popup}>
