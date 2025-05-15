@@ -19,6 +19,7 @@ export default function CreateMoaStep4<NextStepProps>({ nextStep }) {
       <div className={styles.step4_main}>
         {visible && (
           <div className={styles.popup}>
+            <div className={styles.popup_line}>
             <button className={styles.popup_closeButton}
               onClick={handleClose}>
               <IoCloseOutline color="white" fontSize={"30px"} />
@@ -29,6 +30,7 @@ export default function CreateMoaStep4<NextStepProps>({ nextStep }) {
             </div>
             <div className={styles.popup_toggle}>
             <div className={styles.popup_circle}/>
+            </div>
             </div>
           </div>
         )}
