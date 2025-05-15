@@ -57,7 +57,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   const [member, setMember] = useState<string[]>([]);
   const onDateChange = (data: string[]) => {
     setMember(data)
-    console.log("setMember 확인")
+    console.log(`${"setMember 확인 : "+ member}`)
   };
 
   return (
