@@ -4,5 +4,10 @@ export interface DotNavProps {
 }
 
 export interface ToggleLabelProps {
-  label: string;
+    label: string;
+}
+
+export interface NextStepProps {
+    nextStep: () => void;
+    goSelectMoa?: () => void;
 }

@@ -1,13 +1,96 @@
-.group_member_input {
-  width: 55%;
+/* -------------------------- */
+/*   step 1 : 마음을 모아봐요   */
+/* -------------------------- */
+
+.step1_container {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  align-content: center;
+  text-align: center;
+}
+
+.step1_container h1 {
+  padding-top: 60px;
+}
+
+.button {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  justify-content: center;
+  bottom: 10%;
+}
+
+.line_sort_gray p {
+  margin-top: 0px;
+  margin-bottom: 00px;
+}
+
+/* -------------------------- */
+/* step 3 : 나의 모아 설정하기  */
+/* -------------------------- */
+
+.step3_container {
+  margin-left: 40px;
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  max-width: 100vw;
+}
+
+.width {
+  display: flex;
+  width: 100%;
+  margin-right: 50px;
+}
+
+.moa_name_input {
+  display: flex;
+  flex: 1 1 auto;
+  width: 95%;
   padding: 10px;
   border: 1px solid var(--color-gray-300);
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 13px;
+  height: 20px;
+}
+
+.moa_name_input.color {
+  border: 1px solid var(--ui-neutral);
+}
+
+.group_member_input {
+  display: flex;
+  width: 85.5%;
+  padding: 10px;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 10px;
+  font-size: 13px;
+  height: 20px;
+}
+
+.group_member_container {
+  display: flex;
+  gap: 3px;
+  width: 100%;
+  align-items: center;
+}
+
+.step3_container input::placeholder {
+  color: var(--color-gray-300);
+}
+
+.line_sort_block {
+  display: block;
+  margin: 23px 0px 0px 0px;
+  padding-bottom: 5px;
 }
 
 .d_day_group {
   display: inline-block;
+  position: sticky;
+  z-index: 0;
 }
 
 .d_day_start {
@@ -18,36 +101,51 @@
   display: inline-block;
 }
 
-.line_sort_block {
-  display: block;
-}
-
 .line_sort_small {
   display: inline;
+  padding-left: 8px;
+  font-size: small;
 }
 
-.line_sort_gray {
-  display: inline;
-  color: var(--color-gray-500);
-}
+/* -------------------------- */
+/*     step 4 : 모아 설정      */
+/* -------------------------- */
 
-.toggle_group {
-  align-items: center;
-}
-
-.toggle_right {
-  float: right;
-  margin-right: 20px;
-}
-
-.step4_Container {
-  max-width: 100vh;
+.step4_container {
+  top: -150px;
+  max-width: 100vw;
   max-height: 100vh;
   position: relative;
 }
 
+.step4_main {
+  padding-top: 150px;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}
+
+.step4_setting_group {
+  margin-left: 50px;
+}
+
+.step4_setting_group h1 {
+  margin-bottom: 0px;
+}
+
+.span_group {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 60px 0px 0px;
+}
+
+.toggle_right {
+  display: flex;
+}
+
 .popup {
-  padding: 20px;
+  top: 0px;
+  padding-top: 260px;
   background-color: #212121a4;
   position: absolute;
   width: 100%;
@@ -61,12 +159,67 @@
   margin: 0px;
 }
 
-
 .popup_closeButton {
   position: absolute;
   cursor: pointer;
   background: none;
   border: none;
-  top: 50px;
-  right: 40px;
+  top: 70px;
+  right: 60px;
+  padding-top: 70px;
+}
+
+.popup_toggle {
+  width: 50px;
+  height: 26px;
+  background-color: var(--ui-neutral);
+  border-radius: 999px;
+  position: relative;
+  float: right;
+  margin-right: 58px;
+  margin-top: -7px;
+  border: 2px solid var(--ui-secondary);
+}
+
+.popup_circle {
+  width: 11px;
+  height: 11px;
+  background-color: var(--text-primary-reverse);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.line_sort_gray {
+  display: inline-block;
+  color: var(--color-gray-500);
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.step4_button {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  justify-content: center;
+  bottom: 21.5%;
+  padding-left: 7px;
+}
+
+/* -------------------------- */
+/* step 5: 새로운 모아 생성 완료 */
+/* -------------------------- */
+
+.step5_container {
+  width: 100%;
+  height: 100vh;
+  align-content: center;
+  text-align: center;
+}
+
+.step5_font_container {
+  margin-top: 120px;
+  margin-bottom: 30px;
 }
