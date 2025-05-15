@@ -63,7 +63,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   return (
     <div>
       <Modal isOpen={openSelect}
-        showActionButtons={false}
+        showActionButtons={true}
         content={
           <SelectModal
             onClose={() => setOpenSelect(false)}

@@ -20,6 +20,11 @@
     bottom: 25px;
     display: flex;
     justify-content: space-around;
+    background-color: var(--ui-secondary);
+}
+
+.button {
+    cursor: default;
 }
 
 .selectModal_close {
@@ -29,7 +34,7 @@
     z-index: 3;
     flex-shrink: 0;
     align-self: center;
-    padding-left: 40px;
+    margin-left: 40px;
 }
 
 .selectModal_select_button {
@@ -40,7 +45,7 @@
 
 .notPointer {
     width: 145px;
-    
+
 }
 
 .notPointer button {
