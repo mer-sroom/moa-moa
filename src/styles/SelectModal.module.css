@@ -1,21 +1,8 @@
-.selectModal_container {
-    top: -140px;
-    left: 0;
-    max-width: 100vw;
-    max-height: 100vh;
-    position: relative;
-    z-index: 1;
-}
-
 .selectModal_main {
-    padding-top: 150px;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    background-color: #212121a4;
     text-align: center;
     place-items: center;
-    z-index: 2;
+    width: 100%;
+    height: 100vh;
 }
 
 .selectModal_box {
@@ -23,7 +10,6 @@
     height: 60%;
     background-color: var(--ui-secondary);
     border-radius: 25px;
-    position: relative;
     display: flex;
     justify-content: center;
 }
@@ -48,14 +34,13 @@
 
 .selectModal_select_button {
     font-weight: 600;
-    max-width: 174px;
-    width: 100%;
+    width: 145px;
     z-index: 2;
 }
 
 .notPointer {
-    max-width: 174px;
-    width: 100%;
+    width: 145px;
+    
 }
 
 .notPointer button {
@@ -103,7 +88,7 @@
     color: var(--color-gray-400);
     display: flex;
     font-size: 13px;
-    margin-top: 25px;
+    margin-top: 45px;
     margin-bottom: 17px;
 }
 

@@ -8,6 +8,7 @@ import { FaCheck } from "react-icons/fa";
 import styles from "@/styles/createMoa.module.css";
 import type { NextStepProps } from "@/types/createMoa";
 import SelectModal from "../(components)/SelectModal";
+import Modal from "../../(components)/common/Modal";
 
 
 export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
@@ -61,7 +62,14 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
 
   return (
     <div>
-      {openSelect && <SelectModal onClose={() => setOpenSelect(false)} onMemberChange={onDateChange} />}
+      <Modal isOpen={openSelect}
+        showActionButtons={false}
+        content={
+          <SelectModal
+            onClose={() => setOpenSelect(false)}
+            onMemberChange={onDateChange} />
+        }>
+      </Modal>
       <div className={styles.step3_container}>
 
         <h1>나의 모아 설정하기</h1>

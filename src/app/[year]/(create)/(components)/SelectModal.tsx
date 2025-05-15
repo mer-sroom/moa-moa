@@ -5,7 +5,6 @@ import { FaRegCircleCheck } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
-
 const List = ({
     check, state, name
 }: {
@@ -85,7 +84,7 @@ export default function SelectModal({
     };
 
     return (
-        <div className={styles.selectModal_container}>
+        <div>
             <div className={styles.selectModal_main}>
                 <div className={styles.selectModal_box}>
                     <div className={styles.input}>
