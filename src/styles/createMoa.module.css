@@ -89,19 +89,15 @@
 }
 
 .d_day_group {
-  display: inline-block;
-  position: sticky;
-  z-index: 0;
+  display: flex; /* 한 줄에 배치 */
+  gap: 12px; /* 두 칸 사이 여백 */
+  width: 100%;
 }
 
-.d_day_start {
-  display: inline-block;
-}
-
+.d_day_start,
 .d_day_end {
-  display: inline-block;
+  flex: 1 1 0; /* 같은 너비로 늘어남 */
 }
-
 .line_sort_small {
   display: inline;
   padding-left: 8px;
