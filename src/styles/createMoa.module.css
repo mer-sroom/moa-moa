@@ -27,7 +27,91 @@
   margin-top: 0px;
   margin-bottom: 00px;
 }
+/* ───────── step 2 ───────── */
 
+.step2_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preview {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.preview_bg {
+  object-fit: cover;
+  z-index: 0;
+}
+
+.preview_box {
+  position: absolute;
+  left: 50%;
+  top: 26%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.preview_deco {
+  position: absolute;
+  right: 8%;
+  top: 18%;
+  z-index: 2;
+}
+
+.next_btn {
+  position: absolute;
+  bottom: 32px;
+  right: 24px;
+  z-index: 3;
+}
+
+.tab_nav {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 12px 0 4px;
+}
+
+.tab_btn {
+  flex: 1;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.tab_btn.active {
+  background: #000;
+  color: #fff;
+}
+
+.thumb_row {
+  display: flex;
+  gap: 8px;
+  padding: 4px 12px 16px;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.thumb_btn {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  padding: 4px;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.thumb_btn img {
+  object-fit: contain;
+}
 /* -------------------------- */
 /* step 3 : 나의 모아 설정하기  */
 /* -------------------------- */
