@@ -73,7 +73,7 @@ export default function SelectCarousel({
   }, []);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className={styles.container}>
       <div className={styles.carouselContainer}>
         <Swiper
           spaceBetween={28} // 슬라이드 간 간격
