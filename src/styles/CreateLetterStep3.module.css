@@ -139,8 +139,9 @@
 .card {
   aspect-ratio: 128 / 72; /*비율 유지하며 카드 크기 조정*/
   box-shadow: 0px 4.4px 4.4px 0px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 128px;
   cursor: pointer;
-  flex: 0 1 auto;
   border-radius: 20px;
   padding: 16px;
   transition: all 0.3s ease;

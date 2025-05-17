@@ -3,7 +3,7 @@
   padding: 0 40px;
   background-color: var(--color-gray-300);
   height: 100vh;
-  padding-top: 100px;
+  padding-top: 12vh;
 }
 
 .header {
@@ -23,15 +23,31 @@
 }
 
 /*SelectCarousel.tsx 컴포넌트 css*/
+/* 전체 */
+.container {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .carouselContainer {
-  padding-top: 56px; /*캐러셀 위쪽 여백백*/
+  padding-top: 5vh;
 }
 
 .card {
   box-shadow: 0px 4.4px 4.4px 0px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  max-width: 280px;
   aspect-ratio: 280 / 410;
+
+  /*가로, 세로 뷰포트 모두 고려, 제일 작은 쪽을 기준으로로*/
+  width: min(
+    280px /*원본 사이즈이자 최대*/,
+    60vw /* 뷰포트 가로 50% */,
+    calc(70vh * (280 / 410)) /* 뷰포트 세로 × 고정 비율 */
+  );
+
   border-radius: 20px;
   padding: 20px;
   transition: all 0.3s ease;
@@ -130,5 +146,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 86px;
+  /* padding-top: 10vh; */
 }
