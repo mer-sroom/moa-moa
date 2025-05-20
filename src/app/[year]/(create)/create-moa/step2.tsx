@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import styles from "@/styles/createMoa.module.css";
+import styles from "@/styles/create-moa/Step2.module.css";
 import Button from "../../(components)/common/Button";
 import type { NextStepProps } from "@/types/createMoa";
 
