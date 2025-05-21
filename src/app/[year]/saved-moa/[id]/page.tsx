@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { authOptions } from "@/app/api/auth/authoptions";
 import { getServerSession } from "next-auth/next";
-import NotFound from "@/app/[year]/(components)/not-found";
+import NotFound from "@/app/not-found";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
