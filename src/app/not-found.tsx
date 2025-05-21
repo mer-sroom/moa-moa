@@ -2,35 +2,30 @@ export const dynamic = "force-dynamic";
 import Image from "next/image";
 import paperTexture from "public/assets/moamoa_paper_texture.jpg";
 import moaCatImg from "public/assets/service-imgs/404img.svg";
+import "@/styles/globals.css";
+import styles from "@/styles/404.module.css";
+import { style } from "@mui/system";
 export default function NotFound() {
   return (
     <div
+      className={styles.container}
       style={{
         backgroundImage: `url(${paperTexture.src})`,
-        backgroundSize: "contain",
-        backgroundPosition: "center",
-        backgroundRepeat: "repeat",
-        width: "100%",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "2vh",
       }}
     >
       <Image
         src={moaCatImg}
+        priority={true}
         alt="404"
-        style={{ width: "70%", maxWidth: 500, height: "auto" }}
+        className={styles.moaCatImg}
       />
 
-      <div style={{ textAlign: "center", color: "var(--color-black)" }}>
-        <h3>페이지를 찾을 수 없습니다!</h3>
-        <p style={{ fontSize: "0.9rem", lineHeight: "1.3rem" }}>
-          잘못된 주소를 입력하셨거나, 페이지가 삭제되었을 수 있습니다.
+      <div className={styles.textContainer}>
+        <h3>여기는 비어 있는 공간이에요!</h3>
+        <p className={styles.description}>
+          페이지가 삭제되었거나 주소가 변경된 것 같아요.
           <br />
-          다시 확인해 주세요!
+          다시 한 번 확인해 주세요.
         </p>
       </div>
     </div>
