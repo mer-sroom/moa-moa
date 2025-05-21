@@ -1,0 +1,29 @@
+.container {
+  background-size: contain;
+  background-position: center;
+  background-repeat: repeat;
+  width: 100%;
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5vh;
+}
+
+.moaCatImg {
+  width: 70%;
+  max-width: 450px;
+  height: auto;
+}
+
+.textContainer {
+  text-align: center;
+  color: var(--color-black);
+}
+
+.description {
+  font-size: 0.9rem;
+  line-height: 1.3rem;
+  color: var(--color-gray-700);
+}

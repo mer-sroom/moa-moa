@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/api/auth/authoptions";
 import { getServerSession } from "next-auth/next";
-import NotFound from "@/app/[year]/(components)/not-found";
+import NotFound from "@/app/not-found";
 import { getSentLetters } from "@/lib/sentLetter";
 import Image from "next/image";
 import styles from "@/styles/SentLetter.module.css";

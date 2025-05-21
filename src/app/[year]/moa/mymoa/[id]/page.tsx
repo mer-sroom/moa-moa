@@ -5,7 +5,7 @@ import Image from "next/image";
 import { getServerSession } from "next-auth/next";
 import { Suspense } from "react";
 //----------------------------------------------------------------
-import NotFound from "@/app/[year]/(components)/not-found";
+import NotFound from "@/app/not-found";
 import Loading from "@/app/[year]/(components)/loading";
 import Title from "../(components)/(ui)/Title";
 import MailBox from "../(components)/(ui)/MailBox";

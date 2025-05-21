@@ -1,6 +1,6 @@
 import SelectCarousel from "../(components)/SelectCarousel";
 import prisma from "@/lib/prisma";
-import NotFound from "@/app/[year]/(components)/not-found";
+import NotFound from "@/app/not-found";
 import Image from "next/image";
 import NoMoaImage from "@/../public/assets/broke_cat.svg"; //임시 이미지
 

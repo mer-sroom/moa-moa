@@ -2,7 +2,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import FriendListContent from "./(components)/FriendListContent";
-import NotFound from "../(components)/not-found";
+import NotFound from "../../not-found";
 
 export default async function FriendListPage() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;

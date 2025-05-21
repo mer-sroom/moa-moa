@@ -9,7 +9,7 @@ import xIcon from "@/../../public/assets/icons/sharelink_modal/x_sns.svg";
 import Swal from "sweetalert2";
 import { useAlertContext } from "@/contexts/AlertContext";
 import styles from "@/styles/modal.module.css";
-import NotFound from "@/app/[year]/(components)/not-found";
+import NotFound from "@/app/not-found";
 
 interface SnsItem {
   id: string;
