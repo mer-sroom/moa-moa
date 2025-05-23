@@ -1,8 +1,10 @@
 import Button from "../../../(components)/common/Button";
 import styles from "@/styles/createLetter.module.css";
 import Image from "next/image";
-import createLetter from "public/assets/icons/create_letter/create-letter.svg";
-import createRecord from "public/assets/icons/create_letter/create-record.svg";
+import lpImg from "public/assets/service-imgs/icons/lp-record.svg";
+import catBody from "public/assets/icons/create_letter/create_letter_step1_cat_body.svg";
+import catArm from "public/assets/icons/create_letter/create_letter_step1_cat_arm.svg";
+import paperImg from "public/assets/icons/create_letter/create_letter_step1_paper.svg";
 interface Props {
   nextStep: () => void;
 }
@@ -12,20 +14,27 @@ export default function CreateLetterStep1(props: Props) {
   return (
     <>
       <div className={styles.container}>
-        <Image
-          src={createLetter}
-          alt="create letter"
-          className={styles.letter}
-        />
-        <Image
-          src={createRecord}
-          alt="create record"
-          className={styles.record}
-        />
+        <div
+          style={{
+            position: "relative",
+            height: "30vh",
+            width: "100%",
+            // transform: "scale(1.1) rotate(5deg)",
+          }}
+        >
+          <div className={styles.lp_wrapper}>
+            <Image src={lpImg} alt="lp" className={styles.lp_img} />
+          </div>
+          <Image src={paperImg} alt="paper" className={styles.paper_img} />
+          <Image src={catArm} alt="cat arm" className={styles.cat_arm} />
+          <Image src={catBody} alt="cat body" className={styles.cat_body} />
+        </div>
         <div className={styles.container_text}>
           <div className={styles.title}>마음을 전달해요!</div>
           <div className={styles.description}>
-            커스터마이징한 --와 편지와 노래를 담아 친구에게 보낼 수 있어요
+            직접 꾸민 우표와, 좋아하는 노래를 담아
+            <br />
+            친구에게 편지를 보내봐요!
           </div>
         </div>
       </div>
