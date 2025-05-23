@@ -89,15 +89,19 @@
 }
 
 .d_day_group {
-  display: flex; /* 한 줄에 배치 */
-  gap: 12px; /* 두 칸 사이 여백 */
+  display: flex;
+  /* 한 줄에 배치 */
+  gap: 12px;
+  /* 두 칸 사이 여백 */
   width: 100%;
 }
 
 .d_day_start,
 .d_day_end {
-  flex: 1 1 0; /* 같은 너비로 늘어남 */
+  flex: 1 1 0;
+  /* 같은 너비로 늘어남 */
 }
+
 .line_sort_small {
   display: inline;
   padding-left: 8px;
@@ -143,8 +147,11 @@
   z-index: 1;
 }
 
-.popup_line {
-  margin-top: 245px;
+.popup_font {
+  margin-top: 27vh;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .popup_font p {
@@ -169,9 +176,10 @@
   border-radius: 999px;
   position: relative;
   float: right;
-  margin-right: 53px;
-  margin-top: -7px;
+  margin-right: 9%;
   border: 2px solid var(--ui-secondary);
+  margin-top: 278px;
+  margin-right: 9%;
 }
 
 .popup_circle {
