@@ -75,17 +75,15 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
         <h1>나의 모아 설정하기</h1>
         <div className={styles.width}>
           <form onSubmit={submitHandler}>
-
             <label htmlFor="moa_name"
-              className={styles.line_sort_block}>모아 이름짓기</label>
+              className={styles.upper_label_wrapper}>모아 이름짓기</label>
             <input type="text"
               id="moa_name"
               placeholder="이름을 설정해 주세요"
               className={`${styles.moa_name_input} ${color ? styles.color : ''}`}
               onBlur={oninputColor}
             />
-
-            <div className={styles.line_sort_block}>
+            <div className={styles.middle_label_wrapper}>
               <label htmlFor="d_day" >디데이 설정</label>
               <p className={styles.line_sort_small}>(마감 시간은 00:00 으로 자동 조정돼요)</p>
             </div>
@@ -102,7 +100,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
               </div>
             </div>
 
-            <label htmlFor="group" className={styles.line_sort_block}>모아 그룹설정</label>
+            <label htmlFor="group" className={styles.lower_label_wrapper}>모아 그룹설정</label>
             <div className={styles.group_member_container}>
               <input type="hidden" id="group" value={`${isOpen}`} />
               <Button
