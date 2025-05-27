@@ -38,6 +38,7 @@ export default function Calendar({ onDateChange, labelName }: DatePickerProps) {
                 width: '100%',
                 '& label': {
                   color: 'var(--color-gray-300)',
+                  fontSize: 'var(--font-size-base)',
                 },
               }}
             />

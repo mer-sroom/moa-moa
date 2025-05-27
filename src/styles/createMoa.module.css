@@ -32,6 +32,39 @@
 /* step 3 : 나의 모아 설정하기  */
 /* -------------------------- */
 
+/* 410px 이상일때 */
+@media (min-width: 410px) {
+  .moa_name_input {
+    width: 93%;
+  }
+}
+
+@media (max-width: 390px) {
+  .moa_name_input {
+    width: 92%;
+  }
+}
+
+@media (min-width: 530px) {
+  .moa_name_input {
+    width: 94.5%;
+  }
+}
+
+/* 600px 이상일때: 웹 */
+@media (min-width: 600px) {
+  .moa_name_input {
+    width: 95%;
+  }
+}
+
+/* 캘린더 컴포넌트 모바일뷰뷰 */
+@media (max-width: 599px) {
+  .d_day_group {
+    height: 60px;
+  }
+}
+
 .step3_container {
   margin-left: 40px;
   margin-right: 50px;
@@ -50,12 +83,12 @@
 .moa_name_input {
   display: flex;
   flex: 1 1 auto;
-  width: 95%;
   padding: 10px;
+  padding-left: 12px;
   border: 1px solid var(--color-gray-300);
   border-radius: 10px;
-  font-size: 13px;
-  height: 20px;
+  font-size: var(--font-size-base);
+  height: 25px;
   position: absolute;
   margin-top: 10px;
 }
@@ -67,29 +100,23 @@
 .group_member_input {
   display: flex;
   padding: 10px;
+  padding-left: 12px;
   border: 1px solid var(--color-gray-300);
   border-radius: 10px;
-  font-size: 13px;
-  height: 20px;
+  font-size: var(--font-size-base);
+  height: 25px;
   position: absolute;
-  margin-left: 48px;
+  margin-left: 53px;
   inset: 0;
+  background-color: var(--ui-secondary);
 }
 
 .group_member_container {
   display: flex;
-  gap: 3px;
   width: 100%;
   align-items: center;
   position: relative;
-  height: 42px;
-  padding-right: 5px;
-}
-
-@media (min-width: 600px) {
-  .group_member_container {
-    padding-right: 0px;
-  }
+  height: 47px;
 }
 
 .step3_container input::placeholder {
@@ -104,8 +131,8 @@
 
 .middle_label_wrapper {
   display: block;
-  margin: 75px 0px 0px 0px;
-  padding-bottom: 5px;
+  margin: 80px 0px 0px 0px;
+  padding-bottom: 7px;
 }
 
 .lower_label_wrapper {
@@ -122,16 +149,11 @@
   width: 100%;
 }
 
-@media (max-width: 599px) {
-  .d_day_group {
-    height: 60px;
-  }
-}
-
 .d_day_start,
 .d_day_end {
   flex: 1 1 0;
   /* 같은 너비로 늘어남 */
+  position: relative;
 }
 
 .line_sort_small {
