@@ -73,7 +73,7 @@
   height: 20px;
   position: absolute;
   margin-left: 48px;
-  inset: 0;  
+  inset: 0;
 }
 
 .group_member_container {
@@ -83,6 +83,13 @@
   align-items: center;
   position: relative;
   height: 42px;
+  padding-right: 5px;
+}
+
+@media (min-width: 600px) {
+  .group_member_container {
+    padding-right: 0px;
+  }
 }
 
 .step3_container input::placeholder {
