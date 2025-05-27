@@ -122,6 +122,12 @@
   width: 100%;
 }
 
+@media (max-width: 599px) {
+  .d_day_group {
+    height: 60px;
+  }
+}
+
 .d_day_start,
 .d_day_end {
   flex: 1 1 0;

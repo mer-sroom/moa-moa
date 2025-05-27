@@ -5,10 +5,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
+
 interface DatePickerProps {
   onDateChange: (date: string) => void;
   labelName: string;
 }
+
 
 export default function Calendar({ onDateChange, labelName }: DatePickerProps) {
   const [value, setValue] = useState<Dayjs | null>(dayjs(new Date()));
@@ -19,17 +21,27 @@ export default function Calendar({ onDateChange, labelName }: DatePickerProps) {
     onDateChange(data.format("YYYY-MM-DD"))
   };
 
+
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs} dateFormats={{ monthShort: `M` }}>
       <DemoContainer components={['DatePicker',]}>
         <DemoItem>
-          <DatePicker
-            format="YYYY-MM-DD"
-            onChange={(e) => { setValue(value); onDateHandler(value); }}
-            maxDate={nextYear}
-            minDate={dayjs('1980-01-01')}
-            label={labelName}
-          />
+          <div>
+            <DatePicker
+              format="YYYY-MM-DD"
+              views={['year', 'month', 'day']}
+              onChange={(e) => { setValue(value); onDateHandler(value); }}
+              maxDate={nextYear}
+              minDate={dayjs('1980-01-01')}
+              label={labelName}
+              sx={{
+                width: '100%',
+                '& label': {
+                  color: 'var(--color-gray-300)',
+                },
+              }}
+            />
+          </div>
         </DemoItem>
       </DemoContainer>
     </LocalizationProvider>
