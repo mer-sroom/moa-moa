@@ -26,6 +26,7 @@
 .line_sort_gray p {
   margin-top: 0px;
   margin-bottom: 00px;
+  font-size: var(--font-size-base);
 }
 
 /* -------------------------- */
