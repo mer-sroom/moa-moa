@@ -10,8 +10,10 @@ export default function CreateMoaStep5<NextStepProps>({ goSelectMoa }) {
     <div className={styles.step5_container}>
       <Image src={step5} alt="step5" />
       <div className={styles.step5_font_container}>
-      <h1>새로운 모아 생성 완료!</h1>
-      <p className={styles.line_sort_gray}>소중한 마음을 주고받기 위해 @#$%@#$ 해봐요~</p>
+        <h1>새로운 모아 생성 완료!</h1>
+        <div className={styles.line_sort_gray}>
+          <p>소중한 마음을 주고받기 위해 @#$%@#$ 해봐요~</p>
+        </div>
       </div>
       <div className={styles.button}>
         <Button label="메인으로" size="medium" color="black" onClick={goSelectMoa}></Button>
