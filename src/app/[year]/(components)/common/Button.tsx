@@ -57,8 +57,8 @@ export const buttonSize = {
     height: 56px;
   `,
   checkbox: css`
-    width: 42px;
-    height: 40px;
+    width: 48.3px;
+    height: 47px;
   `,
   next: css`
     max-width: 370px;
@@ -89,8 +89,8 @@ export const buttonColor = {
   checkboxTrue: css`
     background-color: var(--ui-neutral);
     color: var(--ui-secondary);
-    font-size: 16px;
-    padding-top: 4px;
+    font-size: 18px;
+    padding-top: 3px;
     border: none;
     border-radius: 10px;
     box-shadow: none;
@@ -99,8 +99,8 @@ export const buttonColor = {
   checkboxFalse: css`
     background-color: var(--ui-secondary);
     color: var(--ui-secondary);
-    font-size: 16px;
-    padding-top: 4px;
+    font-size: 18px;
+    padding-top: 3px;
     border: 1px solid var(--color-gray-300);
     border-radius: 10px;
     box-shadow: none;

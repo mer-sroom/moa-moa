@@ -19,18 +19,18 @@ export default function CreateMoaStep4<NextStepProps>({ nextStep }) {
       <div className={styles.step4_main}>
         {visible && (
           <div className={styles.popup}>
-            <div className={styles.popup_line}>
-            <button className={styles.popup_closeButton}
-              onClick={handleClose}>
-              <IoCloseOutline color="white" fontSize={"30px"} />
-            </button>
-            <div className={styles.popup_font}>
-              <p>버튼을 검은색으로 만들어</p>
-              <p>기능을 활성화 할 수 있어요</p>
-            </div>
-            <div className={styles.popup_toggle}>
-            <div className={styles.popup_circle}/>
-            </div>
+            
+              <button className={styles.popup_closeButton}
+                onClick={handleClose}>
+                <IoCloseOutline color="white" fontSize={"30px"} />
+              </button>
+
+              <div className={styles.popup_font}>
+                <p>버튼을 검은색으로 만들어</p>
+                <p>기능을 활성화 할 수 있어요</p>
+              </div>
+              <div className={styles.popup_toggle}>
+                <div className={styles.popup_circle} />
             </div>
           </div>
         )}
@@ -53,7 +53,7 @@ export default function CreateMoaStep4<NextStepProps>({ nextStep }) {
           </div>
         </div>
         <div className={styles.step4_button}>
-        <Button label="생성하기" size="medium" color="black" onClick={nextStep}></Button>
+          <Button label="생성하기" size="medium" color="black" onClick={nextStep}></Button>
         </div>
       </div>
     </div>
