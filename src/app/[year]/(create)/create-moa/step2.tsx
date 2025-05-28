@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
 import styles from "@/styles/create-moa/Step2.module.css";
@@ -26,7 +25,11 @@ const decos = [
 
 type Tab = "background" | "box" | "deco";
 
-export default function CreateMoaStep2({ nextStep }: NextStepProps) {
+interface Props extends NextStepProps {
+  onBgChange: (url: string) => void /* ★ 부모 콜백 */;
+}
+
+export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
   const [tab, setTab] = useState<Tab>("background");
   const [background, setBackground] = useState(backgrounds[0]);
   const [box, setBox] = useState(boxes[0]);
@@ -36,22 +39,20 @@ export default function CreateMoaStep2({ nextStep }: NextStepProps) {
     tab === "background" ? backgrounds : tab === "box" ? boxes : decos;
 
   const handleSelect = (src: string) => {
-    if (tab === "background") setBackground(src);
-    else if (tab === "box") setBox(src);
-    else setDeco(src);
+    if (tab === "background") {
+      setBackground(src);
+      onBgChange(src); /* ★ 부모에게 알림 */
+    } else if (tab === "box") {
+      setBox(src);
+    } else {
+      setDeco(src);
+    }
   };
 
+  /* JSX는 이전과 동일 */
   return (
     <div className={styles.step2_container}>
-      {/* 미리보기 영역 */}
       <div className={styles.preview}>
-        <Image
-          src={background}
-          alt="background"
-          fill
-          className={styles.preview_bg}
-          priority
-        />
         <Image
           src={box}
           alt="box"
@@ -78,36 +79,43 @@ export default function CreateMoaStep2({ nextStep }: NextStepProps) {
         </div>
       </div>
 
-      {/* 썸네일 목록 */}
-      <div className={styles.thumb_row}>
-        {thumbs.map(src => (
-          <button
-            key={src}
-            className={styles.thumb_btn}
-            onClick={() => handleSelect(src)}
-          >
-            <Image src={src} alt="thumb" width={60} height={60} />
-          </button>
-        ))}
-      </div>
-      {/* 탭 메뉴 */}
-      <div className={styles.tab_nav}>
-        {(["배경", "모아 박스", "장식"] as const).map((label, i) => (
-          <button
-            key={label}
-            className={`${styles.tab_btn} ${
-              tab === (i === 0 ? "background" : i === 1 ? "box" : "deco")
-                ? styles.active
-                : ""
-            }`}
-            onClick={() =>
-              setTab(i === 0 ? "background" : i === 1 ? "box" : "deco")
-            }
-          >
-            {label}
-          </button>
-        ))}
-      </div>
+      {/* ─── 새 푸터 ─── */}
+      <footer className={styles.footer}>
+        {/* 썸네일 행 */}
+        <div className={styles.thumb_row}>
+          {thumbs.map(src => (
+            <button
+              key={src}
+              className={styles.thumb_btn}
+              onClick={() => handleSelect(src)}
+            >
+              <Image src={src} alt="thumb" width={60} height={60} />
+            </button>
+          ))}
+        </div>
+
+        {/* 구분선 */}
+        <div className={styles.divider} />
+
+        {/* 탭 메뉴 */}
+        <nav className={styles.tab_nav}>
+          {(["배경", "모아 박스", "장식"] as const).map((label, i) => {
+            const value: Tab =
+              i === 0 ? "background" : i === 1 ? "box" : "deco";
+            return (
+              <button
+                key={label}
+                className={`${styles.tab_btn} ${
+                  tab === value ? styles.active : ""
+                }`}
+                onClick={() => setTab(value)}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </nav>
+      </footer>
     </div>
   );
 }
