@@ -50,6 +50,13 @@
   --font-family-base: "Inter", sans-serif;
   --border-radius-base: 4px; /* 버튼 등 각종 컴포넌트 모서리 */
   --transition-speed: 0.2s;
+
+  /* -------------------------- */
+  /*  모바일 뷰 Break Point      */
+  /* -------------------------- */
+  --breakpoint-sm: 380px;
+  --breakpoint-md: 440px;
 }
+
 /* 일단 지금 primary - secondary 같은 애매모호한 말로 정의 되어있는데 좀더 쓰기 쉽고 직관적인 말로 바꾸면 좋을 거 같슴다 */
 /* 사용할때는 다른 css 파일에 var(--정의한이름) 으로 사용하면 됩니다. 예를 들어서 body { background-color: var(--color-primary); 이런식으로여여 }*/
