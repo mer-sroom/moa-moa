@@ -14,7 +14,7 @@
   max-width: 430px;
   height: 500px;
 }
-
+/*  크기는 이미지 오고 나중에 조정 할게요 */
 .preview_box {
   position: absolute;
   left: 50%;
@@ -23,15 +23,19 @@
 }
 .preview_deco {
   position: absolute;
-  right: 8%;
-  top: 18%;
+  right: 37%;
+  top: 10%;
 }
 .next_btn {
   position: absolute;
-  bottom: 32px;
-  right: 24px;
+  bottom: -60px;
+  right: -60px;
 }
-
+.next_btn > button {
+  bottom: -60px;
+  right: -60px;
+  padding: 10px 40px !important; /* Button 내부 여백 override */
+}
 /* ───────── footer ───────── */
 .footer {
   width: 100%;
