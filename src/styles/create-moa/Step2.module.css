@@ -1,4 +1,4 @@
-/* ───────── step 2 컨테이너 ───────── */
+/* ───────── Step 2 컨테이너 ───────── */
 .step2_container {
   display: flex;
   flex-direction: column;
@@ -14,7 +14,6 @@
   max-width: 430px;
   height: 500px;
 }
-/*  크기는 이미지 오고 나중에 조정 할게요 */
 .preview_box {
   position: absolute;
   left: 50%;
@@ -32,20 +31,19 @@
   right: -60px;
 }
 .next_btn > button {
-  bottom: -60px;
-  right: -60px;
-  padding: 10px 40px !important; /* Button 내부 여백 override */
+  padding: 10px 40px !important;
 }
-/* ───────── footer ───────── */
+
+/* ───────── Footer ───────── */
 .footer {
   width: 100%;
   background: #fff;
-  margin-top: auto; /* preview 아래로 밀어내기 */
+  margin-top: auto;
   padding: 12px 16px 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  box-shadow: 0 -2px 6px rgba(0 0 0 / 6%);
+  box-shadow: 0 -2px 6px rgb(0 0 0 / 6%);
 }
 
 .divider {
@@ -54,23 +52,31 @@
   background: var(--color-gray-200);
 }
 
-/* 썸네일 행 */
+/* 썸네일 행 (드래그) */
 .thumb_row {
   display: flex;
-  flex-wrap: wrap; /* 가로 스크롤 제거, 넘치면 줄바꿈 */
-  gap: 12px;
-  justify-content: center;
+  gap: 16px; /* 간격 확장 */
+  white-space: nowrap;
+  overflow-x: hidden; /* 가로 스크롤만 숨김 */
+  overflow-y: hidden; /* 세로 스크롤도 숨김 */
+  cursor: grab;
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center;
+  padding: 4px 0; /* 위아래 살짝 여백 */
+}
+.thumb_row:active {
+  cursor: grabbing;
 }
 
 .thumb_btn {
-  flex: none;
-  width: 72px;
-  height: 72px;
-  padding: 6px;
+  flex: 0 0 auto;
+  width: 96px; /* 크기 확대 */
+  height: 96px;
+  padding: 8px;
   border: 1px solid var(--color-gray-300);
-  border-radius: 16px;
+  border-radius: 18px;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(0 0 0 / 8%);
+  box-shadow: 0 3px 8px rgb(0 0 0 / 10%);
   transition: background 0.15s, border 0.15s;
 }
 .thumb_btn img {
@@ -78,7 +84,7 @@
 }
 
 .thumb_selected {
-  background: #f2f4f7;
+  background: #eff3f8;
   border-color: transparent;
 }
 
@@ -88,7 +94,6 @@
   gap: 8px;
   justify-content: center;
 }
-
 .tab_btn {
   flex: 1 1 0;
   padding: 10px 0;
@@ -96,7 +101,7 @@
   border: none;
   border-radius: 14px;
   font-size: 15px;
-  box-shadow: 0 2px 6px rgba(0 0 0 / 8%);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 8%);
 }
 .tab_btn.active {
   background: #000;
