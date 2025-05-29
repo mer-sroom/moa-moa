@@ -4,7 +4,7 @@ import LetterPaperCarousel from "../../(components)/LetterPaperCarousel";
 import { useState, useRef } from "react";
 import { useAlertContext } from "@/contexts/AlertContext";
 import type { createdLetter } from "@/types/createLetter";
-import styles from "@/styles/CreateLetterStep3.module.css";
+import styles from "@/styles/create-letter/CreateLetterStep3.module.css";
 
 interface Props {
   letterContentRef: React.MutableRefObject<createdLetter>; //편지 정보 ref로 받음
