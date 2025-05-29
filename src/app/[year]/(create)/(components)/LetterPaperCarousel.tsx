@@ -4,7 +4,7 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import Image from "next/image";
 import addBtn from "@/../../public/assets/icons/select_moa_add_btn.svg";
-import styles from "@/styles/CreateLetterStep3.module.css";
+import styles from "@/styles/create-letter/CreateLetterStep3.module.css";
 
 type paperDesigns = { id: number; name: string; imageURL: string };
 interface Props {
