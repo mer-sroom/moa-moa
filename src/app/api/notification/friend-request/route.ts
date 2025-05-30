@@ -43,12 +43,13 @@ export async function PATCH(request: Request) {
   };
 
   // 두 값이 모두 존재하는지 확인
-  if (friendshipId == null || senderId == null) {
+  if (friendshipId == null || !senderId) {
     return NextResponse.json(
       { error: "payload에 friendshipId와 senderId가 모두 필요합니다." },
       { status: 400 }
     );
   }
+
   try {
     //friendList 테이블에서 Pending 상태 Accepted로 전환
     await prisma.friendship.update({
@@ -61,11 +62,13 @@ export async function PATCH(request: Request) {
 
     //moaNotification으로 -님과 친구가 되었습니다 read true상태로 추가
     //친구 닉네임 조회
-    const friendUser = await prisma.user.findUnique({
+    const sender = await prisma.user.findUnique({
       where: { id: senderId },
       select: { nickname: true },
     });
-    const friendNickname = friendUser?.nickname || "알 수 없음";
+    //사용자한테 친구 수락 알림 보내기
+    const friendNickname = sender?.nickname || "알 수 없음";
+    //사용자한테 친구 수락 알림 보내기
     await prisma.notification.create({
       data: {
         userId: session.user.id,
@@ -74,6 +77,16 @@ export async function PATCH(request: Request) {
         read: true,
       },
     });
+    //요청 보낸 유저에게도 수락 알림 보내기
+    await prisma.notification.create({
+      data: {
+        userId: senderId,
+        type: "FROM_MOA",
+        message: `${session.user.name}님이 친구 요청을 수락했습니다.`,
+        read: false,
+      },
+    });
+
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error("친구 요청 수락 처리 중 오류 발생:", error);

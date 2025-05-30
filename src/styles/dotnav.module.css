@@ -1,0 +1,22 @@
+.container {
+  text-align: center;
+  margin: 9vh 0 3vh 0;
+  display: flex;
+  justify-content: center;
+  gap: 3vw;
+}
+
+.circle {
+  aspect-ratio: 1/1;
+  width: 1.5%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.black {
+    background-color: var(--ui-neutral);
+}
+
+.gray {
+  background-color: var(--color-gray-500);
+}

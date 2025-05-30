@@ -9,6 +9,9 @@
     "lint": "next lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -29,6 +32,7 @@
     "next-auth": "^4.24.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^5.4.0",
     "react-toastify": "^11.0.3",
     "spotify-web-api-node": "^5.0.2",
     "sweetalert2": "^11.15.10",
@@ -41,6 +45,7 @@
     "eslint": "^9.16.0",
     "eslint-config-next": "^15.1.1",
     "prisma": "^6.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "5.7.2"
   }
 }

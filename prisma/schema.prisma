@@ -21,7 +21,7 @@ enum UserRole {
 
 // 1. User (소셜 로그인 전용)
 model User {
-  id           String   @id @default(uuid())
+  id           String   @id @default(uuid()) 
   // 소셜에서 받아온 이메일 (수정 불가)
   email        String? @unique
 

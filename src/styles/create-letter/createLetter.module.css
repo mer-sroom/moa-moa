@@ -1,0 +1,180 @@
+/* createLetter.module.css */
+
+@keyframes write {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  width: 100%;
+  padding-top: 20px;
+}
+/* 이미지 컨테이너 */
+.container_img {
+  position: relative;
+  width: 100%;
+  height: 30vh;
+}
+
+/* 이미지 */
+/* 공통 포지션 값 */
+.img {
+  position: absolute;
+}
+/* 악상 기호 */
+.quaver {
+  top: -20%;
+  left: 28%;
+  transform: rotate(8deg) scale(0.8);
+  animation: float 2.5s infinite;
+}
+.quaver2 {
+  bottom: -4%;
+  left: 16%;
+  transform: rotate(-8deg);
+  animation: float 3s infinite;
+}
+.crotchet {
+  top: 12%;
+  right: 16%;
+  transform: rotate(16deg);
+  z-index: 1;
+  animation: float 3.5s infinite;
+}
+/* 편지지 */
+.paper_img {
+  left: 16%;
+  width: 63%;
+  height: 30vh;
+}
+/* lp */
+.lp_wrapper {
+  top: 6%;
+  left: 32%;
+  width: 13%;
+  transform: scale(1, 0.8);
+}
+.lp_img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 고양이 */
+.cat_wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.cat_body {
+  width: min(46%, 25vh);
+  height: auto;
+  left: 36%;
+  bottom: 32%;
+}
+.cat_arm {
+  width: min(15%, 8vh);
+  height: auto;
+  left: 48.5%;
+  bottom: 6vh;
+  animation: write 1s infinite;
+}
+
+/* 텍스트  */
+.container_text {
+  width: 100%;
+  max-width: 600px;
+  padding: 5vh 0;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.description {
+  padding-top: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #909090;
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* 미디어쿼리_ media query */
+@media (max-width: 440px) {
+  /* 이미지 */
+  .quaver,
+  .quaver2,
+  .crotchet {
+    scale: 0.7;
+  }
+  .crotchet {
+    right: 12%;
+  }
+
+  .cat_body {
+    width: 44%;
+    left: 34%;
+    bottom: 32%;
+  }
+  .cat_arm {
+    left: 49%;
+    width: 14%;
+    bottom: 26%;
+  }
+  /* 텍스트 */
+  .title {
+    font-size: 20px;
+  }
+  .description {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .cat_arm {
+    bottom: 24%;
+  }
+}
+
+/* 미디어쿼리 세로 */
+@media (min-width: 600px) and (max-height: 790px) {
+  .cat_body {
+    left: 39%;
+  }
+  .cat_arm {
+    left: 48%;
+    bottom: 6vh;
+  }
+}

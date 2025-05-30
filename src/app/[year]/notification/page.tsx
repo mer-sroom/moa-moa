@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/authoptions";
 import { headers } from "next/headers";
-import NotFound from "../(components)/not-found";
+import NotFound from "../../not-found";
 import NotificationPageClient from "./(components)/NotificationPageClient";
 
 export default async function NotificationPageServer() {

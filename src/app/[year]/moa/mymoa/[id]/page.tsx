@@ -5,7 +5,8 @@ import Image from "next/image";
 import { getServerSession } from "next-auth/next";
 import { Suspense } from "react";
 //----------------------------------------------------------------
-import NotFound from "@/app/[year]/(components)/not-found";
+import NotFound from "@/app/not-found";
+import Loading from "@/app/[year]/(components)/loading";
 import Title from "../(components)/(ui)/Title";
 import MailBox from "../(components)/(ui)/MailBox";
 import Button from "@/app/[year]/(components)/common/Button";
@@ -78,7 +79,7 @@ export default async function MyMoaBoxPage({ params }) {
           />
 
           {/* 모아 박스 컨테이너*/}
-          <Suspense fallback={"loading..."}>
+          <Suspense fallback={<Loading />}>
             <MailBox
               moaBoxId={moaBoxId}
               designURL={mailBoxDesign}
@@ -139,6 +140,7 @@ export default async function MyMoaBoxPage({ params }) {
                 <HandleCreateLetter
                   allowAnonymous={moaBox.allowAnonymous}
                   isAuthenticated={!!session}
+                  moaBoxId={moaBoxId}
                 >
                   <Button
                     label={"편지 작성하기"}

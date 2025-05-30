@@ -1,0 +1,88 @@
+/*layout.tsx 영역*/
+.layoutContainer {
+  padding: 100px 40px 20px 40px;
+  overflow: auto;
+}
+/*스크롤 넓이 설정*/
+.layoutContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* 스크롤바 막대 설정*/
+.layoutContainer::-webkit-scrollbar-thumb {
+  background-color: rgba(206, 206, 206, 0.541);
+  border-radius: 10px;
+}
+
+/* 스크롤바 뒷 배경 설정*/
+.layoutContainer::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/*page.tsx 영역*/
+/* 페이지가 비어있을 때 보여줄 화면 */
+.emptyWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60vh;
+  justify-content: center;
+  opacity: 0.5;
+}
+.emptyText {
+  text-align: center;
+}
+/* 페이지 내부 */
+.container {
+  margin-top: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+}
+/* 카드  */
+.card {
+  background-size: cover;
+  height: 320px;
+  padding: 10px 28px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 4px 0px var(--color-gray-400);
+  cursor: pointer;
+}
+/* 카드 내부 */
+.cardContent {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  height: 220px;
+}
+/* 카드 수신인 */
+.cardRecipient {
+  font-size: 14px;
+}
+/* 카드 제목 */
+.cardTitle {
+  margin-top: 0;
+}
+/* 카드 본문 */
+.cardText {
+  font-size: 14px;
+  line-height: 1.6;
+}
+/* 카드 하단, 작성일 */
+.cardFooter {
+  text-align: right;
+  font-size: 14px;
+}
