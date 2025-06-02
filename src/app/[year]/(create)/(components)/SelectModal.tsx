@@ -51,6 +51,8 @@ export default function SelectModal({
         { name: "머가문", selected: false },
         { name: "멈가문", selected: false },
         { name: "현가문", selected: false },
+        { name: "이가문", selected: false },
+        { name: "최가문", selected: false },
     ]);
 
     useEffect(() => {
@@ -86,7 +88,6 @@ export default function SelectModal({
     return (
         <div>
             <div className={styles.selectModal_main}>
-                <div className={styles.selectModal_box}>
                     <div className={styles.input}>
                         {ischeck ?
                             <>{member.map((member, id) => (
@@ -101,8 +102,9 @@ export default function SelectModal({
                             :
                             <p className={styles.placeholder}>선택한 친구 목록</p>}
                     </div>
+                    <p className={styles.middle_p}>초대 가능한 친구</p>
                     <div className={styles.middle}>
-                        <p>초대 가능한 친구</p>
+
                         {friend.map((name) => (
                             <div key={name.name} className={styles.middle_list}>
                                 <List
@@ -128,7 +130,6 @@ export default function SelectModal({
                             </div>
                         }
                     </div>
-                </div>
             </div>
         </div>
     )

@@ -20,7 +20,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   const date = new Date().getDate();
   const [isOpen, setIsOpen] = useState(false);
   const [color, setColor] = useState(false);
-  const [memberColor, setmemberColor] = useState(false);
+  const [memberColor, setMemberColor] = useState(false);
   const [openSelect, setOpenSelect] = useState(false);
   const [member, setMember] = useState<string[]>([]);
 
@@ -49,14 +49,14 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     setIsOpen(!isOpen);
   };
 
-  //input에 데이터 입력이 되어있을때 innput border색 변경
+  //input에 데이터 입력이 되어있을때 input border색 변경
   const oninputColor = (e: React.FocusEvent<HTMLInputElement>) => {
     console.log("입력완")
     setColor(!!e.currentTarget.value)
   };
   const oninputColor_member = (e: React.FocusEvent<HTMLInputElement>) => {
     console.log("입력완")
-    setmemberColor(!!member)
+    setMemberColor(!!member)
   };
 
   //select modal.tsx에서 받아온 이름 적용
@@ -65,10 +65,16 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     console.log(`${"setMember 확인 : " + member}`)
   };
 
+  //모달 닫기 
+  const onClose = () => {
+    setOpenSelect(false)
+  };
+
   return (
     <div>
       <Modal isOpen={openSelect}
         showActionButtons={true}
+        onClose={onClose}
         content={
           <SelectModal
             onClose={() => setOpenSelect(false)}
