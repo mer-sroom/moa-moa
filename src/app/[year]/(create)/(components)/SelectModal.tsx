@@ -53,6 +53,7 @@ export default function SelectModal({
         { name: "현가문", selected: false },
         { name: "이가문", selected: false },
         { name: "최가문", selected: false },
+        { name: "고가문", selected: false },
     ]);
 
     useEffect(() => {
