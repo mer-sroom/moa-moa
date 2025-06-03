@@ -72,12 +72,13 @@
 }
 
 .bottom_tag {
-    width: 80%;
     position: absolute;
-    bottom: 25px;
+    bottom: 13px;
     display: flex;
-    justify-content: space-around;
     background-color: var(--ui-secondary);
+    left: 60%;
+    transform: translateX(-40%);
+    z-index: 1;
 }
 
 .button {
@@ -91,7 +92,8 @@
     z-index: 3;
     flex-shrink: 0;
     align-self: center;
-    margin-left: 40px;
+    margin-left: 55px;
+    margin-right: 25px;
 }
 
 .selectModal_select_button {
@@ -119,6 +121,7 @@
     padding: 5px 10px 5px 15px;
     border-radius: 25px;
     white-space: nowrap;
+    align-items: center;
 }
 
 .input .close_icon {

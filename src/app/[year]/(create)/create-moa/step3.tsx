@@ -54,10 +54,12 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     console.log("입력완")
     setColor(!!e.currentTarget.value)
   };
-  const oninputColor_member = (e: React.FocusEvent<HTMLInputElement>) => {
-    console.log("입력완")
-    setMemberColor(!!member)
-  };
+  //input border색 변경 - 모아 그룹 설정 
+  useEffect(()=>{
+     if(member.length > 0){
+      setMemberColor(!!member)
+    }
+  },[member]);
 
   //select modal.tsx에서 받아온 이름 적용
   const onDateChange = (data: string[]) => {
@@ -65,7 +67,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     console.log(`${"setMember 확인 : " + member}`)
   };
 
-  //모달 닫기 
+  //모달 컴포넌트 닫기 
   const onClose = () => {
     setOpenSelect(false)
   };
@@ -129,7 +131,6 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
                 className={`${styles.group_member_input} ${memberColor ? styles.color : ''}`}
                 onClick={() => setOpenSelect(true)}
                 value={member}
-                onBlur={oninputColor_member}
               />
             </div>
           </form>
