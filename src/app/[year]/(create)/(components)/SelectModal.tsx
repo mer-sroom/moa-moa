@@ -37,10 +37,10 @@ type MemberType = {
 };
 
 export default function SelectModal({
-    onClose, onMemberChange
+    onClose, onMemberChange,
 }: {
     onClose: () => void,
-    onMemberChange: (data: string[]) => void
+    onMemberChange: (data: string[]) => void,
 }) {
 
     const [ischeck, setisCheck] = useState(false);
@@ -51,6 +51,9 @@ export default function SelectModal({
         { name: "머가문", selected: false },
         { name: "멈가문", selected: false },
         { name: "현가문", selected: false },
+        { name: "이가문", selected: false },
+        { name: "최가문", selected: false },
+        { name: "고가문", selected: false },
     ]);
 
     useEffect(() => {
@@ -86,48 +89,40 @@ export default function SelectModal({
     return (
         <div>
             <div className={styles.selectModal_main}>
-                <div className={styles.selectModal_box}>
-                    <div className={styles.input}>
-                        {ischeck ?
-                            <>{member.map((member, id) => (
-                                <p key={id}>
-                                    {member}
-                                    <IoMdClose
-                                        className={styles.close_icon}
-                                        size="20px"
-                                        onClick={() => removeMember(member)} />
-                                </p>
-                            ))}</>
-                            :
-                            <p className={styles.placeholder}>선택한 친구 목록</p>}
-                    </div>
-                    <div className={styles.middle}>
-                        <p>초대 가능한 친구</p>
-                        {friend.map((name) => (
-                            <div key={name.name} className={styles.middle_list}>
-                                <List
-                                    check={check}
-                                    state={name.selected}
-                                    name={name.name}>
-                                </List>
-                            </div>
-                        ))}
-                    </div>
-                    <div className={styles.bottom_tag}>
-                        <p className={styles.selectModal_close} onClick={onClose}>
-                            닫기
-                        </p>
-                        {ischeck ?
-                            <div
-                                className={styles.selectModal_select_button}
-                                onClick={() => { onClose(); onMemberChange(member); }}>
-                                <Button label="선택완료" size="modalBtn" color="black"></Button>
-                            </div> :
-                            <div className={styles.notPointer}>
-                                <Button label="선택완료" size="modalBtn" color="none"></Button>
-                            </div>
-                        }
-                    </div>
+                <div className={styles.input}>
+                    {ischeck ?
+                        <>{member.map((member, id) => (
+                            <p key={id}>
+                                {member}
+                                <IoMdClose
+                                    className={styles.close_icon}
+                                    size="20px"
+                                    onClick={() => removeMember(member)} />
+                            </p>
+                        ))}</>
+                        :
+                        <p className={styles.placeholder}>선택한 친구 목록</p>}
+                </div>
+                <p className={styles.middle_p}>초대 가능한 친구</p>
+                <div className={styles.middle}>
+
+                    {friend.map((name) => (
+                        <div key={name.name} className={styles.middle_list}>
+                            <List
+                                check={check}
+                                state={name.selected}
+                                name={name.name}>
+                            </List>
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.bottom_tag}>
+                    {ischeck ?
+                        <div
+                            className={styles.selectModal_select_button}
+                            onClick={() => { onClose(); onMemberChange(member); }}>
+                            <Button label="선택완료" size="modalBtn" color="black"></Button>
+                        </div> : ''}
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode } from "react";
 import Image from "next/image";
 import x_btn from "../../../../../public/assets/icons/modal_X_btn.svg";
 import styles from "../../../../styles/modal.module.css";
+import { useMediaQuery } from "react-responsive";
 
 // Modal 컴포넌트에 사용할 props 정의
 export interface ModalProps {
@@ -19,21 +20,7 @@ export interface ModalProps {
   isOpen?: boolean; // Modal이 열려 있는지 여부
   onClose?: () => void; // Modal을 닫을 때 호출되는 함수
 }
-// 기본 모달 스타일
-const defaultModalStyle: CSSProperties = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  width: "90%",
-  maxWidth: "350px",
-  maxHeight: "60%",
-  transform: "translate(-50%, -50%)",
-  backgroundColor: "#fff",
-  borderRadius: "28px",
-  padding: "24px 30px",
-  zIndex: 9999,
-  boxShadow: "0px 1px 3px 0px rgba(0, 0, 0, 0.3)",
-};
+
 // 오버레이(배경) 스타일
 export const defaultOverlayStyle: CSSProperties = {
   backgroundColor: "rgba(0, 0, 0, 0.8)",
@@ -55,6 +42,22 @@ export default function Modal({
   overlayStyle: customOverlayStyle,
   showActionButtons,
 }: ModalProps) {
+  const isMobile = useMediaQuery({ maxWidth: 600 });
+// 기본 모달 스타일
+const defaultModalStyle: CSSProperties = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  width: "90%",
+  maxWidth: isMobile ? "290px" : "350px",
+  maxHeight: "60%",
+  transform: "translate(-50%, -50%)",
+  backgroundColor: "#fff",
+  borderRadius: "28px",
+  padding: "24px 30px",
+  zIndex: 9999,
+  boxShadow: "0px 1px 3px 0px rgba(0, 0, 0, 0.3)",
+};
   // isOpen이 false이면 Modal 표시 안 함
   if (!isOpen) return null;
   return (

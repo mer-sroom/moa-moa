@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "../(components)/Calendar";
 import dayjs from 'dayjs';
 import Button from "../../(components)/common/Button";
@@ -20,7 +20,9 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   const date = new Date().getDate();
   const [isOpen, setIsOpen] = useState(false);
   const [color, setColor] = useState(false);
+  const [memberColor, setMemberColor] = useState(false);
   const [openSelect, setOpenSelect] = useState(false);
+  const [member, setMember] = useState<string[]>([]);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,23 +49,34 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     setIsOpen(!isOpen);
   };
 
-  //input에 데이터 입력이 되어있을때 innput border색 변경
+  //input에 데이터 입력이 되어있을때 input border색 변경
   const oninputColor = (e: React.FocusEvent<HTMLInputElement>) => {
     console.log("입력완")
     setColor(!!e.currentTarget.value)
   };
+  //input border색 변경 - 모아 그룹 설정 
+  useEffect(()=>{
+     if(member.length > 0){
+      setMemberColor(!!member)
+    }
+  },[member]);
 
   //select modal.tsx에서 받아온 이름 적용
-  const [member, setMember] = useState<string[]>([]);
   const onDateChange = (data: string[]) => {
     setMember(data)
     console.log(`${"setMember 확인 : " + member}`)
+  };
+
+  //모달 컴포넌트 닫기 
+  const onClose = () => {
+    setOpenSelect(false)
   };
 
   return (
     <div>
       <Modal isOpen={openSelect}
         showActionButtons={true}
+        onClose={onClose}
         content={
           <SelectModal
             onClose={() => setOpenSelect(false)}
@@ -115,7 +128,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
               <input id="group_member"
                 disabled={!isOpen}
                 placeholder="함께 할 친구를 설정해 주세요"
-                className={styles.group_member_input}
+                className={`${styles.group_member_input} ${memberColor ? styles.color : ''}`}
                 onClick={() => setOpenSelect(true)}
                 value={member}
               />
