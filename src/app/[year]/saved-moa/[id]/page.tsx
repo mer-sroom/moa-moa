@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth/next";
 import NotFound from "@/app/not-found";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import { MoaBox } from "@/types/moabox";
+import moaCatImg from "public/assets/service-imgs/error_img.svg";
 import styles from "@/styles/SavedMoa.module.css";
 
 export default async function SavedMoaPage() {
@@ -35,15 +35,12 @@ export default async function SavedMoaPage() {
           alignItems: "center",
           height: "60vh",
           justifyContent: "center",
-          opacity: "0.5",
+          opacity: "0.2",
+          gap: "12px",
+          paddingTop: "5vh",
         }}
       >
-        <Image
-          src="/assets/broke_cat.svg"
-          alt="no moa"
-          width={180}
-          height={180}
-        />
+        <Image src={moaCatImg} alt="no moa" width={280} />
         <p>아직 종료된 모아 박스가 없어요!</p>
       </div>
     );
