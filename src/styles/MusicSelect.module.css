@@ -29,6 +29,8 @@
   font-size: 16px;
   color: #909090;
 }
+
+/* 검색 및 입력창 */
 .music_search_input {
   width: 100%;
 }
@@ -51,8 +53,17 @@
   outline: 2px solid #000;
 }
 
-.music_search_wrap {
-  position: relative;
+/* 검색 결과 */
+.music_result_container {
+  width: 100%;
+  height: 380px;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+}
+
+/* 검색 결과 - 스크롤 바 없애기 */
+.music_result_container::-webkit-scrollbar {
+  display: none;
 }
 
 .music_search_result {
@@ -62,6 +73,7 @@
   row-gap: 5px;
 }
 
+/* 음악 정보 */
 .music_item {
   height: 60px;
   display: flex;
@@ -75,6 +87,7 @@
   box-sizing: border-box;
 }
 
+/* 음악 정보 - 감싸는 박스 */
 .music_text_box {
   width: 60%;
   display: flex;
@@ -82,16 +95,7 @@
   row-gap: 2px;
 }
 
-.song_title {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.song_artist {
-  font-size: 14px;
-  color: var(--color-gray-300);
-}
-
+/* 음악 정보 - 앨범 이미지 */
 .profile_image {
   width: 38px;
   height: 38px;
@@ -101,24 +105,14 @@
   max-width: 100%;
 }
 
-.confirm_button_box {
-  display: flex;
-  justify-content: flex-end;
-  padding: 16px;
-}
-
-.confirm_button {
-  background-color: #eaeaea;
-  color: #888;
-  padding: 10px 16px;
-  border-radius: 12px;
+/* 음악 정보 - 곡명 */
+.song_title {
+  font-size: 16px;
   font-weight: bold;
-  border: none;
-  cursor: not-allowed;
 }
 
-.confirm_button_active {
-  background-color: #000;
-  color: #fff;
-  cursor: pointer;
+/* 음악 정보 - 아티스트 */
+.song_artist {
+  font-size: 14px;
+  color: var(--color-gray-300);
 }
