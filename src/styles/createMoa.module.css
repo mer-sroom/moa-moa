@@ -96,6 +96,12 @@
 
 .moa_name_input.color {
   border: 1px solid var(--ui-neutral);
+  background-color: none;
+}
+
+.group_member_input.color {
+  border: 1px solid var(--ui-neutral);
+  background-color: none;
 }
 
 .group_member_input {

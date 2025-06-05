@@ -1,0 +1,124 @@
+/* 전체 박스 영역 */
+.music_container {
+  display: flex;
+  width: 100%;
+  height: 60vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* 텍스트 박스 영역 */
+.music_container_text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  cursor: pointer;
+}
+
+/* 제목 */
+.music_title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* 설명 */
+.music_description {
+  font-size: 16px;
+  color: #909090;
+}
+.music_search_input {
+  width: 100%;
+}
+
+.music_search_input input {
+  width: 90%;
+  padding: 13px;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 25px;
+  font-size: 14px;
+  height: 25px;
+  background-color: var(--color-gray-200);
+  justify-items: flex-start;
+  align-items: center;
+  display: flex;
+  transition: outline 0.1s ease;
+}
+
+.music_search_input input:focus {
+  outline: 2px solid #000;
+}
+
+.music_search_wrap {
+  position: relative;
+}
+
+.music_search_result {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.music_item {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  justify-content: space-evenly;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: 24px;
+  padding: 12px 0px;
+  box-sizing: border-box;
+}
+
+.music_text_box {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+}
+
+.song_title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.song_artist {
+  font-size: 14px;
+  color: var(--color-gray-300);
+}
+
+.profile_image {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 50px;
+  max-width: 100%;
+}
+
+.confirm_button_box {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.confirm_button {
+  background-color: #eaeaea;
+  color: #888;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  border: none;
+  cursor: not-allowed;
+}
+
+.confirm_button_active {
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}

@@ -9,19 +9,26 @@
 }
 
 .action_btn_wrapper {
+  left: 0;
+  width: 100%;
   position: absolute;
-  bottom: 16px;
+  bottom: 25px;
   display: flex;
   justify-content: space-between;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
+
 .action_btn {
-  padding: 14px 32px;
+  padding: 14px 40px;
   border-radius: 4px;
   color: var(--color-gray-300);
   border: none;
   cursor: pointer;
   font-size: 16px;
   background-color: transparent;
+  font-weight: 600;
 }
 
 .modal_title {
