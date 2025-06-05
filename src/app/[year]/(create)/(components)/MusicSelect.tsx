@@ -135,21 +135,25 @@ export default function MusicSelect() {
         </div>
 
         {/* 검색 결과 */}
-        <div className={styles.music_search_result}>
-          {loading && <div>검색 중...</div>}
-          {error && <div style={{ color: "red" }}>{error}</div>}
-          {!loading &&
-            results.map((track) => (
-              <MusicList
-                key={track.id}
-                id={track.id}
-                check={handleCheck}
-                state={selected === track.id}
-                name={track.name}
-                artist={track.artists.map((a) => a.name).join(", ")}
-                imgUrl={track.album.images?.[0]?.url || "/assets/icons/cat.svg"}
-              />
-            ))}
+        <div className={styles.music_result_container}>
+          <div className={styles.music_search_result}>
+            {loading && <div>검색 중...</div>}
+            {error && <div style={{ color: "red" }}>{error}</div>}
+            {!loading &&
+              results.map((track) => (
+                <MusicList
+                  key={track.id}
+                  id={track.id}
+                  check={handleCheck}
+                  state={selected === track.id}
+                  name={track.name}
+                  artist={track.artists.map((a) => a.name).join(", ")}
+                  imgUrl={
+                    track.album.images?.[0]?.url || "/assets/icons/cat.svg"
+                  }
+                />
+              ))}
+          </div>
         </div>
       </div>
     </div>
