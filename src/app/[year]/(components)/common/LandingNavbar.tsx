@@ -27,7 +27,7 @@ export default function LandingNavbar() {
 
       {/* 메뉴(버튼) 영역 */}
       <nav className={styles.btn_wrapper}>
-        <Link href="/start" className={styles.menuBtn}>
+        <Link href="/moa/select-moa" className={styles.menuBtn}>
           start
         </Link>
         <Link href="/about" className={styles.menuBtn}>
