@@ -9,6 +9,8 @@
 }
 
 .action_btn_wrapper {
+  left: 0;
+  width: 100%;
   position: absolute;
   bottom: 25px;
   display: flex;

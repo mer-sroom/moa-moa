@@ -1,0 +1,58 @@
+/* 이 파일은 실수로 css 를 모두 날려버린 사람이 남기는 유언 */
+/* 파일 정리를 잘하자 */
+
+/* 레코드 돌아가는 애니메이션 */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 전체 컨테이너 */
+.step4_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0 40px 0;
+  position: relative;
+}
+
+/* 음악 앨범 이미지 */
+.step4_music {
+  z-index: 1;
+}
+/* 레코드 이미지(회전) */
+.step4_record {
+  width: 30%;
+  position: absolute;
+  top: 3%;
+  right: 25%;
+  animation: spin 4s linear infinite;
+}
+/* 텍스트 전체 영역 */
+.step4_container_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-top: 43px;
+  padding-bottom: 132px;
+}
+
+/* 텍스트 타이틀 */
+.step4_title {
+  font-size: 24px;
+  font-weight: bold;
+}
+/* 텍스트 설명 */
+.step4_description {
+  font-size: 16px;
+  line-height: 24px;
+  color: #909090;
+}
