@@ -3,7 +3,7 @@
   margin: 9vh 0 3vh 0;
   display: flex;
   justify-content: center;
-  gap: 3vw;
+  gap: 30px;
 }
 
 .circle {
@@ -14,7 +14,7 @@
 }
 
 .black {
-    background-color: var(--ui-neutral);
+  background-color: var(--ui-neutral);
 }
 
 .gray {
