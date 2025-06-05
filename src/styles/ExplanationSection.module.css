@@ -58,7 +58,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 5rem;
   margin-top: 2rem;
   z-index: 2;
 }
@@ -82,7 +82,7 @@
   color: #000;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  width: 260px;
+  width: 210px;
   min-height: 200px;
   padding: 4rem 1.5rem 1.5rem;
   text-align: left;
@@ -146,7 +146,8 @@
   transition: transform 0.35s ease;
 }
 .cardCore:hover .cardBody {
-  transform: translateY(calc(250% + 1.5rem)); /* 카드 높이만큼 내려가기 */
+  transform: translateY(calc(16rem));
+  color: black;
 }
 
 /* 중앙 카드 - 검정색 */
@@ -156,7 +157,7 @@
   color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  width: 260px;
+  width: 210px;
   min-height: 200px;
   padding: 4rem 1.5rem 1.5rem;
   text-align: left;
