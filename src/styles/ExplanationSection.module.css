@@ -8,15 +8,20 @@
   justify-content: flex-start;
   position: relative;
 }
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.fadeIn {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
 
-/* 탭 버튼 컨테이너 */
 .tabButtons {
   display: flex;
   gap: 8px;
   margin-bottom: 2rem;
 }
-
-/* 탭 버튼 활성/비활성 */
 .activeBtn {
   background-color: #000;
   color: #fff;
@@ -34,7 +39,7 @@
   cursor: pointer;
 }
 
-/* 하위 섹션 공통 레이아웃 */
+/* 섹션 공통 레이아웃 */
 .subSection {
   width: 100%;
   flex: 1;
@@ -45,10 +50,258 @@
   position: relative;
 }
 
-/* 하단 화살표 */
+/* 아래 화살표 */
 .arrowDown {
-  margin-top: 2rem;
+  position: relative; /* 혹은 absolute */
+  z-index: 99; /* 카드, 봉투보다 높은 값 */
+  margin-top: 15rem;
   width: 40px;
   height: auto;
   cursor: pointer;
+}
+
+.cardsWrapper {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5rem;
+  margin-top: 2rem;
+  z-index: 2;
+}
+
+.envelopeWrapper {
+  position: absolute;
+  top: 20;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  transform: translate(-50%, 30px);
+  z-index: 1;
+}
+.envelopeImage {
+  object-fit: contain;
+}
+.envelopeFlap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: top center; /* 위쪽 경첩처럼 열리게 */
+  backface-visibility: hidden; /* 3D 뒤면 숨김 */
+}
+.card {
+  position: relative;
+  background-color: #fff;
+  color: #000;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  width: 210px;
+  min-height: 200px;
+  padding: 4rem 1.5rem 1.5rem;
+  text-align: left;
+  z-index: 2;
+  overflow: visible;
+}
+
+.cardCore::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--upgrade-img) center / contain no-repeat;
+  opacity: 0; /* 처음엔 안 보임 */
+  transition: opacity 0.25s ease; /* 짧은 페이드인/아웃 */
+  pointer-events: none; /* 클릭 방해 X */
+  z-index: 2; /* 카드 내부 텍스트 위로 올라옴 */
+}
+
+/* ------------------------------------------------------------------
+   ★ hover 시 변화
+------------------------------------------------------------------ */
+.cardCore:hover {
+  /* ① 배경·그림자·둥근 모서리 제거 → 직사각 자체가 안 보임 */
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+
+  /* ② 크기를 이미지만큼로 축소 – 패딩·고정폭 없애기  */
+  padding: 0;
+
+  /* ③ 레이아웃이 튀지 않도록 flex 컨테이너 안에서
+        ‘그 자리에 그대로’ 있게 하려면 display를 inline-flex로 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 업그레이드 이미지를 덮는 ::before 레이어도, 카드가 작아졌으니
+   100 % → 실제 이미지 크기만큼으로 맞춰 줍니다. */
+.cardCore:hover::before {
+  opacity: 1; /* (기존) 보이게 */
+  width: 220%;
+  height: 220%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-size: contain; /* 찌그러지지 않게 */
+}
+
+/* 기존 카드 내용(아이콘 + h3) 페이드아웃 ─ <p>는 남김 */
+.cardCore:hover img,
+.cardCore:hover h3 {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* ------------------------------------------------------------------
+   ★ <p> 문구를 카드 아래로 미끄러지도록
+------------------------------------------------------------------ */
+.cardBody {
+  transition: transform 0.35s ease;
+}
+.cardCore:hover .cardBody {
+  transform: translateY(calc(16rem));
+  color: black;
+}
+
+/* 중앙 카드 - 검정색 */
+.cardCenter {
+  position: relative;
+  background-color: #000;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  width: 210px;
+  min-height: 200px;
+  padding: 4rem 1.5rem 1.5rem;
+  text-align: left;
+  z-index: 2;
+  overflow: visible;
+}
+
+/* 카드 이미지들 */
+.cardImage {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: auto;
+  object-fit: contain;
+  z-index: 3;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* 왼쪽 카드 이미지 (고양이) */
+.leftcardImage {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: auto;
+  object-fit: contain;
+  z-index: 3;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* 오른쪽 카드 이미지 (CD) */
+.rightcardImage {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: auto;
+  object-fit: contain;
+  z-index: 3;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* 이미 있는 .subSection 규칙은 그대로 두고, GET 전용 확장 */
+.getSection {
+  /* 카드 섹션과 동일한 최소 높이/중앙정렬 유지 */
+}
+
+/* 줄 배치 틀 */
+.contentWrapper {
+  display: flex;
+  gap: 4rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* 왼쪽 글 영역 */
+.textWrapper {
+  flex: 0 0 40%; /* 40 % 너비(최대 480 px 정도) */
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  line-height: 1.4;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.highlight {
+  font-weight: 700;
+}
+
+/* 집 이미지 영역 */
+.imageWrapper {
+  flex: 1 1 auto; /* 남는 공간 꽉 채우기 */
+  display: flex;
+  justify-content: center;
+}
+
+.houseImage {
+  width: 100%;
+  height: auto; /* 반응형 */
+  max-width: 520px; /* 너무 커지지 않도록 */
+}
+
+/* 모바일 대비 – 768px 이하에서 세로 쌓기 */
+@media (max-width: 768px) {
+  .contentWrapper {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .textWrapper {
+    flex: none;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardsWrapper {
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .card,
+  .cardCenter {
+    width: 200px;
+  }
+  .cardImage {
+    top: -30px;
+    width: 100px;
+  }
+  .envelopeWrapper {
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, 0);
+  }
 }
