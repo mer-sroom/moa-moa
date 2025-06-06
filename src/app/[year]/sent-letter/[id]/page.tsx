@@ -4,6 +4,7 @@ import NotFound from "@/app/not-found";
 import { getSentLetters } from "@/lib/sentLetter";
 import Image from "next/image";
 import styles from "@/styles/SentLetter.module.css";
+import moaCatImg from "public/assets/service-imgs/error_img.svg";
 import OpenSentLetter from "@/app/[year]/sent-letter/(components)/OpenSentLetter";
 
 export default async function SentLetterPage() {
@@ -22,15 +23,12 @@ export default async function SentLetterPage() {
           alignItems: "center",
           height: "60vh",
           justifyContent: "center",
-          opacity: "0.5",
+          opacity: "0.2",
+          gap: "12px",
+          paddingTop: "5vh",
         }}
       >
-        <Image
-          src="/assets/broke_cat.svg"
-          alt="no moa"
-          width={180}
-          height={180}
-        />
+        <Image src={moaCatImg} alt="no moa" width={280} />
         <p style={{ textAlign: "center" }}>
           작성한 편지가 없습니다.
           <br />

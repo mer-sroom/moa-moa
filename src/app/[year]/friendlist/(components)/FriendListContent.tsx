@@ -4,7 +4,7 @@ import Image from "next/image";
 import Modal from "../../(components)/common/Modal";
 import FriendInfo from "./FriendInfo";
 import friendListIcon from "@/../public/assets/icons/nav_sidebar/friend_list_icon.svg";
-import NoFriendImg from "@/../public/assets/broke_cat.svg";
+import NoFriendImg from "@/../public/assets/service-imgs/error_img.svg";
 import styles from "@/styles/friendlist.module.css";
 
 interface Friend {
@@ -43,8 +43,12 @@ export default function FriendListContent({ friends }: { friends: Friend[] }) {
             <ul className={styles.friendList}>
               {friends.length === 0 ? (
                 <li className={styles.noFriendsMessage}>
-                  {/* 임시 이미지 */}
-                  <Image src={NoFriendImg} alt="no friends" width={180} />
+                  <Image
+                    src={NoFriendImg}
+                    alt="no friends"
+                    width={200}
+                    priority={true}
+                  />
                   <p>친구 목록이 비어있습니다</p>
                 </li>
               ) : (
