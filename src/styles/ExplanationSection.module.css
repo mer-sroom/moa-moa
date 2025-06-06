@@ -8,6 +8,14 @@
   justify-content: flex-start;
   position: relative;
 }
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.fadeIn {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
 
 .tabButtons {
   display: flex;
@@ -65,7 +73,7 @@
 
 .envelopeWrapper {
   position: absolute;
-  top: 0;
+  top: 20;
   left: 50%;
   width: 500px;
   height: 500px;
@@ -75,7 +83,15 @@
 .envelopeImage {
   object-fit: contain;
 }
-
+.envelopeFlap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: top center; /* 위쪽 경첩처럼 열리게 */
+  backface-visibility: hidden; /* 3D 뒤면 숨김 */
+}
 .card {
   position: relative;
   background-color: #fff;

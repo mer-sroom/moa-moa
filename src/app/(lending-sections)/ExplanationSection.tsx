@@ -1,151 +1,196 @@
+/* src/app/(lending-sections)/ExplanationSection.tsx */
 "use client";
 
-import React, { useState, forwardRef } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import styles from "@/styles/ExplanationSection.module.css";
+import { DEST_SCROLL } from "@/app/(lending-sections)/letterKeyframes";
 
-interface ExplanationSectionProps {
+interface Props {
   onScrollFinal: () => void;
 }
 
-const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
+const ExplanationSection = forwardRef<HTMLElement, Props>(
   ({ onScrollFinal }, ref) => {
+    /* ───────── state ───────── */
     const [tab, setTab] = useState<"SEND" | "GET">("SEND");
+    const [env, setEnv] = useState(false); // 봉투(fade-in)
+    const [cards, setCards] = useState(false); // 카드 등장
+    /* Get 섹션 재생 트리거 */
+    const [playGet, setPlayGet] = useState(false);
 
-    /* ── ★ 카드별 업그레이드 이미지 경로 ── */
+    /* ───────── 봉투·카드 등장 타이밍 ───────── */
+    useEffect(() => {
+      if (window.scrollY >= DEST_SCROLL + 200) {
+        setEnv(true);
+        setCards(true);
+      }
+    }, []);
+    useEffect(() => {
+      const onArrived = () => {
+        setTimeout(() => setEnv(true), 1500); // 1.5 s 후 봉투
+        setTimeout(() => setCards(true), 2000); // 2.0 s 후 카드
+      };
+      addEventListener("letter-arrived", onArrived);
+      return () => removeEventListener("letter-arrived", onArrived);
+    }, []);
+
+    /* ───────── 카드 업그레이드 ­BG ───────── */
     const upgraded = {
       cat: "/assets/icons/lending/cat_upgrade.svg",
       letter: "/assets/icons/lending/Letter_upgrade.svg",
       cd: "/assets/icons/lending/Cd_upgrade.svg",
     };
+    const cls = (f: boolean) => (f ? styles.fadeIn : styles.hidden);
 
-    /* ---------------- SEND 섹션 ---------------- */
-    function SendLetterSection({ onClickNext }: { onClickNext: () => void }) {
-      return (
-        <div className={styles.subSection}>
-          <div className={styles.cardsWrapper}>
-            {/* 왼쪽 카드 */}
-            <div
-              className={`${styles.card} ${styles.cardCore}`}
-              /* ★ 업그레이드 이미지 경로를 CSS 변수로 전달 */
+    /* ---------- SEND 섹션 ---------- */
+    const Send = ({ onClickNext }: { onClickNext: () => void }) => (
+      <div className={styles.subSection}>
+        {/* 카드 3장 */}
+        <motion.div
+          className={`${styles.cardsWrapper} ${cls(cards)}`}
+          initial="hidden"
+          animate={cards ? "show" : "hidden"}
+          variants={{
+            show: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+          }}
+        >
+          {["cat", "letter", "cd"].map(key => (
+            <motion.div
+              key={key}
+              className={
+                key === "letter"
+                  ? `${styles.cardCenter} ${styles.cardCore}`
+                  : `${styles.card} ${styles.cardCore}`
+              }
               style={
                 {
-                  "--upgrade-img": `url(${upgraded.cat})`,
-                } as React.CSSProperties
+                  "--upgrade-img": `url(${
+                    upgraded[key as keyof typeof upgraded]
+                  })`,
+                } as any
               }
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { type: "spring", stiffness: 120 },
+                },
+              }}
             >
               <Image
-                src="/assets/icons/lending/cat.svg"
-                alt="고양이"
+                src={
+                  key === "cat"
+                    ? "/assets/icons/lending/cat.svg"
+                    : key === "letter"
+                    ? "/assets/icons/lending/letter3.svg"
+                    : "/assets/icons/lending/cd.svg"
+                }
+                alt={key}
                 width={100}
                 height={100}
-                className={styles.leftcardImage}
+                className={
+                  key === "cat"
+                    ? styles.leftcardImage
+                    : key === "letter"
+                    ? styles.cardImage
+                    : styles.rightcardImage
+                }
               />
-              <h3>귀여운 오므자를 장식해요!</h3>
+              <h3>
+                {key === "cat"
+                  ? "귀여운 오므자를 장식해요!"
+                  : key === "letter"
+                  ? "편지지를 열어봐요!"
+                  : "진진작한 음악을 들어요!"}
+              </h3>
               <p className={styles.cardBody}>
-                오늘도 바쁘게만 살아가는 어른 여러분 귀여운 아이콘을 활용해 작은
-                행복을 찾아보세요!
+                {key === "cat"
+                  ? "오늘도 작은 행복을 찾아보세요!"
+                  : key === "letter"
+                  ? "추억을 아름답게 기록해요."
+                  : "노래와 함께 힐링!"}
               </p>
-            </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
-            {/* 중앙 카드 */}
-            <div
-              className={`${styles.cardCenter} ${styles.cardCore}`}
-              style={
-                {
-                  "--upgrade-img": `url(${upgraded.letter})`,
-                } as React.CSSProperties
-              }
-            >
-              <Image
-                src="/assets/icons/lending/letter3.svg"
-                alt="편지지"
-                width={100}
-                height={100}
-                className={styles.cardImage}
-              />
-              <h3>편지지를 열어봐요!</h3>
-              <p className={styles.cardBody}>
-                둘이 주고 받는 추억을 아름답게 기록해보아요. 손 편지 한 장이 줄
-                수 있는 따뜻함을 최대한 담아내고 싶었어요.
-              </p>
-            </div>
-
-            {/* 오른쪽 카드 */}
-            <div
-              className={`${styles.card} ${styles.cardCore}`}
-              style={
-                {
-                  "--upgrade-img": `url(${upgraded.cd})`,
-                } as React.CSSProperties
-              }
-            >
-              <Image
-                src="/assets/icons/lending/cd.svg"
-                alt="CD"
-                width={100}
-                height={100}
-                className={styles.rightcardImage}
-              />
-              <h3>진진작한 음악을 들어요!</h3>
-              <p className={styles.cardBody}>
-                바쁜 시대를 살아가는 우리들에게 가볍게 즐길 수 있는 노래 추천과
-                함께 편지로 힐링하는 소중한 시간을 만들어 보세요.
-              </p>
-            </div>
-
-            {/* 뒤 편지봉투 */}
-            <div className={styles.envelopeWrapper}>
-              <Image
-                id="landing-envelope"
-                src="/assets/icons/lending/letter4.svg"
-                alt="편지봉투"
-                fill
-                className={styles.envelopeImage}
-              />
-            </div>
-          </div>
-
-          {/* ↓ 버튼 */}
+        {/* 봉투 래퍼 */}
+        <div className={`${styles.envelopeWrapper} ${cls(env)}`}>
           <Image
-            src="/assets/icons/lending/arrow-down.svg"
-            alt="Next"
-            className={styles.arrowDown}
-            width={40}
-            height={40}
-            onClick={onClickNext}
+            src="/assets/icons/lending/letter4.svg"
+            alt="편지봉투"
+            fill
+            className={styles.envelopeImage}
           />
         </div>
-      );
-    }
 
-    /* ---------------- GET 섹션 (변경 없음) ---------------- */
-    /* ---------------- GET 섹션 ---------------- */
-    function GetLetterSection({ onClickNext }: { onClickNext: () => void }) {
+        {/* ↓ 화살표 */}
+        <Image
+          src="/assets/icons/lending/arrow-down.svg"
+          alt="Next"
+          width={40}
+          height={40}
+          className={styles.arrowDown}
+          onClick={onClickNext}
+        />
+      </div>
+    );
+
+    /* ---------- GET 섹션 ---------- */
+    const Get = ({ onClickNext }: { onClickNext: () => void }) => {
+      /* 등장 트리거 */
+      const [play, setPlay] = useState(false);
+      useEffect(() => {
+        const id = setTimeout(() => setPlay(true), 200);
+        return () => clearTimeout(id);
+      }, []);
+
+      /* 애니메이션 variants */
+      const textVar = {
+        hidden: { x: 120, opacity: 0 },
+        show: {
+          x: 0,
+          opacity: 1,
+          transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] },
+        },
+      };
+      const imgVar = {
+        hidden: { x: "-50%", opacity: 0 },
+        show: {
+          x: 0,
+          opacity: 1,
+          transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] },
+        },
+      };
+
       return (
         <div className={`${styles.subSection} ${styles.getSection}`}>
-          {/* 본문 + 이미지 줄 배치 */}
+          {/* 기존 flex 레이아웃을 살리는 래퍼 */}
           <div className={styles.contentWrapper}>
-            {/* ───────── 왼쪽 글 ───────── */}
-            <div className={styles.textWrapper}>
+            {/* ── 글 ── */}
+            <motion.div
+              className={styles.textWrapper}
+              variants={textVar}
+              initial="hidden"
+              animate={play ? "show" : "hidden"}
+            >
               <h2 className={styles.title}>Get a letter</h2>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                penatibus et magnis dis parturient montes, nascetur ridiculus
-                mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                quis, sem.
-              </p>
-
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit…</p>
               <p className={styles.highlight}>
-                Nulla consequat massa quis enim. Donec pede justo, fringilla
-                <br /> vel, aliquet nec, vulputate eget, arcu.
+                Nulla consequat massa quis enim. Donec pede justo…
               </p>
-            </div>
+            </motion.div>
 
-            {/* ───────── 오른쪽 일러스트 ───────── */}
-            <div className={styles.imageWrapper}>
+            {/* ── 보관함 그림 ── */}
+            <motion.div
+              className={styles.imageWrapper}
+              variants={imgVar}
+              initial="hidden"
+              animate={play ? "show" : "hidden"}
+            >
               <Image
                 src="/assets/icons/lending/Get_a_letter_house.svg"
                 alt="받은 편지 보관함"
@@ -154,24 +199,28 @@ const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
                 className={styles.houseImage}
                 priority
               />
-            </div>
+            </motion.div>
           </div>
 
-          {/* ↓ 스크롤 버튼 */}
+          {/* ↓ 화살표 */}
           <Image
             src="/assets/icons/lending/arrow-down.svg"
             alt="Next"
-            className={styles.arrowDown}
             width={40}
             height={40}
-            onClick={onClickNext}
+            className={styles.arrowDown}
+            onClick={tab === "SEND" ? () => setTab("GET") : onScrollFinal}
+            /* ▼ SEND일 땐 15rem, GET일 땐 5rem */
+            style={{ marginTop: tab === "SEND" ? "15rem" : "5rem" }}
           />
         </div>
       );
-    }
+    };
 
+    /* ───────── JSX ───────── */
     return (
       <section ref={ref} className={styles.explanationSection}>
+        {/* 탭 버튼 */}
         <div className={styles.tabButtons}>
           <button
             onClick={() => setTab("SEND")}
@@ -188,9 +237,9 @@ const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
         </div>
 
         {tab === "SEND" ? (
-          <SendLetterSection onClickNext={() => setTab("GET")} />
+          <Send onClickNext={() => setTab("GET")} />
         ) : (
-          <GetLetterSection onClickNext={onScrollFinal} />
+          <Get onClickNext={onScrollFinal} />
         )}
       </section>
     );
