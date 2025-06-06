@@ -97,6 +97,7 @@ const ExplanationSection = forwardRef<HTMLElement, ExplanationSectionProps>(
             {/* 뒤 편지봉투 */}
             <div className={styles.envelopeWrapper}>
               <Image
+                id="landing-envelope"
                 src="/assets/icons/lending/letter4.svg"
                 alt="편지봉투"
                 fill

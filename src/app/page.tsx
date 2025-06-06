@@ -5,7 +5,7 @@ import LandingNavbar from "@/app/[year]/(components)/common/LandingNavbar";
 import HomeSection from "@/app/(lending-sections)/HomeSection";
 import ExplanationSection from "@/app/(lending-sections)/ExplanationSection";
 import FinalSection from "@/app/(lending-sections)/FinalSection";
-
+import MovingLetterStatic from "@/app/(lending-sections)/MovingLetterStatic";
 import styles from "@/styles/LandingPage.module.css";
 
 /**
@@ -31,23 +31,21 @@ export default function Page() {
   };
 
   return (
-    <div className={styles.container}>
-      {/* 스티키 Navbar */}
-      <LandingNavbar />
+    <>
+      {/* ← 고정 편지 레이어 */}
+      <MovingLetterStatic />
 
-      <div className={styles.mainContent}>
-        {/* 1) Home Section */}
-        <HomeSection onClickNext={scrollToExplanation} />
-
-        {/* 2) Explanation Section */}
-        <ExplanationSection
-          ref={explanationRef}
-          onScrollFinal={scrollToFinal}
-        />
-
-        {/* 3) Final Section */}
-        <FinalSection ref={finalRef} />
+      <div className={styles.container}>
+        <LandingNavbar />
+        <div className={styles.mainContent}>
+          <HomeSection onClickNext={scrollToExplanation} />
+          <ExplanationSection
+            ref={explanationRef}
+            onScrollFinal={scrollToFinal}
+          />
+          <FinalSection ref={finalRef} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

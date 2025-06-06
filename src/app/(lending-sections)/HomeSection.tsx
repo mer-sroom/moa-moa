@@ -27,6 +27,7 @@ export default function HomeSection({ onClickNext }: HomeSectionProps) {
       <div className={styles.rightContent}>
         {/* 1) 편지 (letter) */}
         <Image
+          id="landing-letter"
           src="/assets/icons/lending/letter.svg"
           alt="Letter"
           width={548}
