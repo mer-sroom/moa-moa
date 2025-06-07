@@ -11,3 +11,9 @@ export interface NextStepProps {
     nextStep: () => void;
     goSelectMoa?: () => void;
 }
+
+// db 데이터 저장 임시 
+export type MemberType = {
+    name: string;
+    selected: boolean;
+};

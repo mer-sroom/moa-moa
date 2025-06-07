@@ -1,4 +1,4 @@
-/*모달 공통통*/
+/*모달 공통*/
 .X_btn {
   width: 14px;
   height: 14px;
@@ -9,8 +9,6 @@
 }
 
 .action_btn_wrapper {
-  left: 0;
-  width: 100%;
   position: absolute;
   bottom: 25px;
   display: flex;
