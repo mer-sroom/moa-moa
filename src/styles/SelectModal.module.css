@@ -210,3 +210,8 @@
 .bold {
     font-weight: 700;
 }
+
+.friend_list {
+    text-align: center;
+    color: var(--color-gray-300);
+}

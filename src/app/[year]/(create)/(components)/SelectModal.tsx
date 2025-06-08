@@ -4,7 +4,8 @@ import { FiPlusCircle } from "react-icons/fi";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import type { MemberType } from "@/types/createMoa";  // db 데이터 저장 (임시) 
+import type { ServerType } from "@/types/createMoa";
+
 
 const List = ({
     check, state, name
@@ -39,7 +40,7 @@ export default function SelectModal({
     onMemberChange: (data: string[]) => void,
     check: (data: string) => void,
     removeMember: (data: string) => void,
-    memberValue: MemberType[],
+    memberValue: ServerType[],
     friendData: string[],
 }) {
     const [ischeck, setisCheck] = useState(false);
@@ -59,8 +60,8 @@ export default function SelectModal({
             <div className={styles.selectModal_main}>
                 <div className={styles.input}>
                     {ischeck ?
-                        <>{friendData.map((name) => (
-                            <p key={name}>
+                        <>{friendData.map((name, id) => (
+                            <p key={id}>
                                 {name}
                                 <IoMdClose
                                     className={styles.close_icon}
@@ -73,16 +74,17 @@ export default function SelectModal({
                 </div>
                 <p className={styles.middle_p}>초대 가능한 친구</p>
                 <div className={styles.middle}>
-
-                    {memberValue.map((name) => (
-                        <div key={name.name} className={styles.middle_list}>
+                    {memberValue.length > 0 ? memberValue.map((name, id) => (
+                        <div key={id} className={styles.middle_list}>
                             <List
                                 check={check}
                                 state={name.selected}
                                 name={name.name}>
                             </List>
-                        </div>
-                    ))}
+                        </div>))
+                        : <div className={styles.friend_list}>
+                            <p>친구 목록이 비어있습니다</p>
+                        </div>}
                 </div>
                 <div className={styles.bottom_tag}>
                     {ischeck ?

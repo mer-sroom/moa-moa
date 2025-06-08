@@ -9,7 +9,8 @@ import styles from "@/styles/createMoa.module.css";
 import type { NextStepProps } from "@/types/createMoa";
 import SelectModal from "../(components)/SelectModal";
 import Modal from "../../(components)/common/Modal";
-import type { MemberType } from "@/types/createMoa";  // db 데이터 저장 (임시) 
+import type { ServerType } from "@/types/createMoa";
+
 
 export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   const today = dayjs(new Date()).format("YYYY-MM-DD");
@@ -37,15 +38,31 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   /* ----------------- /     select modal.tsx     /----------------- */
   /* --------------------------------------------------------------- */
 
-  // db 데이터 저장 (임시)
-  const [friend, setFriend] = useState<MemberType[]>([
-    { name: "머가문", selected: false },
-    { name: "멈가문", selected: false },
-    { name: "현가문", selected: false },
-    { name: "이가문", selected: false },
-    { name: "최가문", selected: false },
-    { name: "고가문", selected: false },
-  ]);
+
+  // db 실제 데이터 호출 후 재가공, 저장 
+  const [friend, setFriend] = useState<ServerType[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+      await fetch(`${baseUrl}/api/friendlist`, {
+        cache: "no-store",
+        credentials: 'include',
+      })
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          console.log(data.friends)
+          const processed = data.friends && data.friends.map(item => ({
+            ...item,
+            selected: false,
+          }));
+          setFriend(processed)
+        })
+    }
+    fetchData();
+  }, []);
+
 
   // select modal input tag 실시간 반영
   const [friendData, setMemberData] = useState<string[]>([]);
@@ -71,10 +88,15 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
       ));
   };
 
-  // select modal boolean 데이터 변경때마다 input창에 실시간 데이터 반영
+  // select modal boolean 데이터 변경때마다 step3 input창에 실시간 데이터 반영
   useEffect(() => {
     const onDateChange = friend.filter((friend) => friend.selected).map(friend => friend.name);
-    setMemberData(onDateChange);
+    const dataCheck = friend.filter((friend) => friend.selected).length;
+    if (dataCheck === 0) {
+      setMember([]);
+    } else {
+      setMemberData(onDateChange);
+    }
   }, [friend]);
 
 
@@ -121,7 +143,7 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     }
   }, [member]);
 
-  //select modal.tsx에서 받아온 이름 적용
+  //select modal.tsx의 '선택 완료' 버튼 콜백 함수 
   const onDateChange = (data: string[]) => {
     setMember(data)
     console.log(`${"setMember 확인 : " + member}`)
