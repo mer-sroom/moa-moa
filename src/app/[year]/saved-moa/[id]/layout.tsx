@@ -8,7 +8,6 @@ export default function SavedMoaLayout({ children }) {
         <Image src={icon} alt="saved moa icon" width={28} />
         <h3 className={styles.title}>지난 모아 보관함</h3>
       </div>
-
       {children}
     </div>
   );

@@ -1,22 +1,7 @@
 /*layout.tsx 영역*/
 .layoutContainer {
   padding: 100px 40px 20px 40px;
-  overflow: auto;
-}
-/*스크롤 넓이 설정*/
-.layoutContainer::-webkit-scrollbar {
-  width: 6px;
-}
-
-/* 스크롤바 막대 설정*/
-.layoutContainer::-webkit-scrollbar-thumb {
-  background-color: rgba(206, 206, 206, 0.541);
-  border-radius: 10px;
-}
-
-/* 스크롤바 뒷 배경 설정*/
-.layoutContainer::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
 }
 
 .header {
@@ -32,26 +17,45 @@
 }
 
 /*page.tsx 영역*/
-/* 페이지가 비어있을 때 보여줄 화면 */
-.emptyWrapper {
+/*데이터 없을 때 화면*/
+.noMoaBoxContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 60vh;
   justify-content: center;
-  opacity: 0.5;
+  opacity: 0.2;
+  gap: 12px;
+  padding-top: 5vh;
 }
-.emptyText {
-  text-align: center;
-}
+
 /* 페이지 내부 */
 .container {
+  height: 74vh;
   margin-top: 44px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 24px;
   overflow-y: auto;
+  /*스크롤바 스냅 포인트 적용하기*/
+  scroll-snap-type: y mandatory;
+  padding: 0 10px 50px 10px;
 }
+
+/*자식 요소를 스냅 포인트로 지정 */
+.snapGroup {
+  scroll-snap-align: start;
+}
+
+/*스크롤 투명 설정*/
+.container::-webkit-scrollbar {
+  width: 2px;
+}
+.container::-webkit-scrollbar-thumb,
+.container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
 /* 카드  */
 .card {
   background-size: cover;
@@ -63,9 +67,7 @@
 }
 /* 카드 내부 */
 .cardContent {
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
+  overflow-y: hidden;
   height: 220px;
 }
 /* 카드 수신인 */

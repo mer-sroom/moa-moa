@@ -1,23 +1,6 @@
 /*레이아웃 쪽*/
 .layoutContainer {
   padding: 100px 40px 20px 40px;
-  overflow: auto;
-}
-
-/*스크롤 넓이 설정*/
-.layoutContainer::-webkit-scrollbar {
-  width: 6px;
-}
-
-/* 스크롤바 막대 설정*/
-.layoutContainer::-webkit-scrollbar-thumb {
-  background-color: rgba(206, 206, 206, 0.541);
-  border-radius: 10px;
-}
-
-/* 스크롤바 뒷 배경 설정*/
-.layoutContainer::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0);
 }
 
 .header {
@@ -32,21 +15,43 @@
   font-weight: bold;
 }
 
-/*본문*/
-.container {
-  margin-top: 44px;
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  overflow-y: auto;
-}
-
-.noMoaContainer {
+/*데이터 없을 때 화면*/
+.noMoaBoxContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 60vh;
+  justify-content: center;
+  opacity: 0.2;
+  gap: 12px;
+  padding-top: 5vh;
+}
+
+/*본문*/
+.container {
+  height: 68vh;
+  overflow-y: auto;
   margin-top: 44px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+  /*스크롤바 스냅 포인트 적용하기*/
+  scroll-snap-type: y mandatory;
+  padding-bottom: 50px;
+}
+
+/* 스크롤바 투명 처리 */
+.container::-webkit-scrollbar {
+  width: 2px;
+}
+.container::-webkit-scrollbar-thumb,
+.container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/*자식 요소를 스냅 포인트로 지정 */
+.snapGroup {
+  scroll-snap-align: start;
 }
 
 .yearHeader {

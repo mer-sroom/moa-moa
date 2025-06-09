@@ -28,18 +28,7 @@ export default async function SavedMoaPage() {
   //지난 모아박스가 없는 경우 폴백 화면(추후 수정 예정)
   if (!savedMoaBoxes.length) {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          height: "60vh",
-          justifyContent: "center",
-          opacity: "0.2",
-          gap: "12px",
-          paddingTop: "5vh",
-        }}
-      >
+      <div className={styles.noMoaBoxContainer}>
         <Image src={moaCatImg} alt="no moa" width={280} />
         <p>아직 종료된 모아 박스가 없어요!</p>
       </div>
@@ -69,7 +58,10 @@ export default async function SavedMoaPage() {
     <div className={styles.container}>
       {/* 년도별 카테고리 */}
       {sortedYears.map(year => (
-        <section key={year} className={styles.yearSection}>
+        <section
+          key={year}
+          className={`${styles.yearSection} ${styles.snapGroup}`}
+        >
           <div className={styles.yearHeader}>
             <p className={styles.yearTitle}>{year} 모아 보관함</p>
             {/* <hr className={styles.divideLine} /> */}

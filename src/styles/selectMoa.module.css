@@ -1,7 +1,6 @@
 /*select-moa/layout.tsx css*/
 .layoutContainer {
   padding: 0 40px;
-  background-color: var(--color-gray-300);
   height: 100vh;
   padding-top: 12vh;
 }
