@@ -4,6 +4,8 @@ import { FiPlusCircle } from "react-icons/fi";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import type { ServerType } from "@/types/createMoa";
+
 
 const List = ({
     check, state, name
@@ -31,73 +33,40 @@ const List = ({
     )
 }
 
-type MemberType = {
-    name: string;
-    selected: boolean;
-};
-
 export default function SelectModal({
-    onClose, onMemberChange,
+    onClose, onMemberChange, check, removeMember, memberValue, friendData,
 }: {
     onClose: () => void,
     onMemberChange: (data: string[]) => void,
+    check: (data: string) => void,
+    removeMember: (data: string) => void,
+    memberValue: ServerType[],
+    friendData: string[],
 }) {
-
     const [ischeck, setisCheck] = useState(false);
-    const [member, setMember] = useState<string[]>([]);
 
-    //임시데이터
-    const [friend, setFriend] = useState<MemberType[]>([
-        { name: "머가문", selected: false },
-        { name: "멈가문", selected: false },
-        { name: "현가문", selected: false },
-        { name: "이가문", selected: false },
-        { name: "최가문", selected: false },
-        { name: "고가문", selected: false },
-    ]);
-
+    // input tag 상태 체크 
     useEffect(() => {
-        const booleanCheck = friend.filter((friend) => friend.selected).length;
+        const booleanCheck = memberValue.filter((friend) => friend.selected).length;
         if (booleanCheck === 0) {
             setisCheck(false);
         } else {
             setisCheck(true);
         }
-    }, [friend]);
-
-    useEffect(() => {
-        const onDateChange = friend.filter((friend) => friend.selected)
-            .map((friend) => friend.name);
-        setMember(onDateChange);
-    }, [friend]);
-
-    // ["머가문", "멈가문", "현가문"] 의 boolean 값 상태체크
-    const check = (name_: string) =>
-        setFriend((prev) =>
-            prev.map((friend) =>
-                friend.name === name_
-                    ? { ...friend, selected: !friend.selected }
-                    : friend
-            )
-        );
-
-    //친구선택 목록에서 x버튼으로 이름 빼기
-    const removeMember = (remove: string) => {
-        setMember(prevMember => prevMember.filter((memberName, idx) => memberName !== remove));
-    };
+    }, [memberValue]);
 
     return (
         <div>
             <div className={styles.selectModal_main}>
                 <div className={styles.input}>
                     {ischeck ?
-                        <>{member.map((member, id) => (
+                        <>{friendData.map((name, id) => (
                             <p key={id}>
-                                {member}
+                                {name}
                                 <IoMdClose
                                     className={styles.close_icon}
                                     size="20px"
-                                    onClick={() => removeMember(member)} />
+                                    onClick={() => removeMember(name)} />
                             </p>
                         ))}</>
                         :
@@ -105,22 +74,23 @@ export default function SelectModal({
                 </div>
                 <p className={styles.middle_p}>초대 가능한 친구</p>
                 <div className={styles.middle}>
-
-                    {friend.map((name) => (
-                        <div key={name.name} className={styles.middle_list}>
+                    {memberValue.length > 0 ? memberValue.map((name, id) => (
+                        <div key={id} className={styles.middle_list}>
                             <List
                                 check={check}
                                 state={name.selected}
                                 name={name.name}>
                             </List>
-                        </div>
-                    ))}
+                        </div>))
+                        : <div className={styles.friend_list}>
+                            <p>친구 목록이 비어있습니다</p>
+                        </div>}
                 </div>
                 <div className={styles.bottom_tag}>
                     {ischeck ?
                         <div
                             className={styles.selectModal_select_button}
-                            onClick={() => { onClose(); onMemberChange(member); }}>
+                            onClick={() => { onClose(); onMemberChange(friendData); }}>
                             <Button label="선택완료" size="modalBtn" color="black"></Button>
                         </div> : ''}
                 </div>

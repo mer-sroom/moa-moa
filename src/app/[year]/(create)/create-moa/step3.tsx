@@ -9,6 +9,7 @@ import styles from "@/styles/createMoa.module.css";
 import type { NextStepProps } from "@/types/createMoa";
 import SelectModal from "../(components)/SelectModal";
 import Modal from "../../(components)/common/Modal";
+import type { ServerType } from "@/types/createMoa";
 
 
 export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
@@ -24,13 +25,84 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
   const [openSelect, setOpenSelect] = useState(false);
   const [member, setMember] = useState<string[]>([]);
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(e.currentTarget.moa_name.value)
-    console.log(e.currentTarget.start_day.value)
-    console.log(e.currentTarget.end_day.value)
-    console.log(e.currentTarget.group.value)
+
+
+  /* ----------------- /     modal.tsx     /----------------- */
+  /* ---------------------------------------------------------*/
+
+  // 모달 컴포넌트 닫기 
+  const onClose = () => {
+    setOpenSelect(false)
   };
+
+  /* ----------------- /     select modal.tsx     /----------------- */
+  /* --------------------------------------------------------------- */
+
+
+  // db 실제 데이터 호출 후 재가공, 저장 
+  const [friend, setFriend] = useState<ServerType[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+      await fetch(`${baseUrl}/api/friendlist`, {
+        cache: "no-store",
+        credentials: 'include',
+      })
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          console.log(data.friends)
+          const processed = data.friends && data.friends.map(item => ({
+            ...item,
+            selected: false,
+          }));
+          setFriend(processed)
+        })
+    }
+    fetchData();
+  }, []);
+
+
+  // select modal input tag 실시간 반영
+  const [friendData, setMemberData] = useState<string[]>([]);
+
+  // select modal boolean 값 데이터 처리
+  const check = (name_: string) => {
+    setFriend((prev) =>
+      prev.map((friend) =>
+        friend.name === name_
+          ? { ...friend, selected: !friend.selected }
+          : friend
+      ));
+    setMemberData(friend.filter((friend) => friend.selected).map(friend => friend.name));
+  }
+
+  //select modal 선택된 친구 x버튼으로 빼기
+  const removeMember = (remove: string) => {
+    setFriend((prev) =>
+      prev.map((friend) =>
+        friend.name === remove
+          ? { ...friend, selected: false }
+          : friend
+      ));
+  };
+
+  // select modal boolean 데이터 변경때마다 step3 input창에 실시간 데이터 반영
+  useEffect(() => {
+    const onDateChange = friend.filter((friend) => friend.selected).map(friend => friend.name);
+    const dataCheck = friend.filter((friend) => friend.selected).length;
+    if (dataCheck === 0) {
+      setMember([]);
+    } else {
+      setMemberData(onDateChange);
+    }
+  }, [friend]);
+
+
+  /* ----------------- /     calendar.tsx     /----------------- */
+  /* ----------------------------------------------------------- */
+
 
   // calendar.tsx 콜백 함수 : 초기 세팅 날짜를 현재 날짜로
   const onStartDayHandler = (data: string) => {
@@ -45,8 +117,17 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     console.log(data)
   };
 
-  const groupHandler = () => {
-    setIsOpen(!isOpen);
+
+  /* ----------------- /     step3.tsx     /----------------- */
+  /* -------------------------------------------------------- */
+
+  // form tag onSubmit data 
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(e.currentTarget.moa_name.value)
+    console.log(e.currentTarget.start_day.value)
+    console.log(e.currentTarget.end_day.value)
+    console.log(e.currentTarget.group.value)
   };
 
   //input에 데이터 입력이 되어있을때 input border색 변경
@@ -54,22 +135,23 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
     console.log("입력완")
     setColor(!!e.currentTarget.value)
   };
+
   //input border색 변경 - 모아 그룹 설정 
-  useEffect(()=>{
-     if(member.length > 0){
+  useEffect(() => {
+    if (member.length > 0) {
       setMemberColor(!!member)
     }
-  },[member]);
+  }, [member]);
 
-  //select modal.tsx에서 받아온 이름 적용
+  //select modal.tsx의 '선택 완료' 버튼 콜백 함수 
   const onDateChange = (data: string[]) => {
     setMember(data)
     console.log(`${"setMember 확인 : " + member}`)
   };
 
-  //모달 컴포넌트 닫기 
-  const onClose = () => {
-    setOpenSelect(false)
+  // 모아 그룹 설정 disabled input 태그 활성화 
+  const groupHandler = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -80,7 +162,11 @@ export default function CreateMoaStep3<NextStepProps>({ nextStep }) {
         content={
           <SelectModal
             onClose={() => setOpenSelect(false)}
-            onMemberChange={onDateChange} />
+            onMemberChange={onDateChange}
+            memberValue={friend}
+            check={check}
+            removeMember={removeMember}
+            friendData={friendData} />
         }>
       </Modal>
       <div className={styles.step3_container}>
