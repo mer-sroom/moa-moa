@@ -1,4 +1,5 @@
 import styles from "../../../../styles/backgroundLayout.module.css";
+import backgroundImg from "public/assets/moamoa_paper_texture.jpg";
 export default function BackgroundLayout({
   children,
 }: {
@@ -6,7 +7,16 @@ export default function BackgroundLayout({
 }) {
   return (
     <>
-      <div className={styles.container}>{children}</div>
+      <div
+        style={{
+          backgroundImage: `url(${backgroundImg.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        className={styles.container}
+      >
+        {children}
+      </div>
     </>
   );
 }

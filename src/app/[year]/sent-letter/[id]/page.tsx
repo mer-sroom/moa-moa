@@ -16,18 +16,7 @@ export default async function SentLetterPage() {
 
   if (!sentLetters.length) {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          height: "60vh",
-          justifyContent: "center",
-          opacity: "0.2",
-          gap: "12px",
-          paddingTop: "5vh",
-        }}
-      >
+      <div className={styles.noMoaBoxContainer}>
         <Image src={moaCatImg} alt="no moa" width={280} />
         <p style={{ textAlign: "center" }}>
           작성한 편지가 없습니다.
@@ -44,7 +33,7 @@ export default async function SentLetterPage() {
         <OpenSentLetter letter={letter} key={letter.id}>
           {/* 편지 카드 */}
           <div
-            className={styles.card}
+            className={`${styles.card} ${styles.snapGroup}`}
             style={{
               backgroundImage: `url(${letter.letterPaperDesign.imageURL})`,
             }}
