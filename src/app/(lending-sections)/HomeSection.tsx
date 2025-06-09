@@ -27,11 +27,12 @@ export default function HomeSection({ onClickNext }: HomeSectionProps) {
       <div className={styles.rightContent}>
         {/* 1) 편지 (letter) */}
         <Image
+          id="landing-letter"
           src="/assets/icons/lending/letter.svg"
           alt="Letter"
           width={548}
           height={362}
-          className={styles.letterImage}
+          className={`${styles.letterImage} ${styles.invisibleLetter}`}
         />
         {/* 2) 음악 (music) */}
         <Image

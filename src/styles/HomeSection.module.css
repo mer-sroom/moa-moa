@@ -57,6 +57,10 @@
   height: 600px;
   overflow: hidden;
 }
+.invisibleLetter {
+  opacity: 0; /* 화면에 보이지 않음 */
+  pointer-events: none; /* 클릭·드래그도 차단 */
+}
 
 /* 이미지를 절대 배치 */
 .letterImage {
