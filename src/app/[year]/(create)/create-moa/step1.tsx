@@ -1,11 +1,13 @@
 "use client";
+
 import styles from "@/styles/createMoa.module.css";
 import Image from "next/image";
 import step1 from "@/../../public/assets/icons/createmoa_step1.svg";
 import Button from "../../(components)/common/Button";
 import type { NextStepProps } from "@/types/createMoa";
 
-export default function CreateMoaStep1<NextStepProps>({ nextStep }) {
+// STEP 1 ─ 인트로
+export default function CreateMoaStep1({ nextStep }: NextStepProps) {
   return (
     <div>
       <div className={styles.step1_container}>
@@ -16,10 +18,14 @@ export default function CreateMoaStep1<NextStepProps>({ nextStep }) {
           <p>설정하면 편지를 받을 수 있어요!</p>
         </div>
         <div className={styles.button}>
-          <Button label="모아 생성하기" size="medium" color="black" onClick={nextStep}></Button>
+          <Button
+            label="모아 생성하기"
+            size="medium"
+            color="black"
+            onClick={nextStep}
+          />
         </div>
       </div>
-
     </div>
-  )
+  );
 }
