@@ -39,7 +39,8 @@
     "react-toastify": "^11.0.3",
     "spotify-web-api-node": "^5.0.2",
     "sweetalert2": "^11.15.10",
-    "swiper": "^11.2.2"
+    "swiper": "^11.2.2",
+    "zod": "^3.25.56"
   },
   "devDependencies": {
     "@types/node": "22.10.2",
