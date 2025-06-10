@@ -30,14 +30,14 @@ interface Props extends NextStepProps {
   onBgChange: (url: string) => void;
 }
 
-// STEP 2 ─ 배경·우편함·데코 선택
 export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
   const [tab, setTab] = useState<Tab>("background");
   const [background, setBackground] = useState(backgrounds[0]);
   const [box, setBox] = useState(boxes[0]);
   const [deco, setDeco] = useState<string | null>(null);
 
-  // drag scroll refs (변경 없음)
+  const { update } = useCreateMoa();
+
   const rowRef = useRef<HTMLDivElement | null>(null);
   const isDown = useRef(false);
   const startX = useRef(0);
@@ -56,14 +56,11 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
   };
   const dragEnd = () => (isDown.current = false);
 
-  const { update } = useCreateMoa(); // ★ 컨텍스트
-
   const thumbs =
     tab === "background" ? backgrounds : tab === "box" ? boxes : decos;
   const currentSelected =
     tab === "background" ? background : tab === "box" ? box : deco;
 
-  /* 썸네일 클릭 */
   const handleSelect = (src: string, idx: number) => {
     if (tab === "background") {
       setBackground(src);
@@ -79,7 +76,6 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
 
   return (
     <div className={styles.step2_container}>
-      {/* Preview */}
       <div className={styles.preview}>
         <Image
           src={box}
@@ -107,7 +103,6 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
         </div>
       </div>
 
-      {/* Footer with drag-scroll */}
       <footer className={styles.footer}>
         <div
           ref={rowRef}
@@ -132,9 +127,7 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
             </button>
           ))}
         </div>
-
         <div className={styles.divider} />
-
         <nav className={styles.tab_nav}>
           {(["배경", "모아 박스", "장식"] as const).map((label, i) => {
             const value: Tab =

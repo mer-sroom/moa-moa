@@ -1,5 +1,4 @@
 "use client";
-/* STEP 4 ― 옵션 토글 + 실제 생성 POST */
 import styles from "@/styles/createMoa.module.css";
 import ToggleButton from "../(components)/ToggleButton";
 import { IoCloseOutline } from "react-icons/io5";
@@ -30,7 +29,6 @@ export default function CreateMoaStep4({ nextStep }: NextStepProps) {
             <button className={styles.popup_closeButton} onClick={handleClose}>
               <IoCloseOutline color="white" fontSize="30px" />
             </button>
-
             <div className={styles.popup_font}>
               <p>버튼을 검은색으로 만들어</p>
               <p>기능을 활성화 할 수 있어요</p>
@@ -50,14 +48,21 @@ export default function CreateMoaStep4({ nextStep }: NextStepProps) {
             <div className={styles.span_group}>
               <span>비로그인 유저에게도 편지 받기</span>
               <div className={styles.toggle_right}>
-                {/* CSS 유지를 위해 label만 전달 */}
-                <ToggleButton label="비로그인 유저에게도 편지 받기" />
+                <ToggleButton
+                  label="비로그인 유저에게도 편지 받기"
+                  checked={allowAnonymous}
+                  onChange={setAllowAnonymous}
+                />
               </div>
             </div>
             <div className={styles.span_group}>
               <span>받은 편지 개수 공개하기</span>
               <div className={styles.toggle_right}>
-                <ToggleButton label="받은 편지 개수 공개하기" />
+                <ToggleButton
+                  label="받은 편지 개수 공개하기"
+                  checked={letterCountPublic}
+                  onChange={setLetterCountPublic}
+                />
               </div>
             </div>
           </div>

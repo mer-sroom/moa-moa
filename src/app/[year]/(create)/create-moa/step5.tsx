@@ -6,7 +6,6 @@ import Button from "../../(components)/common/Button";
 import Image from "next/image";
 import step5 from "@/../../public/assets/icons/createmoa_step5.svg";
 
-// STEP 5 ─ 완료 화면
 export default function CreateMoaStep5({ goSelectMoa }: NextStepProps) {
   return (
     <div className={styles.step5_container}>

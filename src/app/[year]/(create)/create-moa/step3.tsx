@@ -1,5 +1,4 @@
 "use client";
-/* STEP 3 ― 제목·D-Day·친구 초대 입력 */
 import { useEffect, useState } from "react";
 import Calendar from "../(components)/Calendar";
 import dayjs from "dayjs";
@@ -9,12 +8,10 @@ import styles from "@/styles/createMoa.module.css";
 import type { NextStepProps, ServerType } from "@/types/createMoa";
 import SelectModal from "../(components)/SelectModal";
 import Modal from "../../(components)/common/Modal";
-// 컨텍스트
 import { useCreateMoa } from "@/contexts/CreateMoaContext";
 
 export default function CreateMoaStep3({ nextStep }: NextStepProps) {
   const today = dayjs().format("YYYY-MM-DD");
-  // ★ 제목 상태 추가
   const [title, setTitle] = useState("");
   const [startDay, setStartDay] = useState(today);
   const [endDay, setEndDay] = useState(today);
@@ -25,7 +22,6 @@ export default function CreateMoaStep3({ nextStep }: NextStepProps) {
 
   const { update } = useCreateMoa();
 
-  // 친구 불러오기
   useEffect(() => {
     fetch("/api/friendlist", { credentials: "include", cache: "no-store" })
       .then(res => res.json())
@@ -34,7 +30,6 @@ export default function CreateMoaStep3({ nextStep }: NextStepProps) {
       );
   }, []);
 
-  // 친구 선택 UI 콜백
   const handleCheck = (name: string) => {
     setFriends(prev =>
       prev.map(f => (f.name === name ? { ...f, selected: !f.selected } : f))
@@ -51,10 +46,8 @@ export default function CreateMoaStep3({ nextStep }: NextStepProps) {
     setMemberColor(names.length > 0);
   }, [friends]);
 
-  // 모달 닫기
   const handleClose = () => setOpenSelect(false);
 
-  // “다음으로” 클릭 시 context update + nextStep
   const handleNext = () => {
     update({
       title,
@@ -86,7 +79,6 @@ export default function CreateMoaStep3({ nextStep }: NextStepProps) {
       <div className={styles.step3_container}>
         <h1>나의 모아 설정하기</h1>
         <div className={styles.width}>
-          {/* 기존 form 제거하고, onClick으로 처리 */}
           <label htmlFor="moa_name" className={styles.upper_label_wrapper}>
             모아 이름짓기
           </label>
@@ -143,7 +135,6 @@ export default function CreateMoaStep3({ nextStep }: NextStepProps) {
         </div>
       </div>
 
-      {/* 버튼은 원래 위치에 그대로 둡니다 */}
       <div className={styles.button}>
         <Button
           label="다음으로"

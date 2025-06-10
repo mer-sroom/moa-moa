@@ -1,15 +1,15 @@
 "use client";
+
 import { createContext, useContext, useState } from "react";
 import type { CreateMoaBoxInput } from "@/types/moaBoxRequest";
-import { useRouter } from "next/navigation";
 
 type Ctx = {
   values: Partial<CreateMoaBoxInput>;
   update: (p: Partial<CreateMoaBoxInput>) => void;
   submit: () => Promise<void>;
 };
-const Ctx = createContext<Ctx>(null as never);
-export const useCreateMoa = () => useContext(Ctx);
+const CreateMoaContext = createContext<Ctx>({} as Ctx);
+export const useCreateMoa = () => useContext(CreateMoaContext);
 
 export default function CreateMoaProvider({
   children,
@@ -18,8 +18,17 @@ export default function CreateMoaProvider({
   children: React.ReactNode;
   onSuccess: () => void;
 }) {
-  const router = useRouter();
-  const [values, setValues] = useState<Partial<CreateMoaBoxInput>>({});
+  // 초기 필수 필드 모두 채워두기
+  const [values, setValues] = useState<Partial<CreateMoaBoxInput>>({
+    title: undefined,
+    dueDate: undefined,
+    backgroundDesignId: 1,
+    mailBoxDesignId: 1,
+    isPublic: true,
+    allowAnonymous: true,
+    letterCountPublic: false,
+    participantIds: [],
+  });
 
   const update = (p: Partial<CreateMoaBoxInput>) =>
     setValues(v => ({ ...v, ...p }));
@@ -34,13 +43,15 @@ export default function CreateMoaProvider({
     if (!res.ok) {
       const err = await res.json();
       console.error("모아 생성 검증 에러:", err);
-      alert("검증 오류가 발생했습니다. 콘솔을 확인하세요.");
+      alert("모아 생성 실패. 콘솔 확인하세요.");
       return;
     }
     onSuccess();
   };
 
   return (
-    <Ctx.Provider value={{ values, update, submit }}>{children}</Ctx.Provider>
+    <CreateMoaContext.Provider value={{ values, update, submit }}>
+      {children}
+    </CreateMoaContext.Provider>
   );
 }

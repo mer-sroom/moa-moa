@@ -6,7 +6,6 @@ import step1 from "@/../../public/assets/icons/createmoa_step1.svg";
 import Button from "../../(components)/common/Button";
 import type { NextStepProps } from "@/types/createMoa";
 
-// STEP 1 ─ 인트로
 export default function CreateMoaStep1({ nextStep }: NextStepProps) {
   return (
     <div>
