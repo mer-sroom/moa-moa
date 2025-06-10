@@ -1,24 +1,28 @@
 /* 전체 감싸기 */
 .allContainer {
   display: flex;
-  height: 100vh;
-  width: 100%;
-  background-color: #1b1b1b;
   flex-direction: column;
-  justify-content: center;
-  padding: 20px 0;
-  padding-top: 63.5px;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #1b1b1b;
+  padding-top: 36px;
 }
 
-/* 마이페이지 섹션 감싸기(저장버튼 제외) */
+/* 마이페이지 섹션 감싸기 */
 .container {
-  width: 82%;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-start;
   align-items: center;
+  width: 82%;
   margin: 0 auto;
-  padding-top: 64px;
   gap: 31px;
+}
+
+/* 저장 버튼은 최하단 근처로 밀어냄 */
+.container > :last-child {
+  margin-top: auto;
 }
 
 /* 프로필 섹션 전체 */
@@ -27,6 +31,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 8%;
 }
 
 /* 프로필 사진 */
@@ -34,7 +39,7 @@
   width: 125px;
   height: 125px;
   border-radius: 250px;
-  background-color: azure;
+  background-color: red;
   box-sizing: border-box;
 }
 
@@ -47,7 +52,6 @@
   gap: 5px;
 }
 
-/* 상단 닉네임 */
 .userName {
   padding: 10px 0 5px 0;
   font-size: 20px;
@@ -85,36 +89,24 @@
   flex-direction: column;
 }
 
-/* 타이틀 라벨 */
-/* padding-bottom: 6px이 생각보다 좁아서 좀 넓혔어요 */
 .formSection label {
   padding-bottom: 12px;
   color: #fff;
 }
 
-/* 입력창 */
 .formSection input {
-  padding: 25px;
+  padding: 3vh;
   border-radius: 50px;
   background-color: #e8e8e8;
   font-size: 14px;
   color: #8f8f8f;
 }
 
-/* 닉네임 */
-.formNickname {
-  padding-bottom: 17px;
-  padding-top: 7px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* 이메일 */
+.formNickname,
 .formEmail {
-  padding-bottom: 17px;
   display: flex;
   flex-direction: column;
-  pointer-events: none;
+  padding-bottom: 17px;
 }
 
 /* 로그아웃, 계정삭제 (전체) */
@@ -123,26 +115,47 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-bottom: 102px;
 }
 
-/* 버튼 전체 스타일 */
 .actions button {
   border: none;
   background-color: transparent;
   cursor: pointer;
 }
 
-/* 로그아웃 버튼 */
 .actions .logout {
   text-decoration: none;
   color: #fff;
   padding: 9px 0;
 }
 
-/* 계정 삭제 버튼 */
 .actions .delete {
   text-decoration: none;
   color: #a79c95;
   padding: 9px 0;
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px), (max-height: 500px) {
+  .container {
+    width: 94%;
+    gap: clamp(12px, 3vh, 24px);
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+  }
+
+  .profileImage,
+  .noprofileImage {
+    width: clamp(60px, 12vw, 100px);
+    height: clamp(60px, 12vw, 100px);
+  }
+
+  .formSection input {
+    padding: clamp(12px, 3vh, 18px);
+  }
+
+  .actions button {
+    font-size: clamp(12px, 3vw, 14px);
+    padding: clamp(6px, 1vh, 10px) 0;
+  }
 }

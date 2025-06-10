@@ -105,6 +105,7 @@ export default function MyPage() {
                   alt="profile Image"
                   width={125}
                   height={125}
+                  className={styles.noprofileImage}
                 />
               </div>
               <div className={styles.userinfo}>
@@ -164,12 +165,9 @@ export default function MyPage() {
 
             {/* 로그아웃 & 회원탈퇴 버튼 섹션 */}
             <div className={styles.actions}>
-              {/* 로그아웃 버튼 */}
               <button onClick={handleLogout} className={styles.logout}>
                 로그아웃
               </button>
-
-              {/* 회원 탈퇴 버튼 */}
               <button
                 className={styles.delete}
                 onClick={() =>
@@ -184,11 +182,10 @@ export default function MyPage() {
               </button>
             </div>
 
-            {/* 닉네임 저장 버튼 */}
             <Button label="저장하기" size="long" color="black" />
           </div>
 
-          {/* 토스트 메시지 컨테이너 */}
+          {/* 토스트 메시지 */}
           <ToastContainer
             position="bottom-center"
             autoClose={2000}
