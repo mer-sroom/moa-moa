@@ -29,7 +29,7 @@ export default function CreateMoaProvider({
     allowAnonymous: true,
     letterCountPublic: false,
     participantIds: [],
-    decorationType: "NONE", // ← 여기!
+    decorationDesignId: undefined,
   });
 
   const update = (p: Partial<CreateMoaBoxInput>) =>

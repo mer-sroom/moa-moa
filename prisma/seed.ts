@@ -1,44 +1,9 @@
-// prisma/seed.ts  (CommonJS 버전)
 const { PrismaClient, UserRole } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
-  /* 1️⃣ 배경 · 우편함 · 장식  ── 3개씩 */
-  await prisma.backgroundDesign.createMany({
-    data: [
-      {
-        id: 1,
-        name: "BG-1",
-        imageURL: "/assets/icons/create_moa/step2_background.svg",
-      },
-      {
-        id: 2,
-        name: "BG-2",
-        imageURL: "/assets/icons/create_moa/background-2.svg",
-      },
-      {
-        id: 3,
-        name: "BG-3",
-        imageURL: "/assets/icons/create_moa/background-3.svg",
-      },
-    ],
-    skipDuplicates: true,
-  });
-
-  await prisma.mailBoxDesign.createMany({
-    data: [
-      {
-        id: 1,
-        name: "Box-1",
-        imageURL: "/assets/icons/create_moa/step2_back.svg",
-      },
-      { id: 2, name: "Box-2", imageURL: "/assets/icons/create_moa/box-2.svg" },
-      { id: 3, name: "Box-3", imageURL: "/assets/icons/create_moa/box-3.svg" },
-    ],
-    skipDuplicates: true,
-  });
-
-  await prisma.letterIconDesign.createMany({
+  /* ──────────────────────────────── 1) 모아 장식 3종 ──────────────────────────────── */
+  await prisma.moaDecorationDesign.createMany({
     data: [
       {
         id: 1,
@@ -56,10 +21,67 @@ async function main() {
         imageURL: "/assets/icons/create_moa/deco-ribbon.svg",
       },
     ],
+    skipDuplicates: true, // 이미 존재하면 무시
+  });
+
+  /* ──────────────────────────────── 2) 배경 디자인 3종 (upsert) ──────────────────────────────── */
+  const bgSeed = [
+    {
+      id: 1,
+      name: "BG-1",
+      imageURL: "/assets/icons/create_moa/step2_background.svg",
+    },
+    {
+      id: 2,
+      name: "BG-2",
+      imageURL: "/assets/icons/create_moa/background-2.svg",
+    },
+    {
+      id: 3,
+      name: "BG-3",
+      imageURL: "/assets/icons/create_moa/background-3.svg",
+    },
+  ];
+
+  for (const bg of bgSeed) {
+    await prisma.backgroundDesign.upsert({
+      where: { id: bg.id },
+      update: { name: bg.name, imageURL: bg.imageURL }, // 덮어쓰기
+      create: bg,
+    });
+  }
+
+  /* ──────────────────────────────── 3) 우편함 디자인 3종 (upsert) ──────────────────────────────── */
+  const boxSeed = [
+    {
+      id: 1,
+      name: "Box-1",
+      imageURL: "/assets/icons/create_moa/step2_back.svg",
+    },
+    { id: 2, name: "Box-2", imageURL: "/assets/icons/create_moa/box-2.svg" },
+    { id: 3, name: "Box-3", imageURL: "/assets/icons/create_moa/box-3.svg" },
+  ];
+
+  for (const box of boxSeed) {
+    await prisma.mailBoxDesign.upsert({
+      where: { id: box.id },
+      update: { name: box.name, imageURL: box.imageURL },
+      create: box,
+    });
+  }
+
+  /* ──────────────────────────────── 4) 편지 아이콘(선택) & 편지지 기본값 ──────────────────────────────── */
+  await prisma.letterIconDesign.createMany({
+    data: [
+      {
+        id: 1,
+        name: "LetterIcon-Default",
+        imageURL: "/assets/mock/letter_icon.svg",
+      },
+    ],
     skipDuplicates: true,
   });
 
-  /* 2️⃣(선택) 편지지 기본값 하나만 */
   await prisma.letterPaperDesign.createMany({
     data: [
       {
@@ -71,7 +93,7 @@ async function main() {
     skipDuplicates: true,
   });
 
-  /* 3️⃣ 테스트 유저 (이미 있으면 업데이트) */
+  /* ──────────────────────────────── 5) 테스트 유저 upsert ──────────────────────────────── */
   const user = await prisma.user.upsert({
     where: { id: "9e75dabc-363d-4904-bde9-866b6e0e4af0" },
     update: { nickname: "Freshman" },
@@ -83,7 +105,7 @@ async function main() {
     },
   });
 
-  /* 4️⃣ 목업 MoaBox 하나 만들어 두기 */
+  /* ──────────────────────────────── 6) 목업 MoaBox 하나 ──────────────────────────────── */
   await prisma.moaBox.create({
     data: {
       ownerId: user.id,
@@ -92,15 +114,17 @@ async function main() {
       shareLink: "seed-sample",
       backgroundDesignId: 1,
       mailBoxDesignId: 1,
+      decorationDesignId: 1, // ⭐ 원하는 모아 장식(id) 지정
     },
   });
 
   console.log("✅  seed 완료!");
 }
 
+/* 실행 */
 main()
-  .catch(e => {
-    console.error(e);
+  .catch(err => {
+    console.error(err);
     process.exit(1);
   })
   .finally(() => prisma.$disconnect());

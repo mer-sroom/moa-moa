@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
           shareLink: nanoid(10),
           backgroundDesignId: body.backgroundDesignId,
           mailBoxDesignId: body.mailBoxDesignId,
-          decorationType: body.decorationType ?? "NONE",
+          decorationDesignId: body.decorationDesignId ?? null,
         },
       });
 
@@ -57,8 +57,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(box, { status: 201 });
   } catch (e) {
-    // console.error 호출 제거: payload 에러 방지
-    console.log("MoaBox 생성 중 서버 에러 발생");
+    // ① 문자열 직렬화해서 무조건 찍기
+    console.log("MoaBox create raw error →", JSON.stringify(e, null, 2));
+    // ② e?.code, e?.message 별도 출력
+    if (e && typeof e === "object") {
+      console.log("err.code =", e.code);
+      console.log("err.message =", e.message);
+    }
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }

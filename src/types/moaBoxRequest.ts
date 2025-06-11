@@ -12,7 +12,7 @@ export const createMoaBoxSchema = z.object({
   letterCountPublic: z.boolean(),
   participantIds: z.array(z.string()).max(30),
 
-  decorationType: DecorationEnum.optional().default("NONE"),
+  decorationDesignId: z.number().int().positive().optional(),
 });
 
 export type CreateMoaBoxInput = z.infer<typeof createMoaBoxSchema>;

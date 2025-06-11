@@ -88,12 +88,7 @@ model Friendship {
   // userAId와 userBId 조합의 중복 방지
   @@unique([userAId, userBId])
 }
-enum DecorationType {
-  NONE      // 선택 안 함
-  STAR
-  HEART
-  RIBBON
-}
+
 // 3. MoaBox (모아 박스)
 // 개인 모아 / 그룹 모아 공통
 model MoaBox {
@@ -127,7 +122,8 @@ model MoaBox {
   mailBoxDesignId    Int 
   mailBoxDesign      MailBoxDesign? @relation(fields: [mailBoxDesignId], references: [id])
 
-  decorationType     DecorationType    @default(NONE)
+  decorationDesignId Int?                 // FK (nullable)
+  decorationDesign   MoaDecorationDesign? @relation(fields: [decorationDesignId], references: [id])
 }
 
 // 4. MoaBoxParticipant (그룹 모아 참가자)
@@ -263,7 +259,18 @@ model LetterIconDesign {
   createdAt       DateTime @default(now())              
   updatedAt       DateTime @default(now())                   
 }
+// 11. MoaDecorationDesign (모아 장식 전용)
+model MoaDecorationDesign {
+  id        Int      @id @default(autoincrement())
+  name      String
+  imageURL  String
 
+  // 1:N ─ MoaBox
+  moaBoxes  MoaBox[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
 
 // ---------------------------
 // (추가) NextAuth 표준 모델
