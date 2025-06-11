@@ -8,6 +8,7 @@ type Ctx = {
   update: (p: Partial<CreateMoaBoxInput>) => void;
   submit: () => Promise<void>;
 };
+
 const CreateMoaContext = createContext<Ctx>({} as Ctx);
 export const useCreateMoa = () => useContext(CreateMoaContext);
 
@@ -18,7 +19,7 @@ export default function CreateMoaProvider({
   children: React.ReactNode;
   onSuccess: () => void;
 }) {
-  // 초기 필수 필드 모두 채워두기
+  /* ★ 초기값에 decorationType 추가 */
   const [values, setValues] = useState<Partial<CreateMoaBoxInput>>({
     title: undefined,
     dueDate: undefined,
@@ -28,6 +29,7 @@ export default function CreateMoaProvider({
     allowAnonymous: true,
     letterCountPublic: false,
     participantIds: [],
+    decorationType: "NONE", // ← 여기!
   });
 
   const update = (p: Partial<CreateMoaBoxInput>) =>
@@ -41,8 +43,7 @@ export default function CreateMoaProvider({
       body: JSON.stringify(values),
     });
     if (!res.ok) {
-      const err = await res.json();
-      console.error("모아 생성 검증 에러:", err);
+      console.error("모아 생성 검증 에러:", await res.json());
       alert("모아 생성 실패. 콘솔 확인하세요.");
       return;
     }

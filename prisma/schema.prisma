@@ -88,7 +88,12 @@ model Friendship {
   // userAId와 userBId 조합의 중복 방지
   @@unique([userAId, userBId])
 }
-
+enum DecorationType {
+  NONE      // 선택 안 함
+  STAR
+  HEART
+  RIBBON
+}
 // 3. MoaBox (모아 박스)
 // 개인 모아 / 그룹 모아 공통
 model MoaBox {
@@ -121,6 +126,8 @@ model MoaBox {
   // 우편함 이미지
   mailBoxDesignId    Int 
   mailBoxDesign      MailBoxDesign? @relation(fields: [mailBoxDesignId], references: [id])
+
+  decorationType     DecorationType    @default(NONE)
 }
 
 // 4. MoaBoxParticipant (그룹 모아 참가자)

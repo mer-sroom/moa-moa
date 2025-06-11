@@ -6,11 +6,13 @@ import { createMoaBoxSchema } from "@/types/moaBoxRequest";
 import { nanoid } from "nanoid";
 
 export async function POST(req: NextRequest) {
+  // 1) 인증
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
+  // 2) 요청 검증
   let body;
   try {
     body = createMoaBoxSchema.parse(await req.json());
@@ -21,6 +23,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // 3) 트랜잭션
   try {
     const box = await prisma.$transaction(async tx => {
       const created = await tx.moaBox.create({
@@ -35,6 +38,7 @@ export async function POST(req: NextRequest) {
           shareLink: nanoid(10),
           backgroundDesignId: body.backgroundDesignId,
           mailBoxDesignId: body.mailBoxDesignId,
+          decorationType: body.decorationType ?? "NONE",
         },
       });
 
@@ -53,7 +57,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(box, { status: 201 });
   } catch (e) {
-    console.error(e);
+    // console.error 호출 제거: payload 에러 방지
+    console.log("MoaBox 생성 중 서버 에러 발생");
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }

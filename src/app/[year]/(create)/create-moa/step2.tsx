@@ -42,7 +42,7 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
   const isDown = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
-
+  const decoTypes = ["STAR", "HEART", "RIBBON"] as const;
   const dragStart = (pageX: number) => {
     isDown.current = true;
     startX.current = pageX - (rowRef.current?.offsetLeft || 0);
@@ -70,7 +70,9 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
       setBox(src);
       update({ mailBoxDesignId: idx + 1 });
     } else {
+      // ★ 장식 선택
       setDeco(src);
+      update({ decorationType: decoTypes[idx] }); // enum 값 전달
     }
   };
 
