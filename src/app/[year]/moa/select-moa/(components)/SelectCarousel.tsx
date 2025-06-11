@@ -128,6 +128,14 @@ export default function SelectCarousel({
                     backgroundImage: `url(${moaBox.mailBoxDesign.imageURL})`,
                   }}
                 />
+                {moaBox.decorationDesign && (
+                  <div
+                    className={styles.moaDecoImage}
+                    style={{
+                      backgroundImage: `url(${moaBox.decorationDesign.imageURL})`,
+                    }}
+                  />
+                )}
                 <h4 className={styles.moaBoxName}>{moaBox.title}</h4>
               </div>
             </SwiperSlide>

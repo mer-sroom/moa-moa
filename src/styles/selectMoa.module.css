@@ -106,7 +106,17 @@
 .moaBoxName {
   margin: 0 0 32px 0;
 }
-
+.moaDecoImage {
+  position: absolute;
+  top: 0;
+  left: 50%; /* 카드 가로 중앙 기준 */
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
 /*선택 됐을 때*/
 .selected {
   position: relative;

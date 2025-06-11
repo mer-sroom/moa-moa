@@ -19,6 +19,7 @@ export type MoaBox = {
   mailBoxDesign: {
     imageURL: string;
   };
+  decorationDesign?: { imageURL: string } | null;
 };
 
 // 편지 미리보기(아이콘 형태일 때)
