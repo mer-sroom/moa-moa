@@ -20,6 +20,7 @@ export default async function SelectMoaPage() {
     include: {
       backgroundDesign: { select: { imageURL: true } },
       mailBoxDesign: { select: { imageURL: true } },
+      decorationDesign: { select: { imageURL: true } },
     },
   });
 

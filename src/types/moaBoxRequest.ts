@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const DecorationEnum = z.enum(["NONE", "STAR", "HEART", "RIBBON"]);
+export type DecorationType = z.infer<typeof DecorationEnum>;
 export const createMoaBoxSchema = z.object({
   title: z.string().min(1).max(50),
   dueDate: z.string().datetime(),
@@ -9,6 +11,8 @@ export const createMoaBoxSchema = z.object({
   allowAnonymous: z.boolean(),
   letterCountPublic: z.boolean(),
   participantIds: z.array(z.string()).max(30),
+
+  decorationDesignId: z.number().int().positive().optional(),
 });
 
 export type CreateMoaBoxInput = z.infer<typeof createMoaBoxSchema>;

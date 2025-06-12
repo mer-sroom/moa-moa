@@ -6,11 +6,13 @@ import { createMoaBoxSchema } from "@/types/moaBoxRequest";
 import { nanoid } from "nanoid";
 
 export async function POST(req: NextRequest) {
+  // 1) 인증
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
+  // 2) 요청 검증
   let body;
   try {
     body = createMoaBoxSchema.parse(await req.json());
@@ -21,6 +23,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // 3) 트랜잭션
   try {
     const box = await prisma.$transaction(async tx => {
       const created = await tx.moaBox.create({
@@ -35,6 +38,7 @@ export async function POST(req: NextRequest) {
           shareLink: nanoid(10),
           backgroundDesignId: body.backgroundDesignId,
           mailBoxDesignId: body.mailBoxDesignId,
+          decorationDesignId: body.decorationDesignId ?? null,
         },
       });
 
@@ -53,7 +57,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(box, { status: 201 });
   } catch (e) {
-    console.error(e);
+    // ① 문자열 직렬화해서 무조건 찍기
+    console.log("MoaBox create raw error →", JSON.stringify(e, null, 2));
+    // ② e?.code, e?.message 별도 출력
+    if (e && typeof e === "object") {
+      console.log("err.code =", e.code);
+      console.log("err.message =", e.message);
+    }
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }

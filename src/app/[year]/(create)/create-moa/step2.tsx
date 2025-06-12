@@ -18,10 +18,11 @@ const boxes = [
   "/assets/icons/create_moa/box-2.svg",
   "/assets/icons/create_moa/box-3.svg",
 ];
+/* 장식은 id + src 로 관리 → FK 전송 */
 const decos = [
-  "/assets/icons/create_moa/deco-star.svg",
-  "/assets/icons/create_moa/deco-heart.svg",
-  "/assets/icons/create_moa/deco-ribbon.svg",
+  { id: 1, src: "/assets/icons/create_moa/deco-star.svg" },
+  { id: 2, src: "/assets/icons/create_moa/deco-heart.svg" },
+  { id: 3, src: "/assets/icons/create_moa/deco-ribbon.svg" },
 ];
 
 type Tab = "background" | "box" | "deco";
@@ -34,10 +35,11 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
   const [tab, setTab] = useState<Tab>("background");
   const [background, setBackground] = useState(backgrounds[0]);
   const [box, setBox] = useState(boxes[0]);
-  const [deco, setDeco] = useState<string | null>(null);
+  const [decoSrc, setDecoSrc] = useState<string | null>(null);
 
   const { update } = useCreateMoa();
 
+  /* --- 드래그 스크롤용 ref --- */
   const rowRef = useRef<HTMLDivElement | null>(null);
   const isDown = useRef(false);
   const startX = useRef(0);
@@ -56,26 +58,35 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
   };
   const dragEnd = () => (isDown.current = false);
 
+  /* --- 썸네일 · 선택 상태 계산 --- */
   const thumbs =
-    tab === "background" ? backgrounds : tab === "box" ? boxes : decos;
-  const currentSelected =
-    tab === "background" ? background : tab === "box" ? box : deco;
+    tab === "background"
+      ? backgrounds
+      : tab === "box"
+      ? boxes
+      : decos.map(d => d.src);
 
+  const currentSelected =
+    tab === "background" ? background : tab === "box" ? box : decoSrc;
+
+  /* --- 선택 핸들러 --- */
   const handleSelect = (src: string, idx: number) => {
     if (tab === "background") {
       setBackground(src);
       onBgChange(src);
-      update({ backgroundDesignId: idx + 1 });
+      update({ backgroundDesignId: idx + 1 }); // id = 1,2,3
     } else if (tab === "box") {
       setBox(src);
-      update({ mailBoxDesignId: idx + 1 });
+      update({ mailBoxDesignId: idx + 1 }); // id = 1,2,3
     } else {
-      setDeco(src);
+      setDecoSrc(src);
+      update({ decorationDesignId: decos[idx].id }); // FK 전송!
     }
   };
 
   return (
     <div className={styles.step2_container}>
+      {/* ───── 미리보기 영역 ───── */}
       <div className={styles.preview}>
         <Image
           src={box}
@@ -84,9 +95,9 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
           height={290}
           className={styles.preview_box}
         />
-        {deco && (
+        {decoSrc && (
           <Image
-            src={deco}
+            src={decoSrc}
             alt="decoration"
             width={120}
             height={120}
@@ -103,6 +114,7 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
         </div>
       </div>
 
+      {/* ───── 썸네일 & 탭 영역 ───── */}
       <footer className={styles.footer}>
         <div
           ref={rowRef}
@@ -127,7 +139,9 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
             </button>
           ))}
         </div>
+
         <div className={styles.divider} />
+
         <nav className={styles.tab_nav}>
           {(["배경", "모아 박스", "장식"] as const).map((label, i) => {
             const value: Tab =
