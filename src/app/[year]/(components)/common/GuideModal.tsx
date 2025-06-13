@@ -1,9 +1,9 @@
 "use client";
 import type { CSSProperties } from "react";
 import { useMediaQuery } from "react-responsive";
-import Image from 'next/image';
-import testimg from '@/../public/assets/service-imgs/guide/create_moa_step4.svg';
-
+import Image, { StaticImageData } from 'next/image';
+import x_btn from "/public/assets/icons/modal_X_btn.svg";
+import styles from "../../../../styles/modal.module.css";
 
 export const overlayStyle: CSSProperties = {
     position: "absolute",
@@ -12,13 +12,15 @@ export const overlayStyle: CSSProperties = {
     zIndex: 1,
     width: "100%",
     height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
 };
 
 export default function GuideModal({
-    isOpen, onClose,
+    isOpen, onClose, img,
 }: {
     isOpen?: boolean;
     onClose?: () => void;
+    img?: string | StaticImageData;
 }) {
     const isMobile = useMediaQuery({ maxWidth: 600 });
     const isSmallMobile = useMediaQuery({ maxWidth: 390 });
@@ -40,12 +42,11 @@ export default function GuideModal({
         height: isMobile ? "" : "90%",
         maxHeight: isMobile ? "90%" : "",
         transform: "translate(-50%, -50%)",
-        padding: "1px 1px",
         zIndex: 2,
-        boxShadow: "0px 1px 3px 0px var(--ui-neutral)",
+        boxShadow: "0px 0px 0px 4px var(--ui-neutral) inset",
         flexDirection: "column",
         backgroundColor: "var(--ui-secondary)",
-        borderRadius: "2px",
+        borderRadius: "20px",
         overflow: "hidden",
     };
 
@@ -55,9 +56,15 @@ export default function GuideModal({
             <div style={{ ...modalStyle }}>
                 <Image
                     style={{ ...contentStyle }}
-                    src={testimg}
-                    alt="testimg"
+                    src={img}
+                    alt="img"
                     sizes="100vw"
+                />
+                <Image
+                    src={x_btn}
+                    alt="close"
+                    onClick={onClose}
+                    className={styles.X_btn}
                 />
             </div>
         </div>
