@@ -22,29 +22,14 @@ export default function CreateMoaStep4({ nextStep }: NextStepProps) {
   };
 
   return (
-    <div>
-      <div className={styles.step4_main}>
-        {visible && (
-          <div className={styles.popup}>
-            <button className={styles.popup_closeButton} onClick={handleClose}>
-              <IoCloseOutline color="white" fontSize="30px" />
-            </button>
-            <div className={styles.popup_font}>
-              <p>버튼을 검은색으로 만들어</p>
-              <p>기능을 활성화 할 수 있어요</p>
-            </div>
-            <div className={styles.popup_toggle}>
-              <div className={styles.popup_circle} />
-            </div>
-          </div>
-        )}
-
+    <>
+      <div className={styles.create_moa_container}>
         <div className={styles.step4_setting_group}>
-          <h1>모아 설정</h1>
+          <h2 className={styles.title}>모아 박스 수신 & 공개 설정</h2>
           <p className={styles.line_sort_gray}>
-            한 번 설정한 값은 수정할 수 없습니다
+            익명 수신 및 편지 수 공개 여부를 선택할 수 있어요
           </p>
-          <div>
+          <div className={styles.step4_options_container}>
             <div className={styles.span_group}>
               <span>비로그인 유저에게도 편지 받기</span>
               <div className={styles.toggle_right}>
@@ -68,7 +53,7 @@ export default function CreateMoaStep4({ nextStep }: NextStepProps) {
           </div>
         </div>
 
-        <div className={styles.step4_button}>
+        <div className={styles.create_moa_button}>
           <Button
             label="생성하기"
             size="medium"
@@ -77,6 +62,6 @@ export default function CreateMoaStep4({ nextStep }: NextStepProps) {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }

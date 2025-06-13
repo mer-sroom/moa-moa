@@ -9,31 +9,41 @@ import type { NextStepProps } from "@/types/createMoa";
 export default function CreateMoaStep1({ nextStep }: NextStepProps) {
   return (
     <div>
-      <div className={styles.step1_container}>
-        <div className={styles.step1_img_container}>
-          <div className={styles.step1_img_house}>
-            <Image src={boingImg} alt="boing" className={styles.step1_boing} />
-            <Image src={sparkImg} alt="spark" className={styles.step1_spark} />
-            <Image
-              src={pageImg}
-              alt="step1"
-              className={styles.step1_pageImg}
-              priority={true}
-            />
+      <div className={styles.create_moa_container}>
+        <div>
+          <div className={styles.step1_img_container}>
+            <div className={styles.step1_img_house}>
+              <Image
+                src={boingImg}
+                alt="boing"
+                className={styles.step1_boing}
+              />
+              <Image
+                src={sparkImg}
+                alt="spark"
+                className={styles.step1_spark}
+              />
+              <Image
+                src={pageImg}
+                alt="step1"
+                className={styles.step1_pageImg}
+                priority={true}
+              />
+            </div>
           </div>
-        </div>
-        <div className={styles.step1_text_container}>
-          <h2 className={styles.step1_title}>마음을 모아봐요!</h2>
-          <div className={styles.step1_description}>
-            <p>
-              나만의 우편함을 만들고 기념일을
-              <br />
-              설정하면 편지를 받을 수 있어요!
-            </p>
+          <div className={styles.step1_text_container}>
+            <h2 className={styles.title}>마음을 모아봐요!</h2>
+            <div className={styles.step1_description}>
+              <p>
+                나만의 우편함을 만들고 기념일을
+                <br />
+                설정하면 편지를 받을 수 있어요!
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className={styles.button}>
+        <div className={styles.create_moa_button}>
           <Button
             label="모아 생성하기"
             size="medium"

@@ -18,7 +18,7 @@ export default function CreateMoaStep5({ goSelectMoa }: NextStepProps) {
           </p>
         </div>
       </div>
-      <div className={styles.button}>
+      <div className={styles.create_moa_button}>
         <Button
           label="메인으로"
           size="medium"
