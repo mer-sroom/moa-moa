@@ -2,6 +2,27 @@
 /*   step 1 : 마음을 모아봐요   */
 /* -------------------------- */
 
+/* 애니메이션 */
+@keyframes spin {
+  0% {
+    transform: scale(1.5) rotate(0deg);
+  }
+
+  100% {
+    transform: scale(1.5) rotate(360deg);
+  }
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(200%) translateY(-180%) rotate(360deg);
+    opacity: 1;
+  }
+}
+
 .step1_container {
   width: 100%;
   height: 100vh;
@@ -11,22 +32,87 @@
   top: 0px;
 }
 
-.step1_container h1 {
-  padding-top: 60px;
+.step1_img_container {
+  width: 97%;
+  margin-right: 3vw;
+}
+.step1_img_house {
+  margin: 0 auto;
+  position: relative;
+  width: fit-content;
+  z-index: 1;
+}
+.step1_boing {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  width: min(15%, 20vh);
+  height: auto;
+  animation: pop 1.5s ease forwards;
+}
+.step1_spark {
+  position: absolute;
+  top: 20%;
+  right: 2%;
+  width: min(18%, 20vh);
+  height: auto;
+  animation: spin 7s linear infinite;
+}
+.step1_pageImg {
+  position: relative;
+  width: min(118%, 36vh);
+  height: auto;
+}
+
+.step1_text_container {
+  width: 100%;
+  padding: 4vh 0;
+}
+.step1_title {
+  margin: 0;
+  font-size: var(--font-size-title);
+  color: var(--text-primary);
+}
+.step1_description p {
+  padding-top: 24px;
+  line-height: 24px;
+  margin: 0;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-700);
 }
 
 .button {
-  display: flex;
-  position: absolute;
   width: 100%;
+  display: flex;
   justify-content: center;
-  bottom: 10%;
 }
 
-.line_sort_gray p {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  font-size: var(--font-size-base);
+@media (max-width: 440px) {
+  .step1_spark {
+    top: 22%;
+    right: 2%;
+  }
+  .step1_boing {
+    top: 16%;
+    left: 40%;
+  }
+  .step1_text_container {
+    padding: 4vh 0;
+  }
+  .step1_description p {
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .step1_spark {
+    top: 22%;
+    right: 20%;
+  }
+  .step1_boing {
+    top: 22%;
+    left: 40%;
+  }
 }
 
 /* -------------------------- */

@@ -7,7 +7,7 @@ dayjs.extend(utc);
 
 import Button from "../../(components)/common/Button";
 import { FaCheck } from "react-icons/fa";
-import styles from "@/styles/createMoa.module.css";
+import styles from "@/styles/create-moa/createMoa.module.css";
 import type { NextStepProps, ServerType } from "@/types/createMoa";
 import SelectModal from "../(components)/SelectModal";
 import Modal from "../../(components)/common/Modal";

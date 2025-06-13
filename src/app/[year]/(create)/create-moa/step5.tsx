@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/styles/createMoa.module.css";
+import styles from "@/styles/create-moa/createMoa.module.css";
 import type { NextStepProps } from "@/types/createMoa";
 import Button from "../../(components)/common/Button";
 import Image from "next/image";

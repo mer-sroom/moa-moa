@@ -64,7 +64,7 @@ export default function CreateLetterStep1(props: Props) {
         <div className={styles.container_text}>
           <div className={styles.title}>마음을 전달해요!</div>
           <div className={styles.description}>
-            직접 꾸민 우표와, 좋아하는 노래를 담아
+            직접 꾸민 스티커와, 좋아하는 노래를 담아
             <br />
             친구에게 편지를 보내봐요!
           </div>

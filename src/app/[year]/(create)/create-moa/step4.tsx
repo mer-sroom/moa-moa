@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/styles/createMoa.module.css";
+import styles from "@/styles/create-moa/createMoa.module.css";
 import ToggleButton from "../(components)/ToggleButton";
 import { IoCloseOutline } from "react-icons/io5";
 import { useState } from "react";

@@ -30,24 +30,24 @@
   /* -------------------------- */
   /*  텍스트 색상상               */
   /* -------------------------- */
-  --text-primary: #000000; /* 기본 글자 색상*/
+  --text-primary: #1b1b1b; /* 기본 글자 색상*/
   --text-primary-reverse: #fff; /*  기본 글자 색상 전환(버튼에 쓰게) */
   --text-secondary: #0f0f0f; /* 보조 텍스트(회색 같은 거)*/
-  --text-accent: #0f0f0f; /* 경고 텍스트 등 */
+  --text-accent: #ff6464; /* 경고 텍스트 등 */
 
   /* -------------------------- */
   /*  ui  색상              */
   /* -------------------------- */
   --ui-primary: #333; /* 주 색상(버튼, 링크, 로고 등 주목도가 필요한 요소) */
   --ui-secondary: #fff; /* Primary 보조 및 강조 색상(디자인적 요소) */
-  --ui-neutral: #000000; /* 텍스트, 배경, 테두리 등에 사용 */
+  --ui-neutral: #1b1b1b; /* 텍스트, 배경, 테두리 등에 사용 */
   --ui-accent: #ff6464; /* 특정 영역을 강조하거나 특별한 상황에 사용(ex 경고 문구등) */
 
   /* -------------------------- */
   /*  고려해볼만한 다른 공통 css     */
   /* -------------------------- */
+  --font-size-title: 24px; /*제목 크기*/
   --font-size-base: 16px;
-  --font-family-base: "Inter", sans-serif;
   --border-radius-base: 4px; /* 버튼 등 각종 컴포넌트 모서리 */
   --transition-speed: 0.2s;
 
@@ -60,3 +60,10 @@
 
 /* 일단 지금 primary - secondary 같은 애매모호한 말로 정의 되어있는데 좀더 쓰기 쉽고 직관적인 말로 바꾸면 좋을 거 같슴다 */
 /* 사용할때는 다른 css 파일에 var(--정의한이름) 으로 사용하면 됩니다. 예를 들어서 body { background-color: var(--color-primary); 이런식으로여여 }*/
+
+@media (max-width: 440px) {
+  :root {
+    --font-size-title: 20px;
+    --font-size-base: 14px;
+  }
+}
