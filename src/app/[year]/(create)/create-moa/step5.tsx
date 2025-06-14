@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/styles/createMoa.module.css";
+import styles from "@/styles/create-moa/createMoa.module.css";
 import type { NextStepProps } from "@/types/createMoa";
 import Button from "../../(components)/common/Button";
 import Image from "next/image";
@@ -18,7 +18,7 @@ export default function CreateMoaStep5({ goSelectMoa }: NextStepProps) {
           </p>
         </div>
       </div>
-      <div className={styles.button}>
+      <div className={styles.create_moa_button}>
         <Button
           label="메인으로"
           size="medium"

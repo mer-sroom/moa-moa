@@ -1,32 +1,143 @@
 /* -------------------------- */
+/*   create-moa 공통통 */
+/* -------------------------- */
+/* 공통 컨테이너 */
+.create_moa_container {
+  box-sizing: border-box;
+  padding: 10px 50px 0 40px;
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+/*타이틀*/
+.title {
+  margin: 0;
+  font-size: var(--font-size-title);
+  color: var(--text-primary);
+}
+/* 부가 설명 */
+.line_sort_gray {
+  line-height: 22px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  color: var(--color-gray-500);
+  font-size: var(--font-size-base);
+}
+.create_moa_button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+/* -------------------------- */
 /*   step 1 : 마음을 모아봐요   */
 /* -------------------------- */
+
+/* 애니메이션 */
+@keyframes spin {
+  0% {
+    transform: scale(1.5) rotate(0deg);
+  }
+
+  100% {
+    transform: scale(1.5) rotate(360deg);
+  }
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(200%) translateY(-180%) rotate(360deg);
+    opacity: 1;
+  }
+}
 
 .step1_container {
   width: 100%;
   height: 100vh;
-  position: absolute;
-  align-content: center;
+  padding-top: 20px;
   text-align: center;
-  top: 0px;
 }
-
-.step1_container h1 {
-  padding-top: 60px;
+.step1_img_container {
+  width: 95%;
+  margin-right: 3vw;
+  margin-top: 10px;
+}
+.step1_img_house {
+  margin: 0 auto;
+  position: relative;
+  width: fit-content;
+  z-index: 1;
+}
+.step1_boing {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  width: min(15%, 20vh);
+  height: auto;
+  animation: pop 1.5s ease forwards;
+}
+.step1_spark {
+  position: absolute;
+  top: 20%;
+  right: 2%;
+  width: min(18%, 20vh);
+  height: auto;
+  animation: spin 7s linear infinite;
+}
+.step1_pageImg {
+  position: relative;
+  width: min(118%, 36vh);
+  height: auto;
+}
+.step1_text_container {
+  width: 100%;
+  padding: 4vh 0;
+  text-align: center;
+}
+.step1_description p {
+  padding-top: 24px;
+  line-height: 24px;
+  margin: 0;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-700);
 }
 
 .button {
-  display: flex;
-  position: absolute;
   width: 100%;
+  display: flex;
   justify-content: center;
-  bottom: 10%;
 }
 
-.line_sort_gray p {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  font-size: var(--font-size-base);
+@media (max-width: 440px) {
+  .step1_spark {
+    top: 22%;
+    right: 2%;
+  }
+  .step1_boing {
+    top: 16%;
+    left: 40%;
+  }
+  .step1_text_container {
+    padding: 4vh 0;
+  }
+  .step1_description p {
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .step1_spark {
+    top: 22%;
+    right: 20%;
+  }
+  .step1_boing {
+    top: 22%;
+    left: 40%;
+  }
 }
 
 /* -------------------------- */
@@ -72,6 +183,7 @@
   display: flex;
   flex-direction: column;
   max-width: 100vw;
+  height: 75vh;
   position: relative;
 }
 
@@ -172,26 +284,27 @@
 /* -------------------------- */
 /*     step 4 : 모아 설정      */
 /* -------------------------- */
-
 .step4_main {
   width: 100%;
-  display: contents;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* background-color: antiquewhite; */
 }
 
-.step4_setting_group {
-  margin-left: 50px;
-  margin-top: 70px;
+.step4_options_container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-
-.step4_setting_group h1 {
-  margin-bottom: 0px;
-}
-
 .span_group {
   display: flex;
   justify-content: space-between;
-  margin: 20px 60px 0px 0px;
-  width: 90%;
+  align-items: center;
+  /* margin: 20px 60px 0px 0px; */
+  /* width: 90%; */
 }
 
 .toggle_right {
@@ -252,22 +365,6 @@
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
-}
-
-.line_sort_gray {
-  display: inline-block;
-  color: var(--color-gray-500);
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
-
-.step4_button {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  bottom: 10%;
-  left: 0;
-  position: fixed;
 }
 
 /* -------------------------- */
