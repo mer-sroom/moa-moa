@@ -1,10 +1,10 @@
 /* -------------------------- */
-/*   create-moa 공통통 */
+/*   create-moa 공통 */
 /* -------------------------- */
 /* 공통 컨테이너 */
 .create_moa_container {
   box-sizing: border-box;
-  padding: 10px 50px 0 40px;
+  padding: 10px 50px;
   width: 100%;
   height: 75vh;
   display: flex;
@@ -17,7 +17,21 @@
   font-size: var(--font-size-title);
   color: var(--text-primary);
 }
-/* 부가 설명 */
+/*타이틀 및 설명, step1,5 전용*/
+/* 타이틀, 부가 설명 감싸는 컨테이너 */
+.text_container {
+  width: 100%;
+  padding: 4vh 0;
+  text-align: center;
+}
+.description {
+  padding-top: 24px;
+  line-height: 24px;
+  margin: 0;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-700);
+}
+/* 부가 설명, step 2 ~ 4 전용*/
 .line_sort_gray {
   line-height: 22px;
   margin-top: 8px;
@@ -25,10 +39,41 @@
   color: var(--color-gray-500);
   font-size: var(--font-size-base);
 }
+/* 버튼(step 1~5) */
 .create_moa_button {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+/* 안내 페이지 이미지 (step1, 5 전용) */
+.main_img_container {
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  height: auto;
+  margin-top: 10px;
+}
+.page_main_img {
+  position: relative;
+  width: min(120%, 40vh);
+  height: auto;
+}
+/* 메인 이미지 postion 용 */
+.img_house {
+  margin: 0 auto;
+  position: relative;
+  width: fit-content;
+  height: auto;
+  z-index: 1;
+}
+/* 미디어 쿼리 */
+@media (max-width: 440px) {
+  .description {
+    line-height: 20px;
+  }
+}
+@media (max-width: 380px) {
 }
 /* -------------------------- */
 /*   step 1 : 마음을 모아봐요   */
@@ -45,7 +90,7 @@
   }
 }
 
-@keyframes pop {
+@keyframes popStep1 {
   0% {
     opacity: 0;
   }
@@ -54,23 +99,8 @@
     opacity: 1;
   }
 }
-
-.step1_container {
-  width: 100%;
-  height: 100vh;
-  padding-top: 20px;
-  text-align: center;
-}
-.step1_img_container {
-  width: 95%;
-  margin-right: 3vw;
-  margin-top: 10px;
-}
 .step1_img_house {
-  margin: 0 auto;
-  position: relative;
-  width: fit-content;
-  z-index: 1;
+  padding-right: 4vw;
 }
 .step1_boing {
   position: absolute;
@@ -78,54 +108,25 @@
   left: 40%;
   width: min(15%, 20vh);
   height: auto;
-  animation: pop 1.5s ease forwards;
+  animation: popStep1 1.5s ease forwards;
 }
 .step1_spark {
   position: absolute;
   top: 20%;
-  right: 2%;
+  right: 10%;
   width: min(18%, 20vh);
   height: auto;
   animation: spin 7s linear infinite;
 }
-.step1_pageImg {
-  position: relative;
-  width: min(118%, 36vh);
-  height: auto;
-}
-.step1_text_container {
-  width: 100%;
-  padding: 4vh 0;
-  text-align: center;
-}
-.step1_description p {
-  padding-top: 24px;
-  line-height: 24px;
-  margin: 0;
-  font-size: var(--font-size-base);
-  color: var(--color-gray-700);
-}
-
-.button {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
 
 @media (max-width: 440px) {
   .step1_spark {
-    top: 22%;
-    right: 2%;
+    top: 20%;
+    right: 12%;
   }
   .step1_boing {
     top: 16%;
     left: 40%;
-  }
-  .step1_text_container {
-    padding: 4vh 0;
-  }
-  .step1_description p {
-    line-height: 20px;
   }
 }
 
@@ -370,15 +371,55 @@
 /* -------------------------- */
 /* step 5: 새로운 모아 생성 완료 */
 /* -------------------------- */
-
-.step5_container {
-  width: 100%;
-  height: 100%;
-  align-content: center;
-  text-align: center;
+/* 애니메이션 */
+@keyframes popStep5 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(200%) translateY(-180%) rotate(300deg);
+    opacity: 1;
+  }
 }
 
-.step5_font_container {
-  margin-top: 120px;
-  margin-bottom: 30px;
+@keyframes twinkle {
+  0% {
+    opacity: 0.2;
+  }
+  75% {
+    opacity: 1;
+    transform: rotate3d(0, 1, 0, 180deg);
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+/* 부속 요소(장식) */
+.step5_boing {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: min(20%, 20vh);
+  height: auto;
+  animation: popStep5 1.5s ease forwards;
+}
+
+.step5_twinkle1,
+.step5_twinkle2 {
+  position: absolute;
+  width: min(7%, 5vh);
+  height: auto;
+}
+
+.step5_twinkle1 {
+  bottom: 44%;
+  left: -8%;
+  animation: twinkle 2s linear infinite;
+}
+
+.step5_twinkle2 {
+  bottom: 22%;
+  right: -20%;
+  animation: twinkle 2s 1s linear infinite;
 }
