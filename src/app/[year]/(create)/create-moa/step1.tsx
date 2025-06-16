@@ -33,7 +33,7 @@ export default function CreateMoaStep1({ nextStep }: NextStepProps) {
 
         <div className={styles.create_moa_button}>
           <Button
-            label="모아 생성하기"
+            label="생성하기"
             size="medium"
             color="black"
             onClick={nextStep}
