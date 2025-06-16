@@ -132,11 +132,11 @@
 
 @media (max-width: 380px) {
   .step1_spark {
-    top: 22%;
-    right: 20%;
+    top: 20%;
+    right: 8%;
   }
   .step1_boing {
-    top: 22%;
+    top: 20%;
     left: 40%;
   }
 }
@@ -393,6 +393,10 @@
   100% {
     opacity: 0.2;
   }
+}
+
+.step5_img_house {
+  padding-right: 2vw;
 }
 
 /* 부속 요소(장식) */

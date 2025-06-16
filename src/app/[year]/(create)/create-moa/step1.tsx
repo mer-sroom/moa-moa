@@ -23,11 +23,11 @@ export default function CreateMoaStep1({ nextStep }: NextStepProps) {
           </div>
         </div>
         <div className={styles.text_container}>
-          <h2 className={styles.title}>마음을 모아봐요!</h2>
+          <h2 className={styles.title}>특별한 날, 나만의 모아박스</h2>
           <p className={styles.description}>
-            나만의 우편함을 만들고 기념일을
+            나만의 감성으로 우편함을 꾸며보세요.
             <br />
-            설정하면 편지를 받을 수 있어요!
+            기념일을 기록하고, 소중한 마음을 편지로 받아보세요.
           </p>
         </div>
 
