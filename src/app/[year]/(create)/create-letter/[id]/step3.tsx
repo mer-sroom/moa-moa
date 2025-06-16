@@ -64,7 +64,7 @@ export default function CreateLetterStep3({
     Object.assign(letterContentRef.current, {
       title: newTitle, //입력한 제목
       content: newContent, //입력한 본문
-      senderName: newSenderName, ///수신자
+      authorName: newSenderName, ///수신자
       letterPaperDesign: nowSelected, //현재 선택한 편지지
     });
     // console.log(letterContentRef);

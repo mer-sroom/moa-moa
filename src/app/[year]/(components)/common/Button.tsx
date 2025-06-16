@@ -26,6 +26,7 @@ export interface ButtonProps {
     | "false";
   onClick?: () => void; // toast alert 의 onCLick 속성 추가
   loading?: boolean; //로딩이 필요한 작업일 때(ex. 이미지 다운로드)
+  disabled?: boolean;
 }
 
 //간단하게만 적었습니당
@@ -148,6 +149,11 @@ const ButtonStyle = styled.button<ButtonProps>`
   ${props => buttonSize[props.size]};
   ${props => buttonColor[props.color]};
   text-align: center;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
 `;
 
 export default function Button({
@@ -157,6 +163,7 @@ export default function Button({
   color,
   className,
   onClick,
+  disabled = false,
 }: ButtonProps) {
   return (
     <ButtonStyle
@@ -164,6 +171,7 @@ export default function Button({
       size={size}
       color={color}
       onClick={onClick}
+      disabled={disabled}
     >
       <div style={{ justifyContent: "center", display: "flex", gap: "12px" }}>
         {label}
