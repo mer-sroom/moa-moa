@@ -59,7 +59,12 @@ export default function CreateLetterStep() {
       case 4:
         return <CreateLetterStep4 nextStep={nextStep} />;
       case 5:
-        return <CreateLetterStep5 nextStep={nextStep} />;
+        return (
+          <CreateLetterStep5
+            letterContentRef={letterContentRef}
+            nextStep={nextStep}
+          />
+        );
       case 6:
         return <CreateLetterStep6 />;
       default:
