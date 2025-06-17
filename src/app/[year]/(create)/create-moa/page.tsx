@@ -35,7 +35,7 @@ export default function CreateMoaPage() {
       case 4:
         return <CreateMoaStep4 nextStep={nextStep} />;
       case 5:
-        return <CreateMoaStep5 nextStep={nextStep} goSelectMoa={goSelectMoa} />;
+        return <CreateMoaStep5 />;
       default:
         return null;
     }
