@@ -1,5 +1,35 @@
 /* 마이 모아 페이지 (page.tsx)*/
 
+/* 380px 미만일때 */
+@media (max-width: 380px) {
+  .mailboxBackground {
+    margin-top: -8%;
+    width: 310px;
+    height: 380px;
+  }
+}
+
+/* 410px 이상일때: 웹 + md app */
+@media (min-width: 410px) {
+  .mailboxBackground {
+    width: 80%;
+    max-width: 100%;
+    height: 60%;
+    max-height: 100%;
+  }
+
+  .buttonSection {
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .buttonSection {
+    width: 80%;
+  }
+}
+
+
 .background {
   width: 100%;
   background-repeat: no-repeat;
@@ -8,6 +38,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
+  background-position: center center;
 }
 
 .headerSection {
@@ -35,9 +67,10 @@
 .buttonSection {
   display: flex;
   justify-content: center;
-  width: 100%;
   padding-top: 40px;
   gap: 20px;
+  position: absolute;
+  bottom: 5%;
 }
 
 .buttonSection a {
@@ -47,11 +80,13 @@
 
 /*모아 박스(MailBox.tsx)*/
 .mailboxBackground {
-  position: relative;
-  width: 420px;
-  height: 490px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   background-size: contain;
   background-repeat: no-repeat;
+  display: flex;
+  background-position: center center;
 }
 
 .mailBoxGrid {
@@ -59,9 +94,9 @@
   top: 30%;
   left: 19%;
   padding: 10px;
-  /* background-color: rgba(255, 255, 255, 0.5); 임시 */
   width: 240px;
   height: 280px;
+  /* background-color: rgba(255, 255, 255, 0.5); 임시 */
 }
 
 .firstRow {
@@ -84,6 +119,7 @@
 .letterItem {
   cursor: pointer;
 }
+
 /*안 읽은 편지 효과 - 보류*/
 /* .letterItem.glowing {
   border-radius: 50%;
