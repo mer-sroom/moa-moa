@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 import CreateMoaStep1 from "./step1";
 import CreateMoaStep2 from "./step2";
@@ -14,12 +13,9 @@ import layout from "@/styles/create-moa/StepLayout.module.css";
 import CreateMoaProvider from "@/contexts/CreateMoaContext";
 
 export default function CreateMoaPage() {
-  const router = useRouter();
   const [step, setStep] = useState(1);
   const [previewBg, setPreviewBg] = useState<string | null>(null);
-
   const nextStep = () => setStep(s => Math.min(s + 1, 5));
-  const goSelectMoa = () => router.push("/2025/moa/select-moa");
   const handleBgChange = (url: string) => setPreviewBg(url);
 
   const renderStep = () => {

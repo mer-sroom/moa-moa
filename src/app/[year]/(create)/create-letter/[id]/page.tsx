@@ -66,7 +66,7 @@ export default function CreateLetterStep() {
           />
         );
       case 6:
-        return <CreateLetterStep6 />;
+        return <CreateLetterStep6 moaBoxId={moaBoxId} />;
       default:
         return null;
     }

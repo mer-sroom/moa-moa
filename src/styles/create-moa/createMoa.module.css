@@ -4,12 +4,12 @@
 /* 공통 컨테이너 */
 .create_moa_container {
   box-sizing: border-box;
-  padding: 10px 50px;
-  width: 100%;
-  height: 75vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 10px 50px;
+  width: 100%;
+  height: 75vh;
 }
 /*타이틀*/
 .title {
