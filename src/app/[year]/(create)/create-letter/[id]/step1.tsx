@@ -1,5 +1,5 @@
 import Button from "../../../(components)/common/Button";
-import styles from "@/styles/create-letter/createLetter.module.css";
+import styles from "@/styles/create-letter/CreateLetterStep1and6.module.css";
 import Image from "next/image";
 import lpImg from "public/assets/service-imgs/icons/lp-record.svg";
 import quaver from "public/assets/service-imgs/icons/quaver.svg";
@@ -16,7 +16,7 @@ export default function CreateLetterStep1(props: Props) {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.container_img}>
+        <div className={styles.step1_container_img}>
           {/* 음표 아이콘 */}
           <Image
             src={quaver}
@@ -62,22 +62,20 @@ export default function CreateLetterStep1(props: Props) {
         </div>
         {/* 텍스트 */}
         <div className={styles.container_text}>
-          <div className={styles.title}>마음을 전달해요!</div>
-          <div className={styles.description}>
+          <h2 className={styles.title}>마음을 전달해요!</h2>
+          <p className={styles.description}>
             직접 꾸민 스티커와, 좋아하는 노래를 담아
             <br />
             친구에게 편지를 보내봐요!
-          </div>
+          </p>
         </div>
-      </div>
-      <>
         <Button
           label="편지 작성하기"
           size="medium"
           color="black"
           onClick={nextStep}
         />
-      </>
+      </div>
     </>
   );
 }
