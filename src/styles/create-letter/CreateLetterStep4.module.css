@@ -19,7 +19,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px 0 40px 0;
   position: relative;
 }
 
@@ -29,9 +28,10 @@
 }
 /* 레코드 이미지(회전) */
 .step4_record {
-  width: 30%;
+  width: clamp(160px, 16vw, 250px);
+  height: clamp(160px, 16vw, 250px);
   position: absolute;
-  top: 3%;
+  top: 9%;
   right: 25%;
   animation: spin 4s linear infinite;
 }
@@ -40,19 +40,47 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding-top: 43px;
-  padding-bottom: 132px;
+  gap: clamp(4px, 1.5vh, 12px);
+  padding-top: clamp(24px, 6vh, 50px);
+  padding-bottom: clamp(60px, 15vh, 132px);
 }
 
 /* 텍스트 타이틀 */
 .step4_title {
-  font-size: 24px;
+  font-size: clamp(18px, 2.2vw, 24px);
   font-weight: bold;
 }
 /* 텍스트 설명 */
 .step4_description {
-  font-size: 16px;
-  line-height: 24px;
-  color: #909090;
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: clamp(18px, 2.2vw, 24px);
+  color: var(--color-gray-700);
+}
+
+/* 레코드 이미지 모바일 대응 */
+/* 600px 이하 */
+@media (max-width: 600px) {
+  .step4_record {
+    width: 40%;
+    top: 5%;
+    right: 20%;
+  }
+}
+
+/* 440px 이하 */
+@media (max-width: 440px) {
+  .step4_record {
+    width: 50%;
+    top: 7%;
+    right: 15%;
+  }
+}
+
+/* 380px 이하 */
+@media (max-width: 380px) {
+  .step4_record {
+    width: 55%;
+    top: 8%;
+    right: 10%;
+  }
 }
