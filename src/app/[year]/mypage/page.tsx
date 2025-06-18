@@ -89,23 +89,22 @@ export default function MyPage() {
   };
 
   // 회원탈퇴
-  const handleDeleteAccount = async () => {
+  const handleDeleteAccount = () => {
     showConfirmModal({
       icon: "경고",
       confirmMessage: "회원탈퇴",
       message: "회원탈퇴 시 모든 정보가 삭제돼요!",
       onConfirm: async () => {
         try {
-          const res = await fetch(`/api/user/delete`, { method: "DELETE" });
-          const data = await res.json();
-
+          const res = await fetch("/api/user/delete", { method: "DELETE" });
           if (res.ok) {
             await signOut({ callbackUrl: "/auth/login" });
           } else {
-            toast.error(data.error || "회원탈퇴 실패");
+            const data = await res.json();
+            toast.error(data.error ?? "회원탈퇴 실패");
           }
-        } catch (error) {
-          console.error("회원탈퇴 실패:", error);
+        } catch (err) {
+          console.error(err);
           toast.error("회원탈퇴 실패");
         }
       },
@@ -179,7 +178,7 @@ export default function MyPage() {
               type="text"
               id="nickname"
               value={editedNickname}
-              onChange={(e) => setEditedNickname(e.target.value)}
+              onChange={e => setEditedNickname(e.target.value)}
             />
           </div>
 
