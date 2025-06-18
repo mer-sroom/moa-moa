@@ -66,7 +66,7 @@ export default async function MyMoaBoxPage({ params }) {
 
   return (
     <div className={styles.captureArea} id="captureMoaBoxArea">
-      <><GuideModalMiddle owner={isOwner}></GuideModalMiddle></>
+      <GuideModalMiddle owner={isOwner}></GuideModalMiddle>
       {/* 마이 모아 전체 배경 img */}
       <div
         className={styles.background}
