@@ -33,6 +33,15 @@
 .mailBoxSection {
   padding-top: 40px;
 }
+.decoration {
+  position: absolute;
+  top: 0;
+  left: 35%;
+  width: 120px;
+  height: 120px;
+  outline: 2px solid red; /* 위치확인용으로 해둠 */
+  z-index: 5;
+}
 
 .buttonSection {
   display: flex;

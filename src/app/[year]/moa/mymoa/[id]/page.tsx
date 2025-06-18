@@ -30,6 +30,7 @@ export default async function MyMoaBoxPage({ params }) {
     include: {
       backgroundDesign: true,
       mailBoxDesign: true,
+      decorationDesign: { select: { imageURL: true } },
       letters: {
         select: {
           id: true,
@@ -58,6 +59,7 @@ export default async function MyMoaBoxPage({ params }) {
   //디자인 정보 불러오기
   const backgroundDesign = moaBox.backgroundDesign?.imageURL;
   const mailBoxDesign = moaBox.mailBoxDesign?.imageURL;
+  const decorationURL = moaBox.decorationDesign?.imageURL;
   //모아 박스에 달린 모든 편지 불러오기
   const letters = moaBox.letters;
 
@@ -86,6 +88,7 @@ export default async function MyMoaBoxPage({ params }) {
               moaBoxId={moaBoxId}
               designURL={mailBoxDesign}
               letters={letters}
+              decorationURL={decorationURL}
             />
           </Suspense>
         </>
