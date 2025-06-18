@@ -36,13 +36,13 @@ export default function CreateLetterStep4(props: Props) {
         </div>
         <Button
           label="노래 선택하기"
-          size="long"
+          size="medium"
           color="black"
           onClick={openModal}
         ></Button>
         <Button
           label="다음으로"
-          size="long"
+          size="medium"
           color="white"
           onClick={nextStep}
         ></Button>
