@@ -18,7 +18,7 @@ import addFriend from "@/../../public/assets/icons/add_friend.svg";
 import penIcon from "@/../../public/assets/icons/pen.svg";
 import styles from "@/styles/mymoa.module.css";
 import MoaBoxDownloadImageBtn from "../(components)/(features)/MoaBoxDownloadImageBtn";
-import GuideModalMiddle from "./(components)/GuideModalMiddle";
+import GuideModalMiddle from "../(components)/(ui)/GuideModalMiddle";
 
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id

@@ -10,13 +10,12 @@ import GuideModal from "../../(components)/common/GuideModal";
 import img from '/public/assets/service-imgs/guide/create_moa_step4.png';
 
 export default function CreateMoaStep4({ nextStep }: NextStepProps) {
-  const [visible, setVisible] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
   const [allowAnonymous, setAllowAnonymous] = useState(true);
   const [letterCountPublic, setLetterCountPublic] = useState(false);
 
   const { update, submit } = useCreateMoa();
-
-  const handleClose = () => setVisible(false);
+  const onClose = () => setIsOpen(false);
 
   const handleCreate = async () => {
     update({ allowAnonymous, letterCountPublic });
@@ -26,7 +25,7 @@ export default function CreateMoaStep4({ nextStep }: NextStepProps) {
   return (
     <>
       <div className={styles.create_moa_container}>
-        {visible && <GuideModal isOpen={visible} img={img} onClose={handleClose} />}
+        <GuideModal isOpen={isOpen} img={img} onClose={onClose} />
         <div className={styles.step4_setting_group}>
           <h2 className={styles.title}>모아 박스 수신 & 공개 설정</h2>
           <p className={styles.line_sort_gray}>
