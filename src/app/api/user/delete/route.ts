@@ -13,33 +13,58 @@ export async function DELETE() {
       { status: 401 }
     );
   }
-
   const userId = session.user.id;
 
   try {
-    await prisma.$transaction([
-      /* ② 소셜 계정·세션 삭제 */
-      prisma.account.deleteMany({ where: { userId } }),
-      prisma.session.deleteMany({ where: { userId } }),
-
-      /* ③ 개인정보 익명화  */
-      prisma.user.update({
-        where: { id: userId },
-        data: {
-          email: null,
-          name: "탈퇴한 사용자",
-          nickname: "탈퇴한 사용자",
-          image: null,
-          role: "USER",
+    await prisma.$transaction(async tx => {
+      /* ② 내가 만든 MoaBox 가져오기 */
+      const myBoxes = await tx.moaBox.findMany({
+        where: { ownerId: userId },
+        select: {
+          id: true,
+          isGroup: true,
+          /* 그룹모아일 때만 필요한 필드 */
+          participants: {
+            where: { NOT: { userId } },
+            select: { userId: true, status: true },
+            orderBy: { createdAt: "asc" },
+          },
         },
-      }),
+      });
 
-      /* ④ 친구관계·알림 등 불필요한 데이터 정리 */
-      prisma.friendship.deleteMany({
+      for (const box of myBoxes) {
+        if (box.isGroup) {
+          /* ── 그룹모아 → 소유권 양도 */
+          const delegate =
+            box.participants.find(p => p.status === "ACCEPTED") ??
+            box.participants[0] ??
+            null;
+
+          await tx.moaBox.update({
+            where: { id: box.id },
+            data: { ownerId: delegate?.userId ?? null },
+          });
+        } else {
+          /* ── 개인모아 → 모든 관련 데이터 삭제 */
+          await tx.letter.deleteMany({ where: { moaBoxId: box.id } });
+          await tx.moaBoxParticipant.deleteMany({
+            where: { moaBoxId: box.id },
+          });
+          await tx.moaBox.delete({ where: { id: box.id } });
+        }
+      }
+
+      /* ③ 친구관계·알림 등 FK 정리 */
+      await tx.friendship.deleteMany({
         where: { OR: [{ userAId: userId }, { userBId: userId }] },
-      }),
-      prisma.notification.deleteMany({ where: { userId } }),
-    ]);
+      });
+      await tx.notification.deleteMany({ where: { userId } });
+
+      /* ④ 소셜 Account·Session 삭제 → User 행 Hard-Delete */
+      await tx.account.deleteMany({ where: { userId } });
+      await tx.session.deleteMany({ where: { userId } });
+      await tx.user.delete({ where: { id: userId } });
+    });
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (e) {
