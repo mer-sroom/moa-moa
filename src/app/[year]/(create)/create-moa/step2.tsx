@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import styles from "@/styles/create-moa/Step2.module.css";
 import Button from "../../(components)/common/Button";
 import type { NextStepProps } from "@/types/createMoa";
 import { useCreateMoa } from "@/contexts/CreateMoaContext";
+import { useMediaQuery } from "react-responsive";
 
 /* 디자인 후보 목록 */
 const backgrounds = [
@@ -15,7 +16,7 @@ const backgrounds = [
 ];
 const boxes = [
   "/assets/icons/create_moa/step2_back.svg",
-  "/assets/icons/create_moa/box-2.svg",
+   "/assets/icons/create_moa/box-2.svg",
   "/assets/icons/create_moa/box-3.svg",
 ];
 /* 장식은 id + src 로 관리 → FK 전송 */
@@ -38,6 +39,9 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
   const [decoSrc, setDecoSrc] = useState<string | null>(null);
 
   const { update } = useCreateMoa();
+
+  const [thumbItemMany, setThumbItemMany] = useState(false);
+  const isMobile = useMediaQuery({ maxWidth: 600 });
 
   /* --- 드래그 스크롤용 ref --- */
   const rowRef = useRef<HTMLDivElement | null>(null);
@@ -84,6 +88,26 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
     }
   };
 
+  // 하단 item 가운데 정렬, 좌측 정렬
+  useEffect(() => {
+    switch (tab) {
+      case "background":
+        if (isMobile ? backgrounds.length > 3 : backgrounds.length > 5) {
+          return setThumbItemMany(true)
+        }
+      case "box":
+        if (isMobile ? boxes.length > 3 : boxes.length > 5) {
+          return setThumbItemMany(true)
+        }
+      case "deco":
+        if (isMobile ? decos.length > 3 : decos.length > 5) {
+          return setThumbItemMany(true)
+        }
+      default:
+        return setThumbItemMany(false);
+    }
+  }, [tab])
+
   return (
     <div className={styles.step2_container}>
       {/* ───── 미리보기 영역 ───── */}
@@ -104,6 +128,7 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
             className={styles.preview_deco}
           />
         )}
+      </div>
         <div className={styles.next_btn}>
           <Button
             label="다음으로"
@@ -112,13 +137,13 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
             onClick={nextStep}
           />
         </div>
-      </div>
 
       {/* ───── 썸네일 & 탭 영역 ───── */}
       <footer className={styles.footer}>
         <div
           ref={rowRef}
-          className={styles.thumb_row}
+          className={`${styles.thumb_row} ${
+                  thumbItemMany ? styles.many : "" }`}
           onMouseDown={e => dragStart(e.pageX)}
           onMouseMove={e => dragMove(e.pageX)}
           onMouseUp={dragEnd}
