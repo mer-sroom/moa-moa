@@ -30,20 +30,23 @@
   bottom: -60px;
   right: -60px;
 }
-.next_btn > button {
+
+.next_btn>button {
   padding: 10px 40px !important;
 }
 
 /* ───────── Footer ───────── */
 .footer {
   width: 100%;
-  background: #fff;
+  background: var(--ui-secondary);
   margin-top: auto;
-  padding: 12px 16px 20px;
+  padding: 12px 16px 20px inset;
   display: flex;
   flex-direction: column;
   gap: 12px;
   box-shadow: 0 -2px 6px rgb(0 0 0 / 6%);
+  bottom: 0;
+  z-index: 1;
 }
 
 .divider {
@@ -55,36 +58,44 @@
 /* 썸네일 행 (드래그) */
 .thumb_row {
   display: flex;
-  gap: 16px; /* 간격 확장 */
+  gap: 16px;   /* 간격 확장 */
   white-space: nowrap;
-  overflow-x: hidden; /* 가로 스크롤만 숨김 */
-  overflow-y: hidden; /* 세로 스크롤도 숨김 */
+  overflow-x: hidden;  /* 가로 스크롤만 숨김 */
+  overflow-y: hidden;  /* 세로 스크롤도 숨김 */
   cursor: grab;
-  justify-content: center; /* 가운데 정렬 */
+  justify-content: center;  /* 가운데 정렬 */
   align-items: center;
   padding: 4px 0; /* 위아래 살짝 여백 */
 }
 .thumb_row:active {
   cursor: grabbing;
 }
+.thumb_row.many {
+  justify-content: start;
+}
 
 .thumb_btn {
   flex: 0 0 auto;
-  width: 96px; /* 크기 확대 */
+  width: 96px;  /* 크기 확대 */
   height: 96px;
   padding: 8px;
-  border: 1px solid var(--color-gray-300);
+  border: 1px none;
   border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 3px 8px rgb(0 0 0 / 10%);
+  background: var(--ui-secondary);
   transition: background 0.15s, border 0.15s;
+  /* box-shadow: 0 3px 8px rgb(0 0 0 / 10%); 혹시 몰라서 남겨둡니다 */
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 .thumb_btn img {
+  height: 100%;
+  width: 100%;
   object-fit: contain;
+  justify-content: center;
 }
 
 .thumb_selected {
-  background: #eff3f8;
+  background: var(--color-gray-200);
   border-color: transparent;
 }
 
@@ -94,16 +105,70 @@
   gap: 8px;
   justify-content: center;
 }
+
 .tab_btn {
   flex: 1 1 0;
   padding: 10px 0;
-  background: #fff;
+  background: var(--color-gray-100);
   border: none;
-  border-radius: 14px;
-  font-size: 15px;
-  box-shadow: 0 2px 6px rgb(0 0 0 / 8%);
+  border-radius: 15px;
+  font-size: var(--font-size-base);
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 .tab_btn.active {
-  background: #000;
-  color: #fff;
+  background: var(--ui-neutral);
+  color: var(--text-primary-reverse);
+}
+
+/*   미디어 쿼리  */
+/* 380px 미만일때 */
+@media (max-width: 379px) {
+  .step2_container {
+    height: 87vh;
+  }
+  .next_btn {
+    bottom: 200px;
+    right: 15px;
+  }
+  .thumb_row {
+    padding: 14px 15px 7px 15px;
+  }
+  .tab_nav {
+    padding: 5px 10px 15px 10px;
+  }
+}
+
+/* 380px 이상일때 */
+@media (min-width: 380px) {
+  .step2_container {
+    height: 87.2vh;
+  }
+  .next_btn {
+    bottom: 250px;
+    right: 15px;
+  }
+  .thumb_row {
+    padding: 25px 20px 15px 20px;
+  }
+  .tab_nav {
+    padding: 15px 20px 25px 20px;
+  }
+}
+
+/* 440px 이상일때 */
+@media (min-width: 440px) {
+  .step2_container {
+    height: 86.7vh;
+  }
+  .next_btn {
+    bottom: 215px;
+    right: 20px;
+  }
+  .thumb_row {
+    padding: 18px 20px 7px 20px;
+  }
+  .tab_nav {
+    padding: 5px 10px 15px 10px;
+  }
 }
