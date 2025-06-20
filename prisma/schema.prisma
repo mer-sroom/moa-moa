@@ -94,8 +94,8 @@ model Friendship {
 model MoaBox {
   id      Int  @id @default(autoincrement())
   // 박스를 만든 소유자
-  owner   User @relation(fields: [ownerId], references: [id])
-  ownerId String
+  owner   User? @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  ownerId String?
 
   title             String?
   isGroup           Boolean   @default(false) // 그룹 모아 여부
@@ -131,8 +131,8 @@ model MoaBox {
 model MoaBoxParticipant {
   id Int @id @default(autoincrement())
 
-  user     User   @relation(fields: [userId], references: [id])
-  userId   String
+  user     User?   @relation(fields: [userId], references: [id])
+  userId   String?
   moaBox   MoaBox @relation(fields: [moaBoxId], references: [id])
   moaBoxId Int
 
@@ -158,7 +158,7 @@ model Letter {
   moaBoxId Int
 
   // 작성자가 로그인 유저라면 연결, 익명이면 null
-  author     User?   @relation(name: "UserLetters", fields: [authorId], references: [id])
+  author     User?   @relation(name: "UserLetters", fields: [authorId], references: [id], onDelete: SetNull)
   authorId   String?
   authorName String? // 익명 편지 시 닉네임
 
