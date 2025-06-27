@@ -160,6 +160,7 @@
 ------------------------------------------------------------------ */
 .cardBody {
   transition: transform 0.35s ease;
+  white-space: pre-line;
 }
 .cardCore:hover .cardBody {
   transform: translateY(calc(16rem));
