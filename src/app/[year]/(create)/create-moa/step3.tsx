@@ -12,6 +12,7 @@ import type { NextStepProps, ServerType } from "@/types/createMoa";
 import SelectModal from "../(components)/SelectModal";
 import Modal from "../../(components)/common/Modal";
 import { useCreateMoa } from "@/contexts/CreateMoaContext";
+import { useAlertContext } from "@/contexts/AlertContext";
 
 export default function CreateMoaStep3({ nextStep }: NextStepProps) {
   const today = dayjs().format("YYYY-MM-DD");
@@ -26,6 +27,7 @@ export default function CreateMoaStep3({ nextStep }: NextStepProps) {
   const [memberColor, setMemberColor] = useState(false);
 
   const { update } = useCreateMoa();
+  const { showAlert } = useAlertContext();
 
   // ───────────── ① 친구 목록 로드 ─────────────
   useEffect(() => {
@@ -65,6 +67,14 @@ export default function CreateMoaStep3({ nextStep }: NextStepProps) {
 
   // ───────────── ③ 다음 단계 (payload 생성) ─────────────
   const handleNext = () => {
+    if (!title) {
+      showAlert("이름을 설정해주세요", "경고");
+      return
+    }
+    else if (startDay === endDay) {
+      showAlert("디데이를 설정해주세요", "경고");
+      return
+    }
     // KST(로컬) 날짜 문자열 → UTC 00:00 ISO
     const isoDueDate = dayjs.utc(endDay).startOf("day").toISOString();
 
@@ -158,7 +168,7 @@ export default function CreateMoaStep3({ nextStep }: NextStepProps) {
                 placeholder="함께 할 친구를 설정해 주세요"
                 className={`${styles.group_member_input} ${
                   memberColor ? styles.color : ""
-                }`}
+                  }`}
                 onClick={() => setOpenSelect(true)}
                 value={memberNames.join(", ")}
                 readOnly
