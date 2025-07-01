@@ -2,6 +2,7 @@
 import { useState } from "react";
 import type { createdLetter } from "@/types/createLetter";
 import Button from "../../../(components)/common/Button";
+import { useAlertContext } from "@/contexts/AlertContext";
 
 interface Props {
   letterContentRef: React.MutableRefObject<createdLetter>;
@@ -13,6 +14,7 @@ export default function CreateLetterStep5({
   nextStep,
 }: Props) {
   const [loading, setLoading] = useState(false);
+  const { showAlert } = useAlertContext();
 
   const send = async () => {
     setLoading(true);
@@ -52,7 +54,8 @@ export default function CreateLetterStep5({
       nextStep(); // 성공 → Step6
     } catch (e) {
       console.error("편지 전송 실패:", e);
-      alert("편지 전송에 실패했습니다.");
+      // alert("편지 전송에 실패했습니다.");
+      showAlert("편지 전송에 실패했습니다", "오류");
     } finally {
       setLoading(false);
     }
