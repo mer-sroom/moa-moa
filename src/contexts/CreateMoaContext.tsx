@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 import type { CreateMoaBoxInput } from "@/types/moaBoxRequest";
+import { useAlertContext } from "@/contexts/AlertContext";
 
 type Ctx = {
   values: Partial<CreateMoaBoxInput>;
@@ -35,6 +36,8 @@ export default function CreateMoaProvider({
   const update = (p: Partial<CreateMoaBoxInput>) =>
     setValues(v => ({ ...v, ...p }));
 
+  const { showAlert } = useAlertContext();
+
   const submit = async () => {
     const res = await fetch("/api/moa-box", {
       method: "POST",
@@ -44,7 +47,8 @@ export default function CreateMoaProvider({
     });
     if (!res.ok) {
       console.error("모아 생성 검증 에러:", await res.json());
-      alert("모아 생성 실패. 콘솔 확인하세요.");
+      //alert("모아 생성 실패. 콘솔 확인하세요.");
+      showAlert("모아 박스 생성에 실패했습니다", "오류");
       return;
     }
     onSuccess();
