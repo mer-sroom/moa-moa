@@ -1,15 +1,29 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import styles from "@/styles/HomeSection.module.css";
 import Hlighter from "./hlighter";
+import { useMediaQuery } from "react-responsive";
+import { redirect } from "next/navigation";
+import { useSession } from 'next-auth/react';
+
 
 interface HomeSectionProps {
   onClickNext?: () => void;
 }
 
 export default function HomeSection({ onClickNext }: HomeSectionProps) {
+  const isMobile = useMediaQuery({ maxWidth: 600 });
+  const { data: session, status } = useSession();
+  const handleJoinClick = () => {
+    if (status === 'unauthenticated') return (redirect("/auth/login"))
+    else if (status === 'authenticated') return (redirect("/[year]/create-moa"))
+  };
+
+  if (isMobile && status === 'unauthenticated') return (redirect("/auth/login"))
+  else if (isMobile && status === 'authenticated') return (redirect("/[year]/moa/select-moa"))
+
   return (
     <section className={styles.homeSection}>
       {/* 왼쪽 텍스트 */}
@@ -25,7 +39,7 @@ export default function HomeSection({ onClickNext }: HomeSectionProps) {
               모두와 함께 추억하고 싶은 순간들을 담아줄 MOA BOX를 내 취향대로 꾸미고 서로에게 편지를 건네보세요!`}
             keyword="MOA BOX" />
         </div>
-        <button className={styles.createButton}>만들기</button>
+        <button className={styles.createButton} onClick={handleJoinClick}>만들기</button>
       </div>
 
       {/* 오른쪽 이미지 영역 */}
