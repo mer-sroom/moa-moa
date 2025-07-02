@@ -34,9 +34,9 @@ export default function CreateLetterStep() {
   const renderDot = () => {
     if (step >= 6) return null;
 
-    const colors = Array(5).fill("gray");
+    const colors = Array(6).fill("gray");
     const activeIndex = step - 1;
-    if (activeIndex >= 0 && activeIndex < 5) {
+    if (activeIndex >= 0 && activeIndex < 6) {
       colors[activeIndex] = "black"; // 현재 step을 검정으로 표시
     }
 

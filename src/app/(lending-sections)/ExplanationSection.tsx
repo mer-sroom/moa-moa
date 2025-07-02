@@ -101,17 +101,17 @@ const ExplanationSection = forwardRef<HTMLElement, Props>(
               />
               <h3>
                 {key === "cat"
-                  ? "귀여운 오므자를 장식해요!"
+                  ? "Step 1. 오브제 올리기!"
                   : key === "letter"
-                  ? "편지지를 열어봐요!"
-                  : "잔잔한 음악을 들어요!"}
+                  ? "Step 2. 편지지를 골라봐요!"
+                  : "Step 3. 이 편지에는 이 노래가 딱이야!"}
               </h3>
               <p className={styles.cardBody}>
                 {key === "cat"
-                  ? "오늘도 작은 행복을 찾아보세요!"
+                  ? "편지에 들어갈 귀여운 오브제를 \n 커스텀 해보세요! \n 편지의 포인트가 되어줄 거에요!"
                   : key === "letter"
-                  ? "추억을 아름답게 기록해요."
-                  : "노래와 함께 힐링!"}
+                  ? "배경이 될 편지지는 중요해요! \n 자유롭게 고르세요! 당신의 선택을 위해 다양하게 준비했습니다!"
+                  : "친구에게 보내는 편지 \n 이 편지를 읽을 때는 이 노래가 어울려! 직접 선곡하세요!"}
               </p>
             </motion.div>
           ))}
@@ -178,9 +178,18 @@ const ExplanationSection = forwardRef<HTMLElement, Props>(
               animate={play ? "show" : "hidden"}
             >
               <h2 className={styles.title}>Get a letter</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit…</p>
+              <p>
+                받은 편지는 MOA BOX에 보관됩니다! <br></br>
+                만들어진 MOA BOX는 각각 기념일이 존재해요! <br></br>
+                친구가 어떤 기념일을 설정했을지 궁금하지 않나요? <br></br>
+                기념일이 끝나면 MOA BOX가 닫혀버리니 조심하세요! 그전에 편지를
+                보내야 안전하답니다!<br></br>
+                만약 친구와 함께하고 싶은 기념일이 있다면 MOA BOX를 생성할 때{" "}
+                <br></br>
+                그룹 설정을 켜고 친구를 추가해주세요!<br></br>
+              </p>
               <p className={styles.highlight}>
-                Nulla consequat massa quis enim. Donec pede justo…
+                지금 바로 예쁜 편지지와 멋진 노래를 담아 편지를 보내보세요!
               </p>
             </motion.div>
 
