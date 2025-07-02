@@ -1,11 +1,9 @@
-/* src/app/(lending-sections)/ExplanationSection.tsx */
 "use client";
-
 import React, { useState, useEffect, forwardRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import styles from "@/styles/ExplanationSection.module.css";
-import { DEST_SCROLL } from "@/app/(lending-sections)/letterKeyframes";
+// import { DEST_SCROLL } from "@/app/(lending-sections)/letterKeyframes";  // ✂️ 이동 애니메이션 제거로 불필요
 
 interface Props {
   onScrollFinal: () => void;
@@ -17,26 +15,28 @@ const ExplanationSection = forwardRef<HTMLElement, Props>(
     const [tab, setTab] = useState<"SEND" | "GET">("SEND");
     const [env, setEnv] = useState(false); // 봉투(fade-in)
     const [cards, setCards] = useState(false); // 카드 등장
-    /* Get 섹션 재생 트리거 */
-    const [playGet, setPlayGet] = useState(false);
+    const [playGet, setPlayGet] = useState(false); // Get 섹션 재생 트리거
 
     /* ───────── 봉투·카드 등장 타이밍 ───────── */
     useEffect(() => {
-      if (window.scrollY >= DEST_SCROLL + 200) {
-        setEnv(true);
-        setCards(true);
-      }
+      // if (window.scrollY >= LOCAL_DEST_SCROLL + 200) {
+      setEnv(true);
+      setCards(true);
+      // }
     }, []);
+
+    /* ★ 이동 애니메이션을 제거했으므로 letter-arrived 이벤트 리스너는 주석 처리
     useEffect(() => {
       const onArrived = () => {
-        setTimeout(() => setEnv(true), 1500); // 1.5 s 후 봉투
+        setTimeout(() => setEnv(true), 1500);  // 1.5 s 후 봉투
         setTimeout(() => setCards(true), 2000); // 2.0 s 후 카드
       };
       addEventListener("letter-arrived", onArrived);
       return () => removeEventListener("letter-arrived", onArrived);
     }, []);
+    */
 
-    /* ───────── 카드 업그레이드 ­BG ───────── */
+    /* ───────── 카드 업그레이드 BG ───────── */
     const upgraded = {
       cat: "/assets/icons/lending/cat_upgrade.svg",
       letter: "/assets/icons/lending/Letter_upgrade.svg",
@@ -104,7 +104,7 @@ const ExplanationSection = forwardRef<HTMLElement, Props>(
                   ? "귀여운 오므자를 장식해요!"
                   : key === "letter"
                   ? "편지지를 열어봐요!"
-                  : "진진작한 음악을 들어요!"}
+                  : "잔잔한 음악을 들어요!"}
               </h3>
               <p className={styles.cardBody}>
                 {key === "cat"
@@ -210,7 +210,6 @@ const ExplanationSection = forwardRef<HTMLElement, Props>(
             height={40}
             className={styles.arrowDown}
             onClick={tab === "SEND" ? () => setTab("GET") : onScrollFinal}
-            /* ▼ SEND일 땐 15rem, GET일 땐 5rem */
             style={{ marginTop: tab === "SEND" ? "15rem" : "5rem" }}
           />
         </div>

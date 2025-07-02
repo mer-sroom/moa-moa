@@ -32,7 +32,7 @@ export default function HomeSection({ onClickNext }: HomeSectionProps) {
           alt="Letter"
           width={548}
           height={362}
-          className={`${styles.letterImage} ${styles.invisibleLetter}`}
+          className={`${styles.letterImage}`}
         />
         {/* 2) 음악 (music) */}
         <Image

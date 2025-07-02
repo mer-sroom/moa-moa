@@ -1,0 +1,19 @@
+# node / editor
+node_modules
+npm-debug.log
+.vscode
+.idea
+
+# next build 결과 / 캐시
+.next
+out
+pack
+static
+diagnostics 
+server
+
+# misc
+Dockerfile*
+docker-compose*
+.env.local
+.env.development
