@@ -1,11 +1,9 @@
-/* src/app/(lending-sections)/ExplanationSection.tsx */
 "use client";
-
 import React, { useState, useEffect, forwardRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import styles from "@/styles/ExplanationSection.module.css";
-import { DEST_SCROLL } from "@/app/(lending-sections)/letterKeyframes";
+// import { DEST_SCROLL } from "@/app/(lending-sections)/letterKeyframes";  // ✂️ 이동 애니메이션 제거로 불필요
 
 interface Props {
   onScrollFinal: () => void;
@@ -17,26 +15,28 @@ const ExplanationSection = forwardRef<HTMLElement, Props>(
     const [tab, setTab] = useState<"SEND" | "GET">("SEND");
     const [env, setEnv] = useState(false); // 봉투(fade-in)
     const [cards, setCards] = useState(false); // 카드 등장
-    /* Get 섹션 재생 트리거 */
-    const [playGet, setPlayGet] = useState(false);
+    const [playGet, setPlayGet] = useState(false); // Get 섹션 재생 트리거
 
     /* ───────── 봉투·카드 등장 타이밍 ───────── */
     useEffect(() => {
-      if (window.scrollY >= DEST_SCROLL + 200) {
-        setEnv(true);
-        setCards(true);
-      }
+      // if (window.scrollY >= LOCAL_DEST_SCROLL + 200) {
+      setEnv(true);
+      setCards(true);
+      // }
     }, []);
+
+    /* ★ 이동 애니메이션을 제거했으므로 letter-arrived 이벤트 리스너는 주석 처리
     useEffect(() => {
       const onArrived = () => {
-        setTimeout(() => setEnv(true), 1500); // 1.5 s 후 봉투
+        setTimeout(() => setEnv(true), 1500);  // 1.5 s 후 봉투
         setTimeout(() => setCards(true), 2000); // 2.0 s 후 카드
       };
       addEventListener("letter-arrived", onArrived);
       return () => removeEventListener("letter-arrived", onArrived);
     }, []);
+    */
 
-    /* ───────── 카드 업그레이드 ­BG ───────── */
+    /* ───────── 카드 업그레이드 BG ───────── */
     const upgraded = {
       cat: "/assets/icons/lending/cat_upgrade.svg",
       letter: "/assets/icons/lending/Letter_upgrade.svg",
@@ -182,8 +182,10 @@ const ExplanationSection = forwardRef<HTMLElement, Props>(
                 받은 편지는 MOA BOX에 보관됩니다! <br></br>
                 만들어진 MOA BOX는 각각 기념일이 존재해요! <br></br>
                 친구가 어떤 기념일을 설정했을지 궁금하지 않나요? <br></br>
-                기념일이 끝나면 MOA BOX가 닫혀버리니 조심하세요! 그전에 편지를 보내야 안전하답니다!<br></br>
-                만약 친구와 함께하고 싶은 기념일이 있다면 MOA BOX를 생성할 때 <br></br>
+                기념일이 끝나면 MOA BOX가 닫혀버리니 조심하세요! 그전에 편지를
+                보내야 안전하답니다!<br></br>
+                만약 친구와 함께하고 싶은 기념일이 있다면 MOA BOX를 생성할 때{" "}
+                <br></br>
                 그룹 설정을 켜고 친구를 추가해주세요!<br></br>
               </p>
               <p className={styles.highlight}>
@@ -217,7 +219,6 @@ const ExplanationSection = forwardRef<HTMLElement, Props>(
             height={40}
             className={styles.arrowDown}
             onClick={tab === "SEND" ? () => setTab("GET") : onScrollFinal}
-            /* ▼ SEND일 땐 15rem, GET일 땐 5rem */
             style={{ marginTop: tab === "SEND" ? "15rem" : "5rem" }}
           />
         </div>

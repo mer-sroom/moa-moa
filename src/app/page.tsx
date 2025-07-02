@@ -5,7 +5,7 @@ import LandingNavbar from "@/app/[year]/(components)/common/LandingNavbar";
 import HomeSection from "@/app/(lending-sections)/HomeSection";
 import ExplanationSection from "@/app/(lending-sections)/ExplanationSection";
 import FinalSection from "@/app/(lending-sections)/FinalSection";
-import MovingLetterStatic from "@/app/(lending-sections)/MovingLetterStatic";
+// import MovingLetterStatic from "@/app/(lending-sections)/MovingLetterStatic";
 import styles from "@/styles/LandingPage.module.css";
 
 /**
@@ -33,7 +33,7 @@ export default function Page() {
   return (
     <>
       {/* ← 고정 편지 레이어 */}
-      <MovingLetterStatic />
+      {/* <MovingLetterStatic /> */}
 
       <div className={styles.container}>
         <LandingNavbar />
