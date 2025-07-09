@@ -1,0 +1,221 @@
+/* ───────── Step 2 컨테이너 ───────── */
+.step2_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0 0 0;
+}
+
+/* preview ▸ 우편함·장식만 */
+.preview {
+  width: 100%;
+  max-width: 430px;
+  height: 53%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.preview_box {
+  width: 80%;
+  display: flex;
+  left: 50%;
+  top: 26%;
+  justify-content: center;
+  align-items: center;
+}
+.preview_deco {
+  max-width: 90px;
+  max-height: 90px;
+}
+
+.next_btn {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.next_btn > button {
+  padding: 10px 40px !important;
+}
+
+/* ───────── Footer ───────── */
+.footer {
+  width: 100%;
+  background: var(--ui-secondary);
+  /* padding: 12px 16px 20px 0; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 -2px 6px rgb(0 0 0 / 6%);
+  bottom: 0;
+  z-index: 1;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-gray-200);
+}
+
+/* 썸네일 행 (드래그) */
+.thumb_row {
+  width: 95%;
+  display: flex;
+  gap: 16px; /* 간격 확장 */
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-x: scroll; /* 가로 스크롤만 숨김 */
+  cursor: grab;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 40px 0 40px 8px; /* 위아래 살짝 여백 */
+}
+.thumb_row:active {
+  cursor: grabbing;
+}
+.thumb_row.many {
+  justify-content: start;
+}
+
+.thumb_btn {
+  flex: 0 0 auto;
+  width: 96px; /* 크기 확대 */
+  height: 96px;
+  padding: 8px;
+  border: 1px none;
+  border-radius: 18px;
+  background: var(--ui-secondary);
+  transition: background 0.15s, border 0.15s;
+  /* box-shadow: 0 3px 8px rgb(0 0 0 / 10%); 혹시 몰라서 남겨둡니다 */
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.thumb_btn img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  justify-content: center;
+}
+
+.thumb_selected {
+  background: var(--color-gray-200);
+  border-color: transparent;
+}
+
+/* 탭 메뉴 */
+.tab_nav {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.tab_btn_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab_btn {
+  /* display: 1 1 0; */
+  padding: 15px 40px;
+  background: var(--color-gray-100);
+  border: none;
+  border-radius: 15px;
+  font-size: var(--font-size-base);
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.tab_btn.active {
+  background: var(--ui-neutral);
+  color: var(--text-primary-reverse);
+}
+
+/* ───────── 미디어 쿼리 ───────── */
+/* 380px 미만일때 */
+@media (max-width: 379px) {
+  .step2_container {
+    width: 100%;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .preview_box {
+    width: 60%;
+    height: 60%;
+  }
+  .preview_deco {
+    width: 30%;
+    height: 30%;
+  }
+
+  .thumb_row {
+    width: 100%;
+    overflow: hidden;
+    overflow-x: scroll;
+    padding: 20px 0 20px 35px;
+  }
+
+  .tab_btn {
+    padding: 15px 37px;
+  }
+
+  .footer {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .thumb_btn {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* 380px 이상일때 */
+@media (min-width: 380px) {
+  .step2_container {
+    width: 100%;
+  }
+
+  .preview {
+    width: 100%;
+    max-width: 330px;
+    max-height: 330px;
+  }
+
+  .preview_box {
+    width: 70%;
+    height: 70%;
+  }
+  .preview_deco {
+    width: 70%;
+    height: 70%;
+  }
+
+  .next_btn {
+    bottom: 276px;
+    right: 15px;
+  }
+
+  .thumb_row {
+    padding: 20px 0 20px 20px;
+  }
+
+  .thumb_btn {
+    width: 90px;
+    height: 90px;
+  }
+
+  .tab_btn {
+    padding: 15px 38px;
+  }
+}
