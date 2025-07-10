@@ -14,12 +14,16 @@ import OpenShareLinkModal from "../(components)/(features)/OpenShareLinkModal";
 import HandleAddFriend from "../(components)/(features)/HandleAddFriend";
 import HandleCreateLetter from "../(components)/(features)/HandleWriteLetter";
 import shareIcon from "@/../../public/assets/icons/share_icon.svg";
-import addFriend from "@/../../public/assets/icons/add_friend.svg";
-import penIcon from "@/../../public/assets/icons/pen.svg";
+import addFriend from "public/assets/icons/add_friend.svg";
+import penIcon from "public/assets/icons/pen.svg";
 import styles from "@/styles/mymoa.module.css";
 import MoaBoxDownloadImageBtn from "../(components)/(features)/MoaBoxDownloadImageBtn";
 import GuideModalMiddle from "../(components)/(ui)/GuideModalMiddle";
-
+//목업
+import backImg from "public/assets/mock/box_default.svg";
+import test1 from "public/assets/mock/moaBox/test1.svg";
+import cake from "public/assets/mock/moaBox/cake.svg";
+import drink from "public/assets/mock/moaBox/drink1.svg";
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
   const moaBoxId = Number(id);
@@ -58,7 +62,9 @@ export default async function MyMoaBoxPage({ params }) {
   }
   //디자인 정보 불러오기
   const backgroundDesign = moaBox.backgroundDesign?.imageURL;
-  const mailBoxDesign = moaBox.mailBoxDesign?.imageURL;
+  // const mailBoxDesign = moaBox.mailBoxDesign?.imageURL;
+  const mailBoxDesign = cake.src;
+
   const decorationURL = moaBox.decorationDesign?.imageURL;
   //모아 박스에 달린 모든 편지 불러오기
   const letters = moaBox.letters;
@@ -68,7 +74,7 @@ export default async function MyMoaBoxPage({ params }) {
 
   return (
     <div className={styles.captureArea} id="captureMoaBoxArea">
-      <GuideModalMiddle owner={isOwner}></GuideModalMiddle>
+      {/* <GuideModalMiddle owner={isOwner}></GuideModalMiddle> */}
       {/* 마이 모아 전체 배경 img */}
       <div
         className={styles.background}
