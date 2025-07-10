@@ -16,7 +16,7 @@ interface HomeSectionProps {
 export default function HomeSection({ onClickNext }: HomeSectionProps) {
   const isMobile = useMediaQuery({ maxWidth: 600 });
   const { data: session, status } = useSession();
-  const handleJoinClick = () => {
+  const onCreateButton = () => {
     if (status === 'unauthenticated') return (redirect("/auth/login"))
     else if (status === 'authenticated') return (redirect("/[year]/create-moa"))
   };
@@ -39,7 +39,7 @@ export default function HomeSection({ onClickNext }: HomeSectionProps) {
               모두와 함께 추억하고 싶은 순간들을 담아줄 MOA BOX를 내 취향대로 꾸미고 서로에게 편지를 건네보세요!`}
             keyword="MOA BOX" />
         </div>
-        <button className={styles.createButton} onClick={handleJoinClick}>만들기</button>
+        <button className={styles.createButton} onClick={onCreateButton}>만들기</button>
       </div>
 
       {/* 오른쪽 이미지 영역 */}
