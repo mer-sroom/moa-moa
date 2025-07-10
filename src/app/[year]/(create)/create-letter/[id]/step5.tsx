@@ -35,6 +35,7 @@ export default function CreateLetterStep5({
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(letterContentRef.current.trackId ? true : false);
   const { showAlert } = useAlertContext();
+  console.log(letterContentRef.current)
   const send = async () => {
     setLoading(true);
 
@@ -109,7 +110,7 @@ export default function CreateLetterStep5({
             }}
             aria-hidden="true"
           />
-          {/* 편지 텍스트 입력 영역 */}
+          {/* 편지 텍스트 */}
           <div className={styles.letterContentWrapper}
             style={{ padding: "30px 10px 10px 10px", }}>
             <div
