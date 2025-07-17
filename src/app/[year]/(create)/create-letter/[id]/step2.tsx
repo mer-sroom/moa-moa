@@ -6,6 +6,8 @@ import styles from "@/styles/create-letter/CreateLetterStep2.module.css";
 import Button from "../../../(components)/common/Button";
 import GuideModal from "@/app/[year]/(components)/common/GuideModal";
 import img from "/public/assets/service-imgs/guide/create_letter.png";
+import type { createdLetter } from "@/types/createLetter";
+import { mockLetterIconData } from "@/mock/mockLetterIcondata"; 
 
 // ───── 오브제 기본 이미지 경로 매핑 ─────
 const objects = [
@@ -29,10 +31,11 @@ const colors = [
 type Tab = "object" | "color";
 
 interface Props {
+  letterContentRef: React.MutableRefObject<createdLetter>;
   nextStep: () => void;
 }
 
-export default function CreateLetterStep2({ nextStep }: Props) {
+export default function CreateLetterStep2({ letterContentRef, nextStep }: Props) {
   // 현재 탭 상태 (오브제 or 색상)
   const [tab, setTab] = useState<Tab>("object");
 
@@ -49,6 +52,9 @@ export default function CreateLetterStep2({ nextStep }: Props) {
   const isDown = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
+
+  // 오브제 목업 데이터 
+  const [mockLetterIcon, setMockLetterIcon] = useState(mockLetterIconData);
 
   const dragStart = (pageX: number) => {
     isDown.current = true;
@@ -86,6 +92,19 @@ export default function CreateLetterStep2({ nextStep }: Props) {
       ? selectedObject.src // 색상 없음 → 기본 이미지 그대로 사용
       : `/assets/mock/objects/${selectedObject.id}-${selectedColor.id}.svg`; // 색상 있음 → 조합된 경로
 
+
+  //오브제 id 매핑
+  const imageURL = mockLetterIcon.find(mockLetterIcon => mockLetterIcon.imageURL === previewSrc);
+
+  //다음 버튼 누를때 오브제 저장 
+  const handleNext = () => {
+    Object.assign(letterContentRef.current, {
+      letterIconDesign: imageURL.id,
+    });
+    console.log("저장된 오브제 이미지 id: "+ imageURL.id)
+    nextStep();
+  };
+
   return (
     <div className={styles.step2_container}>
       {/* ───── 미리보기 영역 ───── */}
@@ -105,7 +124,7 @@ export default function CreateLetterStep2({ nextStep }: Props) {
           label="완성하기"
           size="small"
           color="black"
-          onClick={nextStep}
+          onClick={handleNext}
         />
       </div>
 

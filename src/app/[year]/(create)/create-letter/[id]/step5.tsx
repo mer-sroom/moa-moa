@@ -5,7 +5,7 @@ import Button from "../../../(components)/common/Button";
 import { useAlertContext } from "@/contexts/AlertContext";
 import styles from "@/styles/create-letter/CreateLetterStep3.module.css";
 import MusicCard from "../../(components)/MusicCard";
-
+import { mockLetterIconData } from "@/mock/mockLetterIcondata";
 
 interface Props {
   letterContentRef: React.MutableRefObject<createdLetter>;
@@ -35,7 +35,8 @@ export default function CreateLetterStep5({
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(letterContentRef.current.trackId ? true : false);
   const { showAlert } = useAlertContext();
-  console.log(letterContentRef.current)
+  const letterIconDesignURL = mockLetterIconData.find(data=>data.id === letterContentRef.current.letterIconDesign).imageURL;  // 편지 아이콘 url
+  console.log("편지 입력 데이터: ", letterContentRef.current)
   const send = async () => {
     setLoading(true);
 
@@ -106,7 +107,7 @@ export default function CreateLetterStep5({
           <div
             className={styles.letterIcon}
             style={{
-              backgroundImage: `url(https://images.vexels.com/media/users/3/294731/isolated/preview/67317bd09b94882cdeda7ea95e2b9d09-self-esteem-cherry-cute-icon.png)`,
+              backgroundImage: `url(${letterIconDesignURL})`,
             }}
             aria-hidden="true"
           />
