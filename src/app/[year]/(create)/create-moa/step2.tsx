@@ -29,14 +29,19 @@ const backgrounds = [
 ];
 const boxes = [
   "/assets/icons/create_moa/step2_back.svg",
-   "/assets/icons/create_moa/box-2.svg",
-  "/assets/icons/create_moa/box-3.svg",
+  //"/assets/icons/create_moa/box-2.svg",
+  //"/assets/icons/create_moa/box-3.svg",
+  "/assets/icons/create_moa/box/present.svg",
+  "/assets/icons/create_moa/box/pokemon.svg",
 ];
 /* 장식은 id + src 로 관리 → FK 전송 */
 const decos = [
-  { id: 1, src: "/assets/icons/create_moa/deco-star.svg" },
-  { id: 2, src: "/assets/icons/create_moa/deco-heart.svg" },
-  { id: 3, src: "/assets/icons/create_moa/deco-ribbon.svg" },
+  { id: 1, src: "/assets/mock/color-icons/color-none.svg" },
+  // { id: 1, src: "/assets/icons/create_moa/deco-star.svg" },
+  // { id: 2, src: "/assets/icons/create_moa/deco-heart.svg" },
+  // { id: 3, src: "/assets/icons/create_moa/deco-ribbon.svg" },
+  { id: 4, src: "/assets/icons/create_moa/deco/clouds.svg" },
+  { id: 5, src: "/assets/icons/create_moa/deco/four-leaf-clover.svg" },
 ];
 
 type Tab = "background" | "box" | "deco";
@@ -133,6 +138,7 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
           className={styles.preview_box}
         />
         {decoSrc && (
+          decoSrc === "/assets/mock/color-icons/color-none.svg" ? "" :
           <Image
             src={decoSrc}
             alt="decoration"
