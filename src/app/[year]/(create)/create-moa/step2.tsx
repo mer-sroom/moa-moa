@@ -25,7 +25,7 @@ const backgrounds = [
   "/assets/icons/create_moa/background/ice-cream.svg",
   "/assets/icons/create_moa/background/house.svg",
   "/assets/icons/create_moa/background/cupcake.svg",
-  
+  "/assets/icons/create_moa/background/santa-pattern.svg",
 ];
 const boxes = [
   "/assets/icons/create_moa/step2_back.svg",
