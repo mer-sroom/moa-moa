@@ -18,6 +18,14 @@ const backgrounds = [
   "/assets/icons/create_moa/background/lemon.svg",
   "/assets/icons/create_moa/background/eddy-frame.svg",
   "/assets/icons/create_moa/background/fried-eggs.svg",
+  "/assets/icons/create_moa/background/doughnut.svg",
+  "/assets/icons/create_moa/background/spotted-pattern.svg",
+  "/assets/icons/create_moa/background/street.svg",
+  "/assets/icons/create_moa/background/tree.svg",
+  "/assets/icons/create_moa/background/ice-cream.svg",
+  "/assets/icons/create_moa/background/house.svg",
+  "/assets/icons/create_moa/background/cupcake.svg",
+  
 ];
 const boxes = [
   "/assets/icons/create_moa/step2_back.svg",
