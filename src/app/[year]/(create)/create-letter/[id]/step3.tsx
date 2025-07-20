@@ -5,6 +5,7 @@ import { useState, useRef } from "react";
 import { useAlertContext } from "@/contexts/AlertContext";
 import type { createdLetter } from "@/types/createLetter";
 import styles from "@/styles/create-letter/CreateLetterStep3.module.css";
+import { mockLetterIconData } from "@/mock/mockLetterIcondata";
 
 interface Props {
   letterContentRef: React.MutableRefObject<createdLetter>; //편지 정보 ref로 받음
@@ -36,6 +37,7 @@ export default function CreateLetterStep3({
   const titleRef = useRef<HTMLInputElement | null>(null);
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
   const senderNameRef = useRef<HTMLInputElement | null>(null);
+  const letterIconDesignURL = mockLetterIconData.find(data=>data.id === letterContentRef.current.letterIconDesign).imageURL;  // 편지 아이콘 url
 
   //다음 버튼 눌렀을 때 수행될 로직
   const setData = () => {
@@ -91,7 +93,7 @@ export default function CreateLetterStep3({
           <div
             className={styles.letterIcon}
             style={{
-              backgroundImage: `url(https://images.vexels.com/media/users/3/294731/isolated/preview/67317bd09b94882cdeda7ea95e2b9d09-self-esteem-cherry-cute-icon.png)`,
+              backgroundImage: `url(${letterIconDesignURL})`,
             }}
             aria-hidden="true"
           />
