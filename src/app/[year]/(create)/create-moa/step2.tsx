@@ -10,9 +10,14 @@ import { useMediaQuery } from "react-responsive";
 
 /* 디자인 후보 목록 */
 const backgrounds = [
-  "/assets/icons/create_moa/step2_background.svg",
-  "/assets/icons/create_moa/background-2.svg",
-  "/assets/icons/create_moa/background-3.svg",
+  "/assets/icons/create_moa/background/step2_background.svg",
+  "/assets/icons/create_moa/background/Blue-Bubble.svg",
+  "/assets/icons/create_moa/background/check-patterned-blue.svg",
+  "/assets/icons/create_moa/background/cherries.svg",
+  "/assets/icons/create_moa/background/hearts-stars.svg",
+  "/assets/icons/create_moa/background/lemon.svg",
+  "/assets/icons/create_moa/background/eddy-frame.svg",
+  "/assets/icons/create_moa/background/fried-eggs.svg",
 ];
 const boxes = [
   "/assets/icons/create_moa/step2_back.svg",
