@@ -48,7 +48,9 @@ export default function CreateLetterStep() {
       case 1:
         return <CreateLetterStep1 nextStep={nextStep} />;
       case 2:
-        return <CreateLetterStep2 nextStep={nextStep} />;
+        return <CreateLetterStep2
+          letterContentRef={letterContentRef}
+          nextStep={nextStep} />;
       case 3:
         return (
           <CreateLetterStep3

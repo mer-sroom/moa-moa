@@ -24,6 +24,7 @@
   position: absolute;
   right: 37%;
   top: 10%;
+  object-fit: contain;
 }
 .next_btn {
   position: absolute;

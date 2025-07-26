@@ -40,7 +40,7 @@
   top: -40px;
   left: 40%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
 /* 제목, 보낸 이 input 공통 */
 .inputField {
