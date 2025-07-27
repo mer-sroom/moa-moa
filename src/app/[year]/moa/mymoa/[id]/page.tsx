@@ -63,7 +63,7 @@ export default async function MyMoaBoxPage({ params }) {
   //디자인 정보 불러오기
   const backgroundDesign = moaBox.backgroundDesign?.imageURL;
   // const mailBoxDesign = moaBox.mailBoxDesign?.imageURL;
-  const mailBoxDesign = cake.src;
+  const mailBoxDesign = test1.src;
 
   const decorationURL = moaBox.decorationDesign?.imageURL;
   //모아 박스에 달린 모든 편지 불러오기

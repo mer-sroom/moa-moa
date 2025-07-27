@@ -17,7 +17,7 @@
 .preview_box {
   position: absolute;
   left: 50%;
-  top: 26%;
+  top: 20%;
   transform: translateX(-50%);
 }
 .preview_deco {
@@ -32,7 +32,7 @@
   right: -60px;
 }
 
-.next_btn>button {
+.next_btn > button {
   padding: 10px 40px !important;
 }
 
@@ -41,7 +41,7 @@
   width: 100%;
   background: var(--ui-secondary);
   margin-top: auto;
-  padding: 12px 16px 20px inset;
+  /* padding: 12px 16px 20px inset; */
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -59,12 +59,12 @@
 /* 썸네일 행 (드래그) */
 .thumb_row {
   display: flex;
-  gap: 16px;   /* 간격 확장 */
+  gap: 22px; /* 간격 확장 */
   white-space: nowrap;
-  overflow-x: hidden;  /* 가로 스크롤만 숨김 */
-  overflow-y: hidden;  /* 세로 스크롤도 숨김 */
+  overflow-x: hidden; /* 가로 스크롤만 숨김 */
+  overflow-y: hidden; /* 세로 스크롤도 숨김 */
   cursor: grab;
-  justify-content: center;  /* 가운데 정렬 */
+  justify-content: center; /* 가운데 정렬 */
   align-items: center;
   padding: 4px 0; /* 위아래 살짝 여백 */
 }
@@ -77,13 +77,12 @@
 
 .thumb_btn {
   flex: 0 0 auto;
-  width: 96px;  /* 크기 확대 */
+  width: 96px; /* 크기 확대 */
   height: 96px;
-  padding: 8px;
-  border: 1px none;
+  padding: 0;
+  border: none;
   border-radius: 18px;
   background: var(--ui-secondary);
-  transition: background 0.15s, border 0.15s;
   /* box-shadow: 0 3px 8px rgb(0 0 0 / 10%); 혹시 몰라서 남겨둡니다 */
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.3);
   cursor: pointer;
@@ -91,28 +90,29 @@
 .thumb_btn img {
   height: 100%;
   width: 100%;
-  object-fit: contain;
+  border-radius: inherit;
+  object-fit: cover;
   justify-content: center;
 }
 
 .thumb_selected {
-  background: var(--color-gray-200);
-  border-color: transparent;
+  box-shadow: 0 0 0 3px var(--color-black);
+  transition: box-shadow 0.2s ease;
 }
 
 /* 탭 메뉴 */
 .tab_nav {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   justify-content: center;
 }
 
 .tab_btn {
   flex: 1 1 0;
-  padding: 10px 0;
+  padding: 12px 0;
   background: var(--color-gray-100);
   border: none;
-  border-radius: 15px;
+  border-radius: 24px;
   font-size: var(--font-size-base);
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.3);
   cursor: pointer;
@@ -120,6 +120,7 @@
 .tab_btn.active {
   background: var(--ui-neutral);
   color: var(--text-primary-reverse);
+  transition: 0.4s ease;
 }
 
 /*   미디어 쿼리  */
@@ -163,13 +164,13 @@
     height: 86.7vh;
   }
   .next_btn {
-    bottom: 215px;
+    bottom: 256px;
     right: 20px;
   }
   .thumb_row {
-    padding: 18px 20px 7px 20px;
+    padding: 28px 24px 12px 24px;
   }
   .tab_nav {
-    padding: 5px 10px 15px 10px;
+    padding: 8px 20px 22px 20px;
   }
 }

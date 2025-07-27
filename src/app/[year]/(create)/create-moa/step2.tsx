@@ -10,22 +10,14 @@ import { useMediaQuery } from "react-responsive";
 
 /* 디자인 후보 목록 */
 const backgrounds = [
-  "/assets/icons/create_moa/background/step2_background.svg",
-  "/assets/icons/create_moa/background/Blue-Bubble.svg",
-  "/assets/icons/create_moa/background/check-patterned-blue.svg",
-  "/assets/icons/create_moa/background/cherries.svg",
-  "/assets/icons/create_moa/background/hearts-stars.svg",
-  "/assets/icons/create_moa/background/lemon.svg",
-  "/assets/icons/create_moa/background/eddy-frame.svg",
-  "/assets/icons/create_moa/background/fried-eggs.svg",
-  "/assets/icons/create_moa/background/doughnut.svg",
-  "/assets/icons/create_moa/background/spotted-pattern.svg",
-  "/assets/icons/create_moa/background/street.svg",
-  "/assets/icons/create_moa/background/tree.svg",
-  "/assets/icons/create_moa/background/ice-cream.svg",
-  "/assets/icons/create_moa/background/house.svg",
-  "/assets/icons/create_moa/background/cupcake.svg",
-  "/assets/icons/create_moa/background/santa-pattern.svg",
+  "/assets/icons/create_moa/background/pastel_spark.jpg",
+  "/assets/icons/create_moa/background/green_star.jpg",
+  "/assets/icons/create_moa/background/green_gradient.jpg",
+  "/assets/icons/create_moa/background/blue_cherry.jpg",
+  "/assets/icons/create_moa/background/pond.jpg",
+  "/assets/icons/create_moa/background/blue_star.jpg",
+  "/assets/icons/create_moa/background/basic_blue.jpg",
+  "/assets/icons/create_moa/background/clover.jpg",
 ];
 const boxes = [
   "/assets/icons/create_moa/step2_back.svg",
@@ -111,20 +103,20 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
     switch (tab) {
       case "background":
         if (isMobile ? backgrounds.length > 3 : backgrounds.length > 5) {
-          return setThumbItemMany(true)
+          return setThumbItemMany(true);
         }
       case "box":
         if (isMobile ? boxes.length > 3 : boxes.length > 5) {
-          return setThumbItemMany(true)
+          return setThumbItemMany(true);
         }
       case "deco":
         if (isMobile ? decos.length > 3 : decos.length > 5) {
-          return setThumbItemMany(true)
+          return setThumbItemMany(true);
         }
       default:
         return setThumbItemMany(false);
     }
-  }, [tab])
+  }, [tab]);
 
   return (
     <div className={styles.step2_container}>
@@ -137,32 +129,33 @@ export default function CreateMoaStep2({ nextStep, onBgChange }: Props) {
           height={290}
           className={styles.preview_box}
         />
-        {decoSrc && (
-          decoSrc === "/assets/mock/color-icons/color-none.svg" ? "" :
-          <Image
-            src={decoSrc}
-            alt="decoration"
-            width={120}
-            height={120}
-            className={styles.preview_deco}
-          />
-        )}
+        {decoSrc &&
+          (decoSrc === "/assets/mock/color-icons/color-none.svg" ? (
+            ""
+          ) : (
+            <Image
+              src={decoSrc}
+              alt="decoration"
+              width={120}
+              height={120}
+              className={styles.preview_deco}
+            />
+          ))}
       </div>
-        <div className={styles.next_btn}>
-          <Button
-            label="다음으로"
-            size="medium"
-            color="black"
-            onClick={nextStep}
-          />
-        </div>
+      <div className={styles.next_btn}>
+        <Button
+          label="다음으로"
+          size="medium"
+          color="black"
+          onClick={nextStep}
+        />
+      </div>
 
       {/* ───── 썸네일 & 탭 영역 ───── */}
       <footer className={styles.footer}>
         <div
           ref={rowRef}
-          className={`${styles.thumb_row} ${
-                  thumbItemMany ? styles.many : "" }`}
+          className={`${styles.thumb_row} ${thumbItemMany ? styles.many : ""}`}
           onMouseDown={e => dragStart(e.pageX)}
           onMouseMove={e => dragMove(e.pageX)}
           onMouseUp={dragEnd}
