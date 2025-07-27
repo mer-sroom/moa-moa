@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_우편함" data-name="우편함" xmlns="http://www.w3.org/2000/svg" width="400" height="490" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 490">
+  <defs>
+    <pattern id="_6_dpi_30_" data-name="6 dpi 30%" x="0" y="0" width="48" height="48" patternTransform="translate(-6620.17 -8093.36) scale(.25 .27)" patternUnits="userSpaceOnUse" viewBox="0 0 48 48">
+      <g>
+        <rect width="48" height="48" fill="none"/>
+        <g>
+          <circle cx="24" cy="48" r="3.6" fill="#231815"/>
+          <circle cx="48" cy="48" r="3.6" fill="#231815"/>
+          <circle cx="24" cy="24" r="3.6" fill="#231815"/>
+          <circle cx="48" cy="24" r="3.6" fill="#231815"/>
+          <circle cx="36" cy="36" r="3.6" fill="#231815"/>
+          <circle cx="12" cy="36" r="3.6" fill="#231815"/>
+          <circle cx="36" cy="12" r="3.6" fill="#231815"/>
+          <circle cx="12" cy="12" r="3.6" fill="#231815"/>
+        </g>
+        <g>
+          <circle cy="48" r="3.6" fill="#231815"/>
+          <circle cy="24" r="3.6" fill="#231815"/>
+        </g>
+        <g>
+          <circle cx="24" cy="0" r="3.6" fill="#231815"/>
+          <circle cx="48" cy="0" r="3.6" fill="#231815"/>
+        </g>
+        <circle cy="0" r="3.6" fill="#231815"/>
+      </g>
+    </pattern>
+    <pattern id="_6_dpi_30_-2" data-name="6 dpi 30%" patternTransform="translate(-6624.16 -8089.6) scale(.25 .27)" xlink:href="#_6_dpi_30_"/>
+    <pattern id="_6_dpi_30_-3" data-name="6 dpi 30%" patternTransform="translate(-6621.21 -8097.74) scale(.25 .27)" xlink:href="#_6_dpi_30_"/>
+    <pattern id="_10_lpi_90_" data-name="10 lpi 90%" x="0" y="0" width="72" height="72" patternTransform="translate(-10079.53 12573.76) rotate(45.4) scale(2.05) skewX(.8)" patternUnits="userSpaceOnUse" viewBox="0 0 72 72">
+      <g>
+        <rect width="72" height="72" fill="none"/>
+        <g>
+          <line x1="71.75" y1="68.4" x2="144.25" y2="68.4" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="71.75" y1="54" x2="144.25" y2="54" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="71.75" y1="39.6" x2="144.25" y2="39.6" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="71.75" y1="25.2" x2="144.25" y2="25.2" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="71.75" y1="10.8" x2="144.25" y2="10.8" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="71.75" y1="61.2" x2="144.25" y2="61.2" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="71.75" y1="46.8" x2="144.25" y2="46.8" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="71.75" y1="32.4" x2="144.25" y2="32.4" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="71.75" y1="18" x2="144.25" y2="18" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="71.75" y1="3.6" x2="144.25" y2="3.6" fill="none" stroke="#231815" stroke-width="6.48"/>
+        </g>
+        <g>
+          <line x1="-.25" y1="68.4" x2="72.25" y2="68.4" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-.25" y1="54" x2="72.25" y2="54" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-.25" y1="39.6" x2="72.25" y2="39.6" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-.25" y1="25.2" x2="72.25" y2="25.2" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-.25" y1="10.8" x2="72.25" y2="10.8" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-.25" y1="61.2" x2="72.25" y2="61.2" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-.25" y1="46.8" x2="72.25" y2="46.8" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-.25" y1="32.4" x2="72.25" y2="32.4" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-.25" y1="18" x2="72.25" y2="18" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-.25" y1="3.6" x2="72.25" y2="3.6" fill="none" stroke="#231815" stroke-width="6.48"/>
+        </g>
+        <g>
+          <line x1="-72.25" y1="68.4" x2=".25" y2="68.4" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-72.25" y1="54" x2=".25" y2="54" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-72.25" y1="39.6" x2=".25" y2="39.6" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-72.25" y1="25.2" x2=".25" y2="25.2" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-72.25" y1="10.8" x2=".25" y2="10.8" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-72.25" y1="61.2" x2=".25" y2="61.2" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-72.25" y1="46.8" x2=".25" y2="46.8" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-72.25" y1="32.4" x2=".25" y2="32.4" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-72.25" y1="18" x2=".25" y2="18" fill="none" stroke="#231815" stroke-width="6.48"/>
+          <line x1="-72.25" y1="3.6" x2=".25" y2="3.6" fill="none" stroke="#231815" stroke-width="6.48"/>
+        </g>
+      </g>
+    </pattern>
+  </defs>
+  <rect x="22.34" y="81.26" width="359.11" height="382.45" fill="#fff"/>
+  <path d="M399.4,464.96l-13.1-394.88c-.39-11.68-9.59-21.11-20.56-21.11H35.58c-10.97,0-20.18,9.43-20.56,21.11L1.91,464.96c-.45,13.44,8.79,24.39,20.62,24.39h356.24c11.84,0,21.07-10.94,20.62-24.39ZM354.91,458.06H46.4c-9.42,0-16.8-8.37-16.5-18.67l9.93-326.12c.27-9.1,7.63-16.46,16.45-16.46h288.76c8.81,0,16.18,7.36,16.45,16.46l9.93,326.12c.31,10.3-7.08,18.67-16.5,18.67Z" fill="#fff" stroke="#000" stroke-dasharray="4" stroke-miterlimit="10" stroke-width="2"/>
+  <rect x="37.35" y="207.77" width="328.7" height="20.92" fill="url(#_6_dpi_30_)"/>
+  <path d="M55.83,96.44h288.74c9.65,0,17.49,7.84,17.49,17.49v1.89H38.34v-1.89c0-9.65,7.84-17.49,17.49-17.49Z" fill="url(#_6_dpi_30_-2)"/>
+  <rect x="32.94" y="318.18" width="335.44" height="23.03" fill="url(#_6_dpi_30_-3)"/>
+  <path d="M31.42,421.57h340.6v20.3c0,8.83-7.17,16-16,16H47.42c-8.83,0-16-7.17-16-16v-20.3h0Z" fill="url(#_10_lpi_90_)"/>
+</svg>
