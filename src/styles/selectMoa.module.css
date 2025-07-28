@@ -107,7 +107,7 @@
 }
 .moaDecoImage {
   position: absolute;
-  top: 0;
+  top: 8.5%;
   left: 50%; /* 카드 가로 중앙 기준 */
   transform: translateX(-50%);
   width: 120px;

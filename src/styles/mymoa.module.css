@@ -27,22 +27,19 @@
   margin: 0;
 }
 
-.mailBoxSection {
-  padding-top: 40px;
-}
 .decoration {
   position: absolute;
-  top: 0;
-  left: 35%;
-  width: 120px;
+  top: -5%;
+  left: 30%;
+  width: 160px;
   height: 120px;
-  outline: 2px solid red; /* 위치확인용으로 해둠 */
-  z-index: 5;
+  z-index: 1;
 }
 
 .buttonSection {
   display: flex;
   justify-content: center;
+  width: 100%;
   width: 100%;
   padding-top: 40px;
   gap: 20px;
@@ -55,26 +52,27 @@
 
 /*모아 박스(MailBox.tsx)*/
 .mailboxBackground {
-  position: relative;
-  width: 420px;
+  margin-top: 5%;
+  width: 400px;
   height: 490px;
+  position: relative;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .mailBoxGrid {
   position: absolute;
-  top: 30%;
-  left: 19%;
+  top: 24%;
+  left: 16%;
   padding: 10px;
   /* background-color: rgba(255, 255, 255, 0.5); 임시 */
-  width: 240px;
+  width: 260px;
   height: 280px;
 }
 
 .firstRow {
   display: grid;
-  grid-template-columns: repeat(2, 64px);
+  grid-template-columns: repeat(2, 80px);
   gap: 4px;
   grid-auto-rows: 100px;
   justify-content: center;
@@ -91,8 +89,10 @@
 /*편지(LetterItem.tsx)*/
 .letterItem {
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
 /*안 읽은 편지 효과 - 보류*/
 /* .letterItem.glowing {
   border-radius: 50%;

@@ -2,17 +2,19 @@ import styles from "@/styles/mymoa.module.css";
 import { LetterBase } from "@/types/moabox";
 
 interface LetterItemProps {
+  isOwner: boolean; // 편지 작성자 여부
   letter: LetterBase;
 }
 
-export default function LetterItem({ letter }: LetterItemProps) {
+export default function LetterItem({ letter, isOwner }: LetterItemProps) {
   const { authorName, isOpened, letterIconDesign } = letter;
   //아이콘 정보 불러오기
 
   return (
     <div
       className={`${styles.letterItem} ${
-        isOpened ? styles.opened : styles.glowing
+        //모아박스 소유주한테만 편지 읽음 여부 css로 표시
+        isOpened && isOwner ? styles.opened : ""
       }`}
     >
       {/* 편지 아이콘 */}

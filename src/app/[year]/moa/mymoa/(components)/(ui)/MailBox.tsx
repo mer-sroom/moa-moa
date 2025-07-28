@@ -4,6 +4,7 @@ import PaginatedLetterGrid from "../(features)/PaginatedLetterGrid";
 import styles from "@/styles/mymoa.module.css";
 import Image from "next/image";
 interface MailBoxProps {
+  isOwner: boolean;
   moaBoxId: number;
   designURL: string;
   letters: LetterBase[];
@@ -11,6 +12,7 @@ interface MailBoxProps {
 }
 
 export default function MailBox({
+  isOwner,
   moaBoxId,
   designURL,
   letters,
@@ -32,7 +34,11 @@ export default function MailBox({
             priority
           />
         )}
-        <PaginatedLetterGrid letters={letters} itemsPerPage={8} />
+        <PaginatedLetterGrid
+          isOwner={isOwner}
+          letters={letters}
+          itemsPerPage={8}
+        />
       </div>
     </section>
   );

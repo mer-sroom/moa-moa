@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_아이콘" data-name="아이콘" xmlns="http://www.w3.org/2000/svg" width="70" height="52" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 70 52">
+  <defs>
+    <pattern id="USGS_19_침수_지역_3" data-name="USGS 19 침수 지역 3" x="0" y="0" width="75.48" height="70.75" patternTransform="translate(-1364.78 932.42)" patternUnits="userSpaceOnUse" viewBox="0 0 75.48 70.75">
+      <g>
+        <rect width="75.48" height="70.75" fill="none"/>
+        <line x1="0" y1="70.37" x2="73.44" y2="70.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="66.37" x2="73.44" y2="66.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="62.37" x2="73.44" y2="62.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="58.37" x2="73.44" y2="58.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="54.37" x2="73.44" y2="54.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="50.37" x2="73.44" y2="50.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="46.37" x2="73.44" y2="46.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="42.37" x2="73.44" y2="42.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="38.37" x2="73.44" y2="38.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="34.37" x2="73.44" y2="34.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="30.37" x2="73.44" y2="30.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="26.37" x2="73.44" y2="26.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="22.37" x2="73.44" y2="22.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="18.37" x2="73.44" y2="18.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="14.37" x2="73.44" y2="14.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="10.37" x2="73.44" y2="10.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="6.37" x2="73.44" y2="6.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="2.37" x2="73.44" y2="2.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="68.37" x2="75.48" y2="68.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="64.37" x2="75.48" y2="64.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="60.37" x2="75.48" y2="60.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="56.37" x2="75.48" y2="56.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="52.37" x2="75.48" y2="52.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="48.37" x2="75.48" y2="48.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="44.37" x2="75.48" y2="44.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="40.37" x2="75.48" y2="40.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="36.37" x2="75.48" y2="36.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="32.37" x2="75.48" y2="32.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="28.37" x2="75.48" y2="28.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="24.37" x2="75.48" y2="24.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="20.37" x2="75.48" y2="20.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="16.37" x2="75.48" y2="16.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="12.37" x2="75.48" y2="12.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="8.37" x2="75.48" y2="8.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="4.37" x2="75.48" y2="4.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1=".37" x2="75.48" y2=".37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+      </g>
+    </pattern>
+    <pattern id="_6_dpi_90_" data-name="6 dpi 90%" x="0" y="0" width="48" height="48" patternTransform="translate(-6533.4 -5701.9) scale(.25)" patternUnits="userSpaceOnUse" viewBox="0 0 48 48">
+      <g>
+        <rect width="48" height="48" fill="none"/>
+        <path d="M12.6,70.73c6.3,0,11.4-5.1,11.4-11.4s-5.1-11.4-11.4-11.4S1.2,53.04,1.2,59.33s5.1,11.4,11.4,11.4Z"/>
+        <g>
+          <path d="M24,58.8c5.96,0,10.8-4.83,10.8-10.8s-4.84-10.8-10.8-10.8-10.8,4.84-10.8,10.8,4.83,10.8,10.8,10.8Z"/>
+          <circle cx="48" cy="48" r="10.8"/>
+          <path d="M24,34.8c5.96,0,10.8-4.83,10.8-10.8s-4.84-10.8-10.8-10.8-10.8,4.84-10.8,10.8,4.83,10.8,10.8,10.8Z"/>
+          <circle cx="48" cy="24" r="10.8"/>
+          <path d="M36,46.8c5.96,0,10.8-4.83,10.8-10.8s-4.84-10.8-10.8-10.8-10.8,4.84-10.8,10.8,4.83,10.8,10.8,10.8Z"/>
+          <path d="M12.6,48.07c6.3,0,11.4-5.1,11.4-11.4s-5.1-11.4-11.4-11.4S1.2,30.37,1.2,36.67s5.1,11.4,11.4,11.4Z"/>
+          <path d="M36,22.8c5.96,0,10.8-4.83,10.8-10.8S41.96,1.2,36,1.2s-10.8,4.84-10.8,10.8,4.83,10.8,10.8,10.8Z"/>
+          <path d="M12.6,22.73c6.3,0,11.4-5.1,11.4-11.4S18.9-.07,12.6-.07,1.2,5.04,1.2,11.33s5.1,11.4,11.4,11.4Z"/>
+        </g>
+        <g>
+          <circle cy="48" r="10.8"/>
+          <circle cy="24" r="10.8"/>
+        </g>
+        <g>
+          <path d="M24,10.8c5.96,0,10.8-4.83,10.8-10.8s-4.84-10.8-10.8-10.8S13.2-5.96,13.2,0s4.83,10.8,10.8,10.8Z"/>
+          <circle cx="48" r="10.8"/>
+          <path d="M12.6.07c6.3,0,11.4-5.1,11.4-11.4s-5.1-11.4-11.4-11.4S1.2-17.63,1.2-11.33,6.3.07,12.6.07Z"/>
+        </g>
+        <circle r="10.8"/>
+      </g>
+    </pattern>
+  </defs>
+  <path d="M66.19,48.79H3.75c-2.16,0-3.73-2.19-3.16-4.41L10.27,6.38c.39-1.52,1.68-2.58,3.16-2.58h43.65c1.5,0,2.8,1.08,3.18,2.63l9.11,38c.53,2.21-1.04,4.36-3.18,4.36Z" fill="url(#USGS_19_침수_지역_3)" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44.09,19.57c0,.95.56,1.72,1.25,1.72s1.25-.77,1.25-1.72c0-.19-.04-.36-.08-.53h.02s-1.1-5.01,3.19-6.43c4.29-1.41,5.35,3.14,5.35,3.14h.03c.16.73.64,1.27,1.22,1.27s1.06-.54,1.22-1.27h.03s.78-4.17,3.82-4.58c.01,0-.38-.57-.38-.59l-1.67-6.37s0-.02-.02-.02l-47.05-.38s-.76,1.39-1.26.94l-1.42,4.25s1.58-1.19,4.16-.23c2.57.96,3.15,5.42,3.15,5.42h0c.14,1.39.99,2.46,2.03,2.46s1.88-1.05,2.03-2.41c0,0,1-7.78,10.98-5.42,2.45.62,5.37,1.01,8.01,2.37,4.74,1.98,4.16,7.57,4.16,7.57" fill="url(#_6_dpi_90_)"/>
+  <circle cx="35.85" cy="35.91" r=".95" stroke="#000" stroke-miterlimit="10" stroke-width=".68"/>
+  <path d="M28.84,24.15c0-3.75,3.32-3.75,3.32,0" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".68"/>
+  <path d="M39.67,24.1c0-3.75,3.32-3.75,3.32,0" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".68"/>
+  <polyline points="21.19 30.73 21.46 28.2 19.14 26.92 16.92 28.86 17.87 31.32 19.34 30.88 19.39 29.08" fill="none" stroke="#ff6464" stroke-linecap="round" stroke-linejoin="bevel" stroke-width=".75"/>
+  <polyline points="54.11 31.12 54.84 28.69 52.75 27.08 50.26 28.65 50.82 31.23 52.34 31.02 52.67 29.25" fill="none" stroke="#ff6464" stroke-linecap="round" stroke-linejoin="bevel" stroke-width=".75"/>
+</svg>
