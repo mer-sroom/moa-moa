@@ -20,13 +20,13 @@ export default async function FriendSelectMoaPage({ params }) {
       dueDate: { gte: new Date() },
     },
     include: {
-      backgroundDesign: true,
-      mailBoxDesign: true,
+      backgroundDesign: { select: { imageURL: true } },
+      mailBoxDesign: { select: { imageURL: true } },
+      decorationDesign: { select: { imageURL: true } },
     },
   });
 
   if (friendMoaBoxes.length === 0) {
-    //친구가 진행 중인 모아가 없을 때 화면(나중에 교체 예정)
     return (
       <div className={styles.noMoaBoxContainer}>
         <Image src={NoMoaImage} alt="no moa" width={320} priority={true} />
@@ -40,6 +40,7 @@ export default async function FriendSelectMoaPage({ params }) {
       ...box,
       backgroundDesign: box.backgroundDesign || null,
       mailBoxDesign: box.mailBoxDesign || null,
+      decorationDesign: box.decorationDesign || null,
     }))}
   />;
   return (
