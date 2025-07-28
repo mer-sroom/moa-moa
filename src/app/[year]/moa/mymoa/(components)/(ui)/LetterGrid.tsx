@@ -4,10 +4,11 @@ import { LetterBase } from "@/types/moabox";
 import styles from "@/styles/mymoa.module.css";
 
 interface LetterGridProps {
+  isOwner: boolean;
   letters: LetterBase[];
 }
 
-export default function LetterGrid({ letters }: LetterGridProps) {
+export default function LetterGrid({ isOwner, letters }: LetterGridProps) {
   const firstRow = letters.slice(0, 2);
   const restRow = letters.slice(2);
   return (
@@ -17,7 +18,7 @@ export default function LetterGrid({ letters }: LetterGridProps) {
         <div className={styles.firstRow}>
           {firstRow.map(letter => (
             <OpenLetter key={letter.id} letter={letter}>
-              <LetterItem letter={letter} />
+              <LetterItem letter={letter} isOwner={isOwner} />
             </OpenLetter>
           ))}
         </div>
@@ -25,7 +26,7 @@ export default function LetterGrid({ letters }: LetterGridProps) {
         <div className={styles.restRow}>
           {restRow.map(letter => (
             <OpenLetter key={letter.id} letter={letter}>
-              <LetterItem letter={letter} />
+              <LetterItem letter={letter} isOwner={isOwner} />
             </OpenLetter>
           ))}
         </div>

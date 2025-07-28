@@ -27,17 +27,13 @@
   margin: 0;
 }
 
-/* .mailBoxSection {
-   padding-top: 20px; 
-} */
 .decoration {
   position: absolute;
-  top: 0;
-  left: 35%;
-  width: 120px;
+  top: -5%;
+  left: 30%;
+  width: 160px;
   height: 120px;
-  outline: 2px solid red; /* 위치확인용으로 해둠 */
-  z-index: 5;
+  z-index: 1;
 }
 
 .buttonSection {
@@ -56,6 +52,7 @@
 
 /*모아 박스(MailBox.tsx)*/
 .mailboxBackground {
+  margin-top: 5%;
   width: 400px;
   height: 490px;
   position: relative;
@@ -65,7 +62,7 @@
 
 .mailBoxGrid {
   position: absolute;
-  top: 26%;
+  top: 24%;
   left: 16%;
   padding: 10px;
   /* background-color: rgba(255, 255, 255, 0.5); 임시 */

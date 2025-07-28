@@ -19,12 +19,6 @@ import penIcon from "public/assets/icons/pen.svg";
 import styles from "@/styles/mymoa.module.css";
 import MoaBoxDownloadImageBtn from "../(components)/(features)/MoaBoxDownloadImageBtn";
 import GuideModalMiddle from "../(components)/(ui)/GuideModalMiddle";
-//목업
-import backImg from "public/assets/mock/box_default.svg";
-import cake1 from "public/assets/icons/create_moa/box/mailbox_cake1.svg";
-import cake2 from "public/assets/icons/create_moa/box/mailbox_cake2.svg";
-import fishtank from "public/assets/icons/create_moa/box/mailbox_fishtank.svg";
-import drink from "public/assets/icons/create_moa/box/mailbox_drink.svg";
 
 export default async function MyMoaBoxPage({ params }) {
   const { id } = await params; //모아박스 id
@@ -64,8 +58,7 @@ export default async function MyMoaBoxPage({ params }) {
   }
   //디자인 정보 불러오기
   const backgroundDesign = moaBox.backgroundDesign?.imageURL;
-  // const mailBoxDesign = moaBox.mailBoxDesign?.imageURL;
-  const mailBoxDesign = cake2.src;
+  const mailBoxDesign = moaBox.mailBoxDesign?.imageURL;
 
   const decorationURL = moaBox.decorationDesign?.imageURL;
   //모아 박스에 달린 모든 편지 불러오기
@@ -93,6 +86,7 @@ export default async function MyMoaBoxPage({ params }) {
           {/* 모아 박스 컨테이너*/}
           <Suspense fallback={<Loading />}>
             <MailBox
+              isOwner={isOwner}
               moaBoxId={moaBoxId}
               designURL={mailBoxDesign}
               letters={letters}

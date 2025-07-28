@@ -10,14 +10,17 @@ import { useMediaQuery } from "react-responsive";
 
 /* 디자인 후보 목록 */
 const backgrounds = [
-  "/assets/icons/create_moa/background/pastel_spark.jpg",
-  "/assets/icons/create_moa/background/green_star.jpg",
   "/assets/icons/create_moa/background/green_gradient.jpg",
+  "/assets/icons/create_moa/background/texture2.jpg",
+  "/assets/icons/create_moa/background/texture.jpg",
+  "/assets/icons/create_moa/background/texture3.jpg",
+  "/assets/icons/create_moa/background/textile.jpg",
+  "/assets/icons/create_moa/background/textile2.jpg",
+  "/assets/icons/create_moa/background/pink.jpg",
   "/assets/icons/create_moa/background/blue_cherry.jpg",
-  "/assets/icons/create_moa/background/pond.jpg",
   "/assets/icons/create_moa/background/blue_star.jpg",
-  "/assets/icons/create_moa/background/basic_blue.jpg",
-  "/assets/icons/create_moa/background/clover.jpg",
+  "/assets/icons/create_moa/background/pond.jpg",
+  "/assets/icons/create_moa/background/tile.jpg",
 ];
 const boxes = [
   "/assets/icons/create_moa/step2_back.svg",
@@ -29,8 +32,12 @@ const boxes = [
 /* 장식은 id + src 로 관리 → FK 전송 */
 const decos = [
   { id: 1, src: "/assets/mock/color-icons/color-none.svg" },
-  { id: 2, src: "/assets/icons/create_moa/deco/deco1.svg" },
   { id: 3, src: "/assets/icons/create_moa/deco/deco2.svg" },
+  { id: 7, src: "/assets/icons/create_moa/deco/box_deco6.svg" },
+  { id: 6, src: "/assets/icons/create_moa/deco/box_deco5.svg" },
+  { id: 2, src: "/assets/icons/create_moa/deco/deco1.svg" },
+  { id: 5, src: "/assets/icons/create_moa/deco/box_deco4.svg" },
+  { id: 4, src: "/assets/icons/create_moa/deco/box_deco3.svg" },
 ];
 
 type Tab = "background" | "box" | "deco";

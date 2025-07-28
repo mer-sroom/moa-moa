@@ -16,14 +16,52 @@ const papers = [
   {
     id: 1,
     name: "blue_paper",
-    imageURL:
-      "https://static.vecteezy.com/system/resources/thumbnails/037/998/141/small_2x/ai-generated-pink-creased-crumpled-paper-background-grunge-texture-backdrop-photo.jpg",
+    imageURL: "/assets/icons/create_letter/paper/bluepaper.jpg",
+  },
+  {
+    id: 11,
+    name: "green_star",
+    imageURL: "/assets/icons/create_letter/paper/green_star.jpg",
   },
   {
     id: 2,
-    name: "pink_paper",
-    imageURL:
-      "https://i.pinimg.com/736x/2c/f9/6b/2cf96ba346d67c7b9efd71e7622cf916.jpg",
+    name: "white_paper",
+    imageURL: "/assets/icons/create_letter/paper/whitepaper.jpg",
+  },
+  {
+    id: 3,
+    name: "clover",
+    imageURL: "/assets/icons/create_letter/paper/clover.jpg",
+  },
+  {
+    id: 4,
+    name: "dot",
+    imageURL: "/assets/icons/create_letter/paper/dot.jpg",
+  },
+  {
+    id: 7,
+    name: "paper",
+    imageURL: "/assets/icons/create_letter/paper/paper.jpg",
+  },
+  {
+    id: 8,
+    name: "paper2",
+    imageURL: "/assets/icons/create_letter/paper/paper2.jpg",
+  },
+  {
+    id: 10,
+    name: "tomato",
+    imageURL: "/assets/icons/create_letter/paper/tomato.jpg",
+  },
+  {
+    id: 9,
+    name: "sky",
+    imageURL: "/assets/icons/create_letter/paper/sky.jpg",
+  },
+  {
+    id: 12,
+    name: "universe",
+    imageURL: "/assets/icons/create_letter/paper/universe.jpg",
   },
 ];
 
@@ -37,7 +75,9 @@ export default function CreateLetterStep3({
   const titleRef = useRef<HTMLInputElement | null>(null);
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
   const senderNameRef = useRef<HTMLInputElement | null>(null);
-  const letterIconDesignURL = mockLetterIconData.find(data=>data.id === letterContentRef.current.letterIconDesign).imageURL;  // 편지 아이콘 url
+  const letterIconDesignURL = mockLetterIconData.find(
+    data => data.id === letterContentRef.current.letterIconDesign
+  ).imageURL; // 편지 아이콘 url
 
   //다음 버튼 눌렀을 때 수행될 로직
   const setData = () => {

@@ -5,12 +5,13 @@ import Pagination from "@/app/[year]/(components)/common/Pagination";
 import { LetterBase } from "@/types/moabox";
 
 interface PaginatedLetterGridProps {
+  isOwner: boolean;
   letters: LetterBase[];
   itemsPerPage: number;
 }
 
 export default function PaginatedLetterGrid(props: PaginatedLetterGridProps) {
-  const { letters, itemsPerPage } = props;
+  const { letters, itemsPerPage, isOwner } = props;
   //현재 페이지 설정
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(letters.length / itemsPerPage); //총 페이지 수
@@ -25,7 +26,7 @@ export default function PaginatedLetterGrid(props: PaginatedLetterGridProps) {
   return (
     <>
       {/* //편지가 펼쳐지는 컴포넌트 */}
-      <LetterGrid letters={currentItems} />
+      <LetterGrid isOwner={isOwner} letters={currentItems} />
       {totalPages > 1 && ( //페이지 넘기는 버튼, 아이템 수가 1페이지를 넘어갈 때만 표시
         <div style={{ position: "absolute", bottom: "72px", left: "40%" }}>
           <Pagination
