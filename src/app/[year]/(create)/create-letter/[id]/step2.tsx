@@ -7,11 +7,17 @@ import Button from "../../../(components)/common/Button";
 import GuideModal from "@/app/[year]/(components)/common/GuideModal";
 import img from "/public/assets/service-imgs/guide/create_letter.png";
 import type { createdLetter } from "@/types/createLetter";
-import { mockLetterIconData } from "@/mock/mockLetterIcondata"; 
+import { mockLetterIconData } from "@/mock/mockLetterIcondata";
 
 // ───── 오브제 기본 이미지 경로 매핑 ─────
 const objects = [
-  { id: "cat", src: "/assets/icons/create_letter/letter-basic-cat.svg" },
+  { id: "cat", src: "/assets/service-imgs/icons/letter-basic-cat.svg" },
+  { id: "pudding", src: "/assets/service-imgs/icons/pudding.svg" },
+  { id: "biscuit", src: "/assets/service-imgs/icons/biscuit.svg" },
+  { id: "clover", src: "/assets/service-imgs/icons/clover.svg" },
+  { id: "alien", src: "/assets/service-imgs/icons/alien.svg" },
+  { id: "spark", src: "/assets/service-imgs/icons/spark.svg" },
+  { id: "eight", src: "/assets/service-imgs/icons/eight.svg" },
   { id: "boing", src: "/assets/service-imgs/icons/boing.svg" },
   { id: "crotchet", src: "/assets/service-imgs/icons/crotchet.svg" },
   { id: "dot_spark", src: "/assets/service-imgs/icons/dot_spark.svg" },
@@ -24,6 +30,7 @@ const colors = [
   { id: "none", src: "/assets/mock/color-icons/color-none.svg" },
   { id: "white", src: "/assets/mock/color-icons/color-white.svg" },
   { id: "yellow", src: "/assets/mock/color-icons/color-yellow.svg" },
+  { id: "green", src: "/assets/mock/color-icons/color-green.svg" },
   { id: "pink", src: "/assets/mock/color-icons/color-pink.svg" },
   { id: "blue", src: "/assets/mock/color-icons/color-blue.svg" },
 ];
@@ -35,7 +42,10 @@ interface Props {
   nextStep: () => void;
 }
 
-export default function CreateLetterStep2({ letterContentRef, nextStep }: Props) {
+export default function CreateLetterStep2({
+  letterContentRef,
+  nextStep,
+}: Props) {
   // 현재 탭 상태 (오브제 or 색상)
   const [tab, setTab] = useState<Tab>("object");
 
@@ -53,7 +63,7 @@ export default function CreateLetterStep2({ letterContentRef, nextStep }: Props)
   const startX = useRef(0);
   const scrollLeft = useRef(0);
 
-  // 오브제 목업 데이터 
+  // 오브제 목업 데이터
   const [mockLetterIcon, setMockLetterIcon] = useState(mockLetterIconData);
 
   const dragStart = (pageX: number) => {
@@ -71,7 +81,7 @@ export default function CreateLetterStep2({ letterContentRef, nextStep }: Props)
 
   // 탭에 따라 썸네일 리스트 변경
   const currentList =
-    tab === "object" ? objects.map((obj) => obj.src) : colors.map((c) => c.src);
+    tab === "object" ? objects.map(obj => obj.src) : colors.map(c => c.src);
 
   // 현재 선택된 썸네일 src
   const currentSelected =
@@ -92,16 +102,17 @@ export default function CreateLetterStep2({ letterContentRef, nextStep }: Props)
       ? selectedObject.src // 색상 없음 → 기본 이미지 그대로 사용
       : `/assets/mock/objects/${selectedObject.id}-${selectedColor.id}.svg`; // 색상 있음 → 조합된 경로
 
-
   //오브제 id 매핑
-  const imageURL = mockLetterIcon.find(mockLetterIcon => mockLetterIcon.imageURL === previewSrc);
+  const imageURL = mockLetterIcon.find(
+    mockLetterIcon => mockLetterIcon.imageURL === previewSrc
+  );
 
-  //다음 버튼 누를때 오브제 저장 
+  //다음 버튼 누를때 오브제 저장
   const handleNext = () => {
     Object.assign(letterContentRef.current, {
       letterIconDesign: imageURL.id,
     });
-    console.log("저장된 오브제 이미지 id: "+ imageURL.id)
+    console.log("저장된 오브제 이미지 id: " + imageURL.id);
     nextStep();
   };
 
@@ -134,12 +145,12 @@ export default function CreateLetterStep2({ letterContentRef, nextStep }: Props)
         <div
           ref={rowRef}
           className={styles.thumb_row}
-          onMouseDown={(e) => dragStart(e.pageX)}
-          onMouseMove={(e) => dragMove(e.pageX)}
+          onMouseDown={e => dragStart(e.pageX)}
+          onMouseMove={e => dragMove(e.pageX)}
           onMouseUp={dragEnd}
           onMouseLeave={dragEnd}
-          onTouchStart={(e) => dragStart(e.touches[0].pageX)}
-          onTouchMove={(e) => dragMove(e.touches[0].pageX)}
+          onTouchStart={e => dragStart(e.touches[0].pageX)}
+          onTouchMove={e => dragMove(e.touches[0].pageX)}
           onTouchEnd={dragEnd}
         >
           {currentList.map((src, i) => (

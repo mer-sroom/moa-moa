@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_1" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" width="32" height="36" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 36">
+  <defs>
+    <clipPath id="clippath">
+      <rect width="32" height="35.33" fill="none"/>
+    </clipPath>
+    <mask id="mask" x="0" y="-.29" width="75.48" height="70.29" maskUnits="userSpaceOnUse">
+      <g id="path-1-inside-1_1887_4155" data-name="path-1-inside-1 1887 4155">
+        <path d="M29.21.43l.79,1.4.49,2.08-.19,2.09-.03,2.09.28,2.09-.14,2.09-.21,2.09.26,2.09.2,2.1-.69,2.1.31,2.1.09,2.1-.02,2.1-.6,1.84-1.12,1.63-1.72,1-1.93.35-1.93.37-1.79-.81-1.64-.87-1.06-1.58-.29-2.22,1.35-1.76,1.36-1.8,2.23-.41,2.12-.55,2.29.56.15-1.98-.06-1.92-.3-1.92.02-1.92.36-1.93-.35-1.89-2.06.52-1.96.95-2.21.15-1.98.9-2.07.61-1.99.89-2.09.39-.38,1.96.18,2.02.19,2.02-.17,2.02.41,2.02-.06,2.03-.19,2.03-.84,1.58-.8,1.55-1.37,1.14-1.69.55-1.61.69-.98-.19-1.98-.84-1.77-1.12-1.2-1.88.39-2.24,1.51-1.43,1.44-1.44,1.92-.81,2.08-.05,2.17.45.14-2.14-.18-2.09.22-2.09-.3-2.09-.27-2.09.13-2.09.34-2.09.07-2.09-.21-2.09.61-.63,1.95-.64,1.92-.76,2.03-.39,1.89-.84,1.85-.99,2.14-.07,1.96-.62,1.86-.96,1.98-.64.77.21h-.02ZM12.97,12.57l2.18-.38,1.92-1.1,2.12-.45,2.07-.61,1.98-.9,2.11-.5,2.19-.47-.23-2.28-.07-1.94-1.95.02-1.97.92-2.04.72-2.07.61-2.08.59-2.01.82-2,.53-.2,2.13.03,2.27.02.02Z" fill="#fff"/>
+      </g>
+    </mask>
+    <pattern id="USGS_19_침수_지역_3" data-name="USGS 19 침수 지역 3" x="0" y="0" width="75.48" height="70.75" patternTransform="translate(-37.23 417.5)" patternUnits="userSpaceOnUse" viewBox="0 0 75.48 70.75">
+      <g>
+        <rect width="75.48" height="70.75" fill="none"/>
+        <line x1="0" y1="70.37" x2="73.44" y2="70.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="66.37" x2="73.44" y2="66.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="62.37" x2="73.44" y2="62.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="58.37" x2="73.44" y2="58.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="54.37" x2="73.44" y2="54.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="50.37" x2="73.44" y2="50.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="46.37" x2="73.44" y2="46.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="42.37" x2="73.44" y2="42.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="38.37" x2="73.44" y2="38.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="34.37" x2="73.44" y2="34.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="30.37" x2="73.44" y2="30.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="26.37" x2="73.44" y2="26.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="22.37" x2="73.44" y2="22.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="18.37" x2="73.44" y2="18.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="14.37" x2="73.44" y2="14.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="10.37" x2="73.44" y2="10.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="6.37" x2="73.44" y2="6.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="0" y1="2.37" x2="73.44" y2="2.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="68.37" x2="75.48" y2="68.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="64.37" x2="75.48" y2="64.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="60.37" x2="75.48" y2="60.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="56.37" x2="75.48" y2="56.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="52.37" x2="75.48" y2="52.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="48.37" x2="75.48" y2="48.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="44.37" x2="75.48" y2="44.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="40.37" x2="75.48" y2="40.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="36.37" x2="75.48" y2="36.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="32.37" x2="75.48" y2="32.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="28.37" x2="75.48" y2="28.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="24.37" x2="75.48" y2="24.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="20.37" x2="75.48" y2="20.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="16.37" x2="75.48" y2="16.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="12.37" x2="75.48" y2="12.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="8.37" x2="75.48" y2="8.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1="4.37" x2="75.48" y2="4.37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+        <line x1="2.04" y1=".37" x2="75.48" y2=".37" fill="none" stroke="#b0ffd2" stroke-dasharray="2 2" stroke-width=".75"/>
+      </g>
+    </pattern>
+  </defs>
+  <g clip-path="url(#clippath)">
+    <g mask="url(#mask)">
+      <path d="M29.21.43l.79,1.4.49,2.08-.19,2.09-.03,2.09.28,2.09-.14,2.09-.21,2.09.26,2.09.2,2.1-.69,2.1.31,2.1.09,2.1-.02,2.1-.6,1.84-1.12,1.63-1.72,1-1.93.35-1.93.37-1.79-.81-1.64-.87-1.06-1.58-.29-2.22,1.35-1.76,1.36-1.8,2.23-.41,2.12-.55,2.29.56.15-1.98-.06-1.92-.3-1.92.02-1.92.36-1.93-.35-1.89-2.06.52-1.96.95-2.21.15-1.98.9-2.07.61-1.99.89-2.09.39-.38,1.96.18,2.02.19,2.02-.17,2.02.41,2.02-.06,2.03-.19,2.03-.84,1.58-.8,1.55-1.37,1.14-1.69.55-1.61.69-.98-.19-1.98-.84-1.77-1.12-1.2-1.88.39-2.24,1.51-1.43,1.44-1.44,1.92-.81,2.08-.05,2.17.45.14-2.14-.18-2.09.22-2.09-.3-2.09-.27-2.09.13-2.09.34-2.09.07-2.09-.21-2.09.61-.63,1.95-.64,1.92-.76,2.03-.39,1.89-.84,1.85-.99,2.14-.07,1.96-.62,1.86-.96,1.98-.64.77.21h-.02ZM12.97,12.57l2.18-.38,1.92-1.1,2.12-.45,2.07-.61,1.98-.9,2.11-.5,2.19-.47-.23-2.28-.07-1.94-1.95.02-1.97.92-2.04.72-2.07.61-2.08.59-2.01.82-2,.53-.2,2.13.03,2.27.02.02Z" fill="url(#USGS_19_침수_지역_3)" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+</svg>
